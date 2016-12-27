@@ -3,7 +3,7 @@
 
 @import "{{ site.theme }}";
 
-hello {
+h1 {
     color: blue;
     text-align: left;
     font-family: verdana;
