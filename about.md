@@ -11,4 +11,4 @@ I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Ar
 
 <br>
 
-<div><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/email-black-envelope-back.png" alt="Email"><span style="display: inline-block;vertical-align: middle;"><strong> jlcross </strong></span><img style="vertical-align:middle;margin:2px 2px 2px 2px;" src="jenncross.github.io/images/emailsymbol.png" alt="Email"><span style="display: inline-block;vertical-align: middle;"><strong>  cmu.edu</strong></span></div>
+<div><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/email-black-envelope-back.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-family:'Courier New';"><strong> jlcross </strong></span><img style="vertical-align:middle;margin:2px 2px 2px 2px;" src="jenncross.github.io/images/emailsymbol.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-family:'Courier New';"><strong>  cmu.edu</strong></span></div>
