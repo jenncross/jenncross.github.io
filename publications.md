@@ -1,8 +1,8 @@
 # [](#header-1)Publications
 
 ### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375)
-<p>J. Cross, E. Hamner, C. Bartley and I. Nourbakhsh<br>
-2015 IEEE Frontiers in Education Conference<br></p>
+J. Cross, E. Hamner, C. Bartley and I. Nourbakhsh<br>
+2015 IEEE Frontiers in Education Conference<br>
 
 <a href=“http://www.asee.org/public/conferences/32/papers/10169/view “ target=“_blank”><h3>Identifying and Cultivating Diverse STEM Talent through Creative Robotics</h3></a>
 <p>J. Cross and E. Hamner<br>
