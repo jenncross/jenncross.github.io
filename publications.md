@@ -8,10 +8,10 @@ J. Cross, E. Hamner, C. Bartley and I. Nourbakhsh
 J. Cross and E. Hamner
 2014 American Society for Engineering Education Annual Conference and Exposition
 
-<a href=“http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6630613 “ target=“_blank”><h3>A Visual Robot-Programming Environment for Multidisciplinary Education</h3></a>
+### [](#header-3)[A Visual Robot-Programming Environment for Multidisciplinary Education](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6630613)
 J. Cross, C. Bartley, E. Hamner and I. Nourbakhsh
 2013 IEEE International Conference on Robotics and Automation
 
-<a href=“http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6525207” target=“_blank”><h3>Arts & Bots: Techniques for distributing a STEAM robotics program through K-12 classrooms</h3></a>
+### [](#header-3)[Arts & Bots: Techniques for distributing a STEAM robotics program through K-12 classrooms](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6525207)
 E. Hamner and J. Cross
 2013 IEEE Integrated STEM Education Conference
