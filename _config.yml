@@ -1,3 +1,5 @@
 theme: jekyll-theme-minimal
 title: [Jennifer Cross]
 description: [Personal Website]
+
+show_downloads: [false]
