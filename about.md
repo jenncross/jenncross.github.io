@@ -7,4 +7,4 @@ I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Ar
 
 <center><a href="https://www.linkedin.com/in/jenncross"><img src="jenncross.github.io/images/linkedin-logo_medium.png" alt="LinkedIn">jenncross</a></center>
 
-<center><a href="https://www.linkedin.com/in/jenncross"><img src="jenncross.github.io/images/linkedin-logo_medium.png" alt="LinkedIn"></a></center>
+<center><img src="jenncross.github.io/images/email-black-envelope-back.png" alt="Email"></center>
