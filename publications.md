@@ -1,23 +1,23 @@
 # [](#header-1)Publications
 
 ### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](http://ieeexplore.ieee.org/document/7757720/)
-Cross, J., Hamner, E., Zito, L., & Nourbakhsh, I.
+Cross, J., Hamner, E., Zito, L., & Nourbakhsh, I.<br>
 2016 IEEE Frontiers in Education Conference
 
 ### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities](http://ieeexplore.ieee.org/document/7757677/)
-Cross, J., Hamner, E., Zito, L., Nourbakhsh, I., & Bernstein, D. 
+Cross, J., Hamner, E., Zito, L., Nourbakhsh, I., & Bernstein, D.<br>
 2016 IEEE Frontiers in Education Conference
 
 ### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum](http://ieeexplore.ieee.org/document/7757528/)
-Hamner, E., Cross, J., Zito, L., Bernstein, D., & Mutch-Jones, K. 
+Hamner, E., Cross, J., Zito, L., Bernstein, D., & Mutch-Jones, K.<br>
 2016 IEEE Frontiers in Education Conference
 
 ### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes](http://ieeexplore.ieee.org/document/7757486/)
-Hamner, E., Zito, L., Cross, J., Slezak, B., Mellon, S., Harapko, H., & Welter, M.
+Hamner, E., Zito, L., Cross, J., Slezak, B., Mellon, S., Harapko, H., & Welter, M.<br>
 2016 IEEE Frontiers in Education Conference
 
 ### [](#header-3)[Robots and Romeo and Juliet:  Studying Teacher Integration of Robotics into Middle School Curricula]
-Bernstein, D., Mutch-Jones, K., Hamner, E., & Cross, J. 
+Bernstein, D., Mutch-Jones, K., Hamner, E., & Cross, J.<br>
 2016 International Conference of the American Educational Research Association
 
 ### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375)
