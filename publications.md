@@ -4,7 +4,7 @@
 J. Cross, E. Hamner, C. Bartley and I. Nourbakhsh<br>
 2015 IEEE Frontiers in Education Conference<br>
 
-<a href=“http://www.asee.org/public/conferences/32/papers/10169/view “ target=“_blank”><h3>Identifying and Cultivating Diverse STEM Talent through Creative Robotics</h3></a>
+<h3><a href=“http://www.asee.org/public/conferences/32/papers/10169/view “ target=“_blank”>Identifying and Cultivating Diverse STEM Talent through Creative Robotics</a></h3>
 <p>J. Cross and E. Hamner<br>
 2014 American Society for Engineering Education Annual Conference and Exposition<br></p>
 
