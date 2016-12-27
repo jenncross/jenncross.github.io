@@ -1,18 +1,18 @@
 # [](#header-1)Publications
 
-### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities]
+### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](http://ieeexplore.ieee.org/document/7757720/)
 Cross, J., Hamner, E., Zito, L., & Nourbakhsh, I.
 2016 IEEE Frontiers in Education Conference
 
-### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities]
+### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities](http://ieeexplore.ieee.org/document/7757677/)
 Cross, J., Hamner, E., Zito, L., Nourbakhsh, I., & Bernstein, D. 
 2016 IEEE Frontiers in Education Conference
 
-### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum]
+### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum](http://ieeexplore.ieee.org/document/7757528/)
 Hamner, E., Cross, J., Zito, L., Bernstein, D., & Mutch-Jones, K. 
 2016 IEEE Frontiers in Education Conference
 
-### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes]
+### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes](http://ieeexplore.ieee.org/document/7757486/)
 Hamner, E., Zito, L., Cross, J., Slezak, B., Mellon, S., Harapko, H., & Welter, M.
 2016 IEEE Frontiers in Education Conference
 
