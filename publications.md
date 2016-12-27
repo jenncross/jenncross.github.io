@@ -1,6 +1,6 @@
 # [](#header-1)Publications
 
-<a href=“http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375” target=“_blank”><h3>Arts & Bots: Application and Outcomes of a Secondary School Robotics Program</h3></a>
+<p><a href=“http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375” target=“_blank”><h3>Arts & Bots: Application and Outcomes of a Secondary School Robotics Program</h3></a></p>
 <p>J. Cross, E. Hamner, C. Bartley and I. Nourbakhsh<br>
 2015 IEEE Frontiers in Education Conference<br></p>
 
