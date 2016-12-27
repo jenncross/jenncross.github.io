@@ -4,6 +4,8 @@ I am a PhD Candidate in Robotics at Carnegie Mellon University. I work at the [C
 
 I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research is on
 
+When I am not working on robotics and education research, I enjoy creating artwork through kiln-forming [fused glass](http://jenncross.github.io/activities) and spending time outdoors [gardening](http://jenncross.github.io/activities). 
+
 <br>
 <br>
 
