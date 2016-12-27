@@ -1,8 +1,28 @@
 # [](#header-1)Publications
 
+### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities]
+Cross, J., Hamner, E., Zito, L., & Nourbakhsh, I.
+2016 IEEE Frontiers in Education Conference
+
+### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities]
+Cross, J., Hamner, E., Zito, L., Nourbakhsh, I., & Bernstein, D. 
+2016 IEEE Frontiers in Education Conference
+
+### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum]
+Hamner, E., Cross, J., Zito, L., Bernstein, D., & Mutch-Jones, K. 
+2016 IEEE Frontiers in Education Conference
+
+### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes]
+Hamner, E., Zito, L., Cross, J., Slezak, B., Mellon, S., Harapko, H., & Welter, M.
+2016 IEEE Frontiers in Education Conference
+
+### [](#header-3)[Robots and Romeo and Juliet:  Studying Teacher Integration of Robotics into Middle School Curricula]
+Bernstein, D., Mutch-Jones, K., Hamner, E., & Cross, J. 
+2016 International Conference of the American Educational Research Association
+
 ### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375)
 J. Cross, E. Hamner, C. Bartley and I. Nourbakhsh<br>
-2015 IEEE Frontiers in Education Conference
+2015 IEEE Frontiers in Education Conference 
 
 ### [](#header-3)[Identifying and Cultivating Diverse STEM Talent through Creative Robotics](http://www.asee.org/public/conferences/32/papers/10169/view)
 J. Cross and E. Hamner<br>
