@@ -47,18 +47,18 @@ E. Hamner and J. Cross<br>
 ## [](#header-2)2012
 
 ### [](#header-3)[ChargeCar community conversions: Practical, electric commuter vehicles now!](http://ieeexplore.ieee.org/document/6183231/)
-H. B. Brown, I. Nourbakhsh, C. Bartley, J. Cross, P. Dille, J. Schapiro and A. Styler
+H. B. Brown, I. Nourbakhsh, C. Bartley, J. Cross, P. Dille, J. Schapiro and A. Styler<br>
 2012 IEEE International Electric Vehicle Conference (IEVC)
 
 ## [](#header-2)2010
 
 ### [](#header-3)[Extensive meteoroid fragmentation in V/UHF radar meteor observations at Arecibo Observatory](http://onlinelibrary.wiley.com/doi/10.1029/2009GL041967/full)
-J. D. Mathews, S. J. Briczinski, A. Malhotra,y and J. Cross
+J. D. Mathews, S. J. Briczinski, A. Malhotra,y and J. Cross<br>
 Geophysical Research Letters Volume 37, Issue 4, February 2010
 
 ## [](#header-2)2009
 
 ### [](#header-3)[Classification and Radio Science Modeling of Radar Meteor Echoes](http://www.ee.psu.edu/REU/REUPublications.aspx)
-J. Cross and J. D. Mathews
+J. Cross and J. D. Mathews<br>
 Annual Research Journal of the Electrical Engineering Research Experience for Undergraduates, Vol. 7, August 2009
 
