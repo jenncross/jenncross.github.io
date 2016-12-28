@@ -24,8 +24,8 @@ div.desc {
 Gallery
 
 <div class="img">
-  <a target="_blank" href="forest.jpg">
-    <img src="forest.jpg" alt="Forest" width="300" height="200">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
+    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Forest" width="300" height="200">
   </a>
-  <div class="desc">Add a description of the image here</div>
+  <div class="desc">Green glass bowl</div>
 </div>
