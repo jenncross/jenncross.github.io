@@ -35,14 +35,14 @@ div.container {
 
 <div class="container">
     <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
+      <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg" width="300" height="200">
         <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl">
       </a>
       <!--<div class="desc">Green glass bowl</div>-->
     </div>
 
     <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/2016-11-27 15.45.14.jpg">
+      <a target="_blank" href="jenncross.github.io/images/2016-11-27 15.45.14.jpg" height="0">
         <img src="jenncross.github.io/images/2016-11-27 15.45.14.jpg" alt="gray square bowl" width="300" height="200">
       </a>
       <!--<div class="desc">gray square bowl</div>-->
