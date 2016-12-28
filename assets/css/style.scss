@@ -30,3 +30,11 @@ body {
     height: auto !important; /* real browsers */
     min-height: 100%; /* real browsers */
 }
+
+footer {
+  width:270px;
+  float:left;
+  position: absolute;
+  bottom: 50px; /* stick to bottom */
+  -webkit-font-smoothing:subpixel-antialiased;
+}
