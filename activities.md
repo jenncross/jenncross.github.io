@@ -13,7 +13,7 @@ div.img:hover {
 div.img img {
     width: 100%;
     height: auto;
-    style="vertical-align:middle";
+    vertical-align: middle;
 }
 
 div.desc {
