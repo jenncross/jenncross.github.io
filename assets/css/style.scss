@@ -25,11 +25,7 @@ body {
 
 @media print, screen and (max-height: 600px) {
   
-  div.wrapper {
-    width:auto;
-    margin:0;
-  }
-  
+
   header, section, footer {
     float:none;
     position:static;
