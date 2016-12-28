@@ -27,3 +27,6 @@
 ## [](#header-2)Exploded FPGA
 
 ## [](#header-2)SAE Mini Baja
+![](jenncross.github.io/images/229228_503834531546_214500094_30461786_423676_n.jpg)
+![](jenncross.github.io/images/2105778532_a82879b88e_o.jpg)
+![](jenncross.github.io/images/2902761092_5d31969545_o.jpg)
