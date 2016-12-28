@@ -13,7 +13,10 @@ div.img:hover {
 div.img img {
     width: 100%;
     height: auto;
-    margin-bottom: 0px;
+}
+
+div.img a {
+    line-height: 0%;
 }
 
 div.desc {
