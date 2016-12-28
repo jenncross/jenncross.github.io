@@ -1,9 +1,8 @@
 <style>
 div.img {
     margin: 5px;
-    border: 1px solid #ccc;
     float: left;
-    width: 180px;
+    width: 230px;
 }
 
 div.img:hover {
@@ -16,7 +15,7 @@ div.img img {
 }
 
 div.desc {
-    padding: 15px;
+    padding: 10px;
     text-align: center;
 }
 </style>
@@ -33,6 +32,14 @@ div.desc {
   </a>
   <div class="desc">Green glass bowl</div>
 </div>
+
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
+    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="300" height="200">
+  </a>
+  <div class="desc">Green glass bowl</div>
+</div>
+
 
 ![green glass bowl](jenncross.github.io/images/2016-11-20 22.00.58.jpg)
 
