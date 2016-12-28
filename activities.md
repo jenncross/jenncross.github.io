@@ -2,11 +2,12 @@
 div.img {
     margin: 5px;
     float: left;
-    width: 230px;
+    border: 1px solid #eee;
+    width: 238px;
 }
 
 div.img:hover {
-    border: 1px solid #777;
+    border: 1px solid #bbb;
 }
 
 div.img img {
