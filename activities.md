@@ -4,7 +4,6 @@ div.img {
     float: left;
     border: 1px solid #eee;
     width: 238px;
-    display: inline;
 }
 
 div.img:hover {
@@ -14,6 +13,7 @@ div.img:hover {
 div.img img {
     width: 100%;
     height: auto;
+    margin-bottom: 0px;
 }
 
 div.desc {
