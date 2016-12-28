@@ -16,7 +16,7 @@
 
 # [](#header-1)Past Projects
 
-## [](#header-2)Child Inattention Measurement Chair
+## [](#header-2)Child Movement Measurement Chair
 
 ## [](#header-2)ChargeCar
 
