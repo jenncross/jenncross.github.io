@@ -27,7 +27,7 @@ body {
     width:860px;
     margin:0 auto;
     position: relative; /* needed for footer positioning*/
-    /*height: auto !important;*/ /* real browsers */
+    height: auto !important; /* real browsers */
     min-height: 700px; /* real browsers */
 }
 
