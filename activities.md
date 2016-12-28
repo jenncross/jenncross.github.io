@@ -11,13 +11,8 @@ div.img:hover {
 }
 
 div.img img {
-    margin: 0px;
     width: 100%;
     height: auto;
-}
-
-div.img a {
-    font-size: 5%;
 }
 
 div.desc {
