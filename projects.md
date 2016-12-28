@@ -2,8 +2,14 @@
 
 ## [](#header-2)Arts & Bots
 
+Creative Robotics: an Inclusive Program for Fostering Diverse STEM Talent in Middle School
+
+Robot Diaries: Co-Design of Creative Technology and Middle School Curriculum
+
 ## [](#header-2)Flutter
- 
+
+A Low Cost Robotics kit for Elementary Education
+
 <br><br>
 
 # [](#header-1)Class Projects
