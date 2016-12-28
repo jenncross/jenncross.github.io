@@ -8,6 +8,8 @@ I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Ar
 
 When I am not working on robotics and education research, I enjoy creating artwork through kiln-forming [fused glass](http://jenncross.github.io/activities) and spending time outdoors [gardening](http://jenncross.github.io/activities). 
 
+<div><a href=""><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/folder-download-symbol-with-down-arrow.png" alt="Download"><span style="display:inline-block;vertical-align: middle;font-size:larger;">CV</span></a></div>
+
 <br>
 <br>
 
