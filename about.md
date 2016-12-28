@@ -20,6 +20,3 @@ When I am not working on robotics and education research, I enjoy creating artwo
 <div><a href="orcid.org/0000-0002-1201-2901"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/ID_symbol_B-W_32x32.png" alt="Download"><span style="display:inline-block;vertical-align: middle;font-size:larger;">0000-0002-1201-2901</span></a></div>
 
 <div><a href="https://github.com/jenncross/"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/GitHub-Mark-32px.png" alt="Github"><span style="display:inline-block;vertical-align: middle;font-size:larger;"> jenncross</span></a></div>
-
-<div><a href=""><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/folder-download-symbol-with-down-arrow.png" alt="Download"><span style="display:inline-block;vertical-align: middle;font-size:larger;">CV</span></a></div>
-
