@@ -34,7 +34,7 @@ div.container {
 
 ## [](#header-2)Fused Glass Art
 
-Through training at the Pittsburgh Glass Center, I design and create glass art pieces. I primarily work with kiln-formed fused glass though I also have experience with stained glass and torch-worked glass beads. Working with glass requires an exciting combination of artistic creativity and material science knowledge. I especially enjoy experimenting with the chemical reactions between materials in my work.
+Through training at the Pittsburgh Glass Center, I design and create glass art pieces. I primarily work with kiln-formed fused glass though I also have experience with stained glass and torch-worked glass beads. Working with glass requires an exciting combination of artistic creativity and material science knowledge. I especially enjoy experimenting with the chemical reactions between materials and fluid mechanics in my work.
 
 <div class="container">
     <div class="img">
@@ -82,6 +82,18 @@ Through training at the Pittsburgh Glass Center, I design and create glass art p
      <div class="img">
       <a target="_blank" href="jenncross.github.io/images/2016-12-09 20.02.45.jpg">
         <img src="jenncross.github.io/images/2016-12-09 20.02.45.jpg" alt="red plate with silver foil" width="238" height="175">
+      </a><!--<div class="desc">blue glass channel plate</div>-->
+    </div>
+    
+     <div class="img">
+      <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.09.39_blendv2.jpg">
+        <img src="jenncross.github.io/images/2016-11-20 22.09.39_blendv2.jpg" alt="boiled glass plate" width="238" height="175">
+      </a><!--<div class="desc">blue glass channel plate</div>-->
+    </div>
+    
+    <div class="img">
+      <a target="_blank" href="jenncross.github.io/images/2016-12-09 20.33.59.jpg">
+        <img src="jenncross.github.io/images/2016-12-09 20.33.59.jpg" alt="speckled reaction plate" width="238" height="175">
       </a><!--<div class="desc">blue glass channel plate</div>-->
     </div>
 </div>
