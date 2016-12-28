@@ -25,7 +25,31 @@ Gallery
 
 <div class="img">
   <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
-    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Forest" width="300" height="200">
+    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="300" height="200">
   </a>
   <div class="desc">Green glass bowl</div>
 </div>
+
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
+    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="300" height="200">
+  </a>
+  <div class="desc">Green glass bowl</div>
+</div>
+
+
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
+    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="300" height="200">
+  </a>
+  <div class="desc">Green glass bowl</div>
+</div>
+
+
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
+    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="300" height="200">
+  </a>
+  <div class="desc">Green glass bowl</div>
+</div>
+
