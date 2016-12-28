@@ -18,5 +18,9 @@ h3 {
     margin-bottom: 0px;
 }
 footer {
-    position: relative;
+  width:270px;
+  float:left;
+  position:relative;
+  bottom:50px;
+  -webkit-font-smoothing:subpixel-antialiased;
 }
