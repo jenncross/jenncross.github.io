@@ -22,9 +22,10 @@ h3 {
 body {
     height: 100%;
 }
-div.wrapper {
-    width:auto;
-    margin:0;
+
+.wrapper {
+    width:860px;
+    margin:0 auto;
     position: relative; /* needed for footer positioning*/
     height: auto !important; /* real browsers */
     min-height: 100%; /* real browsers */
