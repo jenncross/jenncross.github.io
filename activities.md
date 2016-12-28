@@ -16,7 +16,7 @@ div.img img {
 }
 
 div.img a {
-    line-height: 0%;
+    font-size: 5%;
 }
 
 div.desc {
