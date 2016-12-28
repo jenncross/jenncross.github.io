@@ -41,11 +41,26 @@ div.desc {
   <div class="desc">blue glass channel plate</div>
 </div>
 
-![gray square bowl](jenncross.github.io/images/2016-11-27 15.45.14.jpg)
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-27 15.45.14.jpg">
+    <img src="jenncross.github.io/images/2016-11-27 15.45.14.jpg" alt="gray square bowl" width="300" height="200">
+  </a>
+  <div class="desc">gray square bowl</div>
+</div>
 
-![bubble trap glass plate](jenncross.github.io/images/2016-12-09 19.58.38.jpg)
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-12-09 19.58.38.jpg">
+    <img src="jenncross.github.io/images/2016-12-09 19.58.38.jpg" alt="bubble trap glass plate" width="300" height="200">
+  </a>
+  <div class="desc">bubble trap glass plate</div>
+</div>
 
-![glass plate with copper mesh](jenncross.github.io/images/2016-12-09 20.03.17.jpg)
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-12-09 20.03.17.jpg">
+    <img src="jenncross.github.io/images/2016-12-09 20.03.17.jpg" alt="glass plate with copper mesh" width="300" height="200">
+  </a>
+  <div class="desc">glass plate with copper mesh</div>
+</div>
 
 ## [](#header-2)Gardening
 
