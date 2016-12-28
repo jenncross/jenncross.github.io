@@ -72,13 +72,7 @@ Through training at the Pittsburgh Glass Center, I design and create glass art p
         <img src="jenncross.github.io/images/2016-11-20 21.52.39.jpg" alt="combed glass plate" width="238" height="175">
       </a><!--<div class="desc">blue glass channel plate</div>-->
     </div>
-    
-    <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/2016-12-09 19.59.38.jpg">
-        <img src="jenncross.github.io/images/2016-12-09 19.59.38.jpg" alt="green glass channel plate" width="238" height="175">
-      </a><!--<div class="desc">blue glass channel plate</div>-->
-    </div>
-    
+          
      <div class="img">
       <a target="_blank" href="jenncross.github.io/images/2016-12-09 20.02.45.jpg">
         <img src="jenncross.github.io/images/2016-12-09 20.02.45.jpg" alt="red plate with silver foil" width="238" height="175">
@@ -96,7 +90,12 @@ Through training at the Pittsburgh Glass Center, I design and create glass art p
         <img src="jenncross.github.io/images/2016-11-20 22.09.39_blendv2.jpg" alt="boiled glass plate" width="238" height="175">
       </a><!--<div class="desc">blue glass channel plate</div>-->
     </div>
-      
+    
+    <div class="img">
+      <a target="_blank" href="jenncross.github.io/images/2016-12-09 19.59.38.jpg">
+        <img src="jenncross.github.io/images/2016-12-09 19.59.38.jpg" alt="green glass channel plate" width="238" height="175">
+      </a><!--<div class="desc">blue glass channel plate</div>-->
+    </div>  
 </div>
 
 ## [](#header-2)Gardening
