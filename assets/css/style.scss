@@ -17,3 +17,15 @@ a {
 h3 {
     margin-bottom: 0px;
 }
+
+
+body {
+    height: 100%;
+}
+div.wrapper {
+    width:auto;
+    margin:0;
+    position: relative; /* needed for footer positioning*/
+    height: auto !important; /* real browsers */
+    min-height: 100%; /* real browsers */
+}
