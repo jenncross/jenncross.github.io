@@ -49,8 +49,8 @@ body {
 @media screen and (max-width: 960px) and (max-height: 600px) {
 
   div.wrapper {
-    width:auto;
-    margin:0;
+    width:500px;
+    margin:0 auto;
   }
 
   header, section, footer {
@@ -81,7 +81,72 @@ body {
   }
 }
 
-@media screen and (max-width: 720px) and (max-height: 600px) {
+@media screen and (max-width: 960px){
+
+  div.wrapper {
+    width:500px;
+    margin:0 auto;
+  }
+
+  header, section, footer {
+    float:none;
+    position:static;
+    width:auto;
+  }
+
+  header {
+    padding-right:320px;
+  }
+
+  section {
+    border:1px solid #e5e5e5;
+    border-width:1px 0;
+    padding:20px 0;
+    margin:0 0 20px;
+  }
+
+  header a small {
+    display:inline;
+  }
+
+  header ul {
+    position:absolute;
+    right:50px;
+    top:52px;
+  }
+}
+
+@media screen and (max-width: 600px) and (max-height: 600px) {
+  
+  div.wrapper {
+    width:auto;
+    margin:0px;
+  }
+    
+  body {
+    word-wrap:break-word;
+  }
+
+  header {
+    padding:0;
+  }
+
+  header ul, header p.view {
+    position:static;
+  }
+
+  pre, code {
+    word-wrap:normal;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
+  div.wrapper {
+    width:auto;
+    margin:0px;
+  }
+    
   body {
     word-wrap:break-word;
   }
