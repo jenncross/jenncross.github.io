@@ -3,7 +3,7 @@ div.img {
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
-    width: 180px;
+    width:  230px;
 }
 
 div.img:hover {
