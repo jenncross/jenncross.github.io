@@ -22,19 +22,3 @@ h3 {
 body {
     height: 100%;
 }
-
-.wrapper {
-    width:860px;
-    margin:0 auto;
-   /*position: relative; /* needed for footer positioning*/
-   /*height: 100%; /* real browsers */
-   /*min-height: 700px; /* real browsers */
-}
-
-footer {
-  width:270px;
-  float:left;
-  position: fixed;
-  bottom: 50px; /* stick to bottom */
-  -webkit-font-smoothing:subpixel-antialiased;
-}
