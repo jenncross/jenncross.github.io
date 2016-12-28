@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-  <div id="container">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -12,6 +11,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
+  
   <body>
     <div class="wrapper">
       <header>
@@ -37,14 +37,9 @@
       {{ content }}
 
       </section>
-      <footer>
-        <p style="margin-bottom: 1px;"><small>Hosted on GitHub Pages</small></p>
-        <p style="margin-bottom: 1px;"><small>Modified from <a href="https://github.com/pages-themes/minimal">Minimal</a> Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-        <p><small>Icons by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small></p>
-      </footer>
     </div>
+  
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
-
 
   {% if site.google_analytics %}
     <script type="text/javascript">
@@ -59,5 +54,11 @@
     </script>
   {% endif %}
   </body>
-  </div>
+  
+  <footer>
+        <p style="margin-bottom: 1px;"><small>Hosted on GitHub Pages</small></p>
+        <p style="margin-bottom: 1px;"><small>Modified from <a href="https://github.com/pages-themes/minimal">Minimal</a> Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Icons by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small></p>
+  </footer>
+
 </html>
