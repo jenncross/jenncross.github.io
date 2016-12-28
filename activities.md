@@ -35,16 +35,11 @@ div.desc {
 </div>
 
 <div class="img">
-  <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
-    <img src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="300" height="200">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg">
+    <img src="jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg" alt="blue glass channel plate" width="300" height="200">
   </a>
-  <div class="desc">Green glass bowl</div>
+  <div class="desc">blue glass channel plate</div>
 </div>
-
-
-![green glass bowl](jenncross.github.io/images/2016-11-20 22.00.58.jpg)
-
-![blue glass channel plate](jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg)
 
 ![gray square bowl](jenncross.github.io/images/2016-11-27 15.45.14.jpg)
 
