@@ -1,10 +1,12 @@
 # [](#header-1)About
 
+![Crater Lake Selfie](jenncross.github.io/images/DSC_0490.jpg)
+
 I am a PhD Candidate in Robotics at Carnegie Mellon University. I work at the [CREATE Lab](http://www.cmucreatelab.org) with my advisor [Professor Illah Nourbakhsh](http://www.cs.cmu.edu/~illah/). I am a fellow of both the IES-supported [Program for Interdisciplinary Education Research](http://www.cmu.edu/pier/) and the [National Science Foundation Graduate Research Fellowship Program](https://www.nsfgrfp.org/).
 
 I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research is on
 
-![](jenncross.github.io/images/IMG_2205_crop.jpg)
+![Butterflies in Garden](jenncross.github.io/images/IMG_2205_crop.jpg)
 
 When I am not working on robotics and education research, I enjoy creating artwork through kiln-forming [fused glass](http://jenncross.github.io/activities) and spending time outdoors [gardening](http://jenncross.github.io/activities). 
 
