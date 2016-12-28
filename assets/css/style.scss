@@ -27,6 +27,11 @@ body {
 
 @media screen and (max-height: 600px) {
 
+  div.wrapper {
+    width:500;
+    margin:0;
+  }
+    
   header, section, footer {
     float:none;
     position:static;
