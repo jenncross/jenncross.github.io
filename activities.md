@@ -37,7 +37,7 @@ div.container {
     <div class="img">
       <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
         <img style="vertical-align:middle" src="jenncross.github.io/images/2016-11-20 22.00.58.jpg" alt="Green glass bowl" width="238" height="175">
-      </a><div class="desc">Green glass bowl</div>
+      </a><!--<div class="desc">Green glass bowl</div>-->
     </div>
 
     <div class="img">
