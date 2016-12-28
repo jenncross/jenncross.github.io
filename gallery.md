@@ -22,3 +22,10 @@ div.desc {
 </style>
 
 Gallery
+
+<div class="img">
+  <a target="_blank" href="forest.jpg">
+    <img src="forest.jpg" alt="Forest" width="300" height="200">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
