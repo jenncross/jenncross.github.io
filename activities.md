@@ -11,6 +11,7 @@ div.img:hover {
 }
 
 div.img img {
+    margin: 0px;
     width: 100%;
     height: auto;
 }
