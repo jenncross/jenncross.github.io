@@ -1,12 +1,12 @@
 # [](#header-1)Projects
-Human Assisted Robot
+## [](#header-2)Human Assisted Robot
 
-Children's Museum Exhibit
+## [](#header-2)Children's Museum Exhibit
 
-ChargeCar
+## [](#header-2)ChargeCar
 
-Micrometeor Radio Classification
+## [](#header-2)Micrometeor Radio Classification
 
-Exploded FPGA
+## [](#header-2)Exploded FPGA
 
-Biomimetic Shark
+## [](#header-2)Biomimetic Shark
