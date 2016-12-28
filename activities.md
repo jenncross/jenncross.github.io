@@ -1,5 +1,7 @@
 # [](#header-1)Activities
 
+## [](#header-2)Women@SCS
+
 ## [](#header-2)Fused Glass Art
 
 ![green glass bowl](jenncross.github.io/images/2016-11-20 22.00.58.jpg)
