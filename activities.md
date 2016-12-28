@@ -23,6 +23,7 @@ div.desc {
 div.container {
 	overflow: auto;
 	width: 100%
+	margin-bottom: 50px;
 }
 </style>
 
