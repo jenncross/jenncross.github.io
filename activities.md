@@ -35,13 +35,6 @@ div.desc {
 </div>
 
 <div class="img">
-  <a target="_blank" href="jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg">
-    <img src="jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg" alt="blue glass channel plate" width="300" height="200">
-  </a>
-  <div class="desc">blue glass channel plate</div>
-</div>
-
-<div class="img">
   <a target="_blank" href="jenncross.github.io/images/2016-11-27 15.45.14.jpg">
     <img src="jenncross.github.io/images/2016-11-27 15.45.14.jpg" alt="gray square bowl" width="300" height="200">
   </a>
@@ -60,6 +53,13 @@ div.desc {
     <img src="jenncross.github.io/images/2016-12-09 20.03.17.jpg" alt="glass plate with copper mesh" width="300" height="200">
   </a>
   <div class="desc">glass plate with copper mesh</div>
+</div>
+
+<div class="img">
+  <a target="_blank" href="jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg">
+    <img src="jenncross.github.io/images/2016-11-21 19.15.29_blend.jpg" alt="blue glass channel plate" width="300" height="200">
+  </a>
+  <div class="desc">blue glass channel plate</div>
 </div>
 
 ## [](#header-2)Gardening
