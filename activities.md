@@ -34,6 +34,8 @@ div.container {
 
 ## [](#header-2)Fused Glass Art
 
+Through training at the Pittsburgh Glass Center, I create glass art, primarily with kiln-formed fused glass though I also have experience with stained glass and torch-worked glass beads. Working with glass requires an exciting combination of artistic creativity and material science knowledge. I especially enjoy experimenting with the chemical reactions between materials in my work.
+
 <div class="container">
     <div class="img">
       <a target="_blank" href="jenncross.github.io/images/2016-11-20 22.00.58.jpg">
