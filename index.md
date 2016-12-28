@@ -1,3 +1,4 @@
+![](jenncross.github.io/images/IMG_2205_crop.jpg)
 
 I'm *Jennifer Cross*.
 
