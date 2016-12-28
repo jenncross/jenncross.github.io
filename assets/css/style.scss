@@ -24,3 +24,9 @@ footer {
   bottom:10px;
   -webkit-font-smoothing:subpixel-antialiased;
 }
+
+div#container {
+  position: relative; /* needed for footer positioning*/
+  height: auto !important; /* real browsers */
+  min-height: 100%; /* real browsers */
+}
