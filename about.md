@@ -14,3 +14,5 @@ When I am not working on robotics and education research, I enjoy creating artwo
 <div><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/email-black-envelope-back.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-size:larger;"> jlcross </span><img style="vertical-align:middle;margin:2px 2px 2px 2px;" src="jenncross.github.io/images/emailsymbol.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-size:larger;">  cmu.edu</span></div>
 
 <div><a href="https://github.com/jenncross/"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/github-logo.png" alt="Github"><span style="display:inline-block;vertical-align: middle;font-size:larger;"> jenncross</span></a></div>
+
+<div><a href=""><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/note-black-symbol-variant.png" alt="Resume"><span style="display:inline-block;vertical-align: middle;font-size:larger;">CV</span></a></div>
