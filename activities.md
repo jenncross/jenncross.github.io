@@ -97,7 +97,3 @@ Through training at the Pittsburgh Glass Center, I design and create glass art p
       </a><!--<div class="desc">blue glass channel plate</div>-->
     </div>  
 </div>
-
-## [](#header-2)Gardening
-
-## [](#header-2)Fiber Art
