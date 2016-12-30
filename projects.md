@@ -46,6 +46,9 @@ Collaborated with partner and faculty advisor to design and prototype exploded m
 Selected components and designed circuit layout for memory chip-based logic blocks; prototyping printed circuit boards for logic blocks in reconfigurable and expandable array; coding specialized assembler in Python to simplify reprogramming of look-up tables and FPGA behavior
 
 ## [](#header-2)SAE Mini Baja
+
+Led a team of 30 members to design and fabricate a small off-road vehicle for the national Baja SAE competition; designed multimedia materials for recruiting corporate sponsorship; tripled team size through recruiting members; managed material and personnel resources; interfaced between team and college administrative and safety officials
+
 ![](jenncross.github.io/images/229228_503834531546_214500094_30461786_423676_n.jpg)
 ![](jenncross.github.io/images/2105778532_a82879b88e_o.jpg)
 <p style="font-size:small">Team photo by Michael J. Maloney; Car photos by Andrew L. Tsang</p>
