@@ -26,11 +26,24 @@ A Low Cost Robotics kit for Elementary Education
 
 ## [](#header-2)ChargeCar
 
-## [](#header-2)Biomimetic Shark
+## [](#header-2)Biomimetic Robotic Shark
+
+Collaborated with partner and faculty advisor to construct shark inspired robot 
+Researched the swimming motions of sharks; investigated various materials to replicate shark musculoskeletal systems, including McKibben artificial pneumatic muscles; designed model in SolidWorks; fabricated proof-of-concept prototype; presented to faculty and peers at weekly design reviews
+
 
 ## [](#header-2)Micrometeor Radio Classification
 
+Researched modern data analysis techniques for identifying  micrometeors with radar telescopes; analyzed data returns from over 10,000 meteor radar echoes; identified radar signal interference patterns supporting the existence of controversial micrometeor fragmentation phenomena; created numerous MATLAB radio science-based simulations of meteor fragmentation confirming potential sources of observed signal interference patterns
+
+## [](#header-2)Low-Cost Position Sensor for Robotic Applications 
+
+Researched implementation and integration of numerous low-cost commercial sensor technologies for novel sensor package;  collaborated with MIT’s Lincoln Laboratory for integration into larger autonomous system; designed complementary sensor sub-systems to minimize error sources; implemented large scale sensor integration in LabVIEW
+
 ## [](#header-2)Exploded FPGA
+
+Collaborated with partner and faculty advisor to design and prototype exploded model of FPGA processor
+Selected components and designed circuit layout for memory chip-based logic blocks; prototyping printed circuit boards for logic blocks in reconfigurable and expandable array; coding specialized assembler in Python to simplify reprogramming of look-up tables and FPGA behavior
 
 ## [](#header-2)SAE Mini Baja
 ![](jenncross.github.io/images/229228_503834531546_214500094_30461786_423676_n.jpg)
