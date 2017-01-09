@@ -51,7 +51,8 @@ A Low Cost Robotics kit for Elementary Education
 <div class="img">
 <a target="_blank" href="jenncross.github.io/images/exploded_full_assembly_v2.jpg"><img src="jenncross.github.io/images/exploded_full_assembly_v2.jpg" width="238" height="175"></a> </div> 
 
-<iframe width="238" height="134" float="left" margin="5px" src="https://www.youtube.com/embed/x0ExKWv6W0U?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe>
+<div class="img">
+<iframe width="238" height="175" src="https://www.youtube.com/embed/x0ExKWv6W0U?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe> </div> 
 
 <div class="img">
 <a target="_blank" href="jenncross.github.io/images/incline_sketch.jpg"><img src="jenncross.github.io/images/incline_sketch.jpg" width="238" height="175"></a> </div>
