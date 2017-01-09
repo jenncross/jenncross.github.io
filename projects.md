@@ -1,7 +1,6 @@
 <style>
 div.img {
     margin: 5px;
-    float: left;
     border: 1px solid #eee;
     width: 238px;
 }
