@@ -1,6 +1,6 @@
 # [](#header-1)Publications
 
-## [](#header-2)2016
+## [](#header-2)2016<a name="2016"></a>
 
 ### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](http://ieeexplore.ieee.org/document/7757720/)
 J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
@@ -22,19 +22,19 @@ E. Hamner, L. Zito, J. Cross, B. Slezak, S. Mellon, H. Harapko, and M. Welter<br
 D. Bernstein, K. Mutch-Jones, E. Hamner, and J. Cross<br>
 2016 International Conference of the American Educational Research Association
 
-## [](#header-2)2015
+## [](#header-2)2015<a name="2015"></a>
 
 ### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375)
 J. Cross, E. Hamner, C. Bartley, and I. Nourbakhsh<br>
 2015 IEEE Frontiers in Education Conference 
 
-## [](#header-2)2014
+## [](#header-2)2014<a name="2014"></a>
 
 ### [](#header-3)[Identifying and Cultivating Diverse STEM Talent through Creative Robotics](http://www.asee.org/public/conferences/32/papers/10169/view)
 J. Cross and E. Hamner<br>
 2014 American Society for Engineering Education Annual Conference and Exposition
 
-## [](#header-2)2013
+## [](#header-2)2013<a name="2013"></a>
 
 ### [](#header-3)[A Visual Robot-Programming Environment for Multidisciplinary Education](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6630613)
 J. Cross, C. Bartley, E. Hamner, and I. Nourbakhsh<br>
@@ -44,19 +44,19 @@ J. Cross, C. Bartley, E. Hamner, and I. Nourbakhsh<br>
 E. Hamner and J. Cross<br>
 2013 IEEE Integrated STEM Education Conference
 
-## [](#header-2)2012
+## [](#header-2)2012<a name="2012"></a>
 
 ### [](#header-3)[ChargeCar community conversions: Practical, electric commuter vehicles now!](http://ieeexplore.ieee.org/document/6183231/)
 H. B. Brown, I. Nourbakhsh, C. Bartley, J. Cross, P. Dille, J. Schapiro and A. Styler<br>
 2012 IEEE International Electric Vehicle Conference (IEVC)
 
-## [](#header-2)2010
+## [](#header-2)2010<a name="2010"></a>
 
 ### [](#header-3)[Extensive meteoroid fragmentation in V/UHF radar meteor observations at Arecibo Observatory](http://onlinelibrary.wiley.com/doi/10.1029/2009GL041967/full)
 J. D. Mathews, S. J. Briczinski, A. Malhotra, and J. Cross<br>
 Geophysical Research Letters, Volume 37, Issue 4, February 2010
 
-## [](#header-2)2009
+## [](#header-2)2009<a name="2009"></a>
 
 ### [](#header-3)[Classification and Radio Science Modeling of Radar Meteor Echoes](http://www.ee.psu.edu/REU/REUPublications.aspx)
 J. Cross and J. D. Mathews<br>
