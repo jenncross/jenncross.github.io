@@ -87,7 +87,7 @@ Researched the swimming motions of sharks; investigated various materials to rep
 ## [](#header-2)Micrometeor Radio Classification
 
 Researched modern data analysis techniques for identifying  micrometeors with radar telescopes; analyzed data returns from over 10,000 meteor radar echoes; identified radar signal interference patterns supporting the existence of controversial micrometeor fragmentation phenomena; created numerous MATLAB radio science-based simulations of meteor fragmentation confirming potential sources of observed signal interference patterns.
-[See Publications](http://jenncross.github.io/publications#2010)
+[See publications](http://jenncross.github.io/publications#2010)
 
 ## [](#header-2)Low-Cost Position Sensor for Robotic Applications 
 
