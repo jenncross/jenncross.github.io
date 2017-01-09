@@ -15,14 +15,13 @@ A Low Cost Robotics kit for Elementary Education
 # [](#header-1)Class Projects
 
 ## [](#header-2)Children's Museum Exhibit
-<img src="jenncross.github.io/images/incline_sketch.jpg" width="238" height="175">
-![](jenncross.github.io/images/incline_sketch.jpg)
-![](jenncross.github.io/images/exploded_full_assembly_v2.jpg)
-![](jenncross.github.io/images/20120426_135440.jpg)
+<a target="_blank" href="jenncross.github.io/images/incline_sketch.jpg"><img src="jenncross.github.io/images/incline_sketch.jpg" width="238" height="175"></a>
+<a target="_blank" href="jenncross.github.io/images/exploded_full_assembly_v2.jpg"><img src="jenncross.github.io/images/exploded_full_assembly_v2.jpg" width="238" height="175"></a>
+<a target="_blank" href="jenncross.github.io/images/20120426_135440.jpg"><img src="jenncross.github.io/images/20120426_135440.jpg" width="238" height="175"></a>
 
 ## [](#header-2)Human-Assisted Robot
-![](jenncross.github.io/images/marvin.png)
-![](jenncross.github.io/images/marvin_pic.jpg)
+<a target="_blank" href="jenncross.github.io/images/marvin.png"><img src="jenncross.github.io/images/marvin.png" width="238" height="175"></a>
+<a target="_blank" href="jenncross.github.io/images/marvin_pic.jpg"><img src="jenncross.github.io/images/marvin_pic.jpg" width="238" height="175"></a>
 
 <br><br>
 
