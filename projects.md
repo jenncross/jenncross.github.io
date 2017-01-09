@@ -102,6 +102,11 @@ Selected components and designed circuit layout for memory chip-based logic bloc
 
 Led a team of 30 members to design and fabricate a small off-road vehicle for the national Baja SAE competition; designed multimedia materials for recruiting corporate sponsorship; tripled team size through recruiting members; managed material and personnel resources; interfaced between team and college administrative and safety officials
 
-![](jenncross.github.io/images/229228_503834531546_214500094_30461786_423676_n.jpg)
-![](jenncross.github.io/images/2105778532_a82879b88e_o.jpg)
+<div class="container">
+
+<div class="img">
+<a target="_blank" href="jenncross.github.io/images/229228_503834531546_214500094_30461786_423676_n.jpg"><img src="jenncross.github.io/images/229228_503834531546_214500094_30461786_423676_n.jpg" width="238" height="134"></a> </div>
+<div class="img">
+<a target="_blank" href="jenncross.github.io/images/2105778532_a82879b88e_o.jpg"><img src="jenncross.github.io/images/2105778532_a82879b88e_o.jpg" width="238" height="134"></a> </div>
+</div>
 <p style="font-size:small">Team photo by Michael J. Maloney; Car photos by Andrew L. Tsang</p>
