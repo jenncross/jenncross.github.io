@@ -54,7 +54,10 @@ A Low Cost Robotics kit for Elementary Education
 <a target="_blank" href="jenncross.github.io/images/exploded_full_assembly_v2.jpg"><img src="jenncross.github.io/images/exploded_full_assembly_v2.jpg" width="238" height="175"></a> </div> 
 
 <div class="img">
-<a target="_blank" href="jenncross.github.io/images/20120426_135440.jpg"><img src="jenncross.github.io/images/20120426_135440.jpg" width="238" height="175"></a></div></div>
+<a target="_blank" href="jenncross.github.io/images/20120426_135440.jpg"><img src="jenncross.github.io/images/20120426_135440.jpg" width="238" height="175"></a></div>
+
+<div class="img"><iframe width="238" height="134" src="https://www.youtube.com/embed/x0ExKWv6W0U" frameborder="0" allowfullscreen></iframe></div>
+</div>
  
 ## [](#header-2)Human-Assisted Robot
 
