@@ -109,4 +109,4 @@ Led a team of 30 members to design and fabricate a small off-road vehicle for th
 <div class="img">
 <a target="_blank" href="jenncross.github.io/images/2105778532_a82879b88e_o.jpg"><img src="jenncross.github.io/images/2105778532_a82879b88e_o.jpg" width="238" height="134"></a> </div>
 </div>
-<p style="font-size:small">Team photo by Michael J. Maloney; Car photos by Andrew L. Tsang</p>
+<p style="font-size:small">Car photo by Andrew L. Tsang - Team photo by Michael J. Maloney</p>
