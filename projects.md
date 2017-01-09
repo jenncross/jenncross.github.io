@@ -19,7 +19,7 @@ A Low Cost Robotics kit for Elementary Education
 
 ## [](#header-2)Human-Assisted Robot
 ![](jenncross.github.io/images/marvin.png)
-![](jenncross.github.io/images/_MG_0447.jpg)
+![](jenncross.github.io/images/marvin_pic.jpg)
 
 <br><br>
 
