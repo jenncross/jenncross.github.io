@@ -15,8 +15,11 @@ A Low Cost Robotics kit for Elementary Education
 # [](#header-1)Class Projects
 
 ## [](#header-2)Children's Museum Exhibit
+![](jenncross.github.io/images/2012.5.3.jpg)
 
 ## [](#header-2)Human-Assisted Robot
+![](jenncross.github.io/images/marvin.png)
+![](jenncross.github.io/images/_MG_0447.jpg)
 
 <br><br>
 
