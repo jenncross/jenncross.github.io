@@ -27,6 +27,7 @@ div.container {
 	margin-bottom: 10px;
 }
 </style>
+
 <div class="container">
     <div class="img">
       <a target="_blank" href="jenncross.github.io/images/glass/2016-12-09 20.03.17.jpg">
