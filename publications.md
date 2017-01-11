@@ -16,7 +16,7 @@ E. Hamner, J. Cross, L. Zito, D. Bernstein, and K. Mutch-Jones<br>
 
 ### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes](http://ieeexplore.ieee.org/document/7757486/)
 E. Hamner, L. Zito, J. Cross, B. Slezak, S. Mellon, H. Harapko, and M. Welter<br>
-2016 IEEE Frontiers in Education Conference
+2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
 ### [](#header-3)[Robots and Romeo and Juliet:  Studying Teacher Integration of Robotics into Middle School Curricula](jenncross.github.io/docs/1063849.1.pdf)
 D. Bernstein, K. Mutch-Jones, E. Hamner, and J. Cross<br>
