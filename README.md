@@ -16,4 +16,4 @@ http://www.colourlovers.com/palette/46688/fresh_cut_day
 http://www.colourlovers.com/palette/15/tech_light
 
 Material Icons:
-https://material.io/icons/
+https://material.io/icons/ also http://www.flaticon.com/packs/material-design
