@@ -2,7 +2,8 @@
 
 
 
-Resources:
+**Resources:**
+
 Using https://github.com/pages-themes/minimal
 
 Color Ideas:
