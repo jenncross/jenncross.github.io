@@ -54,7 +54,7 @@ H. B. Brown, I. Nourbakhsh, C. Bartley, J. Cross, P. Dille, J. Schapiro and A. S
 
 ### [](#header-3)[Extensive meteoroid fragmentation in V/UHF radar meteor observations at Arecibo Observatory](http://onlinelibrary.wiley.com/doi/10.1029/2009GL041967/full)
 J. D. Mathews, S. J. Briczinski, A. Malhotra, and J. Cross<br>
-Geophysical Research Letters, Volume 37, Issue 4, February 2010
+Geophysical Research Letters, Volume 37, Issue 4, February 2010 &#124; &copy;2010 American Geophysical Union
 
 ## [](#header-2)2009<a name="2009"></a>
 
