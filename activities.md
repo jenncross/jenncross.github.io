@@ -33,7 +33,7 @@ div.container {
 ## [](#header-2)Women@SCS
 <div class="container">
    <div class="img">
-	      <a target="_blank" href="jenncross.github.io/images/ourCS2013_organizers.JPG"><img src="jenncross.github.io/images/ourCS2013_organizers.JPG" alt="gray square bowl" width="238" height="175"></a><!--<div class="desc">gray square bowl</div>-->
+	      <a target="_blank" href="jenncross.github.io/images/ourCS2013_organizers.JPG"><img src="jenncross.github.io/images/ourCS2013_organizers.JPG" alt="OurCS2013 Organizers" width="238" height="175"></a><!--<div class="desc">gray square bowl</div>-->
    </div>
    <div class="img">
 	      <a target="_blank" href="jenncross.github.io/images/DSC00501.JPG"><img src="jenncross.github.io/images/DSC00501.JPG" alt="TechNight Presentation" width="238" height="175"></a><!--<div class="desc">Green glass bowl</div>-->
