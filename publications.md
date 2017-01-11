@@ -18,9 +18,9 @@ E. Hamner, J. Cross, L. Zito, D. Bernstein, and K. Mutch-Jones<br>
 E. Hamner, L. Zito, J. Cross, B. Slezak, S. Mellon, H. Harapko, and M. Welter<br>
 2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
-### [](#header-3)[Robots and Romeo and Juliet:  Studying Teacher Integration of Robotics into Middle School Curricula](jenncross.github.io/docs/1063849.1.pdf)
+### [](#header-3)[Robots and Romeo and Juliet:  Studying Teacher Integration of Robotics into Middle School Curricula](../docs/1063849.1.pdf)
 D. Bernstein, K. Mutch-Jones, E. Hamner, and J. Cross<br>
-2016 International Conference of the American Educational Research Association &#124; <a target="_blank" href="jenncross.github.io/docs/1063849.1.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
+2016 International Conference of the American Educational Research Association &#124; <a target="_blank" href="../docs/1063849.1.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ## [](#header-2)2015<a name="2015"></a>
 
