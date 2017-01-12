@@ -26,7 +26,7 @@ D. Bernstein, K. Mutch-Jones, E. Hamner, and J. Cross<br>
 
 ### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](https://doi.org/10.1109/FIE.2015.7344375)
 J. Cross, E. Hamner, C. Bartley, and I. Nourbakhsh<br>
-2015 IEEE Frontiers in Education Conference &#124; &copy;2015 IEEE
+2015 IEEE Frontiers in Education Conference &#124; &copy;2015 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2015_outcomes_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ## [](#header-2)2014<a name="2014"></a>
 
