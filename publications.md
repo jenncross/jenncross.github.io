@@ -2,19 +2,19 @@
 
 ## [](#header-2)2016<a name="2016"></a>
 
-### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](http://ieeexplore.ieee.org/document/7757720/)
+### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720)
 J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
 2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
-### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities](http://ieeexplore.ieee.org/document/7757677/)
+### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities](https://doi.org/10.1109/FIE.2016.7757677)
 J. Cross,  E. Hamner, L. Zito, I. Nourbakhsh, and D. Bernstein<br>
 2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
-### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum](http://ieeexplore.ieee.org/document/7757528/)
+### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum](https://doi.org/10.1109/FIE.2016.7757528)
 E. Hamner, J. Cross, L. Zito, D. Bernstein, and K. Mutch-Jones<br>
 2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
-### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes](http://ieeexplore.ieee.org/document/7757486/)
+### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes](https://doi.org/10.1109/FIE.2016.7757486)
 E. Hamner, L. Zito, J. Cross, B. Slezak, S. Mellon, H. Harapko, and M. Welter<br>
 2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
@@ -24,7 +24,7 @@ D. Bernstein, K. Mutch-Jones, E. Hamner, and J. Cross<br>
 
 ## [](#header-2)2015<a name="2015"></a>
 
-### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7344375)
+### [](#header-3)[Arts & Bots: Application and Outcomes of a Secondary School Robotics Program](https://doi.org/10.1109/FIE.2015.7344375)
 J. Cross, E. Hamner, C. Bartley, and I. Nourbakhsh<br>
 2015 IEEE Frontiers in Education Conference &#124; &copy;2015 IEEE
 
@@ -36,17 +36,17 @@ J. Cross and E. Hamner<br>
 
 ## [](#header-2)2013<a name="2013"></a>
 
-### [](#header-3)[A Visual Robot-Programming Environment for Multidisciplinary Education](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6630613)
+### [](#header-3)[A Visual Robot-Programming Environment for Multidisciplinary Education](https://doi.org/10.1109/ICRA.2013.6630613)
 J. Cross, C. Bartley, E. Hamner, and I. Nourbakhsh<br>
 2013 IEEE International Conference on Robotics and Automation &#124; &copy;2013 IEEE
 
-### [](#header-3)[Arts & Bots: Techniques for distributing a STEAM robotics program through K-12 classrooms](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6525207)
+### [](#header-3)[Arts & Bots: Techniques for distributing a STEAM robotics program through K-12 classrooms](https://doi.org/10.1109/ISECon.2013.6525207)
 E. Hamner and J. Cross<br>
 2013 IEEE Integrated STEM Education Conference &#124; &copy;2013 IEEE
 
 ## [](#header-2)2012<a name="2012"></a>
 
-### [](#header-3)[ChargeCar community conversions: Practical, electric commuter vehicles now!](http://ieeexplore.ieee.org/document/6183231/)
+### [](#header-3)[ChargeCar community conversions: Practical, electric commuter vehicles now!](https://doi.org/10.1109/IEVC.2012.6183231)
 H. B. Brown, I. Nourbakhsh, C. Bartley, J. Cross, P. Dille, J. Schapiro and A. Styler<br>
 2012 IEEE International Electric Vehicle Conference (IEVC) &#124; &copy;2012 IEEE
 
