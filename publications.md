@@ -2,13 +2,13 @@
 
 ## [](#header-2)2016<a name="2016"></a>
 
-### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720){:target="_blank"}
+### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720)
 J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
 2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
 
 ### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities](https://doi.org/10.1109/FIE.2016.7757677)
 J. Cross,  E. Hamner, L. Zito, I. Nourbakhsh, and D. Bernstein<br>
-2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
+2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2016Validation_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum](https://doi.org/10.1109/FIE.2016.7757528)
 E. Hamner, J. Cross, L. Zito, D. Bernstein, and K. Mutch-Jones<br>
@@ -60,5 +60,5 @@ Geophysical Research Letters, Volume 37, Issue 4, February 2010 &#124; &copy;201
 
 ### [](#header-3)[Classification and Radio Science Modeling of Radar Meteor Echoes](http://www.ee.psu.edu/REU/REUPublications.aspx)
 J. Cross and J. D. Mathews<br>
-Annual Research Journal of the Electrical Engineering Research Experience for Undergraduates, Vol. 7, August 2009
+Annual Research Journal of the Electrical Engineering Research Experience for Undergraduates, Vol. 7, August 2009 &#124; <a target="_blank" href="jenncross.github.io/docs/jcross_2009_EEREU_MeteorClassification.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
