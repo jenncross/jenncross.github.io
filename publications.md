@@ -4,7 +4,7 @@
 
 ### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720)
 J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
-2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
+2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2016_talent_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities](https://doi.org/10.1109/FIE.2016.7757677)
 J. Cross,  E. Hamner, L. Zito, I. Nourbakhsh, and D. Bernstein<br>
@@ -12,11 +12,11 @@ J. Cross,  E. Hamner, L. Zito, I. Nourbakhsh, and D. Bernstein<br>
 
 ### [](#header-3)[Training Teachers to Integrate Engineering into Non- Technical Middle School Curriculum](https://doi.org/10.1109/FIE.2016.7757528)
 E. Hamner, J. Cross, L. Zito, D. Bernstein, and K. Mutch-Jones<br>
-2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
+2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2016_teachertraining_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Utilizing Engineering to Teach Non-Technical Disciplines : Case Studies of Robotics within Middle School English and Health Classes](https://doi.org/10.1109/FIE.2016.7757486)
 E. Hamner, L. Zito, J. Cross, B. Slezak, S. Mellon, H. Harapko, and M. Welter<br>
-2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE
+2016 IEEE Frontiers in Education Conference &#124; &copy;2016 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2016_CaseStudies_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Robots and Romeo and Juliet:  Studying Teacher Integration of Robotics into Middle School Curricula](../docs/1063849.1.pdf)
 D. Bernstein, K. Mutch-Jones, E. Hamner, and J. Cross<br>
