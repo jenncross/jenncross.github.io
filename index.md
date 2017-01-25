@@ -1,7 +1,3 @@
-<h1 class="blue" style="font-size: 500%; margin-bottom: 10px;">HELLO</h1>
-<p style="font-size: 200%; margin-bottom: 0px;">I'm <strong>Jennifer Cross</strong>.</p> 
-<p style="font-size: 150%; margin-bottom: 30px;">I am an <a href="http://jenncross.github.io/projects">engineer</a>, <a href="http://jenncross.github.io/teaching">educator</a>, <a href="http://jenncross.github.io/publications">scientist</a>, <a href="http://jenncross.github.io/activities">artist</a>, and <a href="http://jenncross.github.io/projects">roboticist</a>.</p>
-
 ## [](#header-2) This site is under construction. Thanks for your patience.
 
 ![Crater Lake Selfie](jenncross.github.io/images/DSC_0490.jpg)
