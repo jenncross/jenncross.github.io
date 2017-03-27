@@ -16,7 +16,7 @@ When I am not working on robotics and education research, I enjoy creating artwo
 <br>
 <br>
 
-<div><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/drafts-evelope-button.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-size:larger;"> jlcross </span><img style="vertical-align:middle;margin:2px 2px 2px 2px;" src="jenncross.github.io/images/icons/emailsymbol.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-size:larger;">  cmu.edu</span></div>
+<div><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/drafts-evelope-button.png" alt="Email"><span style="display: inline-block;vertical-align: middle;font-size:larger;"> jlcross </span><img style="vertical-align:middle;margin:2px 2px 2px 2px;" src="jenncross.github.io/images/icons/emailsymbol.png" alt="AT"><span style="display: inline-block;vertical-align: middle;font-size:larger;">  cmu.edu</span></div>
 
 <div><a href="https://www.linkedin.com/in/jenncross"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/In-Black-34px-TM.png" alt="LinkedIn"><span style="display:inline-block;vertical-align: middle;font-size:larger;"> jenncross</span></a></div>
 
