@@ -1,7 +1,6 @@
 # [](#header-1)Publications
 
-Find me on:
-<table  cellpadding="10">
+Find me on:<table  cellpadding="10">
 <tbody>
 <tr>
 <td><div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div></td>
