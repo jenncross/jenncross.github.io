@@ -1,8 +1,13 @@
 # [](#header-1)Publications
 
-<div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div>
-
-<div><a href="https://www.researchgate.net/profile/Jennifer_Cross9"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/rgate.png" alt="RG Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">ResearchGate </span></a></div>
+<table  cellpadding="10">
+<tbody>
+<tr>
+<td><div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div></td>
+<td><div><a href="https://www.researchgate.net/profile/Jennifer_Cross9"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/rgate.png" alt="RG Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">ResearchGate </span></a></div></td>
+</tr>
+</tbody>
+</table>
 
 ## [](#header-2)2016<a name="2016"></a>
 
