@@ -10,6 +10,14 @@
 <br>
 
 ## [](#header-2)Complete List
+Documents provided below are the author's versions of the work and are presented to ensure timely dissemination of scholarly work.  Copyright and all rights therein are retained by authors or organizations as noted. These documents are provided for personal use. Not for redistribution.
+
+## [](#header-2)<span style="color:gray">2017</span><a name="2016"></a>
+
+### [](#header-3)[Community-Empowered Air Quality Monitoring System](http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf)
+Y.-C. Hsu, P. Dille, J. Cross, B. Dias, R. Sargent, and I. Nourbakhsh<br>
+CHI 2017 (in press) &#124; &copy;2016 ACM <a target="_blank" href="http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
+
 ## [](#header-2)<span style="color:gray">2016</span><a name="2016"></a>
 
 ### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720)
