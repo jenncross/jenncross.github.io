@@ -10,7 +10,6 @@ Find me on:<table  cellpadding="10">
 </table>
 <br>
 <br>
-<br>
 
 ## [](#header-2)Complete List
 
