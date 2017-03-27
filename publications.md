@@ -10,7 +10,7 @@
 <br>
 
 ## [](#header-2)Complete List
-Documents provided below are the author's versions of the work and are presented to ensure timely dissemination of scholarly work.  Copyright and all rights therein are retained by authors or organizations as noted. These documents are provided for personal use. Not for redistribution.
+<span style.border="1px gray">Documents provided below are the author's versions of the work and are presented to ensure timely dissemination of scholarly work.  Copyright and all rights therein are retained by authors or organizations as noted. These documents are provided for personal use. Not for redistribution.</span>
 
 ## [](#header-2)<span style="color:gray">2017</span><a name="2016"></a>
 
