@@ -11,7 +11,7 @@
 
 ## [](#header-2)Complete List
 
-## [](#header-2)2016<a name="2016"></a>
+## [](#header-2)<span style="color:gray">2016</span><a name="2016"></a>
 
 ### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720)
 J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
