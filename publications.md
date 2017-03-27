@@ -4,7 +4,8 @@ Find me on:
 <table  cellpadding="10">
 <tbody>
 <tr>
-<td><div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div></td>
+<td><div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div></td></tr>
+<tr>
 <td><div><a href="https://www.researchgate.net/profile/Jennifer_Cross9"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/rgate.png" alt="RG Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">ResearchGate </span></a></div></td>
 </tr>
 </tbody>
