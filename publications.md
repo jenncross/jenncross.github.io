@@ -1,20 +1,13 @@
 # [](#header-1)Publications
 
 Find me on:
-<table  cellpadding="10">
-<tbody>
-<tr>
-<td><div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div></td></tr>
-<tr>
-<td><div><a href="https://www.researchgate.net/profile/Jennifer_Cross9"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/rgate.png" alt="RG Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">ResearchGate </span></a></div></td>
-</tr>
-</tbody>
-</table>
-<br>
-<br>
+<div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div>
+
+<div><a href="https://orcid.org/0000-0002-1201-2901"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/ID_symbol_B-W_32x32.png" alt="OrcID icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">0000-0002-1201-2901</span></a></div>
+
+<div><a href="https://www.researchgate.net/profile/Jennifer_Cross9"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/rgate.png" alt="RG Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">ResearchGate </span></a></div>
 
 ## [](#header-2)Complete List
-
 ## [](#header-2)<span style="color:gray">2016</span><a name="2016"></a>
 
 ### [](#header-3)[Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities](https://doi.org/10.1109/FIE.2016.7757720)
