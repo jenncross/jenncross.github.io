@@ -20,7 +20,6 @@ When I am not working on robotics and education research, I enjoy creating artwo
 
 <div><a href="https://www.linkedin.com/in/jenncross"><img style="vertical-align:middle;margin:2px 8px 2px 2px;" src="jenncross.github.io/images/icons/In-Black-34px-TM.png" alt="LinkedIn"><span style="display:inline-block;vertical-align: middle;font-size:larger;">LinkedIn</span></a></div>
 
-<div style="margin: 0;"><span style="display: inline-block;vertical-align: middle;font-size:larger;">Find me on:</span></div>
 <div><a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/gscholar.png" alt="Scholar Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Google Scholar</span></a></div>
 
 <div><a href="https://orcid.org/0000-0002-1201-2901"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="jenncross.github.io/images/icons/ID_symbol_B-W_32x32.png" alt="OrcID icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">OrcID</span></a></div>
