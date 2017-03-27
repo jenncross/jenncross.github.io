@@ -1,13 +1,13 @@
 <style>
 div.img {
-    margin: 5px;
+    margin: 4px;
     float: left;
-    border: .5px solid #eee;
+    border: 1px solid #eee;
     width: 238px;
 }
 
 div.img:hover {
-    border: .5px solid #bbb;
+    border: 1px solid #bbb;
 }
 
 div.img img {
