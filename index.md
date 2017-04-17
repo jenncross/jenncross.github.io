@@ -4,7 +4,7 @@
 
 I am a PhD Candidate in Robotics at Carnegie Mellon University. I work at the [CREATE Lab](http://www.cmucreatelab.org) with my advisor [Professor Illah Nourbakhsh](http://www.cs.cmu.edu/~illah/). I am a fellow of both the IES-supported [Program for Interdisciplinary Education Research](http://www.cmu.edu/pier/) and the [National Science Foundation Graduate Research Fellowship Program](https://www.nsfgrfp.org/). I completed my undergraduate degree in Electrical and Computer Engineering at the [F. W. Olin College of Engineering](http://olin.edu/) in Massachusetts where I was a member of the fifth graduating class. 
 
-I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research is on
+I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research interests include human-robot interaction with a focus on educational applications of robotics and diversity in engineering education.
 
 When I am not working on robotics and education research, I enjoy creating artwork through kiln-forming [fused glass](http://jenncross.github.io/activities) and spending time outdoors gardening. I am a member of the [Society of Women Engineers](http://societyofwomenengineers.swe.org/), [American Society for Engineering Education](https://www.asee.org/) and [IEEE](https://www.ieee.org/).
 
