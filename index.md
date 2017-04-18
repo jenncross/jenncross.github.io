@@ -3,9 +3,6 @@
 <br>
 <br>
 I work at the <a href="http://www.cmucreatelab.org">CREATE Lab</a> on the <a href="http://www.cmucreatelab.org/projects/Arts_&_Bots">Arts & Bots</a> project and  <a href="http://www.cmucreatelab.org/projects/Flutterproject">Flutter</a> project.
-<br>
-<br>
-My research interests include human-robot interaction with a focus on educational applications of robotics, student empowerment through robotics and diversity in engineering education.
 </p>
 
 <br>
