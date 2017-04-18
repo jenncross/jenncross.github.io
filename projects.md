@@ -40,6 +40,6 @@ Robot Diaries: Co-Design of Creative Technology and Middle School Curriculum
 
 A Low Cost Robotics kit for Elementary Education
 
-<br><br>
+<br><br><br><br>
 
-# [](#header-1)[Past Projects...](/pastprojects.md)
+[Past Projects...](/pastprojects.md)
