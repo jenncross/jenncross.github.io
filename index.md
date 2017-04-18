@@ -1,5 +1,5 @@
 <p style="font-size: 150%; ">
-<img src="/images/IMG_6629_noglare.jpg" alt="portrait" style="width: 450px; margin-left: 25px; margin-right: 25px;"/>I am a Ph.D. Candidate at the <a href="http://ri.cmu.edu/">Robotics Institute</a> of Carnegie Mellon University.
+<img src="/images/IMG_6629_noglare.jpg" alt="portrait" style="width: 450px; margin-left: 25px; margin-right: 25px; margin-top: 50px; margin-bottom: 50px;"/>I am a Ph.D. Candidate at the <a href="http://ri.cmu.edu/">Robotics Institute</a> of Carnegie Mellon University.
 <br>
 <br>
 I work at the <a href="http://www.cmucreatelab.org">CREATE Lab</a> on the <a href="http://www.cmucreatelab.org/projects/Arts_&_Bots">Arts & Bots</a> project and  <a href="http://www.cmucreatelab.org/projects/Flutterproject">Flutter</a> project.
