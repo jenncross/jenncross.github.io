@@ -42,4 +42,4 @@ A Low Cost Robotics kit for Elementary Education
 
 <br><br>
 
-[Past Projects...](/pastprojects.md)
+# [](#header-1)[Past Projects...](/pastprojects.md)
