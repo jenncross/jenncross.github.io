@@ -4,6 +4,6 @@
 
 <p style="font-size: 150%; margin-bottom: 30px;">My research interests include human-robot interaction with a focus on educational applications of robotics and diversity in engineering education.</p>
 
-<p style="font-size: 150%; margin-bottom: 30px;">I work at the <a href="http://www.cmucreatelab.org">CREATE Lab</a> on the <a href="http://www.cmucreatelab.org/projects/Arts_&_Bots">Arts & Bots</a> project and  <a href="http://www.cmucreatelab.org/projects/Flutterproject">Flutter</a>.</p>
+<p style="font-size: 150%; margin-bottom: 30px;">I work at the <a href="http://www.cmucreatelab.org">CREATE Lab</a> on the <a href="http://www.cmucreatelab.org/projects/Arts_&_Bots">Arts & Bots</a> project and  <a href="http://www.cmucreatelab.org/projects/Flutterproject">Flutter</a> project.</p>
 
 <br>
