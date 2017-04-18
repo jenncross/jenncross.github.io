@@ -28,7 +28,7 @@ div.container {
 }
 </style>
 
-# [](#header-1)Current Projects
+# [](#header-1)Projects
 
 ## [](#header-2)Arts & Bots
 
@@ -41,3 +41,5 @@ Robot Diaries: Co-Design of Creative Technology and Middle School Curriculum
 A Low Cost Robotics kit for Elementary Education
 
 <br><br>
+
+[Past Projects...](/pastprojects.md)
