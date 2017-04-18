@@ -1,4 +1,4 @@
-<p style="font-size: 125%; margin-bottom: 10px;">
+<p style="font-size: 150%; margin-bottom: 10px;">
 <img src="/images/cross_jennifer_color.jpg" alt="portrait" style="width: 200px; float: left; margin-right: 20px;"/>I am a Ph.D. Candidate at the <a href="http://ri.cmu.edu/">Robotics Institute</a> of Carnegie Mellon University.
 <br>
 <br>
