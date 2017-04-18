@@ -1,4 +1,3 @@
-<p style="font-size: 150%; ">
 <img src="/images/DSC_0490.jpg" alt="crater lake portrait" style="width: 500px; margin-top: 50px; margin-bottom: 50px;"/>
 
 ## [](#header-3)This site is under construction. Thanks for your patience.
