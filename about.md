@@ -2,11 +2,11 @@
 
 ![Post-It Portrait](/images/IMG_6629_noglare.jpg)
 
-I am a PhD Candidate in Robotics at Carnegie Mellon University. I work at the [CREATE Lab](http://www.cmucreatelab.org) with my advisor [Professor Illah Nourbakhsh](http://www.cs.cmu.edu/~illah/). I am a fellow of both the IES-supported [Program for Interdisciplinary Education Research](http://www.cmu.edu/pier/) and the [National Science Foundation Graduate Research Fellowship Program](https://www.nsfgrfp.org/). I completed my undergraduate degree in Electrical and Computer Engineering at the [F. W. Olin College of Engineering](http://olin.edu/) in Massachusetts where I was a member of the fifth graduating class. 
+I am a postdoctoral fellow at Carnegie Mellon University where I work in the [CREATE Lab](http://www.cmucreatelab.org). I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research interests include human-robot interaction with a focus on educational applications of robotics and diversity in engineering education.
 
-I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research interests include human-robot interaction with a focus on educational applications of robotics and diversity in engineering education.
+I completed my Ph.D. in Robotics at the Carnegie Mellon Robotics Institute and was advised by [Professor Illah Nourbakhsh](http://www.cs.cmu.edu/~illah/). I was a fellow of both the IES-supported [Program for Interdisciplinary Education Research](http://www.cmu.edu/pier/) and the [National Science Foundation Graduate Research Fellowship Program](https://www.nsfgrfp.org/). I completed my undergraduate degree in Electrical and Computer Engineering at the [F. W. Olin College of Engineering](http://olin.edu/) in Massachusetts where I was a member of the fifth graduating class. 
 
-When I am not working on robotics and education research, I enjoy creating artwork through kiln-forming [fused glass](/activities) and spending time outdoors gardening. I am a member of the [Society of Women Engineers](http://societyofwomenengineers.swe.org/), [American Society for Engineering Education](https://www.asee.org/) and [IEEE](https://www.ieee.org/).
+When I am not working on robotics and education research, I enjoy creating kiln-formed [fused glass](/activities) and spending time outdoors gardening. I am a member of the [Society of Women Engineers](http://societyofwomenengineers.swe.org/), [American Society for Engineering Education](https://www.asee.org/) and [IEEE](https://www.ieee.org/).
 
 <br>
 <br>
