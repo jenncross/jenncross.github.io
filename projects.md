@@ -28,6 +28,8 @@ div.container {
 }
 </style>
 
+## [](#header-2) This site is under construction. Thanks for your patience.
+
 # [](#header-1)Projects
 
 ## [](#header-2)Arts & Bots
