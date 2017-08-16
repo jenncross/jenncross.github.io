@@ -13,7 +13,7 @@ E. Hamner, L. Zito, J. Cross, M. Tasota, P. Dille, S. Fulton, M. Johnson, I. Nou
 J. Cross<br>
 Doctoral Dissertation, Carnegie Mellon University &#124; &copy;2017 Jennifer Cross  <a target="_blank" href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=1990&context=dissertations"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
-### [](#header-3)[Community-Empowered Air Quality Monitoring System](http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf)
+### [](#header-3)[Community-Empowered Air Quality Monitoring System](https://doi.org/10.1145/3025453.3025853)
 Y.-C. Hsu, P. Dille, J. Cross, B. Dias, R. Sargent, and I. Nourbakhsh<br>
 CHI 2017 &#124; &copy;2017 ACM <a target="_blank" href="http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
