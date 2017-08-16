@@ -1,5 +1,3 @@
-## [](#header-2) This site is under construction. Thanks for your patience.
-
 ![Post-It Portrait](/images/IMG_6629_noglare.jpg)
 
 I am a postdoctoral fellow at Carnegie Mellon University where I work in the [CREATE Lab](http://www.cmucreatelab.org). I work on the CREATE Lab's [Arts & Bots](http://www.cmucreatelab.org/projects/Arts_&_Bots) project and [Flutter](http://www.cmucreatelab.org/projects/Flutter) project. My primary research interests include human-robot interaction with a focus on educational applications of robotics and diversity in engineering education.
