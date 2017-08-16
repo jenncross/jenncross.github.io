@@ -21,7 +21,7 @@ When I am not working on robotics and education research, I enjoy creating kiln-
 
 <div><a href="https://www.researchgate.net/profile/Jennifer_Cross9"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="/images/icons/rgate.png" alt="RG Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">Jennifer Cross</span></a></div>
 
-<div><a href="/docs/2017.04.17 CV.pdf"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="/images/icons/google-drive-pdf-file.png" alt="PDF Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">CV</span></a></div>
+<div><a href="/docs/2017.08.16 CV.pdf"><img style="vertical-align:middle;margin:2px 21px 2px 2px;" src="/images/icons/google-drive-pdf-file.png" alt="PDF Icon"><span style="display:inline-block;vertical-align: middle;font-size:larger;">CV</span></a></div>
 
 <br>
 <br>
