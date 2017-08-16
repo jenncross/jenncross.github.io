@@ -9,9 +9,9 @@ J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
 E. Hamner, L. Zito, J. Cross, M. Tasota, P. Dille, S. Fulton, M. Johnson, I. Nourbakhsh, and J. Schapiro<br>
 2017 IEEE Frontiers in Education Conference (accepted) &#124; &copy;2017 IEEE
 
-### [](#header-3)[Creative Robotic Systems for Talent-based Learning](http://repository.cmu.edu/dissertations/951/)
+### [](#header-3)[Creative Robotic Systems for Talent-Based Learning](http://repository.cmu.edu/dissertations/951/)
 J. Cross<br>
-Doctoral Dissertation, Carnegie Mellon Robotics Institute &#124; &copy;Jennifer Cross  <a target="_blank" href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=1990&context=dissertations"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
+Doctoral Dissertation, Carnegie Mellon University &#124; &copy;2017 Jennifer Cross  <a target="_blank" href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=1990&context=dissertations"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Community-Empowered Air Quality Monitoring System](http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf)
 Y.-C. Hsu, P. Dille, J. Cross, B. Dias, R. Sargent, and I. Nourbakhsh<br>
