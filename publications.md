@@ -1,9 +1,17 @@
 # [](#header-1)Publications
 ## [](#header-2)2017<a name="2017"></a>
 
+### [](#header-3)[Student Outcomes from the Evaluation of a Transdisciplinary Middle School Robotics Program]()
+J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
+2017 IEEE Frontiers in Education Conference (accepted) &#124; &copy;2017 IEEE
+
+### [](#header-3)[Development and Results from User Testing of a Novel Robotics Kit Supporting Systems Engineering for Elementary-Aged Students]()
+E. Hamner, L. Zito, J. Cross, M. Tasota, P. Dille, S. Fulton, M. Johnson, I. Nourbakhsh, and J. Schapiro<br>
+2017 IEEE Frontiers in Education Conference (accepted) &#124; &copy;2017 IEEE
+
 ### [](#header-3)[Community-Empowered Air Quality Monitoring System](http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf)
 Y.-C. Hsu, P. Dille, J. Cross, B. Dias, R. Sargent, and I. Nourbakhsh<br>
-CHI 2017 (in press) &#124; &copy;2017 ACM <a target="_blank" href="http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
+CHI 2017 &#124; &copy;2017 ACM <a target="_blank" href="http://www.cmucreatelab.org/files/Community-Empowered%20Air%20Quality%20Monitoring%20System.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ## [](#header-2)2016<a name="2016"></a>
 
