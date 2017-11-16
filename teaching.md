@@ -4,6 +4,8 @@
 
 ## [](#header-2)Educational Robotics for Educators
 
-## [](#header-2)Introduction to Robotics 
+## [](#header-2)Mobile Robotics Project Course 
 
 ## [](#header-2)Systems Engineering
+
+## [](#header-2)Human-Robot Interaction
