@@ -3,11 +3,11 @@
 
 ### [](#header-3)[Student Outcomes from the Evaluation of a Transdisciplinary Middle School Robotics Program](https://doi.org/10.1109/FIE.2017.8190576)
 J. Cross,  E. Hamner, L. Zito, and I. Nourbakhsh<br>
-2017 IEEE Frontiers in Education Conference &#124; &copy;2017 IEEE
+2017 IEEE Frontiers in Education Conference &#124; &copy;2017 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2017_outcomes-authorscopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Development and Results from User Testing of a Novel Robotics Kit Supporting Systems Engineering for Elementary-Aged Students](https://doi.org/10.1109/FIE.2017.8190577)
 E. Hamner, L. Zito, J. Cross, M. Tasota, P. Dille, S. Fulton, M. Johnson, I. Nourbakhsh, and J. Schapiro<br>
-2017 IEEE Frontiers in Education Conference &#124; &copy;2017 IEEE
+2017 IEEE Frontiers in Education Conference &#124; &copy;2017 IEEE <a target="_blank" href="jenncross.github.io/docs/FIE2017-FlutterPilot-AuthorCopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Creative Robotic Systems for Talent-Based Learning](http://repository.cmu.edu/dissertations/951/)
 J. Cross<br>
