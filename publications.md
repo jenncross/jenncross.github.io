@@ -55,11 +55,11 @@ J. Cross and E. Hamner<br>
 
 ### [](#header-3)[A Visual Robot-Programming Environment for Multidisciplinary Education](https://doi.org/10.1109/ICRA.2013.6630613)
 J. Cross, C. Bartley, E. Hamner, and I. Nourbakhsh<br>
-2013 IEEE International Conference on Robotics and Automation &#124; &copy;2013 IEEE
+2013 IEEE International Conference on Robotics and Automation &#124; &copy;2013 IEEE <a target="_blank" href="jenncross.github.io/docs/ICRA2013_VisualProgrammer_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ### [](#header-3)[Arts & Bots: Techniques for distributing a STEAM robotics program through K-12 classrooms](https://doi.org/10.1109/ISECon.2013.6525207)
 E. Hamner and J. Cross<br>
-2013 IEEE Integrated STEM Education Conference &#124; &copy;2013 IEEE
+2013 IEEE Integrated STEM Education Conference &#124; &copy;2013 IEEE <a target="_blank" href="jenncross.github.io/docs/ISEC2013_Distribution_authorcopy.pdf"><img src="jenncross.github.io/images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
 
 ## [](#header-2)2012<a name="2012"></a>
 
