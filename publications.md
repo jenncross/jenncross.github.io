@@ -1,4 +1,10 @@
 # [](#header-1)Publications
+
+## [](#header-2)2018<a name="2017"></a>
+### [](#header-3)[Visualization Tool for Environmental Sensing and Public Health Data](https://arxiv.org/abs/1804.03263)
+Y.-C. Hsu, J. Cross, P. Dille, I. Nourbakhsh, L. Leiter, and R. Grode <br>
+the 2018 ACM Conference Companion Publication on Designing Interactive Systems (DIS '18 Companion) &#124; &copy;2018 ACM <a target="_blank" href="docs/DIS2018_EHP-authorscopy.pdf"><img src="images/icons/google-drive-pdf-file smaller gray.png" align="absmiddle"  alt="pdf"></a>
+
 ## [](#header-2)2017<a name="2017"></a>
 
 ### [](#header-3)[Student Outcomes from the Evaluation of a Transdisciplinary Middle School Robotics Program](https://doi.org/10.1109/FIE.2017.8190576)
