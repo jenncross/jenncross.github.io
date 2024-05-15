@@ -1,5 +1,34 @@
 # [](#header-1)Publications
 
+## [](#header-2)2023<a name="2023"></a>
+### [Conducting the Pilot Study of Integrating AI: An Experience Integrating Machine Learning into Upper Elementary Robotics Learning (Work in Progress)](https://doi.org/10.18260/1-2--42500)
+Xu, G.; Zabner, D.; Cross, J. L.; Nadler, D. R.; Coxon, S. V.; Engelkenjohn, K.
+2023 ASEE Annual Conference and Exposition, Conference Proceedings &#124; &copy;2023 American Society for Engineering Education
+
+### [Using robotics to enhance middle school science learning: Examining teachers’ design goals for integrated lessons](https://doi.org/10.3102/2015711)
+Bernstein, D.; Cassidy, M.; Mutch-Jones, K.; Cross, J.
+2023 American Education Research Association (AERA) Annual Meeting &#124; &copy;2023 The Authors.
+
+## [](#header-2)2022<a name="2022"></a>
+### [Robots in Science: How middle school science teachers design integrated robotics units for their science classes](https://repository.isls.org//handle/1/9004)
+Bernstein, D.; Cassidy, M.; Mutch-Jones, K.; Cross, J.
+2022 International Conference of the Learning Sciences (ICLS) &#124; &copy;2022 ISLS
+
+### [An Interactive Robot Platform for Introducing Reinforcement Learning to K-12 Students](http://doi.org/10.1007/978-3-030-82544-7_27)
+Zhang, Z.; Willner-Giwerc, S.; Sinapov, J.; Cross, J.; Rogers, C.
+Robotics in Education 2021. &#124; &copy;2022 The Authors, under exclusive license to Springer Nature Switzerland AG
+In: Advances in Intelligent Systems and Computing, vol 1359; Merdan, M. et al. (eds) 
+
+## [](#header-2)2021<a name="2021"></a>
+### [Leveraging tangible interfaces in primary school math: Pilot testing of the Owlet math program](http://doi.org/10.1016/j.ijcci.2020.100222)
+Zito, L.; Cross, J. L.; Brewer, B.; Speer, S.; Tasota, M.; Hamner, E.; Johnson, M.; Lauwers, T.; Nourbakhsh, I.
+International Journal of Child-Computer Interaction - March 2021 &#124; &copy;2021 The Authors. Published by Elsevier B.V.
+
+## [](#header-2)2020<a name="2020"></a>
+### [](#header-3)[Smell Pittsburgh: Engaging Community Citizen Science for AirQuality](http://doi.org/10.1145/3369397)
+Hsu, Y. C.; Cross, J.; Dille, P.; Tasota, M.; Dias, B.; Sargent, R.; Huang, T. H.; Nourbakhsh, I.
+ACM Transactions on Interactive Intelligent Systems - Volume 10 Issue 4 &#124; &copy;2020 ACM
+
 ## [](#header-2)2019<a name="2019"></a>
 ### [](#header-3)[Smell Pittsburgh: Community-Empowered Mobile Smell Reporting System](https://doi.org/10.1145/3301275.3302293)
 Y.-C. Hsu, J. Cross, P. Dille, M. Tasota, B. Dias, R. S., T.-H. (K.) Huang, and I. Nourbakhsh <br>
