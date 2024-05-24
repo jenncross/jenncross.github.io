@@ -7,7 +7,19 @@
 }
 a {
     color: rgb(54,164,241);
+    font-weight: normal;
+    text-decoration: none;
+    letter-spacing: .1em;
+    transition: text-shadow .3s;
 }
+
+a:hover,a:focus {
+    color: #069;
+    font-weight: normal;
+    text-shadow: 0 0 .65px #069, 0 0 .65px #069;
+}
+
+
 .yellowhighlight{ 
   background-color:rgb(255,247,35) 
 }
