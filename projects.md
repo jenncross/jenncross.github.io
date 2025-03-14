@@ -1,3 +1,8 @@
+---
+layout: default
+title: Projects
+---
+
 <style>
 div.img {
     margin: 1px;
@@ -32,8 +37,6 @@ div.container {
 
 # [](#header-1)Projects
 
-
-
 ## [](#header-2)Arts & Bots
 
 Arts & Bots is a middle school robotics program which combines standard robotics components, craft materials, a storyboard-based programming environment, and teacher training to integrate robotics into non-technical courses. By integrating robotics into required core classes like history, and English, we can engage a broader group of students than an elective class or an extracurricular. In Arts & Bots, robotics is used as a novel medium to engage students within the subject. Simultaneously, robotics is contextualized through that course content and made relevant for students not interested in "technology for technology's sake".
@@ -58,23 +61,20 @@ Arts & Bots is a middle school robotics program which combines standard robotics
         <img src="jenncross.github.io/images/" alt="bubble trap glass plate" width="238" height="175">
       </a><!--<div class="desc">bubble trap glass plate</div>-->
     </div>
-   
+
     <div class="img">
       <a target="_blank" href="jenncross.github.io/images/">
         <img src="jenncross.github.io/images/" alt="green glass channel plate" width="238" height="175">
       </a><!--<div class="desc">blue glass channel plate</div>-->
-    </div>  
+    </div>
+
 </div>
 
 ### [](#header-3)Robot Diaries: Co-Design of Creative Technology and Middle School Curriculum
 
-
-
 ## [](#header-2)Flutter
 
 ### [](#header-3)A Low Cost Robotics kit for Elementary Education
-
-
 
 <br><br><br><br>
 

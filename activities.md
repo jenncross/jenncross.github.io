@@ -1,3 +1,8 @@
+---
+layout: default
+title: Activities
+---
+
 <style>
 div.img {
     margin: 4px;
@@ -27,11 +32,13 @@ div.container {
 	margin-bottom: 10px;
 }
 </style>
+
 ## [](#header-2) This site is under construction. Thanks for your patience.
 
 # [](#header-1)Activities
 
 ## [](#header-2)Women@SCS
+
 <div class="container">
    <div class="img">
 	      <a target="_blank" href="jenncross.github.io/images/ourCS2013_organizers.JPG"><img src="jenncross.github.io/images/ourCS2013_organizers.JPG" alt="OurCS2013 Organizers" width="238" height="175"></a><!--<div class="desc">gray square bowl</div>-->
@@ -63,10 +70,11 @@ Through the [Pittsburgh Glass Center](https://www.pittsburghglasscenter.org/), I
         <img src="jenncross.github.io/images/glass/2016-12-09 19.58.38.jpg" alt="bubble trap glass plate" width="238" height="175">
       </a><!--<div class="desc">bubble trap glass plate</div>-->
     </div>
-   
+
     <div class="img">
       <a target="_blank" href="jenncross.github.io/images/glass/2016-12-09 19.59.38.jpg">
         <img src="jenncross.github.io/images/glass/2016-12-09 19.59.38.jpg" alt="green glass channel plate" width="238" height="175">
       </a><!--<div class="desc">blue glass channel plate</div>-->
-    </div>  
+    </div>
+
 </div>

@@ -1,3 +1,8 @@
+---
+layout: default
+title: Past Projects
+---
+
 <style>
 div.img {
     margin: 1px;
@@ -27,6 +32,7 @@ div.container {
 	margin-bottom: 10px;
 }
 </style>
+
 ## [](#header-2) This site is under construction. Thanks for your patience.
 
 # [](#header-1)Past Projects
@@ -36,7 +42,7 @@ div.container {
 <div class="container">
 
 <div class="img">
-<a target="_blank" href="jenncross.github.io/images/exploded_full_assembly_v2.jpg"><img src="jenncross.github.io/images/exploded_full_assembly_v2.jpg" width="238" height="134"></a> </div> 
+<a target="_blank" href="jenncross.github.io/images/exploded_full_assembly_v2.jpg"><img src="jenncross.github.io/images/exploded_full_assembly_v2.jpg" width="238" height="134"></a> </div>
 
 <div class="img">
 <iframe width="238" height="134" src="https://www.youtube.com/embed/videoseries?list=PL247F68B01440A763&amp;controls=0" frameborder="0" allowfullscreen></iframe> </div>
@@ -65,18 +71,17 @@ div.container {
 
 ## [](#header-2)Biomimetic Robotic Shark
 
-Collaborated with partner and faculty advisor to construct shark inspired robot 
+Collaborated with partner and faculty advisor to construct shark inspired robot
 Researched the swimming motions of sharks; investigated various materials to replicate shark musculoskeletal systems, including McKibben artificial pneumatic muscles; designed model in SolidWorks; fabricated proof-of-concept prototype; presented to faculty and peers at weekly design reviews
-
 
 ## [](#header-2)Micrometeor Radio Classification
 
-Researched modern data analysis techniques for identifying  micrometeors with radar telescopes; analyzed data returns from over 10,000 meteor radar echoes; identified radar signal interference patterns supporting the existence of controversial micrometeor fragmentation phenomena; created numerous MATLAB radio science-based simulations of meteor fragmentation confirming potential sources of observed signal interference patterns.
+Researched modern data analysis techniques for identifying micrometeors with radar telescopes; analyzed data returns from over 10,000 meteor radar echoes; identified radar signal interference patterns supporting the existence of controversial micrometeor fragmentation phenomena; created numerous MATLAB radio science-based simulations of meteor fragmentation confirming potential sources of observed signal interference patterns.
 [See publications](http://jenncross.github.io/publications#2010)
 
-## [](#header-2)Low-Cost Position Sensor for Robotic Applications 
+## [](#header-2)Low-Cost Position Sensor for Robotic Applications
 
-Researched implementation and integration of numerous low-cost commercial sensor technologies for novel sensor package;  collaborated with MIT’s Lincoln Laboratory for integration into larger autonomous system; designed complementary sensor sub-systems to minimize error sources; implemented large scale sensor integration in LabVIEW
+Researched implementation and integration of numerous low-cost commercial sensor technologies for novel sensor package; collaborated with MIT’s Lincoln Laboratory for integration into larger autonomous system; designed complementary sensor sub-systems to minimize error sources; implemented large scale sensor integration in LabVIEW
 
 ## [](#header-2)Exploded FPGA
 
