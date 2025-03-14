@@ -1,0 +1,6 @@
+<figure class="image-container {% if include.alignment %}align-{{ include.alignment }}{% endif %}">
+  <img src="{{ include.src }}" alt="{{ include.alt }}" {% if include.width %}width="{{ include.width }}"{% endif %}>
+  {% if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>

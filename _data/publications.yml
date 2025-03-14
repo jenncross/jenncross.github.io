@@ -1,0 +1,83 @@
+# Publications data structured for Jekyll
+
+- title: "Conducting the Pilot Study of Integrating AI: An Experience Integrating Machine Learning into Upper Elementary Robotics Learning (Work in Progress)"
+  authors: "Xu, G.; Zabner, D.; Cross, J. L.; Nadler, D. R.; Coxon, S. V.; Engelkenjohn, K."
+  venue: "2023 ASEE Annual Conference and Exposition, Conference Proceedings"
+  year: 2023
+  copyright: "©2023 American Society for Engineering Education"
+  doi: "https://doi.org/10.18260/1-2--42500"
+
+- title: "Using robotics to enhance middle school science learning: Examining teachers' design goals for integrated lessons"
+  authors: "Bernstein, D.; Cassidy, M.; Mutch-Jones, K.; Cross, J."
+  venue: "2023 American Education Research Association (AERA) Annual Meeting"
+  year: 2023
+  copyright: "©2023 The Authors"
+  doi: "https://doi.org/10.3102/2015711"
+
+- title: "Robots in Science: How middle school science teachers design integrated robotics units for their science classes"
+  authors: "Bernstein, D.; Cassidy, M.; Mutch-Jones, K.; Cross, J."
+  venue: "2022 International Conference of the Learning Sciences (ICLS)"
+  year: 2022
+  copyright: "©2022 ISLS"
+  doi: "https://repository.isls.org//handle/1/9004"
+
+- title: "An Interactive Robot Platform for Introducing Reinforcement Learning to K-12 Students"
+  authors: "Zhang, Z.; Willner-Giwerc, S.; Sinapov, J.; Cross, J.; Rogers, C."
+  venue: "Robotics in Education 2021, Advances in Intelligent Systems and Computing, vol 1359"
+  year: 2022
+  copyright: "©2022 The Authors, under exclusive license to Springer Nature Switzerland AG"
+  doi: "http://doi.org/10.1007/978-3-030-82544-7_27"
+
+- title: "Leveraging tangible interfaces in primary school math: Pilot testing of the Owlet math program"
+  authors: "Zito, L.; Cross, J. L.; Brewer, B.; Speer, S.; Tasota, M.; Hamner, E.; Johnson, M.; Lauwers, T.; Nourbakhsh, I."
+  venue: "International Journal of Child-Computer Interaction - March 2021"
+  year: 2021
+  copyright: "©2021 The Authors. Published by Elsevier B.V."
+  doi: "http://doi.org/10.1016/j.ijcci.2020.100222"
+
+- title: "Smell Pittsburgh: Engaging Community Citizen Science for AirQuality"
+  authors: "Hsu, Y. C.; Cross, J.; Dille, P.; Tasota, M.; Dias, B.; Sargent, R.; Huang, T. H.; Nourbakhsh, I."
+  venue: "ACM Transactions on Interactive Intelligent Systems - Volume 10 Issue 4"
+  year: 2020
+  copyright: "©2020 ACM"
+  doi: "http://doi.org/10.1145/3369397"
+
+- title: "Smell Pittsburgh: Community-Empowered Mobile Smell Reporting System"
+  authors: "Y.-C. Hsu, J. Cross, P. Dille, M. Tasota, B. Dias, R. S., T.-H. (K.) Huang, and I. Nourbakhsh"
+  venue: "2019 International Conference on Intelligent User Interfaces (IUI '19)"
+  year: 2019
+  copyright: "©2019 ACM"
+  doi: "https://doi.org/10.1145/3301275.3302293"
+  pdf: "/docs/DIS2018_EHP-authorscopy.pdf"
+
+- title: "Visualization Tool for Environmental Sensing and Public Health Data"
+  authors: "Y.-C. Hsu, J. Cross, P. Dille, I. Nourbakhsh, L. Leiter, and R. Grode"
+  venue: "2018 ACM Conference Companion Publication on Designing Interactive Systems (DIS '18 Companion)"
+  year: 2018
+  copyright: "©2018 ACM"
+  doi: "https://arxiv.org/abs/1804.03263"
+  pdf: "/docs/DIS2018_EHP-authorscopy.pdf"
+
+- title: "Student Outcomes from the Evaluation of a Transdisciplinary Middle School Robotics Program"
+  authors: "J. Cross, E. Hamner, L. Zito, and I. Nourbakhsh"
+  venue: "2017 IEEE Frontiers in Education Conference"
+  year: 2017
+  copyright: "©2017 IEEE"
+  doi: "https://doi.org/10.1109/FIE.2017.8190576"
+  pdf: "/docs/FIE2017_outcomes-authorscopy.pdf"
+
+- title: "Development and Results from User Testing of a Novel Robotics Kit Supporting Systems Engineering for Elementary-Aged Students"
+  authors: "E. Hamner, L. Zito, J. Cross, M. Tasota, P. Dille, S. Fulton, M. Johnson, I. Nourbakhsh, and J. Schapiro"
+  venue: "2017 IEEE Frontiers in Education Conference"
+  year: 2017
+  copyright: "©2017 IEEE"
+  doi: "https://doi.org/10.1109/FIE.2017.8190577"
+  pdf: "/docs/FIE2017-FlutterPilot-AuthorCopy.pdf"
+
+- title: "Creative Robotic Systems for Talent-Based Learning"
+  authors: "J. Cross"
+  venue: "Doctoral Dissertation, Carnegie Mellon University"
+  year: 2017
+  copyright: "©2017 Jennifer Cross"
+  doi: "http://repository.cmu.edu/dissertations/951/"
+  pdf: "http://repository.cmu.edu/cgi/viewcontent.cgi?article=1990&context=dissertations"

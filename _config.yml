@@ -1,7 +1,29 @@
 theme: jekyll-theme-minimal
-title: [Jennifer Cross]
-description: [Personal Website]
+title: ["Jennifer L. Cross"]
+description: ["Research Assistant Professor, Tufts University"]
 
 show_downloads: [false]
 google_analytics_key: UA-109769074-1
 google_analytics: UA-109769074-1
+
+# Collections
+collections:
+    courses:
+        output: true
+
+# Default layouts
+defaults:
+    - scope:
+          path: ""
+          type: "courses"
+      values:
+          layout: "course"
+    - scope:
+          path: ""
+          type: "posts"
+      values:
+          layout: "post"
+    - scope:
+          path: ""
+      values:
+          layout: "default"

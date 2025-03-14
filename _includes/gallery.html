@@ -1,0 +1,12 @@
+<div class="gallery">
+  {% for image in include.images %}
+  <div class="gallery-item">
+    <a href="{{ image.full }}" class="gallery-link">
+      <img src="{{ image.thumb | default: image.full }}" alt="{{ image.alt }}">
+    </a>
+    {% if image.caption %}
+    <div class="gallery-caption">{{ image.caption }}</div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
