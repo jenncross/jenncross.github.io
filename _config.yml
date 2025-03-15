@@ -10,9 +10,16 @@ google_analytics: UA-109769074-1
 collections:
     courses:
         output: true
+    projects:
+        output: true
 
 # Default layouts
 defaults:
+    - scope:
+          path: ""
+          type: "projects"
+      values:
+          layout: "project"
     - scope:
           path: ""
           type: "courses"

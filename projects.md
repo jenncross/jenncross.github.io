@@ -3,79 +3,84 @@ layout: default
 title: Projects
 ---
 
-<style>
-div.img {
-    margin: 1px;
-    float: left;
-    border: 1px solid #eee;
-    width: 238px;
-}
+<section class="page-header">
+  <h1 class="page-title">Research Projects</h1>
+  <p class="page-subtitle">My research integrates participatory design methodologies with empirical investigation to create innovative systems and interfaces. Each project typically spans multiple methodological approaches and disciplinary boundaries.</p>
+</section>
 
-div.img:hover {
-    border: 1px solid #bbb;
-}
+<section class="filter-controls">
+  <h2 class="filter-title">Filter projects by:</h2>
+  <div class="filter-options">
+    <button class="filter-button active" data-filter="all">All Projects</button>
+    <button class="filter-button" data-filter="participatory">Participatory Design</button>
+    <button class="filter-button" data-filter="research">Design-Based Research</button>
+    <button class="filter-button" data-filter="interdisciplinary">Interdisciplinary</button>
+    <button class="filter-button" data-filter="k12">K-12 Education</button>
+    <button class="filter-button" data-filter="higher">Higher Education</button>
+    <button class="filter-button" data-filter="current">Current Projects</button>
+    <button class="filter-button" data-filter="completed">Completed Projects</button>
+  </div>
+</section>
 
-div.img img {
-    width: 100%;
-    height: auto;
-    vertical-align: middle;
-}
-
-div.desc {
-    padding: 10px;
-    text-align: center;
-}
-
-div.container {
-	overflow: auto;
-	width: 100%;
-	margin-bottom: 10px;
-}
-</style>
-
-## [](#header-2) This site is under construction. Thanks for your patience.
-
-# [](#header-1)Projects
-
-## [](#header-2)Arts & Bots
-
-Arts & Bots is a middle school robotics program which combines standard robotics components, craft materials, a storyboard-based programming environment, and teacher training to integrate robotics into non-technical courses. By integrating robotics into required core classes like history, and English, we can engage a broader group of students than an elective class or an extracurricular. In Arts & Bots, robotics is used as a novel medium to engage students within the subject. Simultaneously, robotics is contextualized through that course content and made relevant for students not interested in "technology for technology's sake".
-
-### [](#header-3)Creative Robotics: an Inclusive Program for Fostering Diverse STEM Talent in Middle School
-
-<div class="container">
-    <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/">
-        <img src="jenncross.github.io/images/" alt="Green glass bowl" width="238" height="175">
-      </a><!--<div class="desc">Green glass bowl</div>-->
+<div class="project-grid">
+  {% for project in site.projects %}
+  {% assign approach_classes = "" %}
+  {% for approach in project.approaches %}
+    {% assign approach_class = approach | downcase | replace: " ", "-" | replace: "-&-", "-" | replace: "-based", "" %}
+    {% assign approach_classes = approach_classes | append: approach_class | append: " " %}
+  {% endfor %}
+  
+  {% assign context_classes = "" %}
+  {% for context in project.contexts %}
+    {% assign context_class = context | downcase | replace: " ", "-" | replace: "-&-", "-" %}
+    {% assign context_classes = context_classes | append: context_class | append: " " %}
+  {% endfor %}
+  
+  <div class="project-card" data-category="{{ approach_classes }} {{ context_classes }} {{ project.status | downcase }}">
+    {% if project.featured_image %}
+    <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
+    {% endif %}
+    <div class="project-content">
+      <h3 class="project-title">{{ project.title }}</h3>
+      <p class="project-meta">{{ project.timeframe }}{% if project.grant %} | {{ project.grant }}{% endif %}</p>
+      <p class="project-description">{{ project.excerpt }}</p>
+      <div class="tag-container">
+        {% for approach in project.approaches %}
+        {% assign approach_class = approach | downcase | replace: " ", "-" | replace: "-&-", "-" | replace: "-based", "" %}
+        <span class="tag"><span class="tag-indicator {{ approach_class }}"></span>{{ approach }}</span>
+        {% endfor %}
+      </div>
+      <a href="{{ project.url }}" class="project-link">Project details</a>
     </div>
-
-    <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/">
-        <img src="jenncross.github.io/images/" alt="gray square bowl" width="238" height="175">
-      </a><!--<div class="desc">gray square bowl</div>-->
-    </div>
-
-    <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/">
-        <img src="jenncross.github.io/images/" alt="bubble trap glass plate" width="238" height="175">
-      </a><!--<div class="desc">bubble trap glass plate</div>-->
-    </div>
-
-    <div class="img">
-      <a target="_blank" href="jenncross.github.io/images/">
-        <img src="jenncross.github.io/images/" alt="green glass channel plate" width="238" height="175">
-      </a><!--<div class="desc">blue glass channel plate</div>-->
-    </div>
-
+  </div>
+  {% endfor %}
 </div>
 
-### [](#header-3)Robot Diaries: Co-Design of Creative Technology and Middle School Curriculum
-
-## [](#header-2)Flutter
-
-### [](#header-3)A Low Cost Robotics kit for Elementary Education
-
-<br><br><br><br>
-
-[Past Projects...](/pastprojects.md)
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Get filter value
+        const filterValue = this.getAttribute('data-filter');
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
