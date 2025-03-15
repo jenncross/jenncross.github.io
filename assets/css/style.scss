@@ -3,7 +3,9 @@
 
 @import "{{ site.theme }}";
 
-/* Color system - minimal with single accent */
+/* ======================================
+   CORE VARIABLES - COMPACT SPACING
+   ====================================== */
 :root {
     --accent: #3182ce;
     --accent-light: rgba(49, 130, 206, 0.1);
@@ -13,11 +15,34 @@
     --bg-primary: #ffffff;
     --bg-secondary: #f7fafc;
     --border: #e2e8f0;
+
+    /* COMPACT SPACING SYSTEM */
+    --space-xs: 0.25rem; /* 4px */
+    --space-sm: 0.5rem; /* 8px */
+    --space-md: 1rem; /* 16px */
+    --space-lg: 1.5rem; /* 24px */
+    --space-xl: 2rem; /* 32px */
 }
 
-/* Reset & base styles */
+/* ======================================
+   CRITICAL OVERRIDES
+   ====================================== */
+/* Fix the theme's problematic hover style */
+a,
+a:hover,
+a:focus,
+a:active {
+    font-weight: 500 !important;
+    color: var(--accent) !important;
+}
+
+/* ======================================
+   RESET & BASE STYLES
+   ====================================== */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -28,8 +53,7 @@ body {
     background-color: var(--bg-primary);
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem;
-    position: relative;
+    padding: var(--space-md);
 }
 
 /* Override any fixed positioning from the theme */
@@ -47,7 +71,9 @@ footer,
     margin: 0 auto;
 }
 
-/* Typography */
+/* ======================================
+   TYPOGRAPHY
+   ====================================== */
 h1,
 h2,
 h3,
@@ -58,35 +84,32 @@ h6 {
     font-weight: 500;
     line-height: 1.3;
     color: var(--text-primary);
-    margin-bottom: 1rem;
+    margin: 0 0 var(--space-sm) 0;
 }
 
 h1 {
     font-size: 2.25rem;
-    margin-top: 0;
-    letter-spacing: -0.025em;
 }
 
 h2 {
     font-size: 1.75rem;
-    margin-top: 2.5rem;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
 }
 
 h3 {
     font-size: 1.35rem;
-    margin-top: 2rem;
 }
 
 h4 {
     font-size: 1.15rem;
-    margin-top: 1.5rem;
 }
 
 p,
 ul,
 ol,
 dl {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-sm);
 }
 
 a {
@@ -98,7 +121,6 @@ a {
 
 a:hover {
     border-bottom-color: var(--accent);
-    text-decoration: none;
 }
 
 small {
@@ -116,24 +138,42 @@ code {
 
 blockquote {
     margin-left: 0;
-    padding-left: 1rem;
+    padding-left: var(--space-sm);
     border-left: 3px solid var(--border);
     color: var(--text-secondary);
     font-style: italic;
 }
 
 blockquote footer {
-    margin-top: 0.5rem;
+    margin-top: var(--space-xs);
     font-size: 0.9rem;
     color: var(--text-tertiary);
 }
 
-/* Header */
+/* ======================================
+   LAYOUT
+   ====================================== */
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* CONSISTENT SECTION SPACING */
+main > * {
+    margin-bottom: var(--space-lg);
+}
+
+main > *:last-child {
+    margin-bottom: 0;
+}
+
+/* ======================================
+   HEADER
+   ====================================== */
 .header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
     border-bottom: 1px solid var(--border);
-    position: relative;
     width: 100%;
 }
 
@@ -141,6 +181,11 @@ blockquote footer {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+}
+
+.header-main {
+    display: flex;
+    flex-direction: column;
 }
 
 .site-title {
@@ -156,10 +201,13 @@ blockquote footer {
     color: var(--text-secondary);
 }
 
+/* ======================================
+   NAVIGATION
+   ====================================== */
 .nav {
     display: flex;
-    margin-top: 1.5rem;
-    gap: 2rem;
+    margin-top: var(--space-sm);
+    gap: var(--space-md);
     flex-wrap: wrap;
 }
 
@@ -169,6 +217,8 @@ blockquote footer {
     color: var(--text-secondary);
     position: relative;
     font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
 }
 
 .nav a::after {
@@ -176,7 +226,7 @@ blockquote footer {
     position: absolute;
     width: 100%;
     height: 2px;
-    bottom: -6px;
+    bottom: 0;
     left: 0;
     background-color: var(--accent);
     transform: scaleX(0);
@@ -188,57 +238,86 @@ blockquote footer {
     transform: scaleX(1);
 }
 
+.nav a:hover,
 .nav a.active {
     color: var(--accent);
 }
 
-/* Main content area */
-main {
-    display: block;
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
+/* ======================================
+   SOCIAL ICONS
+   ====================================== */
+.social-icons {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
 }
 
-/* Bio section (Homepage) */
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: transform 0.2s, background-color 0.2s;
+    border: 1px solid transparent;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    background-color: var(--bg-secondary);
+    border-bottom: none;
+}
+
+.social-icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* ======================================
+   BIO SECTION
+   ====================================== */
 .bio-section {
     display: flex;
     align-items: flex-start;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
 .bio-content {
     flex: 1;
 }
 
+.bio-image-container {
+    flex-shrink: 0;
+}
+
 .bio-image {
     max-width: 300px;
     border-radius: 4px;
+    display: block;
 }
 
 .identity-statement {
     font-size: 1.75rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: var(--space-sm);
     line-height: 1.3;
-    font-weight: 500;
 }
 
-/* Section divider */
+/* ======================================
+   SECTION COMPONENTS
+   ====================================== */
 .section-divider {
     height: 1px;
     background-color: var(--border);
-    margin: 3rem 0;
+    margin: var(--space-md) 0;
     width: 100%;
 }
 
-/* Simple section */
 .simple-section {
-    margin-bottom: 3rem;
-}
-
-.simple-section h2 {
-    margin-bottom: 1.25rem;
+    margin-bottom: var(--space-lg);
 }
 
 .text-link {
@@ -246,21 +325,36 @@ main {
     font-weight: 500;
     font-size: 0.95rem;
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: var(--space-xs);
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
 }
 
 .text-link::after {
     content: " →";
+    transition: margin-left 0.2s;
+    display: inline-block;
 }
 
-/* Page header */
+.text-link:hover {
+    border-bottom-color: var(--accent);
+}
+
+.text-link:hover::after {
+    margin-left: 3px;
+}
+
+/* ======================================
+   PROJECTS PAGE
+   ====================================== */
 .page-header {
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-lg);
 }
 
 .page-title {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-sm);
 }
 
 .page-subtitle {
@@ -269,17 +363,16 @@ main {
     max-width: 800px;
 }
 
-/* Filter controls */
 .filter-controls {
-    margin: 2rem 0 3rem;
-    padding: 1.5rem;
+    margin: var(--space-md) 0 var(--space-lg);
+    padding: var(--space-sm);
     background-color: var(--bg-secondary);
     border-radius: 8px;
 }
 
 .filter-title {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-sm);
     font-size: 1rem;
     color: var(--text-secondary);
 }
@@ -297,9 +390,10 @@ main {
     padding: 0.4rem 1rem;
     font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 0.8rem;
+    font-weight: 500;
     color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
 }
 
 .filter-button:hover {
@@ -313,12 +407,14 @@ main {
     color: white;
 }
 
-/* Project grid */
+/* ======================================
+   PROJECT GRID & CARDS
+   ====================================== */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 2.5rem;
-    margin-bottom: 4rem;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
 .project-card {
@@ -343,7 +439,7 @@ main {
 }
 
 .project-content {
-    padding: 1.5rem;
+    padding: var(--space-sm);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -352,26 +448,26 @@ main {
 .project-title {
     font-size: 1.3rem;
     margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-xs);
 }
 
 .project-meta {
     font-size: 0.85rem;
     color: var(--text-tertiary);
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-sm);
     font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .project-description {
     font-size: 0.95rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-sm);
 }
 
 .tag-container {
     margin-top: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--space-xs);
 }
 
 .tag {
@@ -408,34 +504,341 @@ main {
 
 .project-link {
     display: inline-block;
-    margin-top: 1.25rem;
+    margin-top: var(--space-sm);
     font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
 }
 
 .project-link::after {
     content: " →";
+    transition: margin-left 0.2s;
+    display: inline-block;
 }
 
-/* Footer */
+.project-link:hover {
+    border-bottom-color: var(--accent);
+}
+
+.project-link:hover::after {
+    margin-left: 3px;
+}
+
+/* ======================================
+   PROJECT DETAIL PAGE
+   ====================================== */
+.project-header {
+    margin-bottom: var(--space-md);
+}
+
+.project-detail-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+}
+
+.project-detail-meta {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.project-detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.project-featured-image {
+    margin-bottom: var(--space-md);
+}
+
+.featured-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.project-main {
+    position: relative;
+}
+
+.project-sidebar {
+    position: relative;
+}
+
+.sidebar-section {
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm);
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.sidebar-heading {
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--border);
+}
+
+.resource-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.resource-list li {
+    margin-bottom: var(--space-xs);
+}
+
+.resource-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.resource-link::before {
+    content: "→";
+    color: var(--accent);
+    margin-right: var(--space-xs);
+    transition: margin-right 0.2s;
+}
+
+.resource-link:hover {
+    border-bottom-color: var(--accent);
+}
+
+.resource-link:hover::before {
+    margin-right: 0.5rem;
+}
+
+.team-role {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+/* ======================================
+   TIMELINE COMPONENT
+   ====================================== */
+.timeline {
+    margin-top: var(--space-md);
+    position: relative;
+    padding-left: var(--space-md);
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background-color: var(--border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--space-md);
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--space-md));
+    top: 0.35rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent);
+}
+
+.timeline-date {
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.1rem;
+}
+
+.timeline-content {
+    color: var(--text-secondary);
+}
+
+/* ======================================
+   DATA VISUALIZATION
+   ====================================== */
+.evaluation-data {
+    margin: var(--space-md) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-md) 0;
+}
+
+.data-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.data-label {
+    width: 180px;
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.data-bar-container {
+    flex-grow: 1;
+    height: 24px;
+    background-color: var(--bg-secondary);
+    position: relative;
+}
+
+.data-bar {
+    height: 100%;
+    background-color: var(--accent-light);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.data-value {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.data-note {
+    margin-top: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* ======================================
+   PUBLICATIONS
+   ====================================== */
+.project-publications {
+    margin-top: var(--space-sm);
+}
+
+.publication-item {
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.publication-item:last-child {
+    border-bottom: none;
+}
+
+.publication-citation {
+    margin-bottom: var(--space-xs);
+}
+
+.publication-links {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* ======================================
+   GALLERY
+   ====================================== */
+.project-gallery {
+    margin-top: var(--space-md);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.03);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: var(--space-xs);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
+
+/* ======================================
+   RELATED PROJECTS
+   ====================================== */
+.more-projects {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
 .footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
     border-top: 1px solid var(--border);
     color: var(--text-tertiary);
     font-size: 0.9rem;
-    position: relative;
     width: 100%;
 }
 
 .footer p {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-xs);
 }
 
-/* Image handling */
+/* ======================================
+   IMAGE HANDLING
+   ====================================== */
 .image-container {
-    margin: 2rem 0;
+    margin: var(--space-md) 0;
     max-width: 100%;
 }
 
@@ -448,21 +851,21 @@ main {
 figcaption {
     font-size: 0.9rem;
     color: var(--text-tertiary);
-    margin-top: 0.5rem;
+    margin-top: var(--space-xs);
     font-style: italic;
 }
 
 .align-left {
     float: left;
-    margin-right: 2rem;
-    margin-bottom: 1rem;
+    margin-right: var(--space-md);
+    margin-bottom: var(--space-sm);
     max-width: 40%;
 }
 
 .align-right {
     float: right;
-    margin-left: 2rem;
-    margin-bottom: 1rem;
+    margin-left: var(--space-md);
+    margin-bottom: var(--space-sm);
     max-width: 40%;
 }
 
@@ -470,36 +873,182 @@ figcaption {
     display: block;
     max-width: 300px;
     height: auto;
-    margin: 0 auto 2rem;
+    margin: 0 auto var(--space-md);
     border-radius: 4px;
 }
 
-/* Responsive adjustments */
+/* ======================================
+   SPECIFIC SECTION SPACING FIX
+   ====================================== */
+/* Apply specific spacing to main sections on the home page */
+#about-me,
+#current-research-interests,
+#teaching {
+    margin-bottom: var(--space-md) !important;
+}
+
+/* Ensure headings don't have excess spacing */
+main > h2,
+main > h2 + * {
+    margin-top: var(--space-md) !important;
+    margin-bottom: var(--space-xs) !important;
+}
+
+/* Force consistent spacing after lists */
+ul,
+ol {
+    margin-bottom: var(--space-sm) !important;
+}
+
+/* Fix section spacing after "View all projects" links */
+.text-link {
+    margin-bottom: 0 !important;
+}
+
+/* ======================================
+   RESPONSIVE ADJUSTMENTS
+   ====================================== */
 @media (max-width: 768px) {
     .bio-section {
         flex-direction: column;
         align-items: center;
     }
 
+    .bio-image-container {
+        order: -1;
+        margin-bottom: var(--space-sm);
+    }
+
     .bio-image {
         max-width: 250px;
-        margin-bottom: 1.5rem;
     }
 
     .project-grid {
         grid-template-columns: 1fr;
     }
 
+    .project-content {
+        grid-template-columns: 1fr;
+    }
+
     .nav {
-        gap: 1rem;
+        gap: var(--space-sm);
     }
 
-    .filter-options {
-        gap: 0.5rem;
+    .social-icons {
+        gap: 0.75rem;
     }
 
-    .filter-button {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.8rem;
+    .social-icon {
+        width: 28px;
+        height: 28px;
     }
+
+    .social-icon img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ======================================
+   RESPONSIVE ADJUSTMENTS
+   ====================================== */
+@media (max-width: 768px) {
+    :root {
+        --space-md: 1.5rem;
+        --space-lg: 2.5rem;
+    }
+
+    .bio-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bio-image-container {
+        order: -1;
+        margin-bottom: var(--space-sm);
+    }
+
+    .bio-image {
+        max-width: 250px;
+        border-radius: 999px;
+        border: 0.2rem solid var(--text-primary);
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-content {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        gap: var(--space-sm);
+    }
+
+    .social-icons {
+        gap: 0.75rem;
+    }
+
+    .social-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .social-icon img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ======================================
+   SPECIFIC SECTION SPACING FIX
+   ====================================== */
+/* Target specific headings that shouldn't have too much space after */
+h2,
+h2 + p,
+h2 + section {
+    margin-bottom: var(--space-sm) !important;
+}
+
+/* Apply specific spacing to main headings on the home page */
+main > h2 {
+    margin-top: var(--space-lg) !important;
+    margin-bottom: var(--space-sm) !important;
+}
+
+/* Force specific spacing between main sections */
+#about-me,
+#current-research-interests,
+#teaching {
+    margin-bottom: var(--space-lg) !important;
+}
+
+/* Ensure spacing after lists is controlled */
+ul,
+ol {
+    margin-bottom: var(--space-md) !important;
+}
+
+/* Force consistent spacing before footer */
+main > *:last-child {
+    margin-bottom: var(--space-lg) !important;
+}
+
+/* Fix section spacing after "View all projects" links */
+.text-link {
+    margin-bottom: 0 !important;
+}
+
+/* Fix specific Jekyll-generated margins */
+main > article,
+main > section {
+    margin-bottom: var(--space-lg) !important;
+    padding-bottom: 0 !important;
+}
+
+/* Ensure consistent heading spacing after Bio section */
+.bio-section + h2 {
+    margin-top: 0 !important;
 }
