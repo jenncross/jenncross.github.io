@@ -190,15 +190,16 @@ main > *:last-child {
 
 .site-title {
     margin: 0;
-    font-size: 2.4rem;
+    font-size: 3rem;
     color: var(--text-primary);
 }
 
 .site-subtitle {
-    margin: 0.3rem 0 0;
-    font-size: 1.1rem;
+    margin: var(--space-sm) 0 0;
+    font-size: 1.5rem;
     font-weight: 300;
     color: var(--text-secondary);
+    line-height: 1;
 }
 
 /* ======================================
@@ -243,11 +244,10 @@ main > *:last-child {
     color: var(--accent);
 }
 
-/* ======================================
-   SOCIAL ICONS
-   ====================================== */
+/* Social icons with text styling */
 .social-icons {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-sm);
     margin-top: var(--space-xs);
 }
@@ -255,25 +255,32 @@ main > *:last-child {
 .social-icon {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
     background-color: transparent;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
     border: 1px solid transparent;
+    margin-bottom: var(--space-xs);
 }
 
 .social-icon:hover {
-    transform: translateY(-3px);
-    background-color: var(--bg-secondary);
+    transform: translateY(-2px);
     border-bottom: none;
 }
 
 .social-icon img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
+    margin-right: 0.5rem;
+}
+
+.social-icon span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    white-space: nowrap;
+    font-style: italic;
 }
 
 /* ======================================
@@ -296,7 +303,8 @@ main > *:last-child {
 
 .bio-image {
     max-width: 300px;
-    border-radius: 4px;
+    border-radius: 999px;
+    border: 0.2rem solid var(--text-primary);
     display: block;
 }
 
@@ -342,7 +350,7 @@ main > *:last-child {
 }
 
 .text-link:hover::after {
-    margin-left: 3px;
+    margin-left: 0.5rem;
 }
 
 /* ======================================
@@ -921,6 +929,8 @@ ol {
 
     .bio-image {
         max-width: 250px;
+        border-radius: 999px;
+        border: 0.2rem solid var(--text-primary);
     }
 
     .project-grid {
@@ -933,20 +943,6 @@ ol {
 
     .nav {
         gap: var(--space-sm);
-    }
-
-    .social-icons {
-        gap: 0.75rem;
-    }
-
-    .social-icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .social-icon img {
-        width: 16px;
-        height: 16px;
     }
 }
 
@@ -985,20 +981,6 @@ ol {
 
     .nav {
         gap: var(--space-sm);
-    }
-
-    .social-icons {
-        gap: 0.75rem;
-    }
-
-    .social-icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .social-icon img {
-        width: 16px;
-        height: 16px;
     }
 }
 
