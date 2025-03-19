@@ -183,7 +183,7 @@
       - text: "DOI"
         url: "https://repository.isls.org//handle/1/9004"
 
-- type: conference
+- type: journal
   title: "An Interactive Robot Platform for Introducing Reinforcement Learning to K-12 Students"
   authors:
       - name: "Ziyi Zhang"

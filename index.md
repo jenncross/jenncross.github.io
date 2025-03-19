@@ -8,7 +8,7 @@ layout: default
   </div>
   <div class="bio-content">   
     <h2>About Me</h2>
-    <p>Currently, I'm a Research Assistant Professor at the <a href="https://ceeo.tufts.edu/">Tufts University Center for Engineering Education and Outreach</a>. I design interactive systems through participatory methodologies, bridging robotics, human-centered design, and education.</p>
+    <p>I'm a Research Assistant Professor at the <a href="https://ceeo.tufts.edu/">Tufts University Center for Engineering Education and Outreach</a>. I design interactive systems through participatory methodologies, bridging robotics, human-centered design, and education.</p>
     
     <p>I completed my Ph.D. in Robotics at the Carnegie Mellon Robotics Institute, advised by <a href="http://www.cs.cmu.edu/~illah/">Professor Illah Nourbakhsh</a>. I was a fellow of both the IES-supported <a href="http://www.cmu.edu/pier/">Program for Interdisciplinary Education Research</a> and the <a href="https://www.nsfgrfp.org/">National Science Foundation Graduate Research Fellowship Program</a>. I completed my undergraduate degree in Electrical and Computer Engineering at the <a href="http://olin.edu/">F. W. Olin College of Engineering</a>.</p>
   </div>

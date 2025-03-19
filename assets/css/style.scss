@@ -195,7 +195,7 @@ main > *:last-child {
 }
 
 .site-subtitle {
-    margin: var(--space-sm) 0 0;
+    margin: var(--space-xs) 0 var(--space-sm);
     font-size: 1.5rem;
     font-weight: 300;
     color: var(--text-secondary);
@@ -1033,4 +1033,145 @@ main > section {
 /* Ensure consistent heading spacing after Bio section */
 .bio-section + h2 {
     margin-top: 0 !important;
+}
+
+/* Publication styles for project pages */
+.project-publications {
+    margin-top: var(--space-md);
+}
+
+.project-publications .publication-item {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+}
+
+.project-publications .publication-item:last-child {
+    border-bottom: none;
+}
+
+.project-publications .publication-cite {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+}
+
+.project-publications .publication-award {
+    color: #d14;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 0.25rem;
+}
+
+.project-publications .publication-links {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.project-publications .publication-link {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.project-publications .separator {
+    color: #777;
+}
+
+/* Enhanced team and partners styling */
+.team-role,
+.partner-role {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+    margin-left: 0.25rem;
+}
+
+/* Funding section styling */
+.sidebar-section .resource-list li strong {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-section .resource-list li {
+    margin-bottom: 0.75rem;
+}
+
+.sidebar-section .resource-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Gallery enhancements */
+.project-gallery {
+    margin-top: var(--space-xl);
+}
+
+.project-gallery h3 {
+    margin-bottom: var(--space-md);
+}
+
+/* Mobile responsiveness for publications */
+@media (max-width: 768px) {
+    .project-publications .publication-cite {
+        font-size: 0.9rem;
+    }
+
+    .project-publications .publication-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+/* Improved Line Spacing for Better Readability */
+p,
+.project-main li,
+.project-overview,
+.project-objectives,
+.research-questions {
+    line-height: 1.7; /* Increased from default to improve readability */
+}
+
+/* Add some breathing room between paragraphs */
+p + p {
+    margin-top: 1rem;
+}
+
+/* Fix list alignment to align numbers with text body */
+ol,
+ul {
+    padding-left: 1.5rem; /* Reduce default padding */
+    counter-reset: item; /* Reset counter for custom styling */
+}
+
+ol > li,
+ul > li {
+    position: relative;
+    padding-left: 0.5rem;
+    margin-bottom: 0.75rem; /* Add space between list items */
+    list-style-position: outside; /* Ensures numbers align with text */
+}
+
+/* Subtle spacing improvement between sections */
+h2,
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem; /* More space after headings */
+}
+
+/* Project content area with slightly improved spacing */
+.project-content {
+    gap: 3.5rem; /* Slightly increased from your current gap */
+}
+
+/* Improved spacing in sidebar sections */
+.sidebar-section + .sidebar-section {
+    margin-top: 1.5rem;
+}
+
+/* Subtle improvement to make objectives and questions more readable */
+.project-objectives ol,
+.research-questions ol {
+    margin-top: 0.75rem;
 }
