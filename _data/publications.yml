@@ -109,7 +109,9 @@
   publisher: "AAAI"
   doi: ""
   award: ""
-  links: []
+  links:
+      - text: "Paper Website"
+        url: "https://tufts-ai-robotics-group.github.io/SmartMotor/"
 
 - type: conference
   title: "Conducting the Pilot Study of Integrating AI: An Experience Integrating Machine Learning into Upper Elementary Robotics Learning (Work in Progress)"
