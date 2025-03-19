@@ -2,74 +2,103 @@
 layout: project
 title: "Integrating AI in Upper Elementary Education"
 timeframe: "2021 - Present"
-grant: "NSF #1932854"
 approaches:
-    - "Participatory Design"
     - "Design-Based Research"
     - "Interdisciplinary"
 contexts:
     - "K-12 Education"
 status: "Current"
-featured_image: "/images/projects/ai-elementary.jpg"
+featured_image: "/images/projects/SmartMotors/smartmotor.png"
 excerpt: "Exploring approaches to teaching machine learning concepts through robotics and tangible interfaces with upper elementary teachers and students."
 team:
     - name: "Jennifer Cross"
       role: "Principal Investigator"
     - name: "Chris Rogers"
       role: "Co-Investigator"
-    - name: "Joren Sinapov"
+    - name: "Jivko Sinapov"
       role: "Co-Investigator"
-    - name: "Grace Xu"
-      role: "Graduate Researcher"
-    - name: "Daniel Zabner"
-      role: "Graduate Researcher"
+    - name: "Geling (Jazz) Xu"
+      role: "Graduate Student"
+    - name: "David Zabner"
+      role: "Graduate Student"
+    - name: "Tanushree Burman"
+      role: "Graduate Student"
+    - name: "Milan Dahal"
+      role: "Graduate Student"
 partners:
-    - "Boston Public Schools"
-    - "Cambridge Public Schools"
+    - "Maryville University of St. Louis"
+    - name: "Steve Coxon"
+      role: "Co-PI, Maryville University"
+    - name: "Dustin Nadler"
+      role: "Collaborator, Maryville University"
 technologies:
-    - "Machine Learning Platforms"
-    - "Robotics Kits"
+    - "Machine Learning"
+    - "ESP32"
     - "Visual Programming Interfaces"
     - "Interactive Tangible Interfaces"
-funding: "This work is supported by the National Science Foundation under Grant No. 1932854."
+funding: 
+  - awardnumber: "NSF IIS-2119174"
+  - amount: 	"$866,273.00"
+  - duration: "3 years"
+  - description: "This work is supported by the National Science Foundation under Grant IIS-2119174. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation."
+
 resources:
     - title: "Project Website"
-      url: "https://ceeo.tufts.edu/projects/ai-elementary"
-    - title: "Teacher Resources"
-      url: "https://ceeo.tufts.edu/projects/ai-elementary/resources"
-    - title: "Curriculum Materials"
-      url: "https://ceeo.tufts.edu/projects/ai-elementary/curriculum"
-timeline:
-    - year: 2021
-      description: "Initial curriculum development and technology prototyping. Conducted participatory design workshops with 8 teachers."
-    - year: 2022
-      description: "First classroom implementations in 3 classrooms. Iterative refinement of teaching materials based on teacher feedback."
-    - year: 2023
-      description: "Expanded to 12 classrooms across 4 schools. Enhanced tangible interfaces based on classroom observations and student feedback."
-    - year: 2024
-      description: "Developed comprehensive teacher professional development program. Released open-source curriculum materials and technology guides."
-outcomes:
-    description: "The project has demonstrated promising outcomes in introducing complex AI and machine learning concepts to elementary students through hands-on, tangible learning experiences."
-    metrics:
-        - label: "Student Engagement"
-          percentage: 94
-          value: "4.7/5.0"
-        - label: "Concept Understanding"
-          percentage: 88
-          value: "4.4/5.0"
-        - label: "Teacher Adoption"
-          percentage: 82
-          value: "4.1/5.0"
-        - label: "Cross-Curricular Integration"
-          percentage: 76
-          value: "3.8/5.0"
-    note: "Data based on classroom observations, teacher surveys, and student assessments from 2021-2024 (n=267 students, 15 teachers)."
+      url: "https://smartmotors.notion.site/"
+
 publications:
-    - citation: "Burman, T., Dahal, M., Xu, G., Rogers, C., Cross, J., and Sinapov, J. (2025). Smart Motor: A Low-Cost Hardware And Software Toolkit For Introducing Supervised Machine Learning To Elementary School Students. In EAAI'25: Proceedings of the Fifteenth Symposium on Educational Advances in Artificial Intelligence, Philadelphia, PA."
-      doi: "https://doi.org/10.1145/3123456.7890123"
-    - citation: "Xu, G., Zabner, D., Cross, J., Nadler, D., Coxon, S., and Engelkenjohn, K. (2023). Conducting the Pilot Study of Integrating AI: An Experience Integrating Machine Learning into Upper Elementary Robotics Learning (Work in Progress). In Proceedings of 2023 American Society for Engineering Education (ASEE) Annual Conference and Exposition. Baltimore, Maryland."
-      doi: "https://doi.org/10.18260/1-2--42500"
-      pdf: "/docs/ASEE2023_AI_Elementary.pdf"
+    - type: conference
+      title: "Smart Motor: A Low-Cost Hardware And Software Toolkit For Introducing Supervised Machine Learning To Elementary School Students"
+      authors:
+          - name: "Tanushree Burman"
+            highlight: false
+          - name: "Milan Dahal"
+            highlight: false
+          - name: "Geling Xu"
+            highlight: false
+          - name: "Chris Rogers"
+            highlight: false
+          - name: "Jennifer L. Cross"
+            highlight: true
+          - name: "Jivko Sinapov"
+            highlight: false
+      venue: "EAAI'25: Proceedings of the Fifteenth Symposium on Educational Advances in Artificial Intelligence"
+      year: 2025
+      pages: ""
+      location: "Philadelphia, PA"
+      publisher: "AAAI"
+      doi: ""
+      award: ""
+      links:
+        - text: "Paper Website"
+          url: "https://tufts-ai-robotics-group.github.io/SmartMotor/"
+
+    - type: conference
+      title: "Conducting the Pilot Study of Integrating AI: An Experience Integrating Machine Learning into Upper Elementary Robotics Learning (Work in Progress)"
+      authors:
+        - name: "Geling Xu"
+          highlight: false
+        - name: "Daniel Zabner"
+          highlight: false
+        - name: "Jennifer L. Cross"
+          highlight: true
+        - name: "Dustin Nadler"
+          highlight: false
+        - name: "Steven Coxon"
+          highlight: false
+        - name: "Karen Englekenjohn"
+          highlight: false
+    venue: "2023 ASEE Annual Conference and Exposition"
+    year: 2023
+    pages: ""
+    location: "Baltimore, Maryland"
+    publisher: "American Society for Engineering Education"
+    doi: "https://doi.org/10.18260/1-2--42500"
+    award: ""
+    links:                  
+        - text: "DOI"
+          url: "https://doi.org/10.18260/1-2--42500"
+
 gallery:
     - full: "/images/projects/ai-elementary/classroom1.jpg"
       thumb: "/images/projects/ai-elementary/classroom1-thumb.jpg"
@@ -87,35 +116,34 @@ gallery:
 
 ## Project Overview
 
-The "Integrating AI in Upper Elementary Education" project explores innovative approaches to introducing artificial intelligence and machine learning concepts to upper elementary students (grades 3-5) through robotics and tangible interfaces. Using a participatory design methodology, we collaborate with teachers to develop age-appropriate learning experiences that make complex computational concepts accessible and engaging.
+This project is developing upper elementary school students' abilities to work with Artificial intelligence (AI) in future careers. AI will be a critical tool for influencing and increasing productivity in the future of work. As such, it is increasingly important to introduce K-12 students to basic AI knowledge and skills. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO will work with over 50 teachers in St. Louis County to develop a research-informed educational ecosystem bringing AI concepts to upper elementary school students.
 
-The core innovation of this project is the development of tangible, interactive interfaces that allow young students to train machine learning models through physical demonstration rather than abstract programming. By physically manipulating robots and seeing immediate results, students develop intuitive understandings of key AI concepts like supervised learning, classification, and pattern recognition.
+The core innovation of this project is the development of tangible, interactive interfaces that allow young students to train machine learning models through physical demonstration rather than abstract programming. By physically manipulating robots and seeing immediate results, students develop intuitive understandings of key AI concepts like supervised learning, classification, and pattern recognition. (Photo Credit: Milan Dahal)
+
+## Project Objectives
+
+1. To create, test, and revise inexpensive hardware with multiple built-in AI algorithms to allow
+   students to explore the learning behavior of different algorithms.
+2. To create a system that is highly compatible with 5th grade classrooms. Specifically focusing
+   on hardware that is safe, inexpensive, and easy for 5th graders to use and learn from and
+   with.
+3. To make our parts diverse and their AI algorithms flexible enough to support diversity in
+   both student generated problems and solutions.
+4. To design parts that can be combined to build more complex systems with engineerable
+   behavior.
+5. To discover through student and teacher feedback which AI algorithms are most powerful and
+   which are easiest to use.
 
 ## Research Questions
 
-Our work addresses three primary research questions:
-
-1. How can abstract AI and machine learning concepts be made accessible to elementary-aged learners through tangible, embodied learning experiences?
-
-2. What pedagogical approaches best support teachers in integrating AI and computational thinking across elementary curriculum areas?
-
-3. How do students' conceptions of AI and intelligent technologies evolve through hands-on engagement with these learning experiences?
-
-## Methodological Approach
-
-The project employs a design-based research methodology with iterative cycles of design, implementation, analysis, and refinement. Each cycle involves:
-
-1. **Participatory Design Workshops**: Collaborative sessions with teachers to identify curriculum integration opportunities and design learning activities
-
-2. **Technology Prototyping**: Development of tangible interfaces and visual programming tools based on teacher and student input
-
-3. **Classroom Implementation**: Testing of activities and technologies in authentic classroom environments
-
-4. **Multi-modal Assessment**: Collection of data through observations, interviews, student artifacts, and performance assessments
-
-5. **Iterative Refinement**: Revision of materials and approaches based on implementation findings
-
-This cyclical approach ensures that our educational technologies and approaches are grounded in classroom realities and responsive to student and teacher needs.
+1. How does the introduction of tangible artificial intelligence elements lead to changes in upper
+   elementary students’ understanding of artificial intelligence concepts and attitudes
+   towards artificial intelligence?
+2. How do different levels of complexity and variety of tangible artificial intelligence elements
+   impact the engagement of upper elementary students and the diversity of their solutions
+   and designs?
+3. What are the potential benefits and challenges of introducing tangible artificial intelligence
+   elements in integrated engineering and literacy activities?
 
 ## Key Innovations
 
@@ -136,30 +164,3 @@ Our visual programming environment makes machine learning concepts accessible by
 -   Visualizing classification boundaries and decision-making processes
 -   Providing immediate feedback during model training and testing
 -   Supporting natural language explanations of AI decision-making
-
-### Curriculum Integration Framework
-
-We developed a framework for integrating AI concepts across subject areas:
-
--   **Science**: Training models to classify materials or predict outcomes of physical interactions
--   **Mathematics**: Exploring probability, statistics, and pattern recognition through AI applications
--   **Language Arts**: Teaching robots to recognize emotional content in stories
--   **Social Studies**: Examining ethical considerations of AI through age-appropriate scenarios
-
-## Findings and Impact
-
-Our research has demonstrated that elementary students are capable of understanding fundamental AI concepts when presented through tangible, embodied learning experiences. Key findings include:
-
--   Students develop more accurate mental models of AI through hands-on interaction than through abstract explanation alone
--   Tangible interfaces support diverse learning styles and reduce barriers to engagement with complex computational concepts
--   Cross-curricular integration increases student motivation and contextualizes abstract concepts
--   Teacher confidence in teaching AI concepts significantly increases with appropriate technological and pedagogical support
-
-## Future Directions
-
-As this project continues, we are exploring:
-
-1. Expanding the range of AI concepts addressed in the curriculum, including reinforcement learning and natural language processing
-2. Developing more sophisticated assessment tools to measure deeper conceptual understanding
-3. Creating sustainable professional development models for broader teacher adoption
-4. Investigating the longitudinal impact of early AI education on student attitudes and career interests
