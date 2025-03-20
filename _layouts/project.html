@@ -8,10 +8,7 @@ layout: default
     <div class="project-detail-tags">
         {% for approach in page.approaches %}
         <span class="tag"
-            ><span
-                class="tag-indicator {{ approach | downcase | replace: ' ', '-' | replace: '-&-', '-' | replace: '-based', '' }}"
-            ></span
-            >{{ approach }}</span
+            ><span class="tag-indicator {{ approach | downcase | replace: ' ', '-' | replace: '-&-', '-' | replace: '-based', '' }}"></span>{{ approach }}</span
         >
         {% endfor %}
     </div>
@@ -68,33 +65,18 @@ layout: default
             {% for pub in page.publications %}
             <div class="publication-item">
                 <p class="publication-cite">
-                    {% if pub.authors %} {% assign author_list = "" %} {% for
-                    author in pub.authors %} {% if author.highlight %} {% assign
-                    author_name = "<strong
+                    {% assign author_list = "" %} {% for author in pub.authors %} {% if author.highlight %} {% assign author_name = "<strong
                         >" | append: author.name | append: "</strong
-                    >" %} {% else %} {% assign author_name = author.name %} {%
-                    endif %} {% if forloop.last %} {% assign author_list =
-                    author_list | append: " and " | append: author_name %} {%
-                    elsif forloop.first %} {% assign author_list = author_name
-                    %} {% else %} {% assign author_list = author_list | append:
-                    ", " | append: author_name %} {% endif %} {% endfor %} {{
-                    author_list }}. {% endif %} {% if pub.year %}{{ pub.year
-                    }}.{% endif %} {{ pub.title }}. {% if pub.venue %} {% if
-                    pub.venue contains "Proceedings" %} {{ pub.venue }} {% else
-                    %}
-                    <em>{{ pub.venue }}</em>
-                    {% endif %} {% endif %} {% if pub.volume and pub.volume !=
-                    "" %} {{ pub.volume }}{% if pub.issue and pub.issue != ""
-                    %}({{ pub.issue }}){% endif %}{% endif %} {% if pub.pages
-                    and pub.pages != "" %}, {{ pub.pages }}{% endif %} {% if
-                    pub.location and pub.location != "" %}, {{ pub.location }}{%
-                    endif %}. {% if pub.publisher and pub.publisher != "" %}{{
-                    pub.publisher }}.{% endif %} {% if pub.award and pub.award
-                    != "" %}
+                    >" %} {% else %} {% assign author_name = author.name %} {% endif %} {% if pub.authors.size > 1 %} {% if forloop.last %} {% assign
+                    author_list = author_list | append: " and " | append: author_name %} {% elsif forloop.first %} {% assign author_list = author_name %} {%
+                    else %} {% assign author_list = author_list | append: ", " | append: author_name %} {% endif %} {% else %} {% assign author_list =
+                    author_name %} {% endif %} {% endfor %} {{ author_list }}. {{ pub.year }}. {{ pub.title }}. <em>{{ pub.venue }}</em>{% if pub.volume and
+                    pub.volume != "" %} {{ pub.volume }}{% if pub.issue and pub.issue != "" %}({{ pub.issue }}){% endif %}{% endif %}{% if pub.pages and
+                    pub.pages != "" %}, {{ pub.pages }}{% endif %}. {% if pub.publisher and pub.publisher != "" %}{{ pub.publisher }}.{% endif %} {% if
+                    pub.award %}
                     <span class="publication-award">{{ pub.award }}</span>
                     {% endif %}
                 </p>
-
                 {% if pub.links and pub.links.size > 0 %}
                 <div class="publication-links">
                     {% for link in pub.links %} {% if forloop.first == false %}
@@ -115,10 +97,7 @@ layout: default
                         class="text-link"
                         target="_blank"
                         >DOI</a
-                    >{% endif %} {% if pub.doi and pub.pdf %}<span
-                        class="separator"
-                        >&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                    >{% endif %} {% if pub.pdf %}<a
+                    >{% endif %} {% if pub.doi and pub.pdf %}<span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>{% endif %} {% if pub.pdf %}<a
                         href="{{ pub.pdf }}"
                         class="text-link"
                         target="_blank"
@@ -140,8 +119,7 @@ layout: default
                 {% for member in page.team %}
                 <li>
                     {{ member.name }}{% if member.role %}
-                    <span class="team-role">({{ member.role }})</span>{% endif
-                    %}
+                    <span class="team-role">({{ member.role }})</span>{% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -152,10 +130,8 @@ layout: default
             <ul class="resource-list">
                 {% for partner in page.partners %}
                 <li>
-                    {% if partner.name %} {{ partner.name }}{% if partner.role
-                    %}
-                    <span class="team-role">({{ partner.role }})</span>{% endif
-                    %} {% else %} {{ partner }} {% endif %}
+                    {% if partner.name %} {{ partner.name }}{% if partner.role %}
+                    <span class="team-role">({{ partner.role }})</span>{% endif %} {% else %} {{ partner }} {% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -174,11 +150,8 @@ layout: default
             <h4 class="sidebar-heading">Funding</h4>
             {% if page.funding.first %}
             <ul class="resource-list">
-                {% for fund_item in page.funding %} {% if fund_item.awardnumber
-                %}
-                <li>
-                    <strong>Award Number:</strong> {{ fund_item.awardnumber }}
-                </li>
+                {% for fund_item in page.funding %} {% if fund_item.awardnumber %}
+                <li><strong>Award Number:</strong> {{ fund_item.awardnumber }}</li>
                 {% elsif fund_item.amount %}
                 <li><strong>Amount:</strong> {{ fund_item.amount }}</li>
                 {% elsif fund_item.duration %}
@@ -221,37 +194,32 @@ layout: default
 <div class="more-projects">
     <h3>More Projects</h3>
     <div class="project-grid">
-        {% assign other_projects = site.projects | where_exp: "project",
-        "project.title != page.title" | sample: 2 %} {% for project in
-        other_projects %}
-        <div class="project-card">
+        {% assign other_projects = site.projects | where_exp: "project", "project.title != page.title" | sample: 2 %} {% for project in other_projects %}
+        <div
+            class="project-card"
+            data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}"
+        >
             {% if project.featured_image %}
-            <img
-                src="{{ project.featured_image }}"
-                alt="{{ project.title }}"
-                class="project-image"
-            />
+            <div class="project-image-container">
+                <img
+                    src="{{ project.featured_image }}"
+                    alt="{{ project.title }}"
+                    class="project-image"
+                />
+            </div>
             {% endif %}
             <div class="project-content">
                 <h3 class="project-title">{{ project.title }}</h3>
-                <p class="project-meta">{{ project.timeframe }}</p>
-                <p class="project-description">
-                    {{ project.excerpt | strip_html | truncate: 120 }}
-                </p>
+                <p class="project-description">{{ project.excerpt }}</p>
                 <div class="tag-container">
-                    {% for approach in project.approaches %}
-                    <span class="tag">
-                        <span
-                            class="tag-indicator {{ approach | downcase | replace: ' ', '-' | replace: '-&-', '-' | replace: '-based', '' }}"
-                        ></span>
-                        {{ approach }}
-                    </span>
+                    {% for discipline in project.disciplines limit:3 %}
+                    <span class="tag">{{ discipline }}</span>
                     {% endfor %}
                 </div>
                 <a
                     href="{{ project.url }}"
                     class="project-link"
-                    >Project details</a
+                    >Details</a
                 >
             </div>
         </div>

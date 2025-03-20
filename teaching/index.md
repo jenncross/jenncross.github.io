@@ -11,6 +11,7 @@ title: Teaching
 My courses emphasize hands-on, project-based learning that allows students to develop both technical skills and the ability to apply these skills to solve real-world problems. I believe in creating inclusive learning environments that support diverse learners and promote collaboration.
 
 </section> 
+
 ## Current Courses
 
 {% for course in site.courses %}
