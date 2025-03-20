@@ -3,12 +3,13 @@ layout: project
 title: "Integrating AI in Upper Elementary Education"
 timeframe: "2021 - Present"
 grant: "NSF IIS-2119174"
-approaches:
-    - "Design-Based Research"
-    - "Interdisciplinary"
-contexts:
-    - "K-12 Education"
-status: "Current"
+disciplines:
+    - "Computing & Coding"
+    - "Robotics"
+    - "Electronics"
+    - "Education"
+project_type:
+    - "Research Projects"
 featured_image: "/images/projects/SmartMotors/smartmotor.png"
 excerpt: "Exploring approaches to teaching machine learning concepts through robotics and tangible interfaces with upper elementary teachers and students."
 team:
@@ -109,13 +110,13 @@ gallery:
 
 ## Project Overview
 
-This project is developing upper elementary school students' abilities to work with Artificial intelligence and in future careers. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO is working work with 50 teachers in St. Louis County to develop a research-informed educational ecosystem introducing AI, specifically machine learning,concepts to upper elementary school students.(Photo Credit: Milan Dahal)
+This project is developing upper elementary school students' abilities to work with artificial intelligence and in future careers. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO is working work with 50 teachers in St. Louis County to develop a research-informed educational ecosystem introducing AI, specifically machine learning,concepts to upper elementary school students.(Photo Credit: Milan Dahal)
 
 ### Objectives
 
 1. To create, test, and revise inexpensive hardware with multiple built-in AI algorithms to allow
    students to explore the learning behavior of different algorithms.
-2. To create a system that is highly compatible with 5th grade classrooms. Specifically focusing
+2. To create a system that is highly compatible with 5th grade classrooms and specifically focus
    on hardware that is safe, inexpensive, and easy for 5th graders to use and learn from and
    with.
 3. To discover through student and teacher feedback which AI algorithms are most powerful and
@@ -126,10 +127,6 @@ This project is developing upper elementary school students' abilities to work w
 1. How does the introduction of tangible artificial intelligence elements lead to changes in upper elementary students' understanding of artificial intelligence concepts and attitudes towards artificial intelligence?
 2. How do different levels of complexity and variety of tangible artificial intelligence elements impact the engagement of upper elementary students and the diversity of their solutions and designs?
 3. What are the potential benefits and challenges of introducing tangible artificial intelligence elements in integrated engineering and literacy activities?
-
-## Contribution
-
-As principal investigator, I provided support and direction to the interdisciplinary and multi-organization team of computer scientists, engineers, educators, and researchers. I provided expertise and advising at the intersection of interaction research, emerging technologies, and instructional design. I evaluated progress toward objectives through regular meetings, management of the timeline and budget, and reporting to the funding agency.
 
 ## Key Innovations
 
@@ -150,8 +147,13 @@ Tanushree Burman, graduate student, developed the "Smart App". An on-computer su
 -   Visualizations of classification decision-making processes
 -   Providing immediate feedback during model training and testing
 -   Supporting math standards interpreting data and graphs
-    Additionally, this work has been extending into the development of interfaces for helping elementary age students also understand addition machine learning methods including reinforcement learning.
+
+Additionally, this work has been extending into the development of interfaces for helping elementary age students also understand additional machine learning methods including reinforcement learning.
 
 ### Co-Design Workshop with Teachers
 
 Geling (Jazz) Xu, graduate student, developed and led co-design activities with our partner teachers. During these workshops the partner teachers explored the Smart Motor and Smart App platforms, and working collaborative on the design of classroom activities for introducing these tools to students. These workshop have helped to inform both machine learning instructional design for elementary students as well as informing the development of experiences for introducing educators to machine learning and AI technologies.
+
+## Contribution
+
+As principal investigator, I provided support and direction to the interdisciplinary and multi-organization team of computer scientists, engineers, educators, and researchers. I provided expertise and advising at the intersection of interaction research, emerging technologies, and instructional design. I evaluated progress toward objectives through regular meetings, management of the timeline and budget, and reporting to the funding agency.

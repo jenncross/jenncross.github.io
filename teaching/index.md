@@ -3,12 +3,14 @@ layout: default
 title: Teaching
 ---
 
-# Teaching
+<section class="page-header">
+ <h1 class="page-title">Teaching</h1>
 
-My teaching approach draws on constructivist principles and focuses on creating meaningful learning experiences that bridge theoretical concepts with real-world applications. I design learning environments that foster student creativity and critical thinking in engineering and computer science.
+<p class="page-subtitle"> My teaching approach draws on constructivist principles and focuses on creating meaningful learning experiences that bridge theoretical concepts with real-world applications. I design learning environments that foster student creativity and critical thinking in engineering and computer science.</p>
 
 My courses emphasize hands-on, project-based learning that allows students to develop both technical skills and the ability to apply these skills to solve real-world problems. I believe in creating inclusive learning environments that support diverse learners and promote collaboration.
 
+</section> 
 ## Current Courses
 
 {% for course in site.courses %}

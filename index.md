@@ -8,9 +8,9 @@ layout: default
   </div>
   <div class="bio-content">   
     <h2>About Me</h2>
-    <p>I'm a Research Assistant Professor at the <a href="https://ceeo.tufts.edu/">Tufts University Center for Engineering Education and Outreach</a>. I design interactive systems through participatory methodologies, bridging robotics, human-centered design, and education.</p>
+    <p>I am a Research Assistant Professor at the <a href="https://ceeo.tufts.edu/">Tufts University Center for Engineering Education and Outreach</a>. I design interactive systems through participatory methodologies, bridging robotics, human-centered design, and education.</p>
     
-    <p>I completed my Ph.D. in Robotics at the Carnegie Mellon Robotics Institute, advised by <a href="http://www.cs.cmu.edu/~illah/">Professor Illah Nourbakhsh</a>. I was a fellow of both the IES-supported <a href="http://www.cmu.edu/pier/">Program for Interdisciplinary Education Research</a> and the <a href="https://www.nsfgrfp.org/">National Science Foundation Graduate Research Fellowship Program</a>. I completed my undergraduate degree in Electrical and Computer Engineering at the <a href="http://olin.edu/">F. W. Olin College of Engineering</a>.</p>
+    <p> My interdisciplinary training has encompassed many fields. I worked as a postdoctoral scholar in the <a href="https://www.ceeoinnovations.org/fetlab/">Future Educational Technologies Lab</a> at Tufts University mentored by Prof. Chris Rogers. I completed my Ph.D. and M.S. in Robotics at the Robotics Institute at Carnegie Mellon University under the supervision of Prof. Illah Nourbakhsh. My graduate studies were supported by fellowships from both the National Science Foundation (NSF) Graduate Research Fellowship Program and the Institute of Education Sciences (IES) Program for Interdisciplinary Education Research. My undergraduate studies were in Electrical and Computer Engineering from the F. W. Olin College of Engineering. </p>
   </div>
 
 </div>

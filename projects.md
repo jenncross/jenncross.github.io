@@ -10,51 +10,58 @@ title: Projects
 
 <section class="filter-controls">
   <h2 class="filter-title">Filter projects by:</h2>
-  <div class="filter-options">
-    <button class="filter-button active" data-filter="all">All Projects</button>
-    <button class="filter-button" data-filter="participatory">Participatory Design</button>
-    <button class="filter-button" data-filter="research">Design-Based Research</button>
-    <button class="filter-button" data-filter="interdisciplinary">Interdisciplinary</button>
-    <button class="filter-button" data-filter="k12">K-12 Education</button>
-    <button class="filter-button" data-filter="higher">Higher Education</button>
-    <button class="filter-button" data-filter="current">Current Projects</button>
-    <button class="filter-button" data-filter="completed">Completed Projects</button>
-  </div>
+<div class="filter-options">
+  <button class="filter-button active" data-filter="all">All Projects</button>
+  
+  <!-- Primary disciplines -->
+  <button class="filter-button" data-filter="computing-and-coding">Computing & Coding</button>
+  <button class="filter-button" data-filter="robotics">Robotics</button>
+  <button class="filter-button" data-filter="interface-and-interaction-design">Interface & Interaction Design</button>
+  <button class="filter-button" data-filter="electronics">Electronics</button>
+  <button class="filter-button" data-filter="mechanical">Mechanical Design</button>
+  <button class="filter-button" data-filter="education">Education</button>
+  <button class="filter-button" data-filter="data-analysis">Data Analysis</button>
+  
+  <!-- Project types -->
+  <button class="filter-button" data-filter="research-projects">Research Projects</button>
+  <button class="filter-button" data-filter="personal">Personal Projects</button>
+  <button class="filter-button" data-filter="graduate">Graduate Work</button>
+  <button class="filter-button" data-filter="undergraduate">Undergraduate Work</button>
+</div>
 </section>
 
 <div class="project-grid">
   {% for project in site.projects %}
-  {% assign approach_classes = "" %}
-  {% for approach in project.approaches %}
-    {% assign approach_class = approach | downcase | replace: " ", "-" | replace: "-&-", "-" | replace: "-based", "" %}
-    {% assign approach_classes = approach_classes | append: approach_class | append: " " %}
+  {% assign discipline_classes = "" %}
+  {% for discipline in project.disciplines %}
+    {% assign discipline_class = discipline | downcase | replace: " ", "-" | replace: "&", "and" %}
+    {% assign discipline_classes = discipline_classes | append: discipline_class | append: " " %}
   {% endfor %}
   
-  {% assign context_classes = "" %}
-  {% for context in project.contexts %}
-    {% assign context_class = context | downcase | replace: " ", "-" | replace: "-&-", "-" %}
-    {% assign context_classes = context_classes | append: context_class | append: " " %}
+  {% assign type_classes = "" %}
+  {% for type in project.project_type %}
+    {% assign type_class = type | downcase | replace: " ", "-" | replace: "&", "and" %}
+    {% assign type_classes = type_classes | append: type_class | append: " " %}
   {% endfor %}
   
-  <div class="project-card" data-category="{{ approach_classes }} {{ context_classes }} {{ project.status | downcase }}">
-    {% if project.featured_image %}
+<div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
+  {% if project.featured_image %}
+  <div class="project-image-container">
     <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
-    {% endif %}
-    <div class="project-content">
-      <h3 class="project-title">{{ project.title }}</h3>
-      <p class="project-meta">{{ project.timeframe }}{% if project.grant %} | {{ project.grant }}{% endif %}</p>
-      <p class="project-description">{{ project.excerpt }}</p>
-      <div class="tag-container">
-        {% for approach in project.approaches %}
-        {% assign approach_class = approach | downcase | replace: " ", "-" | replace: "-&-", "-" | replace: "-based", "" %}
-        <span class="tag"><span class="tag-indicator {{ approach_class }}"></span>{{ approach }}</span>
-        {% endfor %}
-      </div>
-      <a href="{{ project.url }}" class="project-link">Project details</a>
-    </div>
   </div>
-  {% endfor %}
+  {% endif %}
+  <div class="project-content">
+    <h3 class="project-title">{{ project.title }}</h3>
+    <p class="project-description">{{ project.excerpt }}</p>
+    <div class="tag-container">
+      {% for discipline in project.disciplines limit:3 %}
+      <span class="tag">{{ discipline }}</span>
+      {% endfor %}
+    </div>
+    <a href="{{ project.url }}" class="project-link">Details</a>
+  </div>
 </div>
+ {% endfor %}
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
