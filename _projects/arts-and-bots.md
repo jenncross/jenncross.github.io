@@ -6,13 +6,12 @@ grant: "NSF #1321227"
 disciplines:
     - "Computing & Coding"
     - "Robotics"
-    - "Interface & Interaction Design"
     - "Education"
     - "Data Analysis"
 
 project_type:
     - "Research Projects"
-featured_image: "/images/projects/arts-bots/arts-bots-knee.jpg"
+featured_image: "/images/projects/AB/farm.jpg"
 excerpt: "An inclusive educational robotics program that integrates creative technology into non-technical middle school classes to identify and cultivate diverse STEM talent."
 team:
     - name: "Jennifer Cross"
@@ -22,7 +21,7 @@ team:
     - name: "Emily Hamner"
       role: "Project Manager & Grant Proposal Co-Author"
     - name: "Lauren Zito"
-      role: "Project Coordinator, previously Research Assistant"
+      role: "Research Staff; undergraduate Research Assistant (former)"
     - name: "Additional CREATE Lab Members"
 partners:
     - "Marshall University"
@@ -109,109 +108,92 @@ publications:
             url: "http://repository.cmu.edu/dissertations/951/"
           - text: "PDF"
             url: "http://repository.cmu.edu/cgi/viewcontent.cgi?article=1990&context=dissertations"
+    - title: "and more . "
 
 gallery:
-    - full: "/images/projects/arts-bots/arts-bots-knee.jpg"
-      alt: "Student-built robot modeling a knee musculoskeletal structure"
-      caption: "Student-built robot from a seventh grade health class, modeling a knee musculoskeletal structure with servo motors"
-    - full: "/images/projects/arts-bots/arts-bots-english.jpg"
-      alt: "Arts & Bots robot for Romeo and Juliet project"
-      caption: "Robot created for an English class representing scenes from Romeo and Juliet"
-    - full: "/images/projects/arts-bots/arts-bots-visual.jpg"
-      alt: "Visual programming interface for Arts & Bots"
-      caption: "The visual programming interface developed for Arts & Bots to make programming accessible to middle school students"
+    - full: "/images/projects/AB/eldorado.jpg"
+      alt: "Student-built robot representing El Dorado by Edgar Allen Poe"
+      caption: "Language Arts project showing how English classes integrated robotics - a student-created scene from El Dorado with lighting, servo, motors, and voice recordings"
+    - full: "/images/projects/AB/farm.jpg"
+      alt: "Farm-themed robot diorama with LED-lit pond"
+      caption: "Language Arts project featuring a farm scene with an illuminated pond and moving curtains moving paper characters"
+    - full: "/images/projects/AB/rjstudent.jpg"
+      alt: "Student programming a Romeo & Juliet robotic diorama Arts & Bots project"
+      caption: "Middle school student working with the visual programming interface to program her Romeo & Juliet robotic diorama project, simulataneously engaging with robotics and literature"
+    - full: "/images/projects/AB/pd.jpg"
+      alt: "Teachers participating in Arts & Bots professional development"
+      caption: "Teacher exploring robotics tools during professional development"
+    - full: "/images/projects/AB/teacher.jpg"
+      alt: "Teacher and student working on an Arts & Bots project"
+      caption: "Teacher-student collaboration during an Arts & Bots implementation"
+    - full: "/images/projects/AB/turtle.jpg"
+      alt: "Turtle robot with LED lights and Hummingbird robotics kit"
+      caption: "Student-created turtle robot with LED lighting effects, integrating of electronics, programming, and craft materials"
+    - full: "/images/projects/AB/ourteam.jpg"
+      alt: "A group of 11 people stand outside a large stone doorway with the sign National Science Foundation above"
+      caption: "Our team, including researchers, educators, administrators and developers, at a reverse site visit to the National Science Foundation."
 ---
 
 ## Project Overview
 
-Arts & Bots was an educational robotics program developed by the Carnegie Mellon CREATE Lab that addressed a critical challenge in STEM education: how to engage a broader, more diverse group of students with engineering and computing concepts. Unlike traditional robotics initiatives like FIRST or VEX Robotics Competition that emphasized competition and task-completion in self-selected contexts, Arts & Bots focused on creativity and inclusivity by integrating robotics directly into required core classes.
+Arts & Bots was an educational robotics program developed by the Carnegie Mellon University [CREATE Lab](https://www.cmucreatelab.org/) that addressed a critical challenge in STEM education: how to engage a broader group of students with opportunities exploring engineering and computing concepts. Unlike traditional robotics initiatives that emphasized competition and task-completion in elective and extracurricular programs, Arts & Bots focused on creativity and inclusivity by integrating robotics directly into required core classes in public school districts.
+
+{% include image.html src="/images/projects/AB/ourteam.jpg" alt="A group of 11 people stand outside a large stone doorway with the sign National Science Foundation above" caption="Our team, including researchers, educators, administrators and developers, at a reverse site visit to the National Science Foundation." alignment="left" width="300px" %}
+
+Arts & Bots Math-Science Partnership was distinctive in its research-practice partnership model. Teachers, school administrators, and pre-service teacher education partners were active co-designers throughout the project lifecycle. Rather than creating our invention in isolation, we established equal partnerships where educators shared design decision-making authority and were full research partners. These educators co-authored publications, presented alongside us at conferences, and at an NSF reverse site-visit.
+
+By embedding creative robotics activities within required courses such as language arts, social studies, and health education, we reached students who might never have self-selected into traditional robotics programs. This approach allowed teachers to use robotics as a creative communication medium and provided new formative assessment opportunities that helped educators see their students' capabilities in a different light.
 
 My work on Arts & Bots focused on developing and evaluating models for effectively integrating robotics into non-technical classrooms. By embedding creative robotics activities within required courses such as language arts, social studies, and health education, we reached students who might never have self-selected into traditional robotics programs. This approach allowed teachers to use robotics as a creative communication medium and provided new formative assessment opportunities that helped educators see their students' capabilities in a different light.
-
-{% include image.html src="/images/projects/arts-bots/arts-bots-knee.jpg" alt="Student-built robot modeling a knee musculoskeletal structure" caption="Student-created knee model in a health class showing how Arts & Bots can be integrated to demonstrate physiological concepts" %}
-
-## Program Design & Implementation
-
-The Arts & Bots program combined four key elements designed to support creative expression and cross-disciplinary learning:
-
-1. **Craft Materials**: Students use everyday craft and building materials to create personalized robot exteriors, making the technology more approachable and allowing for personal expression.
-
-2. **Flexible Hardware Kit**: Centered around the Hummingbird microcontroller, the kit includes various outputs (DC motors, hobby servos, RGB LEDs, single color LEDs, vibration motors) and sensors (temperature, light, sound-level, distance, and potentiometers).
-
-3. **Interactive Visual Programming Environment**: A custom-designed software environment that makes programming accessible to novice programmers, reducing barriers to participation.
-
-4. **Adaptable Curriculum**: Integration strategies that enhance existing subject content rather than displacing it, making robotics relevant to core learning objectives.
-
-This combination supports a constructionist approach to learning, where students develop understanding and skills through the creation of meaningful artifacts within authentic contexts.
 
 ## Research Focus
 
 My research with Arts & Bots addressed two primary questions:
 
+{% include image.html src="/images/projects/AB/rjstudent.jpg" alt="Student programming an Arts & Bots project" caption="Middle school student engaging with the visual programming interface I helped design to ensure accessibility for all learners" alignment="right" width="300px" %}
+
 1. How could robotics be meaningfully integrated into required, non-technical classes to engage diverse students who might not otherwise participate in engineering experiences?
 
-2. What integration models and design elements enabled teachers to effectively incorporate robotics as both a learning tool and an assessment opportunity?
+2. What design elements enabled teachers to effectively incorporate robotics as both a learning tool and a formative assessment opportunity?
 
-These questions were explored through several key research areas:
+## Technology Design & Implementation
 
--   **Integration Models**: Developing frameworks for how non-technical teachers could effectively incorporate robotics into their curriculum while meeting subject-specific learning objectives.
+The Arts & Bots program combined four key elements designed to support creative expression and cross-disciplinary learning:
 
--   **Student Engagement**: Examining how creative robotics activities in non-elective courses built confidence and interest in engineering among diverse student populations.
+{% include image.html src="/images/projects/AB/turtle.jpg" alt="Turtle robot with LED lighting" caption="Student-created turtle robot with integrated LED lighting, demonstrating how my design approach encouraged creative expression alongside technical learning" alignment="right" width="300px" %}
 
--   **Teacher Development**: Creating professional development approaches that enabled educators without technical backgrounds to successfully implement robotics activities.
+1. **Craft Materials**: Students used everyday craft and building materials to create personalized robots, making the technology more approachable and allowing for personal expression and communication about various disciplines.
 
--   **Assessment Opportunities**: Exploring how robotics projects provided alternative assessment pathways that helped teachers recognize diverse student capabilities and learning styles.
+2. **Flexible Hardware Kit**: Centered around the Hummingbird microcontroller, the kit included various outputs (DC motors, hobby servos, RGB LEDs, single color LEDs, vibration motors) and sensors (temperature, light, sound-level, distance, and potentiometers).
+
+3. **Interactive Visual Programming Environment**: A custom-designed software environment that made programming accessible to novice programmers, reducing barriers to participation.
+
+4. **Adaptable Curriculum**: Integration strategies that enhanced existing subject content rather than displacing it, making robotics relevant to core learning objectives.
+
+This combination supported a constructionist approach to learning, where students developed understanding and skills through the creation of meaningful projects within authentic contexts.
+
+## My Contribution
+
+As co-lead on the Arts & Bots research and development, I developed approaches for integrating technology into non-technical classrooms and was lead designer and instructor of the professional development program. My work bridged the gap between engineering education, robotics technology, and core academic subjects, creating pathways for more students to engage with computing and robotics. I led interaction design and usability testing and was responsible for the development of data collection methods, data analysis, and research-informed design iterations.
+
+### Key Contributions and Skills
+
+{% include image.html src="/images/projects/AB/pd.jpg" alt="Teachers in professional development workshop" caption="A professional development workshop for teachers, who were co-designers of Arts & Bots curriculum units." alignment="right" width="350px" %}
+
+1. **Teacher Professional Development Curriculum**: I co-designed and led training for over 360 educators, supporting teacher confidence as technology integrators. My approach focused on building teacher capacity through hands-on experience, collaborative problem-solving, and classroom implementation strategies.
+
+2. **Educational Technology Evaluation**: I developed and implemented evaluation tools to assess both student learning and teacher implementation experiences, including attitudinal surveys, implementation observation protocols, and analysis methods for student artifacts.
+
+3. **User Research and Iterative Design**: Through classroom implementation studies across many contexts, I identified success factors and challenges in different subject areas, using this research to refine both the technology and integration approaches.
 
 ## Program Impact
 
-Between 2010 and 2017, Arts & Bots engaged over 2,400 students and 360 educators across Pennsylvania, Ohio, and West Virginia, as well as internationally in Brazil and the United Kingdom. The program was particularly successful in reaching students who might not otherwise have selected into technology activities.
+Between 2010 and 2017, Arts & Bots (and predecessor, Robot Diaries) engaged over 2,400 students and 360 educators across Pennsylvania and West Virginia, as well as internationally in Brazil and the United Kingdom. The program was particularly aimed at providing confidence-building opportunities to students who might not otherwise have self-selected into elective technology activities.
 
 Our evaluation results showed that:
 
-1. Students in required courses who would not have chosen elective robotics classes gained significant experience with engineering design, programming, and electronics through Arts & Bots.
+1. Students in required courses gained significant experience with engineering design, programming, and electronics through Arts & Bots.
 
-2. Teachers observed students engaging with course content in new ways, often discovering capabilities in students that weren't evident through traditional classwork.
+2. Teachers observed students engaging with course content in new ways, often discovering capabilities in students that weren't evident through regular classwork.
 
-3. Both students and teachers reported increased confidence with technology after participating in integrated robotics projects.
-
-4. The integration into required classes successfully eliminated self-selection bias and reached a more diverse student population than typical extracurricular robotics programs.
-
-## My Contributions
-
-As a key researcher on the Arts & Bots program, my contributions included:
-
-1. **Integration Framework**: Developed models for how robotics can be effectively integrated into non-technical classes, providing a framework for curriculum design that serves both subject content and engineering learning goals.
-
-2. **Teacher Professional Development**: Created and refined an effective model for training non-technical teachers to use robotics meaningfully in their classrooms, building their confidence and capacity.
-
-3. **Classroom Implementation Studies**: Documented and analyzed implementation details across diverse classroom contexts, identifying success factors and challenges in different subject areas.
-
-4. **Assessment Tools**: Developed formative and process assessment approaches that helped teachers recognize student capabilities that might not be evident in traditional classwork.
-
-5. **Evaluation Instruments**: Created and implemented evaluation tools to assess both student learning outcomes and teacher implementation experiences.
-
-6. **Design Recommendations**: Identified key affordances of successful integration models and developed design recommendations for educational robotics tools that support cross-disciplinary learning.
-
-## Case Studies
-
-Two particularly successful integration models that I studied in depth included:
-
-### English Language Arts Integration
-
-In English classes, students created robots that represented characters or scenes from literature they were studying, such as Romeo and Juliet. This approach allowed students to demonstrate narrative understanding and textual analysis through a new medium, while simultaneously developing technical skills. Teachers reported that the projects revealed insights into student comprehension that weren't apparent through traditional written assignments.
-
-### Health Education Integration
-
-In health classes, students built robotic models of physiological systems, such as the knee musculoskeletal structure shown in the featured image. Students programmed servo motors to demonstrate joint movement when triggered by sensors, combining anatomy learning with engineering principles. This hands-on approach engaged students who struggled with traditional textbook learning and provided teachers with a new window into student understanding.
-
-## Conclusions and Future Directions
-
-The Arts & Bots program demonstrated that creative robotics could serve as a powerful cross-disciplinary learning tool when thoughtfully integrated into required classes. By embedding robotics within existing curriculum rather than isolating it in elective courses, we reached a broader, more diverse group of students and provided new opportunities for them to develop confidence and interest in engineering.
-
-Our research highlighted several key principles for effective integration:
-
-1. Robotics activities should enhance rather than displace existing subject content
-2. Creative expression should be valued alongside technical learning
-3. Teacher professional development must build both confidence and competence
-4. Projects should provide alternative assessment opportunities that reveal student capabilities
-5. Integration should be designed to reach students who might not self-select into technology experiences
+3. Both students and teachers reported increased confidence with technology after participating in Arts & Bots projects.

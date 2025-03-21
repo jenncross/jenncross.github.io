@@ -1,17 +1,17 @@
 ---
 layout: project
-title: "Integrating AI in Upper Elementary Education"
+title: "Smart Motors: Integrating AI in Upper Elementary Education"
 timeframe: "2021 - Present"
 grant: "NSF IIS-2119174"
 disciplines:
     - "Computing & Coding"
     - "Robotics"
-    - "Electronics"
+    - "Interface & Interaction Design"
     - "Education"
 project_type:
     - "Research Projects"
 featured_image: "/images/projects/SmartMotors/smartmotor.png"
-excerpt: "Exploring approaches to teaching machine learning concepts through robotics and tangible interfaces with upper elementary teachers and students."
+excerpt: "Exploring approaches to teaching machine learning concepts through robotics with elementary teachers and students."
 team:
     - name: "Jennifer Cross"
       role: "Principal Investigator"
@@ -110,16 +110,16 @@ gallery:
 
 ## Project Overview
 
-This project is developing upper elementary school students' abilities to work with artificial intelligence and in future careers. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO is working work with 50 teachers in St. Louis County to develop a research-informed educational ecosystem introducing AI, specifically machine learning,concepts to upper elementary school students.(Photo Credit: Milan Dahal)
+This project is developing upper elementary school students' abilities to work with artificial intelligence (AAI) and in future careers. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO is working with teachers in St. Louis County to develop a research-informed educational ecosystem introducing AI, specifically machine learning (ML), concepts to upper elementary school students. (Photo Credit: Milan Dahal)
 
 ### Objectives
 
-1. To create, test, and revise inexpensive hardware with multiple built-in AI algorithms to allow
+1. To create, test, and revise inexpensive hardware with multiple built-in ML algorithms to allow
    students to explore the learning behavior of different algorithms.
 2. To create a system that is highly compatible with 5th grade classrooms and specifically focus
    on hardware that is safe, inexpensive, and easy for 5th graders to use and learn from and
    with.
-3. To discover through student and teacher feedback which AI algorithms are most powerful and
+3. To discover through student and teacher feedback which ML algorithms are most powerful and
    which are easiest to use.
 
 ### Research Questions
@@ -132,16 +132,19 @@ This project is developing upper elementary school students' abilities to work w
 
 ### Smart Motor Platform
 
-Milan Dahal, graduate student, developed the "Smart Motor" platform, a low-cost hardware and software toolkit that enables students to train simple machine learning, nearest neighbor, models through a built-in tangible interface. This work included:
+Milan Dahal, graduate student, developed the "Smart Motor" embedded platform, a low-cost hardware and software toolkit that enables students to train simple machine learning, nearest neighbor, models through a built-in tangible interface. This work included:
 
--   No-computer required to keep classroom costs low
+-   Computer-free interface to keep classroom costs low
 -   Engaging and interactive code-free training of motor behaviors for integrated engineering activities
 -   Usability testing of the on-motor interface
-    The open-source designs are available on the [project website](https://smartmotors.notion.site/).
+
+The open-source designs are available on the [project website](https://smartmotors.notion.site/).
 
 ### Visual Machine Learning Interface
 
 Tanushree Burman, graduate student, developed the "Smart App". An on-computer supplemental interface for the Smart Motor tool. This visual programming environment makes machine learning concepts accessible by:
+
+{% include image.html src="/images/projects/SmartMotors/train.png" alt="Smart App TRAIN page for building understand of the training data representation." alignment="right" width="300px" %}
 
 -   Representing sensor, output and data representation through intuitive graphical elements
 -   Visualizations of classification decision-making processes
