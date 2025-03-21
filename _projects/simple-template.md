@@ -10,7 +10,14 @@ disciplines:
     - "Discipline 3"
 project_type:
     - "Undergraduate Work" # or "Graduate Work" or "Personal Projects"
-weight: 110 # Higher numbers appear lower
+# gallery:
+#     - full: "/images/projects/project-name/image1.jpg"
+#       alt: "Description of image 1"
+#       caption: "Caption for image 1"
+#     - full: "/images/projects/project-name/image2.jpg"
+#       alt: "Description of image 2"
+#       caption: "Caption for image 2"
+# weight: 110 # Higher numbers appear lower
 ---
 
 ## Overview

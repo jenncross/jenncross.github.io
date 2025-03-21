@@ -4,7 +4,10 @@ layout: default
 
 <div class="project-header">
     <h1 class="project-detail-title">{{ page.title }}</h1>
+    {% if page.project_category %}
     <p class="project-category-badge">{{ page.project_category }}</p>
+    {% endif %}
+    <p class="project-detail-meta">{{ page.timeframe }}</p>
     <div class="project-detail-tags">
         {% for discipline in page.disciplines %}
         <span class="tag">{{ discipline }}</span>
@@ -14,18 +17,19 @@ layout: default
 
 {% if page.featured_image %}
 <div class="project-featured-image">
-    <img src="{{ page.featured_image }}" alt="{{ page.title }}" class="featured-image">
+    <img
+        src="{{ page.featured_image }}"
+        alt="{{ page.title }}"
+        class="featured-image"
+    />
 </div>
 {% endif %}
 
-<div class="project-content simple-project-content">
-    <div class="project-main">
-        {{ content }}
-    </div>
-    
-    {% if page.technologies or page.resources %}
+<div class="project-content">
+    <div class="project-main">{{ content }}</div>
+
+    {% if page.technologies %}
     <div class="project-sidebar">
-        {% if page.technologies %}
         <div class="sidebar-section">
             <h4 class="sidebar-heading">Technologies & Methods</h4>
             <ul class="resource-list">
@@ -34,15 +38,18 @@ layout: default
                 {% endfor %}
             </ul>
         </div>
-        {% endif %}
-        
+
         {% if page.resources %}
         <div class="sidebar-section">
             <h4 class="sidebar-heading">Resources</h4>
             <ul class="resource-list">
                 {% for resource in page.resources %}
                 <li>
-                    <a href="{{ resource.url }}" class="resource-link">{{ resource.title }}</a>
+                    <a
+                        href="{{ resource.url }}"
+                        class="resource-link"
+                        >{{ resource.title }}</a
+                    >
                 </li>
                 {% endfor %}
             </ul>

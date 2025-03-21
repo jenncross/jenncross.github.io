@@ -4,6 +4,9 @@ layout: default
 
 <div class="project-header">
     <h1 class="project-detail-title">{{ page.title }}</h1>
+    {% if page.project_category %}
+    <p class="project-category-badge">{{ page.project_category }}</p>
+    {% endif %}
     <p class="project-detail-meta">{{ page.timeframe }}</p>
     <div class="project-detail-tags">
         {% for approach in page.approaches %}

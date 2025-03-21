@@ -2,6 +2,9 @@
 layout: project
 title: "Robots in Science"
 timeframe: "2019 - 2024"
+weight: 51
+project_category: "Research Project"
+featured: false
 grant: "NSF #1932854"
 disciplines:
     - "Education"
@@ -13,13 +16,13 @@ featured_image: "/images/projects/robots-in-science/pd2.jpg"
 excerpt: "Investigating how middle school science teachers design and implement integrated robotics units to enhance student learning in physical science while developing computational thinking practices."
 team:
     - name: "Jennifer Cross"
-      role: "Co-Principal Investigator"
+      role: "Co-Investigator"
     - name: "Debra Bernstein"
       role: "Principal Investigator"
     - name: "Karen Mutch-Jones"
-      role: "Co-Principal Investigator"
+      role: "Co-Investigator"
     - name: "Michael Cassidy"
-      role: "Co-Principal Investigator"
+      role: "Co-Investigator"
 partners:
     - name: "TERC"
       role: "Lead Organization"
@@ -121,7 +124,6 @@ The experiences of participating teachers underscored the importance of finding 
 Robot-enhanced lessons effectively engaged students in explorations of science concepts. Units covered a range of topics such as energy transfer, Newton's Laws of Motion and properties of light and sound
 
 -   Students showed increased interest and engagement when robotics was integrated into science lessons
--
 -   Robotics-enhanced science units supported students' development of computational thinking practices, namely pattern recognition, algorithm design, decomposition, abstraction, and data practices
 -   Students (N=186) demonstrated growth in CT skills within science contexts
 

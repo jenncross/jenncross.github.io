@@ -1,6 +1,8 @@
 ---
 layout: project
 title: "Smart Motors: Integrating AI in Upper Elementary Education"
+featured: true
+weight: 10
 timeframe: "2021 - Present"
 grant: "NSF IIS-2119174"
 disciplines:

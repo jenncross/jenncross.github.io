@@ -1,7 +1,9 @@
 ---
 layout: project
 title: "Arts & Bots"
-timeframe: "2010 - 2017"
+featured: false
+weight: 100
+project_category: "Graduate Project"
 grant: "NSF #1321227"
 disciplines:
     - "Computing & Coding"
@@ -11,15 +13,15 @@ disciplines:
 
 project_type:
     - "Research Projects"
-featured_image: "/images/projects/AB/farm.jpg"
+featured_image: "/images/projects/AB/rjstudent.jpg"
 excerpt: "An inclusive educational robotics program that integrates creative technology into non-technical middle school classes to identify and cultivate diverse STEM talent."
 team:
     - name: "Jennifer Cross"
-      role: "Graduate Student & Grant Proposal Co-Author"
+      role: "Project Co-Lead, Graduate Student & Proposal Co-Author"
+    - name: "Emily Hamner"
+      role: "Project Co-Lead, Project Manager & Proposal Co-Author"
     - name: "Illah Nourbakhsh"
       role: "Principal Investigator"
-    - name: "Emily Hamner"
-      role: "Project Manager & Grant Proposal Co-Author"
     - name: "Lauren Zito"
       role: "Research Staff; undergraduate Research Assistant (former)"
     - name: "Additional CREATE Lab Members"
@@ -33,18 +35,16 @@ partners:
     - name: "TERC"
       role: "External Evaluation"
 technologies:
-    - "Hummingbird Microcontroller"
-    - "Visual Programming Environment"
-    - "Servo Motors, LEDs, and Sensors"
-    - "Craft Materials Integration"
+    - "Hummingbird Robotics Kit"
+    - "CREATE Lab Visual Programming Environment"
 funding:
     - awardnumber: "NSF #1321227"
     - amount: "$1,455,306.00"
     - duration: "4 years"
     - description: "Creative Robotics: an inclusive program for fostering diverse STEM talent in middle school (MSP Program)"
 resources:
-    - title: "Arts & Bots Hardware Kit"
-      url: "https://www.birdbraintechnologies.com/hummingbird/"
+    - title: "Project Website"
+      url: "http://www.artsandbots.com/"
 publications:
     - title: "Student Outcomes from the Evaluation of a Transdisciplinary Middle School Robotics Program"
       authors:

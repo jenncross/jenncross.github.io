@@ -5,7 +5,7 @@ title: Projects
 
 <section class="page-header">
   <h1 class="page-title">Research & Design Projects</h1>
-  <p class="page-subtitle">My work integrates participatory design methodologies with empirical investigation to create innovative systems and interfaces. Each project spans multiple methodological approaches and disciplinary boundaries.</p>
+  <p class="page-subtitle">My work creating robotics systems, software, innovative interactions and intuitive interfaces builds on participatory design methodologies and empirical investigations.</p>
 </section>
 
 <section class="filter-controls">
@@ -16,15 +16,11 @@ title: Projects
     <!-- Primary disciplines -->
     <button class="filter-button" data-filter="computing-and-coding">Computing & Coding</button>
     <button class="filter-button" data-filter="robotics">Robotics</button>
-    <button class="filter-button" data-filter="interface-and-interaction-design">Interface & Interaction Design</button>
+    <button class="filter-button" data-filter="robotics">Prototyping</button>
+    <button class="filter-button" data-filter="interface-and-interaction-design">Interfaces & Interactions</button>
     <button class="filter-button" data-filter="education">Education</button>
-    <button class="filter-button" data-filter="data-analysis">Data Analysis</button>
-    
-    <!-- Project types -->
-    <button class="filter-button" data-filter="research-projects">Research Projects</button>
-    <button class="filter-button" data-filter="personal">Personal Projects</button>
-    <button class="filter-button" data-filter="graduate">Graduate Work</button>
-    <button class="filter-button" data-filter="undergraduate">Undergraduate Work</button>
+    <button class="filter-button" data-filter="data-analysis">Data</button>
+
   </div>
 </section>
 
@@ -33,23 +29,28 @@ title: Projects
 <div class="project-grid">
   {% assign featured_projects = site.projects | where: "featured", true | sort: "weight" %}
   {% for project in featured_projects %}
-  <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
-    {% if project.featured_image %}
-    <div class="project-image-container">
-      <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
-    </div>
-    {% endif %}
-    <div class="project-content">
-      <h3 class="project-title">{{ project.title }}</h3>
-      <p class="project-description">{{ project.excerpt }}</p>
-      <div class="tag-container">
-        {% for discipline in project.disciplines limit:3 %}
-        <span class="tag">{{ discipline }}</span>
-        {% endfor %}
+  <a href="{{ project.url }}" class="project-card-link">
+    <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
+      {% if project.featured_image %}
+      <div class="project-image-container">
+        <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
+        {% if project.project_category == "Graduate Project" or project.project_category == "Undergraduate Project" %}
+        <span class="card-category-badge">{{ project.project_category }}</span>
+        {% endif %}
       </div>
-      <a href="{{ project.url }}" class="project-link">Details</a>
+      {% endif %}
+      <div class="project-content">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <p class="project-description">{{ project.excerpt }}</p>
+        <div class="tag-container">
+          {% for discipline in project.disciplines limit:3 %}
+          <span class="tag">{{ discipline }}</span>
+          {% endfor %}
+        </div>
+        <span class="project-link">Details</span>
+      </div>
     </div>
-  </div>
+  </a>
   {% endfor %}
 </div>
 
@@ -58,41 +59,44 @@ title: Projects
 <div class="project-grid">
   {% assign recent_projects = site.projects | where_exp: "item", "item.featured != true" | where_exp: "item", "item.weight < 100" | sort: "weight" %}
   {% for project in recent_projects %}
-  <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
-    {% if project.featured_image %}
-    <div class="project-image-container">
-      <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
-    </div>
-    {% endif %}
-    <div class="project-content">
-      <h3 class="project-title">{{ project.title }}</h3>
-      <p class="project-description">{{ project.excerpt }}</p>
-      <div class="tag-container">
-        {% for discipline in project.disciplines limit:3 %}
-        <span class="tag">{{ discipline }}</span>
-        {% endfor %}
+  <a href="{{ project.url }}" class="project-card-link">
+    <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
+      {% if project.featured_image %}
+      <div class="project-image-container">
+        <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
+        {% if project.project_category == "Graduate Project" or project.project_category == "Undergraduate Project" %}
+        <span class="card-category-badge">{{ project.project_category }}</span>
+        {% endif %}
       </div>
-      <a href="{{ project.url }}" class="project-link">Details</a>
+      {% endif %}
+      <div class="project-content">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <p class="project-description">{{ project.excerpt }}</p>
+        <div class="tag-container">
+          {% for discipline in project.disciplines limit:3 %}
+          <span class="tag">{{ discipline }}</span>
+          {% endfor %}
+        </div>
+        <span class="project-link">Details</span>
+      </div>
     </div>
-  </div>
+  </a>
   {% endfor %}
 </div>
 
 <!-- Additional Projects Section -->
 <h2 class="section-title">Additional Projects</h2>
-
-<!-- Group projects by category -->
-<div class="project-categories">
-  <!-- Graduate Projects -->
-  {% assign graduate_projects = site.projects | where_exp: "item", "item.weight >= 100" | where: "project_category", "Graduate Project" | sort: "weight" %}
-  {% if graduate_projects.size > 0 %}
-  <h3 class="category-heading">Graduate Projects</h3>
-  <div class="project-grid">
-    {% for project in graduate_projects %}
+<div class="project-grid">
+  {% assign additional_projects = site.projects | where_exp: "item", "item.featured != true" | where_exp: "item", "item.weight >= 100" | sort: "weight" %}
+  {% for project in additional_projects %}
+  <a href="{{ project.url }}" class="project-card-link">
     <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
       {% if project.featured_image %}
       <div class="project-image-container">
         <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
+        {% if project.project_category == "Graduate Project" or project.project_category == "Undergraduate Project" %}
+        <span class="card-category-badge">{{ project.project_category }}</span>
+        {% endif %}
       </div>
       {% endif %}
       <div class="project-content">
@@ -103,66 +107,11 @@ title: Projects
           <span class="tag">{{ discipline }}</span>
           {% endfor %}
         </div>
-        <a href="{{ project.url }}" class="project-link">Details</a>
+        <span class="project-link">Details</span>
       </div>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-  
-  <!-- Undergraduate Projects -->
-  {% assign undergrad_projects = site.projects | where_exp: "item", "item.weight >= 100" | where: "project_category", "Undergraduate Project" | sort: "weight" %}
-  {% if undergrad_projects.size > 0 %}
-  <h3 class="category-heading">Undergraduate Projects</h3>
-  <div class="project-grid">
-    {% for project in undergrad_projects %}
-    <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
-      {% if project.featured_image %}
-      <div class="project-image-container">
-        <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
-      </div>
-      {% endif %}
-      <div class="project-content">
-        <h3 class="project-title">{{ project.title }}</h3>
-        <p class="project-description">{{ project.excerpt }}</p>
-        <div class="tag-container">
-          {% for discipline in project.disciplines limit:3 %}
-          <span class="tag">{{ discipline }}</span>
-          {% endfor %}
-        </div>
-        <a href="{{ project.url }}" class="project-link">Details</a>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-  
-  <!-- Personal Projects -->
-  {% assign personal_projects = site.projects | where_exp: "item", "item.weight >= 100" | where: "project_category", "Personal Project" | sort: "weight" %}
-  {% if personal_projects.size > 0 %}
-  <h3 class="category-heading">Personal Projects</h3>
-  <div class="project-grid">
-    {% for project in personal_projects %}
-    <div class="project-card" data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}">
-      {% if project.featured_image %}
-      <div class="project-image-container">
-        <img src="{{ project.featured_image }}" alt="{{ project.title }}" class="project-image">
-      </div>
-      {% endif %}
-      <div class="project-content">
-        <h3 class="project-title">{{ project.title }}</h3>
-        <p class="project-description">{{ project.excerpt }}</p>
-        <div class="tag-container">
-          {% for discipline in project.disciplines limit:3 %}
-          <span class="tag">{{ discipline }}</span>
-          {% endfor %}
-        </div>
-        <a href="{{ project.url }}" class="project-link">Details</a>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
+  </a>
+  {% endfor %}
 </div>
 
 <script>
@@ -184,9 +133,9 @@ title: Projects
         // Filter projects
         projectCards.forEach(card => {
           if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
-            card.style.display = 'block';
+            card.closest('.project-card-link').style.display = 'block';
           } else {
-            card.style.display = 'none';
+            card.closest('.project-card-link').style.display = 'none';
           }
         });
       });
