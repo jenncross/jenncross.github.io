@@ -32,8 +32,8 @@ a,
 a:hover,
 a:focus,
 a:active {
-    font-weight: 500 !important;
-    color: var(--accent) !important;
+    font-weight: 500;
+    color: var(--accent);
 }
 
 /* ======================================
@@ -437,6 +437,17 @@ main > *:last-child {
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
     height: 100%;
+}
+
+.project-grid a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.project-grid a:hover {
+    border-bottom: 1px solid transparent;
 }
 
 .project-card:hover {
@@ -1395,4 +1406,39 @@ h3 {
 /* Make the project-image-container position relative so the badge can be positioned absolutely */
 .project-image-container {
     position: relative;
+}
+
+/* Back link styling */
+.back-link {
+    display: inline-block;
+    background-color: var(--accent);
+    color: white;
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    margin-bottom: var(--space-md);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.back-link a,
+a:hover {
+    color: #ffffff;
+}
+
+.back-link::before {
+    content: "←";
+    margin-right: 0.25rem;
+    transition: transform 0.2s;
+}
+
+.back-link:hover::before {
+    transform: translateX(2px);
+}
+
+.back-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
 }
