@@ -4,7 +4,7 @@ layout: default
 
 <div class="bio-section">
   <div class="bio-image-container">
-    <img src="/images/tufts_headshot_jcross_square.PNG" alt="portrait of Jennifer with shoulder length curly hair, smiling and wearing glasses" class="bio-image">
+    <img src="/images/tufts_headshot_jcross_square.png" alt="portrait of Jennifer with shoulder length curly hair, smiling and wearing glasses" class="bio-image">
   </div>
   <div class="bio-content">   
     <h2>About Me</h2>
