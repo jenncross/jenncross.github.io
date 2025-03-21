@@ -1,0 +1,110 @@
+---
+layout: default
+---
+<div class="course-header">
+  <h1 class="course-detail-title">{{ page.title }}</h1>
+  <p class="course-detail-meta">{{ page.level }} • {{ page.students }} • {{ page.years }}</p>
+  <div>
+    {% for tag in page.tags %}
+    <span class="course-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="course-content">
+  <div class="course-main">
+    {{ content }}
+    
+    {% if page.timeline %}
+    <h3>Course Evolution Timeline</h3>
+    <div class="timeline">
+      {% for item in page.timeline %}
+      <div class="timeline-item">
+        <div class="timeline-date">{{ item.year }}</div>
+        <div class="timeline-content">
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if page.outcomes %}
+    <h3>Student Outcomes</h3>
+    <p>{{ page.outcomes.description }}</p>
+    
+    <div class="evaluation-data">
+      {% for metric in page.outcomes.metrics %}
+      <div class="data-row">
+        <div class="data-label">{{ metric.label }}</div>
+        <div class="data-bar-container">
+          <div class="data-bar" style="width: {{ metric.percentage }}%;"></div>
+          <div class="data-value">{{ metric.value }}</div>
+        </div>
+      </div>
+      {% endfor %}
+      
+      <p class="data-note">{{ page.outcomes.note }}</p>
+    </div>
+    {% endif %}
+    
+    {% if page.projects %}
+    <h3>Example Student Projects</h3>
+    <div class="project-examples">
+      {% for project in page.projects %}
+      <div class="project-example">
+        <h4 class="project-title">{{ project.title }}</h4>
+        <p class="project-desc">{{ project.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if page.references %}
+    <div class="references">
+      <h3>Course References</h3>
+      {% for reference in page.references %}
+      <div class="reference-item">
+        {{ reference }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  
+  <div class="course-sidebar">
+    {% if page.materials %}
+    <div class="sidebar-section">
+      <h4 class="sidebar-heading">Course Materials</h4>
+      <ul class="resource-list">
+        {% for material in page.materials %}
+        <li><a href="{{ material.url }}" class="resource-link">{{ material.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    
+    {% if page.testimonials %}
+    <div class="sidebar-section">
+      <h4 class="sidebar-heading">Student Testimonials</h4>
+      {% for testimonial in page.testimonials %}
+      <blockquote {% if forloop.index > 1 %}style="margin-top: 1.5rem;"{% endif %}>
+        <p>"{{ testimonial.quote }}"</p>
+        <footer>—{{ testimonial.author }}</footer>
+      </blockquote>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if page.innovations %}
+    <div class="sidebar-section">
+      <h4 class="sidebar-heading">Teaching Innovations</h4>
+      <ul class="resource-list">
+        {% for innovation in page.innovations %}
+        <li>{{ innovation }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>

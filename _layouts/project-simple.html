@@ -1,0 +1,67 @@
+---
+layout: default
+---
+
+<div class="project-header">
+    <h1 class="project-detail-title">{{ page.title }}</h1>
+    {% if page.project_category %}
+    <p class="project-category-badge">{{ page.project_category }}</p>
+    {% endif %}
+    <p class="project-detail-meta">{{ page.timeframe }}</p>
+    <div class="project-detail-tags">
+        {% for discipline in page.disciplines %}
+        <span class="tag">{{ discipline }}</span>
+        {% endfor %}
+    </div>
+</div>
+
+{% if page.featured_image %}
+<div class="project-featured-image">
+    <img
+        src="{{ page.featured_image }}"
+        alt="{{ page.title }}"
+        class="featured-image"
+    />
+</div>
+{% endif %}
+
+<div class="project-content">
+    <div class="project-main">{{ content }}</div>
+
+    {% if page.technologies %}
+    <div class="project-sidebar">
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Technologies & Methods</h4>
+            <ul class="resource-list">
+                {% for tech in page.technologies %}
+                <li>{{ tech }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if page.resources %}
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Resources</h4>
+            <ul class="resource-list">
+                {% for resource in page.resources %}
+                <li>
+                    <a
+                        href="{{ resource.url }}"
+                        class="resource-link"
+                        >{{ resource.title }}</a
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+{% if page.gallery %}
+<div class="project-gallery">
+    <h3>Project Gallery</h3>
+    {% include gallery.html images=page.gallery %}
+</div>
+{% endif %}

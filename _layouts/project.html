@@ -1,0 +1,232 @@
+---
+layout: default
+---
+
+<div class="project-header">
+    <h1 class="project-detail-title">{{ page.title }}</h1>
+    {% if page.project_category %}
+    <p class="project-category-badge">{{ page.project_category }}</p>
+    {% endif %}
+    <p class="project-detail-meta">{{ page.timeframe }}</p>
+    <div class="project-detail-tags">
+        {% for approach in page.approaches %}
+        <span class="tag"
+            ><span class="tag-indicator {{ approach | downcase | replace: ' ', '-' | replace: '-&-', '-' | replace: '-based', '' }}"></span>{{ approach }}</span
+        >
+        {% endfor %}
+    </div>
+</div>
+
+{% if page.featured_image %}
+<div class="project-featured-image">
+    <img
+        src="{{ page.featured_image }}"
+        alt="{{ page.title }}"
+        class="featured-image"
+    />
+</div>
+{% endif %}
+
+<div class="project-content">
+    <div class="project-main">
+        {{ content }} {% if page.timeline %}
+        <h3>Project Timeline</h3>
+        <div class="timeline">
+            {% for item in page.timeline %}
+            <div class="timeline-item">
+                <div class="timeline-date">{{ item.year }}</div>
+                <div class="timeline-content">
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %} {% if page.outcomes %}
+        <h3>Project Outcomes</h3>
+        <p>{{ page.outcomes.description }}</p>
+
+        {% if page.outcomes.metrics %}
+        <div class="evaluation-data">
+            {% for metric in page.outcomes.metrics %}
+            <div class="data-row">
+                <div class="data-label">{{ metric.label }}</div>
+                <div class="data-bar-container">
+                    <div
+                        class="data-bar"
+                        style="width: {{ metric.percentage }}%;"
+                    ></div>
+                    <div class="data-value">{{ metric.value }}</div>
+                </div>
+            </div>
+            {% endfor %} {% if page.outcomes.note %}
+            <p class="data-note">{{ page.outcomes.note }}</p>
+            {% endif %}
+        </div>
+        {% endif %} {% endif %} {% if page.publications %}
+        <h3>Related Publications</h3>
+        <div class="project-publications">
+            {% for pub in page.publications %}
+            <div class="publication-item">
+                <p class="publication-cite">
+                    {% assign author_list = "" %} {% for author in pub.authors %} {% if author.highlight %} {% assign author_name = "<strong
+                        >" | append: author.name | append: "</strong
+                    >" %} {% else %} {% assign author_name = author.name %} {% endif %} {% if pub.authors.size > 1 %} {% if forloop.last %} {% assign
+                    author_list = author_list | append: " and " | append: author_name %} {% elsif forloop.first %} {% assign author_list = author_name %} {%
+                    else %} {% assign author_list = author_list | append: ", " | append: author_name %} {% endif %} {% else %} {% assign author_list =
+                    author_name %} {% endif %} {% endfor %} {{ author_list }}. {{ pub.year }}. {{ pub.title }}. <em>{{ pub.venue }}</em>{% if pub.volume and
+                    pub.volume != "" %} {{ pub.volume }}{% if pub.issue and pub.issue != "" %}({{ pub.issue }}){% endif %}{% endif %}{% if pub.pages and
+                    pub.pages != "" %}, {{ pub.pages }}{% endif %}. {% if pub.publisher and pub.publisher != "" %}{{ pub.publisher }}.{% endif %} {% if
+                    pub.award %}
+                    <span class="publication-award">{{ pub.award }}</span>
+                    {% endif %}
+                </p>
+                {% if pub.links and pub.links.size > 0 %}
+                <div class="publication-links">
+                    {% for link in pub.links %} {% if forloop.first == false %}
+                    <span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    {% endif %}
+                    <a
+                        href="{{ link.url }}"
+                        class="publication-link"
+                        target="_blank"
+                        >{{ link.text }}</a
+                    >
+                    {% endfor %}
+                </div>
+                {% elsif pub.doi or pub.pdf %}
+                <p class="publication-links">
+                    {% if pub.doi %}<a
+                        href="{{ pub.doi }}"
+                        class="text-link"
+                        target="_blank"
+                        >DOI</a
+                    >{% endif %} {% if pub.doi and pub.pdf %}<span class="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</span>{% endif %} {% if pub.pdf %}<a
+                        href="{{ pub.pdf }}"
+                        class="text-link"
+                        target="_blank"
+                        >PDF</a
+                    >{% endif %}
+                </p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="project-sidebar">
+        {% if page.team %}
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Research Team</h4>
+            <ul class="resource-list">
+                {% for member in page.team %}
+                <li>
+                    {{ member.name }}{% if member.role %}
+                    <span class="team-role">({{ member.role }})</span>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %} {% if page.partners %}
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Partners & Collaborators</h4>
+            <ul class="resource-list">
+                {% for partner in page.partners %}
+                <li>
+                    {% if partner.name %} {{ partner.name }}{% if partner.role %}
+                    <span class="team-role">({{ partner.role }})</span>{% endif %} {% else %} {{ partner }} {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %} {% if page.technologies %}
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Technologies</h4>
+            <ul class="resource-list">
+                {% for tech in page.technologies %}
+                <li>{{ tech }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %} {% if page.funding %}
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Funding</h4>
+            {% if page.funding.first %}
+            <ul class="resource-list">
+                {% for fund_item in page.funding %} {% if fund_item.awardnumber %}
+                <li><strong>Award Number:</strong> {{ fund_item.awardnumber }}</li>
+                {% elsif fund_item.amount %}
+                <li><strong>Amount:</strong> {{ fund_item.amount }}</li>
+                {% elsif fund_item.duration %}
+                <li><strong>Duration:</strong> {{ fund_item.duration }}</li>
+                {% elsif fund_item.description %}
+                <li>{{ fund_item.description }}</li>
+                {% else %}
+                <li>{{ fund_item }}</li>
+                {% endif %} {% endfor %}
+            </ul>
+            {% else %}
+            <p>{{ page.funding }}</p>
+            {% endif %}
+        </div>
+        {% endif %} {% if page.resources %}
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Project Resources</h4>
+            <ul class="resource-list">
+                {% for resource in page.resources %}
+                <li>
+                    <a
+                        href="{{ resource.url }}"
+                        class="resource-link"
+                        >{{ resource.title }}</a
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if page.gallery %}
+<div class="project-gallery">
+    <h3>Project Gallery</h3>
+    {% include gallery.html images=page.gallery %}
+</div>
+{% endif %} {% if site.projects.size > 1 %}
+<div class="more-projects">
+    <h3>More Projects</h3>
+    <div class="project-grid">
+        {% assign other_projects = site.projects | where_exp: "project", "project.title != page.title" | sample: 2 %} {% for project in other_projects %}
+        <div
+            class="project-card"
+            data-category="{% for discipline in project.disciplines %}{{ discipline | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %} {% for type in project.project_type %}{{ type | downcase | replace: ' ', '-' | replace: '&', 'and' }} {% endfor %}"
+        >
+            {% if project.featured_image %}
+            <div class="project-image-container">
+                <img
+                    src="{{ project.featured_image }}"
+                    alt="{{ project.title }}"
+                    class="project-image"
+                />
+            </div>
+            {% endif %}
+            <div class="project-content">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <p class="project-description">{{ project.excerpt }}</p>
+                <div class="tag-container">
+                    {% for discipline in project.disciplines limit:3 %}
+                    <span class="tag">{{ discipline }}</span>
+                    {% endfor %}
+                </div>
+                <a
+                    href="{{ project.url }}"
+                    class="project-link"
+                    >Details</a
+                >
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

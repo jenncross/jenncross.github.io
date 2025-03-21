@@ -1,0 +1,620 @@
+# Journal Publications
+- type: journal
+  title: "Leveraging tangible interfaces in primary school math: Pilot testing of the Owlet math program"
+  authors:
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Bambi Brewer"
+        highlight: false
+      - name: "Samantha Speer"
+        highlight: false
+      - name: "Michael Tasota"
+        highlight: false
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Molly Johnson"
+        highlight: false
+      - name: "Tom Lauwers"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "International Journal of Child-Computer Interaction"
+  year: 2021
+  volume: "27"
+  issue: ""
+  pages: ""
+  publisher: "Elsevier"
+  doi: "http://doi.org/10.1016/j.ijcci.2020.100222"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "http://doi.org/10.1016/j.ijcci.2020.100222"
+
+- type: journal
+  title: "Smell Pittsburgh: Engaging Community Citizen Science for Air Quality"
+  authors:
+      - name: "Yen-Chia Hsu"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Paul Dille"
+        highlight: false
+      - name: "Michael Tasota"
+        highlight: false
+      - name: "Beatrice Dias"
+        highlight: false
+      - name: "Randy Sargent"
+        highlight: false
+      - name: "Ting-Hao Huang"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "ACM Transactions on Interactive Intelligent Systems"
+  year: 2020
+  volume: "10"
+  issue: "4"
+  pages: ""
+  publisher: "ACM"
+  doi: "http://doi.org/10.1145/3369397"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "http://doi.org/10.1145/3369397"
+
+- type: journal
+  title: "Extensive Meteoroid Fragmentation in V/UHF Radar Meteor Observations at Arecibo Observatory"
+  authors:
+      - name: "John Mathews"
+        highlight: false
+      - name: "Stanley J. Briczinski"
+        highlight: false
+      - name: "Akshay Malhotra"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+  venue: "Geophysical Research Letters"
+  year: 2010
+  volume: "37"
+  issue: "4"
+  pages: ""
+  publisher: "American Geophysical Union"
+  doi: "https://doi.org/10.1029/2009GL041967"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1029/2009GL041967"
+
+# Conference Publications
+- type: conference
+  title: "Smart Motor: A Low-Cost Hardware And Software Toolkit For Introducing Supervised Machine Learning To Elementary School Students"
+  authors:
+      - name: "Tanushree Burman"
+        highlight: false
+      - name: "Milan Dahal"
+        highlight: false
+      - name: "Geling Xu"
+        highlight: false
+      - name: "Chris Rogers"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Jivko Sinapov"
+        highlight: false
+  venue: "EAAI'25: Proceedings of the Fifteenth Symposium on Educational Advances in Artificial Intelligence"
+  year: 2025
+  pages: ""
+  location: "Philadelphia, PA"
+  publisher: "AAAI"
+  doi: ""
+  award: ""
+  links:
+      - text: "Paper Website"
+        url: "https://tufts-ai-robotics-group.github.io/SmartMotor/"
+
+- type: conference
+  title: "Conducting the Pilot Study of Integrating AI: An Experience Integrating Machine Learning into Upper Elementary Robotics Learning (Work in Progress)"
+  authors:
+      - name: "Geling Xu"
+        highlight: false
+      - name: "Daniel Zabner"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Dustin Nadler"
+        highlight: false
+      - name: "Steven Coxon"
+        highlight: false
+      - name: "Karen Englekenjohn"
+        highlight: false
+  venue: "2023 ASEE Annual Conference and Exposition"
+  year: 2023
+  pages: ""
+  location: "Baltimore, Maryland"
+  publisher: "American Society for Engineering Education"
+  doi: "https://doi.org/10.18260/1-2--42500"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.18260/1-2--42500"
+
+- type: conference
+  title: "Using robotics to enhance middle school science learning: Examining teachers' design goals for integrated lessons"
+  authors:
+      - name: "Debra Bernstein"
+        highlight: false
+      - name: "Michael Cassidy"
+        highlight: false
+      - name: "Karen Mutch-Jones"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+  venue: "2023 American Education Research Association (AERA) Annual Meeting"
+  year: 2023
+  pages: ""
+  location: ""
+  publisher: "AERA"
+  doi: "https://doi.org/10.3102/2015711"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.3102/2015711"
+
+- type: conference
+  title: "Robots in Science: How middle school science teachers design integrated robotics units for their science classes"
+  authors:
+      - name: "Debra Bernstein"
+        highlight: false
+      - name: "Michael Cassidy"
+        highlight: false
+      - name: "Karen Mutch-Jones"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+  venue: "2022 International Conference of the Learning Sciences (ICLS)"
+  year: 2022
+  pages: "1968-1969"
+  location: ""
+  publisher: "International Society of the Learning Sciences"
+  doi: "https://repository.isls.org//handle/1/9004"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://repository.isls.org//handle/1/9004"
+
+- type: journal
+  title: "An Interactive Robot Platform for Introducing Reinforcement Learning to K-12 Students"
+  authors:
+      - name: "Ziyi Zhang"
+        highlight: false
+      - name: "Sara Willner-Giwerc"
+        highlight: false
+      - name: "Jivko Sinapov"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Chris Rogers"
+        highlight: false
+  venue: "Robotics in Education 2021, Advances in Intelligent Systems and Computing"
+  year: 2022
+  volume: "1359"
+  pages: ""
+  location: ""
+  publisher: "Springer"
+  doi: "http://doi.org/10.1007/978-3-030-82544-7_27"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "http://doi.org/10.1007/978-3-030-82544-7_27"
+
+- type: conference
+  title: "Pilot Results of a Digital Manipulative for Elementary Mathematics"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Bambi Brewer"
+        highlight: false
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Samantha Speer"
+        highlight: false
+      - name: "Michael Tasota"
+        highlight: false
+  venue: "2020 Annual Meeting of the American Educational Research Association (AERA)"
+  year: 2020
+  pages: ""
+  location: "San Francisco, CA"
+  publisher: "AERA"
+  doi: ""
+  award: ""
+  links: []
+
+- type: conference
+  title: "Smell Pittsburgh: Community-Empowered Mobile Smell Reporting System"
+  authors:
+      - name: "Yen-Chia Hsu"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Paul Dille"
+        highlight: false
+      - name: "Michael Tasota"
+        highlight: false
+      - name: "Beatrice Dias"
+        highlight: false
+      - name: "Randy Sargent"
+        highlight: false
+      - name: "Ting-Hao Huang"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "Proceedings of the 24th International Conference on Intelligent User Interfaces (IUI '19)"
+  year: 2019
+  pages: ""
+  location: "Marina del Ray, CA"
+  publisher: "ACM"
+  doi: "https://doi.org/10.1145/3301275.3302293"
+  award: "Honorable Mention Award"
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1145/3301275.3302293"
+      - text: "PDF"
+        url: "/docs/DIS2018_EHP-authorscopy.pdf"
+
+- type: conference
+  title: "Visualization Tool for Environmental Sensing and Public Health Data"
+  authors:
+      - name: "Yen-Chia Hsu"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Paul Dille"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+      - name: "Leann Leiter"
+        highlight: false
+      - name: "Ryan Grode"
+        highlight: false
+  venue: "Proceedings of the 2018 ACM Conference Companion Publication on Designing Interactive Systems (DIS '18 Companion)"
+  year: 2018
+  pages: ""
+  location: "Hong Kong"
+  publisher: "ACM"
+  doi: "https://arxiv.org/abs/1804.03263"
+  award: ""
+  links:
+      - text: "arXiv"
+        url: "https://arxiv.org/abs/1804.03263"
+      - text: "PDF"
+        url: "/docs/DIS2018_EHP-authorscopy.pdf"
+
+- type: conference
+  title: "Student Outcomes from the Evaluation of a Transdisciplinary Middle School Robotics Program"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "2017 IEEE Frontiers in Education Conference (FIE)"
+  year: 2017
+  pages: ""
+  location: "Indianapolis, Indiana"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2017.8190576"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2017.8190576"
+      - text: "PDF"
+        url: "/docs/FIE2017_outcomes-authorscopy.pdf"
+
+- type: conference
+  title: "Development and Results from User Testing of a Novel Robotics Kit Supporting Systems Engineering for Elementary-Aged Students"
+  authors:
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Michael Tasota"
+        highlight: false
+      - name: "Paul Dille"
+        highlight: false
+      - name: "Stephen Fulton"
+        highlight: false
+      - name: "Molly Johnson"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+      - name: "Joshua Schapiro"
+        highlight: false
+  venue: "2017 IEEE Frontiers in Education Conference (FIE)"
+  year: 2017
+  pages: ""
+  location: "Indianapolis, Indiana"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2017.8190577"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2017.8190577"
+      - text: "PDF"
+        url: "/docs/FIE2017-FlutterPilot-AuthorCopy.pdf"
+
+- type: conference
+  title: "Community-Empowered Air Quality Monitoring System"
+  authors:
+      - name: "Yen-Chia Hsu"
+        highlight: false
+      - name: "Paul Dille"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Beatrice Dias"
+        highlight: false
+      - name: "Randy Sargent"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "Proceedings of 2017 ACM CHI Conference on Human Factors in Computing Systems"
+  year: 2017
+  pages: ""
+  location: "Denver, Colorado"
+  publisher: "ACM"
+  doi: "https://doi.org/10.1145/3025453.3025853"
+  award: "Honorable Mention Award"
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1145/3025453.3025853"
+
+- type: thesis
+  title: "Creative Robotic Systems for Talent-Based Learning"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+  venue: "Doctoral Dissertation, Carnegie Mellon University"
+  year: 2017
+  pages: ""
+  publisher: "Carnegie Mellon University"
+  doi: "http://repository.cmu.edu/dissertations/951/"
+  award: ""
+  links:
+      - text: "Repository"
+        url: "http://repository.cmu.edu/dissertations/951/"
+      - text: "PDF"
+        url: "http://repository.cmu.edu/cgi/viewcontent.cgi?article=1990&context=dissertations"
+
+- type: conference
+  title: "Development of an Assessment for Measuring Middle School Student Attitudes towards Robotics Activities"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+      - name: "Debra Bernstein"
+        highlight: false
+  venue: "2016 IEEE Frontiers in Education Conference (FIE)"
+  year: 2016
+  pages: ""
+  location: "Erie, Pennsylvania"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2016.7757620"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2016.7757620"
+
+- type: conference
+  title: "Engineering and Computational Thinking Talent in Middle School Students: a Framework for Defining and Recognizing Student Affinities"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "2016 IEEE Frontiers in Education Conference (FIE)"
+  year: 2016
+  pages: ""
+  location: "Erie, Pennsylvania"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2016.7757720"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2016.7757720"
+
+- type: conference
+  title: "Utilizing Engineering to Teach Non-Technical Disciplines: Case Studies of Robotics within Middle School English and Health Classes"
+  authors:
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Brett Slezak"
+        highlight: false
+      - name: "Sue Mellon"
+        highlight: false
+      - name: "Heather Harapko"
+        highlight: false
+      - name: "Michelle Welter"
+        highlight: false
+  venue: "2016 IEEE Frontiers in Education Conference (FIE)"
+  year: 2016
+  pages: ""
+  location: "Erie, Pennsylvania"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2016.7757528"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2016.7757528"
+
+- type: conference
+  title: "Training Teachers to Integrate Engineering into Non-Technical Middle School Curriculum"
+  authors:
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Lauren Zito"
+        highlight: false
+      - name: "Debra Bernstein"
+        highlight: false
+      - name: "Karen Mutch-Jones"
+        highlight: false
+  venue: "2016 IEEE Frontiers in Education Conference (FIE)"
+  year: 2016
+  pages: ""
+  location: "Erie, Pennsylvania"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2016.7757528"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2016.7757528"
+
+- type: conference
+  title: "Robots and Romeo and Juliet: Studying Teacher Integration of Robotics into Middle School Curricula"
+  authors:
+      - name: "Debra Bernstein"
+        highlight: false
+      - name: "Karen Mutch-Jones"
+        highlight: false
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+  venue: "2016 Annual Meeting of the American Educational Research Association (AERA)"
+  year: 2016
+  pages: ""
+  location: "Washington, DC"
+  publisher: "AERA"
+  doi: ""
+  award: ""
+  links: []
+
+- type: conference
+  title: "Arts & Bots: Application and Outcomes of a Secondary School Robotics Program"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Christopher Bartley"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "2015 IEEE Frontiers in Education Conference (FIE)"
+  year: 2015
+  pages: ""
+  location: "El Paso, Texas"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/FIE.2015.7344375"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/FIE.2015.7344375"
+
+- type: conference
+  title: "Identifying and Cultivating Diverse STEM Talent through Creative Robotics"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Emily Hamner"
+        highlight: false
+  venue: "2014 American Society for Engineering Education (ASEE) Annual Conference and Exposition"
+  year: 2014
+  pages: ""
+  location: "Indianapolis, Indiana"
+  publisher: "American Society for Engineering Education"
+  doi: "https://doi.org/10.18260/1-2--20578"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.18260/1-2--20578"
+
+- type: conference
+  title: "A Visual Robot-Programming Environment for Multidisciplinary Education"
+  authors:
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Christopher Bartley"
+        highlight: false
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+  venue: "2013 IEEE International Conference on Robotics and Automation (ICRA)"
+  year: 2013
+  pages: ""
+  location: "Karlsruhe, Germany"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/ICRA.2013.6630562"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/ICRA.2013.6630562"
+
+- type: conference
+  title: "Arts & Bots: Techniques for distributing a STEAM robotics program through K-12 classrooms"
+  authors:
+      - name: "Emily Hamner"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+  venue: "2013 IEEE Integrated STEM Education Conference (ISEC)"
+  year: 2013
+  pages: ""
+  location: "Princeton, NJ"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/ISECon.2013.6525207"
+  award: "Best Paper Award"
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/ISECon.2013.6525207"
+
+- type: conference
+  title: "ChargeCar Community Conversions: Practical, Electric Commuter Vehicles Now!"
+  authors:
+      - name: "H. Benjamin Brown"
+        highlight: false
+      - name: "Illah Nourbakhsh"
+        highlight: false
+      - name: "Christopher Bartley"
+        highlight: false
+      - name: "Jennifer L. Cross"
+        highlight: true
+      - name: "Paul Dille"
+        highlight: false
+      - name: "Joshua Schapiro"
+        highlight: false
+      - name: "Alex Styler"
+        highlight: false
+  venue: "2012 IEEE International Electric Vehicle Conference (IEVC)"
+  year: 2012
+  pages: ""
+  location: "Greenville, SC"
+  publisher: "IEEE"
+  doi: "https://doi.org/10.1109/IEVC.2012.6183232"
+  award: ""
+  links:
+      - text: "DOI"
+        url: "https://doi.org/10.1109/IEVC.2012.6183232"

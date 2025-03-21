@@ -1,62 +1,69 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>{{ site.title}} </title>
-
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap">
+    {% if site.google_analytics %}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', '{{ site.google_analytics }}', 'auto');
+      ga('send', 'pageview');
+    </script>
+    {% endif %}
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-      
-        <h1 class="blue" style="font-size: 500%; margin-bottom: 10px;">HELLO</h1>
-        <p style="font-size: 200%; margin-bottom: 0px;">I'm <strong>Jennifer Cross</strong>.</p>
-        <p style="font-size: 150%; margin-bottom: 30px;">I am a <font class="blue">roboticist</font>,<br> <font class="blue">educator</font>, and <font class="blue">scientist</font>.</p> 
-        <!-- <p style="font-size: 150%; margin-bottom: 30px;">I am a <a href="/projects">roboticist</a>,<br> <a href="/teaching">educator</a>, and <a href="/publications">scientist</a>.</p>--> 
-        
-        <!--<br><br> added when title replaced-->
-        <p style="margin-bottom: 10px;"><a href="/"><strong>HOME</strong></a></p>
-        <p style="margin-bottom: 10px;"><a href="/about"><strong>ABOUT</strong></a></p>
-        <p style="margin-bottom: 10px;"><a href="/publications"><strong>PUBLICATIONS</strong></a></p>
-         <!--<p style="margin-bottom: 10px;"><a href="/projects"><strong>PROJECTS</strong></a></p>
-        <p style="margin-bottom: 10px;"><a href="/teaching"><strong>TEACHING</strong></a></p>
-        <p style="margin-bottom: 10px;"><a href="/activities"><strong>ACTIVITIES</strong></a></p>-->
-        <p style="margin-bottom: 10px;"><a href="/docs/CV.pdf"><strong>CV</strong></a></p>
-       
-                
-      </header>
-      <section>
+    <header class="header">
+      <div class="header-content">
+        <div>
+          <h1 class="site-title">{{ site.title }}</h1>
+          <p class="site-subtitle">{{ site.description }}</p>
+          <div class="social-icons">
+            <a href="https://scholar.google.com/citations?user=eu0Cw5QAAAAJ" class="social-icon" title="Google Scholar" aria-label="Google Scholar">
+              <img src="/images/icons/gscholar.png" alt="Google Scholar"> <span>Google Scholar</span>
+            </a>  
+            <a href="https://www.linkedin.com/in/jenncross" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+              <img src="/images/icons/In-Black-34px.png" alt="LinkedIn"> <span>LinkedIn</span>
+            </a>
 
+            <a href="https://github.com/jenncross" class="social-icon" title="GitHub" aria-label="GitHub">
+              <img src="/images/icons/GitHub-Mark-32px.png" alt="GitHub"> <span>GitHub</span>
+            </a>
+            <a href="https://orcid.org/0000-0002-1201-2901" class="social-icon" title="ORCID" aria-label="ORCID">
+              <img src="/images/icons/ID_symbol_B-W_32x32.png" alt="ORCID"> <span>ORCID</span>
+            </a>
+            <a href="/docs/CV.pdf" class="social-icon" title="Download CV" aria-label="Download CV">
+              <img src="/images/icons/google-drive-pdf-file.png" alt="CV"> <span>CV</span>
+            </a>
+
+            <a href="mailto:Jennifer.Cross@tufts.edu" class="social-icon" title="Email" aria-label="Email">
+              <img src="/images/icons/drafts-evelope-button.png" alt="Email"> <span>Email</span>
+            </a>
+          </div> 
+          
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+        <!-- <a href="{{ '/teaching' | relative_url }}" {% if page.url contains '/teaching' %}class="active"{% endif %}>Teaching</a> -->
+        <a href="{{ '/projects' | relative_url }}" {% if page.url contains '/projects' %}class="active"{% endif %}>Projects</a>
+        <a href="{{ '/publications' | relative_url }}" {% if page.url contains '/publications' %}class="active"{% endif %}>Publications</a>
+        <a href="{{ '/creative' | relative_url }}" {% if page.url contains '/creative' %}class="active"{% endif %}>Creative Practice</a>
+      </nav>
+    </header>
+
+    <main>
       {{ content }}
-
-      </section>
-      <footer>
-        <p style="margin-bottom: 10px;font-size:x-small">
-        <!--Hosted on GitHub Pages &mdash; <a href="https://github.com/pages-themes/minimal">Minimal</a> Theme<br>-->
-        &copy;2024 Jennifer Cross<br>
-        <!--Design by Jennifer Cross via <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a><br>-->
-        </p>
-      </footer>
-    </div>
-    <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
-
-
- {% if site.google_analytics %}
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', '{{ site.google_analytics }}', 'auto');
-        ga('send', 'pageview');
-    </script>
-  {% endif %}
+    </main>
+    
+    <footer class="footer">
+      <p>&copy; {{ 'now' | date: "%Y" }} Jennifer Cross • Last updated {{ site.time | date: "%B %Y" }}</p>
+      <p>This content was authored by Jennifer Cross with support from <a href="https://www.anthropic.com/claude">Claude AI</a>. Built with <a href="https://jekyllrb.com/">Jekyll</a> on <a href="https://github.com/jenncross/jenncross.github.io">GitHub Pages</a>.</p>
+    </footer>
   </body>
 </html>
