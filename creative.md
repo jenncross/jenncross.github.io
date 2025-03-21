@@ -5,7 +5,8 @@ title: Creative Practice
 
 <section class="page-header">
   <h1 class="page-title">Creative Practice</h1>
-  <p class="page-subtitle">My creative work explores the intersections of art, design, and science. These explorations inform and are informed by my approach to interdisciplinary engineering and design. </p>
+  <p class="page-subtitle">My creative work explores the intersections of art, design, and science.</p>
+<p>These explorations inform and are informed by my approach to interdisciplinary engineering and design.</p> 
 </section>
 
 ## Fused Glass Art

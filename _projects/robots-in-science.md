@@ -9,7 +9,7 @@ disciplines:
     - "Data Analysis"
 project_type:
     - "Research Projects"
-featured_image: "/images/projects/robots-in-science/classroom.jpg"
+featured_image: "/images/projects/robots-in-science/pd1.jpg"
 excerpt: "Investigating how middle school science teachers design and implement integrated robotics units to enhance student learning in physical science while developing computational thinking practices."
 team:
     - name: "Jennifer Cross"
@@ -73,49 +73,48 @@ publications:
           - text: "DOI"
             url: "https://doi.org/10.3102/2015711"
 gallery:
-    - full: "/images/projects/robots-in-science/teacher-workshop.jpg"
-      alt: "Teacher professional development workshop"
-      caption: "Science teachers participating in robotics integration workshop"
-    - full: "/images/projects/robots-in-science/student-activity.jpg"
-      alt: "Students working with robots"
-      caption: "Middle school students engaging with robotics in science class"
+    - full: "/images/projects/robots-in-science/light.jpg"
+      alt: "Light experiment setup with Hummingbird"
+      caption: "A light experiment setup created with the Hummingbird robotics kit showing components labeled for teaching physics concepts"
+    - full: "/images/projects/robots-in-science/newton.jpg"
+      alt: "Cardboard box science model with Hummingbird"
+      caption: "Teacher-created robotics model of Newton's First Law of Motion using the Hummingbird controller"
+    - full: "/images/projects/robots-in-science/pd2.jpg"
+      alt: "Teacher professional development session"
+      caption: "Providing hands-on support to a teacher during a professional development workshop on robotics integration"
+    - full: "/images/projects/robots-in-science/pd1.jpg"
+      alt: "Teacher collaboration on robotics project"
+      caption: "Teachers collaborating on designing an integrated robotics science lesson during professional development"
 ---
+
+{% include image.html src="/images/projects/robots-in-science/logo.png" alt="Robots in Science" alignment="left" width="300px" %}
 
 ## Project Overview
 
-The Robots in Science project investigated the integration of robotics and computational thinking (CT) into middle school physical science instruction. This research explored how science teachers design and implement technology-integrated lessons that enhance student learning of physical science concepts while developing computational thinking practices.
-
-Over the course of a 4-year project, we worked with 13 science and engineering teachers and over 370 students. This project examined how teachers incorporate robotics into their physical science curricula, the challenges they face, and the impact on student learning outcomes. The research provided insights into effective approaches for supporting disciplinary learning goals through technology integration.
+The Robots in Science project (NSF #1932854) investigated the integration of robotics and computational thinking into middle school physical science instruction. Working with 13 science teachers and over 370 students across rural, suburban, and urban schools, we examined how technology integration can enhance science learning while developing computational thinking skills.
 
 ## Research Questions
 
 1. How can a professional development intervention support middle school science teachers in designing instructional units that incorporate robotics to enhance student CT practices and support disciplinary learning objectives?
+
+{% include image.html src="/images/projects/robots-in-science/light.jpg" alt="Light experiment setup with Hummingbird Robot" caption="A labeled light experiment setup using the Hummingbird robotics kit to teach concepts about light reflection and absorption" alignment="right" width="350px" %}
+
 2. What extent does teacher enactment reflect the goals and principles of the approach to integration, and what challenges do teachers face during implementation?
 3. How does participation in integrated robotics lessons support student learning in the discipline?
 4. What opportunities does participation in integrated robotics lessons provide for students to engage in computational thinking practices?
 
-## Design of Teacher Professional Development
+## Key Outcomes & Impact
 
-One contribution of this project was the development of a professional development model for middle school science teachers through structured workshops and coaching that included:
-
--   Curriculum Analysis & Integrated Unit Design: Teachers analyzed existing curriculum to identify opportunities for meaningful integration of robotics and CT that would enhance science learning goals. Through guided analysis, teachers identified specific areas where robotics could offer concrete representations of abstract science concepts in parallel with CT learning opportunities.
-
--   Robotics & Technology Experience: Virtual, hands-on workshops familiarized teachers with the Hummingbird educational robotics kit and Microsoft MakeCode.
-
--   Computational Thinking Framework: The project developed a framework to help teachers recognize and foster computational thinking practices within science contexts. This framework emphasized how CT practices like abstraction, decomposition, and algorithmic thinking could support scientific inquiry.
-
-{% include image.html src="/images/projects/robots-in-science/pd-workshop.jpg" alt="Professional development session with teachers" caption="Teachers collaborating during a professional development workshop to design integrated robotics activities" %}
-
-## Key Findings
+The project demonstrated several important findings:
 
 ### Teacher Development
 
-The experiences of participating teachers underscored the importance of finding appropriate models to support student science learning. Through the professional development program:
+The experiences of participating teachers underscored the importance of finding appropriate models to support student science learning. Through the professional development program, teachers:
 
--   Teachers developed skills and confidence to create integrated activities for their students
--   Teachers reported that designing new units was challenging but rewarding
--   Teachers at all levels of experience felt supported in their learning about robotics
--   Teachers implementing and iterating units across multiple years demonstrated changes in knowledge about technology and instructional design
+-   developed skills and confidence to create integrated activities for their students,
+-   reported that designing new units was challenging but rewarding,
+-   felt supported in their learning about robotics, and
+-   demonstrated changes in knowledge about technology and instructional design
 
 ### Student Learning
 
@@ -126,11 +125,32 @@ Robot-enhanced lessons effectively engaged students in explorations of science c
 -   Robotics-enhanced science units supported students' development of computational thinking practices, namely pattern recognition, algorithm design, decomposition, abstraction, and data practices
 -   Students (N=186) demonstrated growth in CT skills within science contexts
 
-## Impact & Outcomes
+The research contributed valuable insights into effective models for technology integration in science education and identified resources that can support teachers in this work.
 
-An important goal of this project was to broaden participation in robotics and computational thinking by:
+## My Contribution
 
--   Lowering barriers to entry for teachers and students
--   Integrating CT and robotics activities into core content science classes
+As the robotics and technology expert on this project, I led several critical components:
 
-The research findings contribute to our understanding of effective models for technology integration in science education and identify areas where curriculum and instructional support could be improved. This work has implications for teacher professional development, curriculum design, and educational policy related to STEM education.
+{% include image.html src="/images/projects/robots-in-science/pd2.jpg" alt="Supporting a teacher during PD" caption="Providing hands-on mentoring during a professional development session on robotics integration" alignment="left" width="300px" %}
+
+**Technical Design & Implementation:** I selected project technology platforms (Hummingbird robotics kit, Microbits, MakeCode) and designed instructional materials for their use. These choices enabled teachers and students to create expressive models representing science concepts, expanding beyond typical experiment-focused applications.
+
+**Professional Development:** I designed and facilitated all robotics and technology workshop activities and co-created the computational thinking lessons for teachers. When COVID hit in 2020, I led the rapid transformation of our hands-on robotics program to fully online formats, selecting digital collaboration tools and redesigning activities for virtual delivery.
+
+**Teacher Support:** I provided ongoing mentoring to all participating teachers throughout implementation, serving as their primary resource for technology questions and classroom integration challenges. I also developed exemplar integrated robotics lessons now available on the [project website](https://www.terc.edu/robots-in-science/).
+
+## Transferable Skills & Reflection
+
+This project highlights several of my core professional strengths applicable to both academic and industry settings:
+
+{% include image.html src="/images/projects/robots-in-science/newton.jpg" alt="Teacher-created robotics model of Newton's First Law of Motion" caption="Example of low-cost implementation using the Hummingbird controller with cardboard and common materials to create science models" alignment="right" width="300px" %}
+
+**Design Thinking:** I incorporated design thinking methodologies in the professional development and curriculum materials to support teachers' development of design skills. At the same time, I applied user-centered approaches to tailor the PD to teachers' needs, continuously refining based on feedback and implementation experiences.
+
+**Technical Translation:** I bridged technical robotics concepts with pedagogical approaches, making complex technology accessible to educators with varying technical backgrounds.
+
+**Adaptive Problem-Solving:** When faced with the challenge of COVID restrictions, I rapidly reconfigured hands-on experiences for digital environments, demonstrating flexibility and creative solution development.
+
+**Cross-Disciplinary Collaboration:** I worked effectively with education researchers, curriculum specialists, and classroom teachers, facilitating communication across disciplines to achieve project goals.
+
+This work demonstrates my commitment to thoughtful technology integration that serves authentic user and learner needs – an approach that informs all my work.
