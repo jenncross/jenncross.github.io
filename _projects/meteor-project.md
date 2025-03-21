@@ -1,31 +1,39 @@
 ---
 layout: project-simple
-title: "Micrometeor Radio Classification"
+title: "Micrometeor Radio Classification & Radar Simulation"
 project_category: "Undergraduate Project"
 excerpt: "Developed data analysis techniques for identifying micrometeors using radar telescopes, supporting controversial fragmentation phenomena through MATLAB simulations."
-featured_image: "/images/projects/micrometeor/featured-image.jpg"
+featured_image: "/images/projects/meteors_thumb.png"
 disciplines:
     - "Data Analysis"
+    - "MATLAB"
     - "Signal Processing"
     - "Scientific Computing"
-project_type:
-    - "Undergraduate Work"
-weight: 105
+featured: false
+weight: 114
+project_category: "Undergraduate Project"
+gallery:
+    - full: "/images/projects/meteors.png"
+      alt: "Graphs showing radar echos of UHF and VHF meteor echos, and above a simulation showing similar patters to the VFH echo"
+      caption: "Radar data and simulation results for a micrometeor which is hypothesized to have fragmented resulting in constructive and destructive interference patterns"
+    - full:  "/images/projects/meteors2.png"
+      alt: "Graphs showing radar echos of UHF and VHF meteor echos, and above a simulation showing similar patters to the VFH echo"
+      caption: "Radar data and simulation results for a micrometeor which is hypothesized to have fragmented resulting in constructive and destructive interference patterns"
 ---
 
 ## Overview
 
-As an NSF Research Experiences for Undergraduates (REU) Scholar at Penn State's Electrical Engineering Department, I researched techniques for identifying micrometeors in radar telescope data. The project focused on analyzing signal patterns from over 10,000 meteor radar echoes to identify evidence supporting controversial micrometeor fragmentation phenomena.
+As an REU (Research Experiences for Undergraduates) summer research assistant in Penn State's Electrical Engineering Department, I researched techniques for identifying micrometeors in radar telescope data. The project focused on analyzing signal patterns from over 10,000 meteor radar echoes to identify evidence supporting theorized micrometeor fragmentation phenomena.
 
 ## Key Contributions
 
--   Analyzed large-scale radar data returns from over 10,000 meteor echoes, demonstrating skills in data processing and pattern recognition
--   Identified specific radar signal interference patterns that supported the existence of controversial micrometeor fragmentation phenomena
--   Developed MATLAB simulations of meteor fragmentation that confirmed potential sources of the observed signal interference patterns
--   Co-authored a peer-reviewed publication in Geophysical Research Letters based on the findings
+-   Analyzed large-scale radar data returns from over 10,000 meteor echoes, applying skills in data processing and pattern recognition
+-   Identified specific radar signal interference patterns that supported the existence of micrometeor fragmentation phenomena
+-   Developed MATLAB numerical simulations of meteor fragmentation, radio science, and wave interference that supported potential sources of the observed signal interference patterns
+-   Co-authored a publication in Geophysical Research Letters based on the findings
 -   Presented research methodology and results to the NSF REU program and department faculty
 
-{% include image.html src="/images/projects/micrometeor/data-visualization.jpg" alt="Radar data visualization" caption="Visualization of meteor radar echo showing characteristic fragmentation patterns" %}
+{% include image.html src="/images/projects/meteors2.png" alt="Radar data visualization" caption="Visualization of meteor radar echo showing characteristic fragmentation patterns" align="right" %}
 
 ## Technologies & Methods
 
