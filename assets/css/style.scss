@@ -706,7 +706,7 @@ main > *:last-child {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--space-md);
-    margin-top: var(--space-md);
+    margin-top: var(--space-sm);
 }
 
 .project-main {
