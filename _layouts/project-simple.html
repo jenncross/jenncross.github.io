@@ -13,11 +13,6 @@ layout: default
     <p class="project-category-badge">{{ page.project_category }}</p>
     {% endif %}
     <p class="project-detail-meta">{{ page.timeframe }}</p>
-    <div class="project-detail-tags">
-        {% for discipline in page.disciplines %}
-        <span class="tag">{{ discipline }}</span>
-        {% endfor %}
-    </div>
 </div>
 
 {% if page.featured_image %}
@@ -43,8 +38,16 @@ layout: default
                 {% endfor %}
             </ul>
         </div>
-
-        {% if page.resources %}
+        {% endif %} {% if page.disciplines %}
+        <div class="sidebar-sidebar">
+            <h4 class="sidebar-heading">Skills</h4>
+            <div class="project-detail-tags">
+                {% for discipline in page.disciplines %}
+                <span class="tag">{{ discipline }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %} {% if page.resources %}
         <div class="sidebar-section">
             <h4 class="sidebar-heading">Resources</h4>
             <ul class="resource-list">
@@ -61,7 +64,6 @@ layout: default
         </div>
         {% endif %}
     </div>
-    {% endif %}
 </div>
 
 {% if page.gallery %}

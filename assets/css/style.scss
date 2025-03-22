@@ -679,6 +679,18 @@ main > *:last-child {
     margin-bottom: var(--space-sm);
 }
 
+.project-detail-tags .tag {
+    background-color: var(--accent-light);
+    color: var(--text-secondary);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.2rem 0.4rem;
+    border-radius: 20px;
+    margin-bottom: var(--space-md);
+    transition: transform 0.2s;
+}
+
 .project-featured-image {
     margin-bottom: var(--space-md);
 }
@@ -907,14 +919,14 @@ main > *:last-child {
     position: relative;
     border-radius: 4px;
     overflow: hidden;
-    /* Set a consistent height for all gallery items */
-    height: 200px; /* Adjust this value as needed */
+    height: 200px;
+    display: flex;
+    flex-direction: column;
 }
 
 .gallery-item img {
     width: 100%;
     height: 100%;
-    /* Make images cover their container while maintaining aspect ratio */
     object-fit: cover;
     object-position: center;
     display: block;
@@ -938,8 +950,39 @@ main > *:last-child {
     transition: opacity 0.3s;
 }
 
-.gallery-item:hover .gallery-caption {
-    opacity: 1;
+/* Mobile-specific gallery styles */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: var(--space-md);
+    }
+
+    .gallery-item {
+        height: auto; /* Allow height to adjust to content */
+        flex-direction: column;
+    }
+
+    .gallery-item img {
+        height: 250px; /* Fixed height for images on mobile */
+    }
+
+    .gallery-caption {
+        position: static; /* Remove absolute positioning */
+        font-size: 0.9rem;
+        color: var(--text-tertiary);
+        font-style: italic;
+        background-color: var(--bg-secondary);
+        color: var(--text-secondary);
+        padding: var(--space-sm);
+        opacity: 1;
+    }
+}
+
+/* Desktop hover behavior */
+@media (min-width: 769px) {
+    .gallery-item:hover .gallery-caption {
+        opacity: 1;
+    }
 }
 
 /* ======================================
@@ -1366,6 +1409,25 @@ h3 {
     margin-top: var(--space-md);
     margin-bottom: var(--space-xs);
     color: var(--text-primary);
+}
+
+.simple-project-content .tag-container {
+    margin: 0 0 0.75rem 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.simple-project-content .tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Remove extra spacing from the bottom of the page */

@@ -112,7 +112,7 @@ gallery:
 
 ## Project Overview
 
-This project is developing upper elementary school students' abilities to work with artificial intelligence (AAI) and in future careers. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO is working with teachers in St. Louis County to develop a research-informed educational ecosystem introducing AI, specifically machine learning (ML), concepts to upper elementary school students. (Photo Credit: Milan Dahal)
+This project involves developing upper elementary school students' abilities to work with artificial intelligence (AI) and in future careers. Through this project, a team of robotics and education researchers at Tufts University in Massachusetts and Maryville University in St. Louis, MO is working with teachers in St. Louis County to develop a research-informed educational ecosystem introducing AI, specifically machine learning (ML), concepts to upper elementary school students. (Photo Credit: Milan Dahal)
 
 ### Objectives
 

@@ -1,6 +1,6 @@
 ---
 layout: project-simple
-title: "Phoenix Racing: SAE Mini-Baja Team Leadership"
+title: "SAE Baja - Phoenix Racing"
 project_category: "Undergraduate Project"
 excerpt: "Led a 30-member team in designing and fabricating a small off-road vehicle for national competition, developing leadership and project management skills."
 featured_image: "/images/projects/baja/car.jpg"
@@ -13,8 +13,8 @@ weight: 120
 project_category: "Undergraduate Project"
 gallery:
     - full: "/images/projects/baja/grind.jpg" 
-      alt: "Jennifer wears safety equipment while holding a grinder against a bare steel frame" 
-      caption: "Jennifer grinding welding bead on suspension tabs."
+      alt: "Jennifer wears safety equipment while holding a wire wheel grinder against a bare steel frame" 
+      caption: "Jennifer uses a wire wheel grinder to clean slag from welding bead on suspension tabs."
     - full: "/images/projects/baja/team.jpg"
       alt: "Baja car and team members"
       caption: "Baja car and team members (Photo Credit: MJ Maloney)"
@@ -31,7 +31,7 @@ gallery:
 
 ## Overview
 
-During the Society of Automotive Engineers (SAE) Baja competition, college teams design, CAD, fabricate, test, and race small off-road vehicles that can survive punish terrain and water conditions. The cars are designed from the ground up and teams must work to address many design, manufacturing, management, and sponsorship issues.
+During the Society of Automotive Engineers (SAE) Baja competition, college teams design, CAD, fabricate, test, and race small off-road vehicles that can survive punishing terrain and water conditions. The cars are designed from the ground up and teams must work to address many design, manufacturing, management, and sponsorship issues.
 
 As Co-General Manager for two years and later Leadership Advisor for Olin College's Society of Automotive Engineers (SAE) Baja team, I managed the design and fabrication of small off-road vehicles for the national competition. This work required resolving systems engineering and sub-system interface challenges, along with team dynamics, resource management, and stakeholder communication.
 
