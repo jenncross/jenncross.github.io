@@ -38,9 +38,6 @@ funding:
     - duration: "2 years"
     - description: "Engaging Individual Education Plan Teams as Co-Designers of Middle Grades Computing Activities for Autistic Students"
 gallery:
-    - full: "/images/projects/orbit/orbit_logo.png"
-      alt: "ORBIT logo in purple showing Opportunities for Robotics, Building, and Inclusive Technology"
-      caption: "ORBIT: Opportunities for Robotics, Building, and Inclusive Technology"
     - full: "/images/projects/orbit/paper1code.png"
       alt: "Early paper prototype of the ORBIT app showing simplified motor exploration interface"
       caption: "Initial paper prototype exploring step-based programming with visual cues for motor control"
@@ -59,7 +56,7 @@ gallery:
 ---
 
 ## Project Overview
-{% include image.html src="/images/projects/orbit/orbit_logo.png" alt="ORBIT logo in purple showing Opportunities for Robotics, Building, and Inclusive Technology" caption="ORBIT: Opportunities for Robotics, Building, and Inclusive Technology" alignment="left" width="250px" %}
+{% include image.html src="/images/projects/orbit/orbit_logo.png" alt="ORBIT logo in purple showing Opportunities for Robotics, Building, and Inclusive Technology" alignment="left" width="250px" %}
 
 On the ORBIT (Opportunities for Robotics, Building, and Inclusive Technology) project, I, along with my team, creating accessible coding experiences for autistic middle school students. We are working directly with special education teachers to co-design technology that supports both executive functioning and computational thinking skills simultaneously.
 
