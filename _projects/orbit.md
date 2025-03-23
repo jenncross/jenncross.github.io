@@ -1,117 +1,131 @@
 ---
 layout: project
-title: "ORBIT"
-excerpt: "A brief 1-2 sentence description of the project that will appear in the projects listing."
-featured_image: "/images/projects/project-name/featured-image.jpg"
-project_category: "Research Project" # or "Graduate Project" or "Personal Project"
-weight: 10
+title: "ORBIT: Co-Design of Computing Experiences with Special Education Teachers"
+timeframe: "2023 - Present"
 featured: true
-
-# Disciplines (choose all that apply)
+weight: 5
+grant: "NSF #2318191"
 disciplines:
     - "Computing & Coding"
-    - "Robotics"
     - "Interface & Interaction Design"
-    - "Electronics"
-    - "Mechanical Design"
     - "Education"
-    - "Data Analysis"
-
-# Project type (choose one primary type)
 project_type:
-    - "Research Projects" # Or use: "Personal Projects", "Graduate Work", "Undergraduate Work"
-
-# Additional metadata (optional)
-timeframe: "YYYY - Present/YYYY"
-grant: "Funding Agency #GRANT-NUMBER" # Optional
+    - "Research Projects"
+featured_image: "/images/projects/orbit/pilot1motor.png"
+excerpt: "Leading a participatory design approach to create accessible computing technologies that integrate executive functioning support with computational thinking activities for autistic middle school students."
 team:
-    - name: "Your Name"
-      role: "Project Lead"
-    - name: "Collaborator Name"
-      role: "Role Description"
+    - name: "Jennifer Cross"
+      role: "Principal Investigator"
+    - name: "Elissa Milto"
+      role: "Co-Investigator"
+    - name: "Robert Hayes"
+      role: "Researcher"
+    - name: "Evelyn Goroza"
+      role: "Graduate Student"
 partners:
-    - "Partner Organization"
-    - name: "Partner Name"
-      role: "Partner Role"
+    - name: "Winter Hill Community Innovation School"
+      role: "Somerville Public Schools "
 technologies:
-    - "Technology 1"
-    - "Technology 2"
-    - "Technology 3"
+    - "Javascript"
+    - "React"
+    - "Micropython"
+    - "LEGO® Robotics (SPIKE Prime)"
 funding:
-    - awardnumber: "GRANT-NUMBER"
-    - amount: "$000,000"
-    - duration: "X years"
-    - description: "Brief funding description"
-resources:
-    - title: "Project Website"
-      url: "https://project-website.com"
-    - title: "Github Repository"
-      url: "https://github.com/username/repo"
-publications:
-    - title: "Publication Title"
-      authors:
-          - name: "Your Name"
-            highlight: true
-          - name: "Co-author Name"
-            highlight: false
-      venue: "Conference/Journal Name"
-      year: 2025
-      doi: "https://doi.org/10.xxxx/xxxxx"
-      links:
-          - text: "PDF"
-            url: "/docs/publication.pdf"
+    - awardnumber: "NSF #2318191"
+    - amount: "$299,813"
+    - duration: "2 years"
+    - description: "Engaging Individual Education Plan Teams as Co-Designers of Middle Grades Computing Activities for Autistic Students"
 gallery:
-    - full: "/images/projects/project-name/gallery1.jpg"
-      alt: "Description of gallery image 1"
-      caption: "Caption for gallery image 1"
-    - full: "/images/projects/project-name/gallery2.jpg"
-      alt: "Description of gallery image 2"
-      caption: "Caption for gallery image 2"
+    - full: "/images/projects/orbit/orbit_logo.png"
+      alt: "ORBIT logo in purple showing Opportunities for Robotics, Building, and Inclusive Technology"
+      caption: "ORBIT: Opportunities for Robotics, Building, and Inclusive Technology"
+    - full: "/images/projects/orbit/paper1code.png"
+      alt: "Early paper prototype of the ORBIT app showing simplified motor exploration interface"
+      caption: "Initial paper prototype exploring step-based programming with visual cues for motor control"
+    - full: "/images/projects/orbit/paper1motor.png"
+      alt: "Paper prototype showing programming blocks and motor control"
+      caption: "Paper prototype focusing on simplified motor direction controls with clear text instructions"
+    - full: "/images/projects/orbit/pilot1motor.png"
+      alt: "Final ORBIT app interface showing motor controls in dark mode"
+      caption: "Pilot React implementation with clean visual organization, color-coding, and clear separation between programming steps"
+    - full: "/images/projects/orbit/pilot1settings.png"
+      alt: "ORBIT app settings screen showing reading level options in high contrast theme"
+      caption: "Pilot React implementation's reading level customization with five options from icon-only to complex text"
+    - full: "/images/projects/orbit/pilot1timer.png"
+      alt: "ORBIT app interface showing timer visualization in pastel theme"
+      caption: "An alternative visual theme of the Pilot React implementation with the block tower visualization for timer functions"
 ---
 
 ## Project Overview
+{% include image.html src="/images/projects/orbit/orbit_logo.png" alt="ORBIT logo in purple showing Opportunities for Robotics, Building, and Inclusive Technology" caption="ORBIT: Opportunities for Robotics, Building, and Inclusive Technology" alignment="left" width="250px" %}
 
-This is where you provide a comprehensive description of your project. This section should give visitors a clear understanding of what the project is about, its goals, and its significance.
+On the ORBIT (Opportunities for Robotics, Building, and Inclusive Technology) project, I'm creating accessible coding experiences for autistic middle school students. We are working directly with special education teachers to co-design technology that supports both executive functioning and computational thinking skills simultaneously.
 
-{% include image.html src="/images/projects/project-name/inline-image1.jpg" alt="Description of inline image" caption="This is how you include an in-line image with a caption" %}
+{% include image.html src="/images/projects/orbit/paper1code.png" alt="Paper prototype showing my initial interface design" caption="Early paper prototype from our co-design workshops" alignment="right" width="300px" %}
 
-You can continue with more paragraphs that explain the project in detail. This is a good place to discuss the motivation behind the project and its broader impacts.
+Our team builds coding tools specifically for autistic learners from the beginning, instead of just adding accessibility features to existing platforms. Through our co-design approach, we're developing software and learning activities that help students meet their individual education plan goals while exploring robotics and coding - opening doors to computing interest and confidence that might otherwise remain closed.
 
-## Approach & Methods
+## My Contribution
 
-Describe the approaches and methodologies used in this project. This helps visitors understand how you tackled the challenges and what makes your approach innovative.
+As PI and lead developer, I'm driving both the research and design aspects of this project, including:
 
-Here's how to include a right-aligned image:
+**Participatory Design** -- designed and facilitated workshops with special education teachers using paper prototyping and iterative design methods. I developed the co-design methodology that bridges the gap between special education expertise and computational thinking, creating an effective collaboration framework for this interdisciplinary work.
 
-{% include image.html src="/images/projects/project-name/inline-image2.jpg" alt="Another inline image" caption="A right-aligned image example" alignment="right" width="300px" %}
+**Custom Software Design & Development** -- designed and developed the ORBIT App, a programming interface built using ReactJS for autistic students working with LEGO® SPIKE™ Prime robots. This custom software includes:
+- A step-based programming interface with customizations options for scaffolding executive functioning skills
+- Five-level reading support system that adapts from symbolic representations to complex text based on student needs
+- Audio support with text-to-speech capabilities and customizable robot voices to increase customizability and engagement
+- Adaptive UI with color theme options, dyslexia-friendly fonts, and high contrast modes
+- Mission-based learning system with guided activities and validation
+- Visual dashboards with representations and controls for motors, sensors, and timers
+- Bluetooth connectivity for real-time communication with physical robots
 
-This text will wrap around the image that's aligned to the right. You can discuss your methods while having a relevant image alongside your text. This is particularly useful for showing process shots, sketches, or diagrams that illustrate your approach.
+**Research-Based Design Framework:** Through our co-design process, we identified design considerations that inform the education and technology environment:
+- Supporting teacher-mediated trajectories for individualized computing and technology skill development
+- Incorporating feedback mechanisms that support engagement and independence
+- Designing consistent representations across physical and digital environments
 
-## Key Innovations
+## Design Process & Methodology
 
-### Innovation 1
+Our process exemplifies my approach to human-centered design for educational technology. I led a series of structured co-design workshops with special education teachers that progressed through three key phases:
 
-Describe your first key innovation or contribution of this project.
+{% include image.html src="/images/projects/orbit/digital1motors.png" alt="ORBIT app interface" caption="The first digital Figma prototype used in co-design sessions." alignment="right" width="350px" %}
 
-### Innovation 2
+1. **Storytelling & Needs Assessment:** Through guided activities, we elicited teachers' experiences, values, and barriers faced with educational technologies in autism-focused classrooms.
 
-Describe your second key innovation or contribution.
+2. **Paper Prototyping:** We created low-fidelity paper prototypes of both physical tools and digital interfaces to quickly iterate on design concepts before committing to development.
 
-{% include image.html src="/images/projects/project-name/inline-image3.jpg" alt="Full-width image" caption="This image spans the full width of the content area" %}
+3. **Digital Prototyping:** We translated paper designs into digital mockups, then functional software prototypes for testing and refinement with teacher input.
 
-## Results & Impact
+{% include image.html src="/images/projects/orbit/digital2motor.png" alt="ORBIT app interface" caption="A second figma prototype for in co-design session revised based on participant feedback." alignment="right" width="350px" %}
 
-Discuss the outcomes and impact of your project. This could include:
+This iterative, participatory approach ensures that the final technology ecosystem will be genuinely useful in special education contexts where standard computational thinking tools often fail.
 
--   Quantitative results
--   Qualitative feedback
--   User testing insights
--   Broader impacts on the field or community
+## Design Embodiments
 
-## Future Directions
+The ORBIT project has produced several integrated tools, with the custom software serving as the centerpiece of the technology ecosystem:
 
-Outline potential next steps, future iterations, or follow-up projects that build on this work.
+### ORBIT App 
+We designed and developed this programming environment featuring:
 
-## Acknowledgments
+- **Autism-Specific Interface Design:** The app uses a unique one-step-at-a-time approach, with clear visual separation of programming elements to reduce cognitive load and support executive functioning.
 
-Acknowledge funding sources, contributors, and partners who made this work possible.
+- **Multi-modal Learning Support:** Multiple representation methods including visual icons, text that adapts to five different reading levels, and audio feedback with customizable text-to-speech.
+
+- **Interactive Visual Dashboards:** A visualization systems for robotics control concepts, including a math manipulative inspired visualization for timers.
+
+{% include image.html src="/images/projects/orbit/pilot1motor.png" alt="ORBIT app interface" caption="Pilot react implementation with visual organization and clear separation between programming elements" alignment="right" width="350px" %}
+
+### Physical Learning Supports
+Through our collaborative design sessions, complementary physical tools emerged:
+
+- **Planning Board:** A tangible tool for sequencing and decomposing programming tasks before using the digital interface, supporting working memory and task switching.
+
+- **Visual Glossary:** A reference system that maintains consistent representation of programming concepts across physical and digital environments.
+
+## Current Status & Next Steps
+
+The project is currently in active development, with initial prototypes being refined for classroom pilot testing. The next phases include:
+
+- Classroom implementation with autistic middle school students
+- Iterative refinement based on student and teacher experiences
