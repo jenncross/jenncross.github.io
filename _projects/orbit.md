@@ -28,6 +28,8 @@ partners:
 technologies:
     - "Javascript"
     - "React"
+    - "HTML/CSS"
+    - "Figma"
     - "Micropython"
     - "LEGO® Robotics (SPIKE Prime)"
 funding:
@@ -59,11 +61,11 @@ gallery:
 ## Project Overview
 {% include image.html src="/images/projects/orbit/orbit_logo.png" alt="ORBIT logo in purple showing Opportunities for Robotics, Building, and Inclusive Technology" caption="ORBIT: Opportunities for Robotics, Building, and Inclusive Technology" alignment="left" width="250px" %}
 
-On the ORBIT (Opportunities for Robotics, Building, and Inclusive Technology) project, I'm creating accessible coding experiences for autistic middle school students. We are working directly with special education teachers to co-design technology that supports both executive functioning and computational thinking skills simultaneously.
+On the ORBIT (Opportunities for Robotics, Building, and Inclusive Technology) project, I, along with my team, creating accessible coding experiences for autistic middle school students. We are working directly with special education teachers to co-design technology that supports both executive functioning and computational thinking skills simultaneously.
 
-{% include image.html src="/images/projects/orbit/paper1code.png" alt="Paper prototype showing my initial interface design" caption="Early paper prototype from our co-design workshops" alignment="right" width="300px" %}
+{% include image.html src="/images/projects/orbit/paper1code.png" alt="Paper prototype showing my initial interface design" caption="Early paper prototype from our co-design workshops" alignment="left" width="300px" %}
 
-Our team builds coding tools specifically for autistic learners from the beginning, instead of just adding accessibility features to existing platforms. Through our co-design approach, we're developing software and learning activities that help students meet their individual education plan goals while exploring robotics and coding - opening doors to computing interest and confidence that might otherwise remain closed.
+Along with my team, I am building coding tools specifically for autistic learners from the beginning, instead of just adding accessibility features to existing platforms. Through our co-design approach, we're developing software and learning activities that help students meet their individual education plan goals while exploring robotics and coding - opening doors to computing interest and confidence that might otherwise remain closed.
 
 ## My Contribution
 
@@ -89,7 +91,7 @@ As PI and lead developer, I'm driving both the research and design aspects of th
 
 Our process exemplifies my approach to human-centered design for educational technology. I led a series of structured co-design workshops with special education teachers that progressed through three key phases:
 
-{% include image.html src="/images/projects/orbit/digital1motors.png" alt="ORBIT app interface" caption="The first digital Figma prototype used in co-design sessions." alignment="right" width="350px" %}
+{% include image.html src="/images/projects/orbit/digital1motors.png" alt="ORBIT app interface" caption="The first digital Figma prototype used in co-design sessions. (Figma credit: Evelyn Goroza)" alignment="right" width="350px" %}
 
 1. **Storytelling & Needs Assessment:** Through guided activities, we elicited teachers' experiences, values, and barriers faced with educational technologies in autism-focused classrooms.
 
@@ -97,7 +99,7 @@ Our process exemplifies my approach to human-centered design for educational tec
 
 3. **Digital Prototyping:** We translated paper designs into digital mockups, then functional software prototypes for testing and refinement with teacher input.
 
-{% include image.html src="/images/projects/orbit/digital2motor.png" alt="ORBIT app interface" caption="A second figma prototype for in co-design session revised based on participant feedback." alignment="right" width="350px" %}
+{% include image.html src="/images/projects/orbit/digital2motor.png" alt="ORBIT app interface" caption="A second figma prototype for in co-design session revised based on participant feedback. (Figma credit: Evelyn Goroza & Jenn Cross)"" alignment="right" width="350px" %}
 
 This iterative, participatory approach ensures that the final technology ecosystem will be genuinely useful in special education contexts where standard computational thinking tools often fail.
 
