@@ -96,7 +96,7 @@ Our process exemplifies my approach to human-centered design for educational tec
 
 3. **Digital Prototyping:** We translated paper designs into digital mockups, then functional software prototypes for testing and refinement with teacher input.
 
-{% include image.html src="/images/projects/orbit/digital2motor.png" alt="ORBIT app interface" caption="A second figma prototype for in co-design session revised based on participant feedback. (Figma credit: Evelyn Goroza & Jenn Cross)"" alignment="right" width="350px" %}
+{% include image.html src="/images/projects/orbit/digital2motor.png" alt="ORBIT app interface" caption="A second figma prototype for in co-design session revised based on participant feedback. (Figma credit: Evelyn Goroza & Jenn Cross)" alignment="right" width="350px" %}
 
 This iterative, participatory approach ensures that the final technology ecosystem will be genuinely useful in special education contexts where standard computational thinking tools often fail.
 
