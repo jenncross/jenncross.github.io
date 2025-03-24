@@ -60,13 +60,13 @@ gallery:
 
 On the ORBIT (Opportunities for Robotics, Building, and Inclusive Technology) project, I, along with my team, creating accessible coding experiences for autistic middle school students. We are working directly with special education teachers to co-design technology that supports both executive functioning and computational thinking skills simultaneously.
 
-{% include image.html src="/images/projects/orbit/paper1code.png" alt="Paper prototype showing my initial interface design" caption="Early paper prototype from our co-design workshops" alignment="left" width="300px" %}
-
 Along with my team, I am building coding tools specifically for autistic learners from the beginning, instead of just adding accessibility features to existing platforms. Through our co-design approach, we're developing software and learning activities that help students meet their individual education plan goals while exploring robotics and coding - opening doors to computing interest and confidence that might otherwise remain closed.
 
 ## My Contribution
 
 As PI and lead developer, I'm driving both the research and design aspects of this project, including:
+
+{% include image.html src="/images/projects/orbit/paper1code.png" alt="Paper prototype showing my initial interface design" caption="Early paper prototype from our co-design workshops" alignment="right" width="300px" %}
 
 **Participatory Design** -- designed and facilitated workshops with special education teachers using paper prototyping and iterative design methods. I developed the co-design methodology that bridges the gap between special education expertise and computational thinking, creating an effective collaboration framework for this interdisciplinary work.
 
