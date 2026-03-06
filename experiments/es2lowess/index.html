@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Explorer: LOWESS &amp; Polynomial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1d21; --sub: #4a5060; --muted: #6e7685; --faint: #9ea5b0;
+            --border: #d5dae2; --surface: #f3f5f8; --bg: #ebeef3;
+            --card: #ffffff;
+            --lo: #0064e0; --lo-soft: #e0f0ff; --lo-mid: #b0d4ff;
+            --po: #7c3aed; --po-soft: #ede5ff; --po-mid: #c7b2ff;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--bg); color: var(--ink);
+            overscroll-behavior: none; margin: 0;
+        }
+        code, .mono { font-family: 'DM Mono', monospace; font-size: 0.92em; }
+
+        /* ---- D3 chart elements ---- */
+        .axis-label { font-size: 13px; font-weight: 500; fill: var(--muted); }
+        .domain { stroke: var(--border); stroke-width: 1.5; }
+        .tick line { stroke: #e5e7eb; }
+        .tick text { fill: var(--muted); font-size: 12px; font-family: 'DM Mono', monospace; }
+        .training-point { stroke-width: 2px; transition: fill 0.15s, stroke 0.15s; cursor: pointer; }
+        .point-label { font-size: 10px; font-weight: 600; fill: var(--ink); text-anchor: middle; pointer-events: none; font-family: 'DM Mono', monospace; }
+        .prediction-trace { fill: none; stroke-width: 2.5px; stroke-linejoin: round; stroke-linecap: round; }
+        .trace-lowess { stroke: var(--lo); }
+        .trace-poly { stroke: var(--po); }
+        .ci-band { opacity: 0.18; }
+        .ci-lowess { fill: var(--lo); }
+        .ci-poly { fill: var(--po); }
+        .residual-line { stroke: var(--danger); stroke-width: 1.5px; stroke-dasharray: 3 3; opacity: 0.55; pointer-events: none; }
+        .sweep-line { stroke: var(--faint); stroke-width: 1.5px; stroke-dasharray: 4 4; pointer-events: none; }
+        .local-tangent-line { stroke: var(--danger); stroke-width: 2px; stroke-dasharray: 6 4; opacity: 0.65; pointer-events: none; }
+        .weight-label { font-size: 9.5px; font-weight: 600; text-anchor: middle; pointer-events: none; font-family: 'DM Mono', monospace; }
+
+        /* ---- Layout primitives ---- */
+        .panel {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 16px;
+        }
+        .ctrl-label {
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px;
+            display: flex; justify-content: space-between; align-items: baseline;
+        }
+        .ctrl-label .val { text-transform: none; letter-spacing: 0; }
+
+        /* ---- Mode toggle ---- */
+        .mode-toggle {
+            display: flex; border-radius: 10px; overflow: hidden;
+            border: 2px solid var(--border); background: var(--surface);
+        }
+        .mode-toggle label {
+            flex: 1; text-align: center; padding: 9px 0;
+            font-weight: 700; font-size: 13px; letter-spacing: 0.01em;
+            cursor: pointer; transition: all 0.15s; user-select: none; color: var(--muted);
+        }
+        .mode-toggle label:first-child { border-right: 1px solid var(--border); }
+        .mode-toggle input { display: none; }
+        .mode-toggle label.active-lowess { background: var(--lo); color: #fff; }
+        .mode-toggle label.active-poly { background: var(--po); color: #fff; }
+
+        /* ---- Sliders ---- */
+        input[type="range"] {
+            -webkit-appearance: none; appearance: none;
+            height: 5px; border-radius: 3px; outline: none;
+            background: var(--border); width: 100%;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+            background: var(--lo); cursor: pointer;
+            border: 2.5px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+        }
+        body.mode-poly input[type="range"]::-webkit-slider-thumb { background: var(--po); }
+
+        /* ---- Toggle switch ---- */
+        .toggle-switch {
+            position: relative; width: 38px; height: 22px;
+            background: var(--border); border-radius: 11px;
+            cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+        }
+        .toggle-switch.on { background: var(--po); }
+        .toggle-switch .knob {
+            position: absolute; top: 2px; left: 2px;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: #fff; transition: transform 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+        }
+        .toggle-switch.on .knob { transform: translateX(16px); }
+
+        /* ---- Equation boxes ---- */
+        .equation-box {
+            border: 1px solid var(--border); background: var(--card);
+            border-radius: 10px; padding: 8px 12px;
+            transition: all 0.15s;
+        }
+        .equation-box.active {
+            border-color: var(--lo); background: var(--lo-soft);
+            box-shadow: 0 0 0 2px var(--lo-mid);
+        }
+
+        /* ---- Metric pills ---- */
+        .metric-pill {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; padding: 3px 10px; font-size: 12px;
+        }
+        .metric-pill .label { color: var(--muted); font-weight: 500; }
+        .metric-pill .value { font-weight: 700; font-family: 'DM Mono', monospace; }
+
+        /* ---- Tips card ---- */
+        .tips-card {
+            border-radius: var(--radius); padding: 14px 16px;
+            font-size: 13px; line-height: 1.55;
+        }
+        .tips-card.lo { background: var(--lo-soft); border: 1px solid var(--lo-mid); color: #003d8a; }
+        .tips-card.po { background: var(--po-soft); border: 1px solid var(--po-mid); color: #4c1d95; }
+        .tips-card strong { font-weight: 700; }
+        .tips-card .tip-row { display: flex; gap: 6px; align-items: baseline; margin-top: 5px; }
+        .tips-card .tip-arrow { flex-shrink: 0; opacity: 0.55; }
+
+        /* ---- Chart overlays ---- */
+        .chart-toolbar {
+            position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 5px; z-index: 10;
+        }
+        .chart-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 11px; font-size: 11.5px; font-weight: 600;
+            border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.88); color: var(--sub);
+            cursor: pointer; transition: all 0.15s;
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            font-family: 'DM Sans', sans-serif;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+        .chart-btn:hover { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .chart-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .chart-btn.gen-btn { background: var(--lo); color: #fff; border-color: var(--lo); box-shadow: 0 2px 8px rgba(0,100,224,0.28); }
+        .chart-btn.gen-btn:hover { background: #0055c0; }
+        .chart-btn.gen-btn svg { stroke: #fff; }
+        .points-badge {
+            position: absolute; top: 8px; right: 12px; z-index: 10;
+            font-size: 10.5px; font-weight: 600; color: var(--faint);
+            background: rgba(255,255,255,0.85); padding: 3px 9px;
+            border-radius: 6px; border: 1px solid rgba(0,0,0,0.06);
+            font-family: 'DM Mono', monospace;
+            backdrop-filter: blur(4px);
+        }
+        .chart-hint-overlay {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 12px; align-items: center;
+            font-size: 11px; color: var(--faint); font-weight: 500;
+            background: rgba(255,255,255,0.85); padding: 4px 14px;
+            border-radius: 8px; pointer-events: none;
+            border: 1px solid rgba(0,0,0,0.05);
+            backdrop-filter: blur(4px);
+        }
+        .chart-hint-overlay svg { width: 12px; height: 12px; stroke: var(--faint); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+        /* ---- Visibility by mode ---- */
+        .lowess-only, .poly-only { display: none; }
+        body.mode-lowess .lowess-only { display: block; }
+        body.mode-poly .poly-only { display: block; }
+        .lowess-only-flex, .poly-only-flex { display: none !important; }
+        body.mode-lowess .lowess-only-flex { display: flex !important; }
+        body.mode-poly .poly-only-flex { display: flex !important; }
+    </style>
+</head>
+<body class="antialiased mode-lowess">
+
+<div class="max-w-[1440px] mx-auto px-4 py-4 sm:px-6 sm:py-5">
+
+    <!-- ============ HEADER ============ -->
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4">
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight" style="color: var(--ink);">Regression Explorer</h1>
+            <p class="text-sm mt-0.5" style="color: var(--muted);">See how LOWESS and Polynomial regression fit curves through noisy data.</p>
+        </div>
+        <div class="mode-toggle" style="width: 240px; flex-shrink: 0;">
+            <label id="mode-label-lowess" class="active-lowess">
+                <input type="radio" name="mode" value="lowess" checked><span>LOWESS</span>
+            </label>
+            <label id="mode-label-poly" class="">
+                <input type="radio" name="mode" value="poly"><span>Polynomial</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- ============ MAIN GRID ============ -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
+
+        <!-- ======= LEFT COL: chart + equations ======= -->
+        <div class="flex flex-col gap-3">
+
+            <!-- Chart -->
+            <div class="panel relative" style="padding: 10px 10px 10px 10px;">
+                <div class="chart-toolbar">
+                    <button id="btn-generate" class="chart-btn gen-btn">
+                        <svg viewBox="0 0 24 24"><path d="M23 4l-6 6M17 4h6v6"/><path d="M1 20l6-6M7 20H1v-6"/><path d="M20.49 15A9 9 0 1 1 9 3.51"/></svg>
+                        New Data
+                    </button>
+                    <button id="btn-reset" class="chart-btn">
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        Clear
+                    </button>
+                </div>
+                <div class="points-badge"><span id="points-count-display">20</span> pts</div>
+                <div id="chart-container" class="w-full" style="height: 460px;"></div>
+                <div class="chart-hint-overlay">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-7.07l-2.83 2.83M9.76 14.24l-2.83 2.83m0-10.14l2.83 2.83m4.48 4.48l2.83 2.83"/></svg>
+                    click chart to add
+                    <span style="color: var(--border);">&vert;</span>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    click point to remove
+                </div>
+            </div>
+
+            <!-- Equation strip + Metrics (below chart, still in left col) -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <div class="panel flex-1" id="equations-panel" style="padding: 12px 16px;">
+                    <div id="equations-container" class="flex flex-wrap justify-center gap-2 items-center min-h-[36px]"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 items-center justify-center sm:justify-end" id="metrics-row" style="display:none;">
+                    <div class="metric-pill"><span class="label">MSE</span><span class="value" id="metric-mse">&mdash;</span></div>
+                    <div class="metric-pill"><span class="label">R&sup2;</span><span class="value" id="metric-r2">&mdash;</span></div>
+                    <div class="metric-pill"><span class="label">n</span><span class="value" id="metric-n">&mdash;</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======= RIGHT COL: tips + controls ======= -->
+        <div class="flex flex-col gap-3">
+
+            <!-- LOWESS Tips — first thing visible -->
+            <div class="tips-card lo lowess-only">
+                <strong>How to explore LOWESS</strong>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Drag <strong>Reveal Fit</strong> to watch LOWESS build its curve one local fit at a time.</span></div>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Adjust <code>frac</code> &mdash; small = wiggly, large = smooth.</span></div>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Try <code>frac=1.0</code> to see it approach ordinary linear regression.</span></div>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Add outlier points and see how LOWESS handles them locally.</span></div>
+            </div>
+
+            <!-- Poly Tips — first thing visible -->
+            <div class="tips-card po poly-only">
+                <strong>How to explore Polynomial</strong>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Start at degree 1 (line), then increase &mdash; count the bends.</span></div>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Crank degree to max and watch it oscillate &mdash; that&rsquo;s <strong>overfitting</strong>.</span></div>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Toggle <strong>Residuals</strong> on to see the error at each point.</span></div>
+                <div class="tip-row"><span class="tip-arrow">&rarr;</span> <span>Switch back to LOWESS on the same data to compare.</span></div>
+            </div>
+
+            <!-- LOWESS Controls -->
+            <div class="panel lowess-only" style="padding: 14px 16px;">
+                <div class="space-y-4">
+                    <div>
+                        <div class="ctrl-label">Reveal Fit &amp; Sliding Window</div>
+                        <input id="reveal-slider" type="range" min="0" max="1" value="0" step="0.005" class="cursor-pointer">
+                    </div>
+                    <div>
+                        <div class="ctrl-label"><code>frac</code> &mdash; Span Size <span class="val mono font-bold" style="color: var(--lo);" id="frac-value">0.40</span></div>
+                        <input id="frac-slider" type="range" min="0.05" max="1.0" value="0.40" step="0.01" class="cursor-pointer">
+                        <p class="text-xs mt-1" style="color: var(--faint);">Fraction of data per local fit &mdash; the <code>frac</code> param in <code>sm.nonparametric.lowess()</code>.</p>
+                    </div>
+                    <div>
+                        <div class="ctrl-label">Bootstrap Samples <span class="val mono font-bold" style="color: var(--lo);" id="lowess-boot-value">0</span></div>
+                        <input id="lowess-boot-slider" type="range" min="0" max="500" value="0" step="1" class="cursor-pointer">
+                        <p class="text-xs mt-1" style="color: var(--faint);">0 = no CI band. Try 100 to match <code>solarBootstrapLOWESSAnalysis()</code>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Poly Controls -->
+            <div class="panel poly-only" style="padding: 14px 16px;">
+                <div class="space-y-4">
+                    <div>
+                        <div class="ctrl-label">Polynomial Degree <span class="val mono font-bold" style="color: var(--po);" id="degree-value">2</span></div>
+                        <input id="degree-slider" type="range" min="1" max="9" value="2" step="1" class="cursor-pointer">
+                        <p class="text-xs mt-1" style="color: var(--faint);">Max usable = <span class="mono font-semibold" id="max-degree-hint">19</span> (n&minus;1).</p>
+                    </div>
+                    <div>
+                        <div class="ctrl-label">Bootstrap Samples <span class="val mono font-bold" style="color: var(--po);" id="poly-boot-value">0</span></div>
+                        <input id="poly-boot-slider" type="range" min="0" max="500" value="0" step="1" class="cursor-pointer">
+                        <p class="text-xs mt-1" style="color: var(--faint);">0 = no CI band.</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium">Show Residuals</span>
+                        <div id="residual-toggle" class="toggle-switch" role="button" tabindex="0"><div class="knob"></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    // =========================================================================
+    // STATE
+    // =========================================================================
+    let trainingData = []; // Populated by generateNoisyData() on init
+
+    let state = {
+        mode: 'lowess',
+        // LOWESS — mirrors sm.nonparametric.lowess(y, x, frac=...)
+        frac: 0.40,
+        lowessBootstrap: 0,
+        revealX: 0,
+        // Polynomial — mirrors np.polyfit(x, y, deg=...)
+        degree: 2,
+        polyBootstrap: 0,
+        showResiduals: false,
+    };
+
+    let lowessCurve = [];   // [{x, lower, median, upper}]
+    let originalFits = {};  // LOWESS local fits keyed by x (for per-point equation display)
+    let polyCoeffs = [];    // [a0, a1, ...] low-to-high
+    let polyCurve = [];     // [{x, lower, median, upper}]
+
+    // =========================================================================
+    // D3 SETUP
+    // =========================================================================
+    const container = d3.select("#chart-container");
+    const margin = { top: 20, right: 20, bottom: 55, left: 60 };
+    let W, H;
+
+    const svg = container.append("svg").attr("width", "100%").attr("height", "100%");
+    const chartG = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const xScale = d3.scaleLinear().domain([0, 1]);
+    const yScale = d3.scaleLinear().domain([0, 1]);
+
+    const xAxisG = chartG.append("g").attr("class", "x-axis");
+    const yAxisG = chartG.append("g").attr("class", "y-axis");
+    const xLbl = chartG.append("text").attr("class", "axis-label").attr("text-anchor", "middle").text("x");
+    const yLbl = chartG.append("text").attr("class", "axis-label").attr("text-anchor", "middle").attr("transform", "rotate(-90)").text("y");
+
+    const ciPath = chartG.append("path").attr("class", "ci-band ci-lowess");
+    const residG = chartG.append("g");
+    const tracePath = chartG.append("path").attr("class", "prediction-trace trace-lowess");
+    const tangentLine = chartG.append("line").attr("class", "local-tangent-line").style("display", "none");
+    const sweepLine = chartG.append("line").attr("class", "sweep-line").style("display", "none");
+
+    // =========================================================================
+    // LOWESS — statsmodels-compatible (tricube kernel, frac-based neighbor count)
+    // =========================================================================
+
+    /**
+     * Perform LOWESS smoothing matching the statsmodels API behavior.
+     * Uses a tricube kernel and selects k = ceil(frac * n) neighbors.
+     *
+     * Parameters match: sm.nonparametric.lowess(y, x, frac=frac)
+     *
+     * Returns sorted array of {x, y} with one smoothed value per input point.
+     */
+    function lowessSmooth(xs, ys, frac) {
+        const n = xs.length;
+        if (n < 2) return xs.map((x, i) => ({ x, y: ys[i] }));
+
+        // k = number of neighbors, derived from frac (same as statsmodels)
+        const k = Math.max(2, Math.min(n, Math.ceil(frac * n)));
+
+        // Sort by x for output ordering
+        const order = Array.from({ length: n }, (_, i) => i).sort((a, b) => xs[a] - xs[b]);
+        const result = [];
+
+        for (let oi = 0; oi < n; oi++) {
+            const idx = order[oi];
+            const tx = xs[idx];
+
+            // Compute distances and find k nearest
+            const dists = new Float64Array(n);
+            const indices = new Array(n);
+            for (let i = 0; i < n; i++) { indices[i] = i; dists[i] = Math.abs(xs[i] - tx); }
+            indices.sort((a, b) => dists[a] - dists[b]);
+
+            const dMax = dists[indices[k - 1]] * 1.0001;
+
+            // Weighted linear regression (tricube kernel)
+            let sW = 0, sWX = 0, sWY = 0;
+            for (let j = 0; j < k; j++) {
+                const jj = indices[j];
+                const u = dMax > 0 ? dists[jj] / dMax : 0;
+                const w = u >= 1 ? 0 : Math.pow(1 - Math.pow(u, 3), 3);
+                sW += w; sWX += w * xs[jj]; sWY += w * ys[jj];
+            }
+            if (sW === 0) { result.push({ x: tx, y: ys[idx] }); continue; }
+
+            const mX = sWX / sW, mY = sWY / sW;
+            let num = 0, den = 0;
+            for (let j = 0; j < k; j++) {
+                const jj = indices[j];
+                const u = dMax > 0 ? dists[jj] / dMax : 0;
+                const w = u >= 1 ? 0 : Math.pow(1 - Math.pow(u, 3), 3);
+                const dx = xs[jj] - mX;
+                num += w * dx * (ys[jj] - mY);
+                den += w * dx * dx;
+            }
+            const slope = den === 0 ? 0 : num / den;
+            result.push({ x: tx, y: (mY - slope * mX) + slope * tx });
+        }
+        return result;
+    }
+
+    /**
+     * Compute the local weighted linear fit at a single target x.
+     * Returns {slope, intercept} for equation display and tangent drawing.
+     */
+    function getLocalFit(targetX, xs, ys, frac) {
+        const n = xs.length;
+        const k = Math.max(2, Math.min(n, Math.ceil(frac * n)));
+
+        const dists = new Float64Array(n);
+        const indices = new Array(n);
+        for (let i = 0; i < n; i++) { indices[i] = i; dists[i] = Math.abs(xs[i] - targetX); }
+        indices.sort((a, b) => dists[a] - dists[b]);
+        const dMax = dists[indices[k - 1]] * 1.0001;
+
+        let sW = 0, sWX = 0, sWY = 0;
+        for (let j = 0; j < k; j++) {
+            const jj = indices[j];
+            const u = dMax > 0 ? dists[jj] / dMax : 0;
+            const w = u >= 1 ? 0 : Math.pow(1 - Math.pow(u, 3), 3);
+            sW += w; sWX += w * xs[jj]; sWY += w * ys[jj];
+        }
+        if (sW === 0) return { slope: 0, intercept: 0 };
+        const mX = sWX / sW, mY = sWY / sW;
+        let num = 0, den = 0;
+        for (let j = 0; j < k; j++) {
+            const jj = indices[j];
+            const u = dMax > 0 ? dists[jj] / dMax : 0;
+            const w = u >= 1 ? 0 : Math.pow(1 - Math.pow(u, 3), 3);
+            const dx = xs[jj] - mX;
+            num += w * dx * (ys[jj] - mY);
+            den += w * dx * dx;
+        }
+        const slope = den === 0 ? 0 : num / den;
+        return { slope, intercept: mY - slope * mX };
+    }
+
+    /**
+     * Compute the tricube weight for a point at distance dist from center,
+     * given a maximum distance dMax. Used for visual weight display.
+     */
+    function tricubeWeight(dist, dMax) {
+        if (dMax === 0) return dist === 0 ? 1 : 0;
+        const u = dist / dMax;
+        return u >= 1 ? 0 : Math.pow(1 - Math.pow(u, 3), 3);
+    }
+
+    /**
+     * Linearly interpolate a LOWESS result at arbitrary query x-values.
+     * Returns NaN outside data range (mirrors interp1d with bounds_error=False).
+     */
+    function interpLowess(lr, xq) {
+        const out = new Float64Array(xq.length);
+        for (let q = 0; q < xq.length; q++) {
+            const x = xq[q];
+            if (x < lr[0].x || x > lr[lr.length - 1].x) { out[q] = NaN; continue; }
+            let lo = 0, hi = lr.length - 1;
+            while (lo < hi - 1) { const m = (lo + hi) >> 1; if (lr[m].x <= x) lo = m; else hi = m; }
+            const t = lr[hi].x === lr[lo].x ? 0 : (x - lr[lo].x) / (lr[hi].x - lr[lo].x);
+            out[q] = lr[lo].y + t * (lr[hi].y - lr[lo].y);
+        }
+        return out;
+    }
+
+    // =========================================================================
+    // POLYNOMIAL (normal equations)
+    // =========================================================================
+
+    /**
+     * Fit polynomial via normal equations with Gaussian elimination.
+     * Returns coefficients [a0, a1, a2, ...] where y = a0 + a1*x + a2*x^2 + ...
+     */
+    function fitPolynomial(xs, ys, degree) {
+        const n = xs.length;
+        const d = Math.min(degree, n - 1);
+        if (n === 0) return [];
+        const cols = d + 1;
+        const XtX = Array.from({ length: cols }, () => new Float64Array(cols));
+        const XtY = new Float64Array(cols);
+
+        for (let i = 0; i < n; i++) {
+            let xpj = 1;
+            for (let j = 0; j < cols; j++) {
+                XtY[j] += xpj * ys[i];
+                let xpk = 1;
+                for (let k = 0; k <= j; k++) {
+                    XtX[j][k] += xpj * xpk;
+                    if (k !== j) XtX[k][j] += xpj * xpk;
+                    xpk *= xs[i];
+                }
+                xpj *= xs[i];
+            }
+        }
+
+        const aug = XtX.map((row, i) => {
+            const r = new Float64Array(cols + 1);
+            for (let j = 0; j < cols; j++) r[j] = row[j];
+            r[cols] = XtY[i]; return r;
+        });
+
+        for (let col = 0; col < cols; col++) {
+            let mx = Math.abs(aug[col][col]), mr = col;
+            for (let row = col + 1; row < cols; row++) {
+                if (Math.abs(aug[row][col]) > mx) { mx = Math.abs(aug[row][col]); mr = row; }
+            }
+            if (mr !== col) [aug[col], aug[mr]] = [aug[mr], aug[col]];
+            const piv = aug[col][col];
+            if (Math.abs(piv) < 1e-14) continue;
+            for (let row = col + 1; row < cols; row++) {
+                const f = aug[row][col] / piv;
+                for (let j = col; j <= cols; j++) aug[row][j] -= f * aug[col][j];
+            }
+        }
+
+        const c = new Float64Array(cols);
+        for (let i = cols - 1; i >= 0; i--) {
+            let s = aug[i][cols];
+            for (let j = i + 1; j < cols; j++) s -= aug[i][j] * c[j];
+            c[i] = Math.abs(aug[i][i]) > 1e-14 ? s / aug[i][i] : 0;
+        }
+        return Array.from(c);
+    }
+
+    /** Evaluate polynomial at x given coefficients [a0, a1, ...]. */
+    function evalPoly(c, x) {
+        let y = 0, xp = 1;
+        for (let i = 0; i < c.length; i++) { y += c[i] * xp; xp *= x; }
+        return y;
+    }
+
+    // =========================================================================
+    // METRICS
+    // =========================================================================
+    function computeR2(ys, pr) {
+        const n = ys.length; if (n === 0) return 0;
+        let m = 0; for (let i = 0; i < n; i++) m += ys[i]; m /= n;
+        let st = 0, sr = 0;
+        for (let i = 0; i < n; i++) { st += (ys[i] - m) ** 2; sr += (ys[i] - pr[i]) ** 2; }
+        return st === 0 ? 1 : 1 - sr / st;
+    }
+    function computeMSE(ys, pr) {
+        let s = 0, c = 0;
+        for (let i = 0; i < ys.length; i++) { if (!isNaN(pr[i])) { s += (ys[i] - pr[i]) ** 2; c++; } }
+        return c === 0 ? 0 : s / c;
+    }
+
+    // =========================================================================
+    // RECALCULATE
+    // =========================================================================
+    function recalculate() {
+        if (trainingData.length < 2) { lowessCurve = []; originalFits = {}; polyCoeffs = []; polyCurve = []; return; }
+        const xs = trainingData.map(d => d.x);
+        const ys = trainingData.map(d => d.y);
+        const n = xs.length;
+        if (state.mode === 'lowess') recalcLowess(xs, ys, n);
+        else recalcPoly(xs, ys, n);
+    }
+
+    function recalcLowess(xs, ys, n) {
+        // Compute per-point local fits for equation display and tangent drawing
+        trainingData.forEach(d => {
+            originalFits[d.x] = getLocalFit(d.x, xs, ys, state.frac);
+        });
+
+        const smoothed = lowessSmooth(xs, ys, state.frac);
+        const nPts = 100;
+        const xMin = Math.min(...xs), xMax = Math.max(...xs);
+        const xQ = Array.from({ length: nPts }, (_, i) => xMin + (xMax - xMin) * i / (nPts - 1));
+        const yI = interpLowess(smoothed, xQ);
+
+        if (state.lowessBootstrap === 0) {
+            lowessCurve = xQ.map((x, i) => ({ x, lower: yI[i], median: yI[i], upper: yI[i] }));
+            return;
+        }
+
+        // Bootstrap CI (mirrors solarBootstrapLOWESSAnalysis)
+        const allP = xQ.map(() => []);
+        for (let b = 0; b < state.lowessBootstrap; b++) {
+            const sx = new Array(n), sy = new Array(n);
+            for (let i = 0; i < n; i++) { const idx = Math.floor(Math.random() * n); sx[i] = xs[idx]; sy[i] = ys[idx]; }
+            const bs = lowessSmooth(sx, sy, state.frac);
+            const bsY = interpLowess(bs, xQ);
+            for (let i = 0; i < nPts; i++) allP[i].push(bsY[i]);
+        }
+        lowessCurve = xQ.map((x, i) => {
+            const v = allP[i].filter(v => !isNaN(v)).sort((a, b) => a - b);
+            if (v.length === 0) return { x, lower: yI[i], median: yI[i], upper: yI[i] };
+            return {
+                x,
+                lower: v[Math.max(0, Math.floor(v.length * 0.025))],
+                median: yI[i],  // Always use original fit, not bootstrap median
+                upper: v[Math.min(v.length - 1, Math.floor(v.length * 0.975))]
+            };
+        });
+    }
+
+    function recalcPoly(xs, ys, n) {
+        const eDeg = Math.min(state.degree, n - 1);
+        polyCoeffs = fitPolynomial(xs, ys, eDeg);
+        const nPts = 120;
+        const xMin = Math.min(...xs) - 0.02, xMax = Math.max(...xs) + 0.02;
+        const xA = Array.from({ length: nPts + 1 }, (_, i) => xMin + (xMax - xMin) * i / nPts);
+
+        if (state.polyBootstrap === 0) {
+            polyCurve = xA.map(x => { const y = evalPoly(polyCoeffs, x); return { x, lower: y, median: y, upper: y }; });
+            return;
+        }
+
+        const allP = xA.map(() => []);
+        for (let b = 0; b < state.polyBootstrap; b++) {
+            const sx = new Array(n), sy = new Array(n);
+            for (let i = 0; i < n; i++) { const idx = Math.floor(Math.random() * n); sx[i] = xs[idx]; sy[i] = ys[idx]; }
+            const c = fitPolynomial(sx, sy, eDeg);
+            for (let i = 0; i <= nPts; i++) allP[i].push(evalPoly(c, xA[i]));
+        }
+        polyCurve = xA.map((x, i) => {
+            const p = allP[i].sort((a, b) => a - b);
+            return {
+                x,
+                lower: p[Math.max(0, Math.floor(p.length * 0.025))],
+                median: evalPoly(polyCoeffs, x),  // Always use actual fit, not bootstrap median
+                upper: p[Math.min(p.length - 1, Math.floor(p.length * 0.975))]
+            };
+        });
+    }
+
+    // =========================================================================
+    // RENDER
+    // =========================================================================
+    function render() {
+        W = container.node().getBoundingClientRect().width - margin.left - margin.right;
+        H = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
+        svg.attr("viewBox", `0 0 ${W + margin.left + margin.right} ${H + margin.top + margin.bottom}`);
+        xScale.range([0, W]); yScale.range([H, 0]);
+        xAxisG.attr("transform", `translate(0,${H})`).call(d3.axisBottom(xScale).ticks(8));
+        yAxisG.call(d3.axisLeft(yScale).ticks(8));
+        xLbl.attr("transform", `translate(${W / 2},${H + margin.bottom - 10})`);
+        yLbl.attr("transform", `translate(${-margin.left + 18},${H / 2}) rotate(-90)`);
+
+        const isL = state.mode === 'lowess';
+        const bootN = isL ? state.lowessBootstrap : state.polyBootstrap;
+        const accent = isL ? '#0064e0' : '#7c3aed';
+        const light = isL ? '#e0f0ff' : '#ede5ff';
+
+        // In LOWESS mode, only show the curve up to the reveal position
+        const curve = isL ? lowessCurve.filter(d => d.x <= state.revealX) : polyCurve;
+
+        tracePath.attr("class", `prediction-trace ${isL ? 'trace-lowess' : 'trace-poly'}`);
+        ciPath.attr("class", `ci-band ${isL ? 'ci-lowess' : 'ci-poly'}`);
+
+        const cType = isL ? d3.curveLinear : d3.curveBasis;
+        const tGen = d3.line().x(d => xScale(d.x)).y(d => yScale(d.median)).defined(d => !isNaN(d.median)).curve(cType);
+        const aGen = d3.area().x(d => xScale(d.x))
+            .y0(d => yScale(Math.max(-0.5, Math.min(1.5, d.lower))))
+            .y1(d => yScale(Math.max(-0.5, Math.min(1.5, d.upper))))
+            .defined(d => !isNaN(d.lower) && !isNaN(d.upper)).curve(cType);
+
+        tracePath.datum(curve).attr("d", tGen);
+        ciPath.datum(curve).attr("d", aGen).style("display", bootN > 0 ? null : "none");
+
+        // --- Sweep line and tangent (LOWESS only) ---
+        if (isL) {
+            sweepLine.style("display", null)
+                .attr("x1", xScale(state.revealX)).attr("y1", 0)
+                .attr("x2", xScale(state.revealX)).attr("y2", H);
+
+            // Active point = rightmost revealed point
+            const revealedPts = trainingData.filter(d => d.x <= state.revealX);
+            const activePt = revealedPts.length > 0 ? revealedPts[revealedPts.length - 1] : null;
+
+            if (activePt && originalFits[activePt.x]) {
+                const fit = originalFits[activePt.x];
+                const len = 0.15;
+                const x1 = Math.max(0, activePt.x - len);
+                const x2 = Math.min(1, activePt.x + len);
+                tangentLine.style("display", null)
+                    .attr("x1", xScale(x1)).attr("y1", yScale(fit.slope * x1 + fit.intercept))
+                    .attr("x2", xScale(x2)).attr("y2", yScale(fit.slope * x2 + fit.intercept));
+            } else {
+                tangentLine.style("display", "none");
+            }
+        } else {
+            sweepLine.style("display", "none");
+            tangentLine.style("display", "none");
+        }
+
+        // --- Compute dynamic weights for LOWESS visual display ---
+        let dynamicWeights = {};
+        if (isL && trainingData.length > 0) {
+            const k = Math.max(2, Math.min(trainingData.length, Math.ceil(state.frac * trainingData.length)));
+            const distances = trainingData.map(d => ({ id: d.id, dist: Math.abs(d.x - state.revealX) }));
+            distances.sort((a, b) => a.dist - b.dist);
+            const dMax = distances[k - 1].dist * 1.0001;
+            trainingData.forEach(d => {
+                dynamicWeights[d.id] = tricubeWeight(Math.abs(d.x - state.revealX), dMax);
+            });
+        }
+
+        // --- Points ---
+        const pts = chartG.selectAll(".training-point").data(trainingData, d => d.id);
+        pts.exit().remove();
+        pts.enter().append("circle").attr("class", "training-point")
+            .on("click", (e, d) => { e.stopPropagation(); trainingData = trainingData.filter(p => p.id !== d.id); fullUpdate(); })
+          .merge(pts)
+            .attr("cx", d => xScale(d.x)).attr("cy", d => yScale(d.y))
+            .attr("r", d => {
+                if (!isL) return 6;
+                const w = dynamicWeights[d.id] || 0;
+                return w > 0 ? 5 + w * 5 : 5;
+            })
+            .style("fill", d => {
+                if (!isL) return light;
+                const w = dynamicWeights[d.id] || 0;
+                return w > 0 ? d3.interpolateBlues(0.2 + w * 0.6) : "#e5e7eb";
+            })
+            .style("stroke", d => {
+                if (!isL) return accent;
+                const w = dynamicWeights[d.id] || 0;
+                return w > 0 ? "#1e40af" : "#9ca3af";
+            });
+
+        // Point ID labels
+        const lbls = chartG.selectAll(".point-label").data(trainingData, d => d.id);
+        lbls.exit().remove();
+        lbls.enter().append("text").attr("class", "point-label")
+          .merge(lbls)
+            .attr("x", d => xScale(d.x)).attr("y", d => yScale(d.y))
+            .attr("dy", isL ? -22 : -12)
+            .text(d => d.id);
+
+        // Weight labels (LOWESS only)
+        const wData = isL ? trainingData : [];
+        const wLbls = chartG.selectAll(".weight-label").data(wData, d => d.id);
+        wLbls.exit().remove();
+        wLbls.enter().append("text").attr("class", "weight-label").attr("dy", -10)
+          .merge(wLbls)
+            .attr("x", d => xScale(d.x)).attr("y", d => yScale(d.y))
+            .text(d => { const w = dynamicWeights[d.id] || 0; return `w=${w.toFixed(2)}`; })
+            .style("fill", d => { const w = dynamicWeights[d.id] || 0; return w > 0 ? "#dc2626" : "#9ca3af"; });
+
+        // Residuals (poly only)
+        residG.selectAll("*").remove();
+        if (!isL && state.showResiduals && polyCoeffs.length > 0) {
+            trainingData.forEach(d => {
+                residG.append("line").attr("class", "residual-line")
+                    .attr("x1", xScale(d.x)).attr("y1", yScale(d.y))
+                    .attr("x2", xScale(d.x)).attr("y2", yScale(evalPoly(polyCoeffs, d.x)));
+            });
+        }
+
+        renderEquation();
+        renderMetrics();
+    }
+
+    function renderEquation() {
+        const c = d3.select("#equations-container"); c.selectAll("*").remove();
+        if (trainingData.length < 2) {
+            c.append("div").style("color", "var(--faint)").attr("class", "italic text-sm").text("Need at least 2 data points.");
+            return;
+        }
+
+        if (state.mode === 'lowess') {
+            // Show per-point equation boxes for all revealed points
+            const revealedPts = trainingData.filter(d => d.x <= state.revealX).sort((a, b) => a.x - b.x);
+            const activePt = revealedPts.length > 0 ? revealedPts[revealedPts.length - 1] : null;
+
+            if (revealedPts.length === 0) {
+                c.append("div").style("color", "var(--faint)").attr("class", "italic text-sm")
+                    .text("Drag the Reveal Fit slider to start building the model.");
+                return;
+            }
+
+            revealedPts.forEach(pt => {
+                const fit = originalFits[pt.x];
+                if (!fit) return;
+                const py = fit.slope * pt.x + fit.intercept;
+                const sign = fit.slope >= 0 ? "+" : "\u2212";
+                const isActive = activePt && pt.id === activePt.id;
+
+                const box = c.append("div")
+                    .attr("class", `equation-box text-center flex flex-col items-center min-w-[110px] ${isActive ? 'active' : ''}`);
+                box.append("div").attr("class", "text-xs font-bold mb-1").style("color", "var(--muted)")
+                    .text(`${pt.id}  (x=${pt.x.toFixed(2)})`);
+                box.append("div").attr("class", "mono text-sm font-semibold")
+                    .text(`y = ${fit.intercept.toFixed(2)} ${sign} ${Math.abs(fit.slope).toFixed(2)}x`);
+                box.append("div").attr("class", "text-xs mt-1").style("color", "var(--lo)")
+                    .text(`\u0177 = ${py.toFixed(2)}`);
+            });
+        } else {
+            const eDeg = Math.min(state.degree, trainingData.length - 1);
+            const box = c.append("div").attr("class", "equation-box text-center");
+            const parts = [];
+            for (let i = 0; i < polyCoeffs.length; i++) {
+                const v = polyCoeffs[i];
+                if (Math.abs(v) < 1e-10 && i > 0) continue;
+                const av = Math.abs(v);
+                const sign = v >= 0 ? (parts.length > 0 ? ' + ' : '') : (parts.length > 0 ? ' \u2212 ' : '\u2212');
+                if (i === 0) parts.push(v.toFixed(3));
+                else if (i === 1) parts.push(sign + av.toFixed(3) + 'x');
+                else parts.push(sign + av.toFixed(3) + 'x' + sup(i));
+            }
+            box.append("div").attr("class", "text-xs font-bold mb-1").style("color", "var(--muted)")
+                .text(`Degree ${eDeg} polynomial`);
+            box.append("div").attr("class", "mono text-sm font-semibold").style("word-break", "break-all")
+                .text('y = ' + (parts.length > 0 ? parts.join('') : '0'));
+        }
+    }
+
+    function sup(n) {
+        const s = { 0:'\u2070',1:'\u00B9',2:'\u00B2',3:'\u00B3',4:'\u2074',5:'\u2075',6:'\u2076',7:'\u2077',8:'\u2078',9:'\u2079' };
+        return String(n).split('').map(c => s[c] || c).join('');
+    }
+
+    function renderMetrics() {
+        const row = document.getElementById('metrics-row');
+        if (trainingData.length < 2) { row.style.display = 'none'; return; }
+        row.style.display = 'flex';
+
+        const xs = trainingData.map(d => d.x), ys = trainingData.map(d => d.y);
+        let pred;
+        if (state.mode === 'lowess') {
+            // Only compute metrics for revealed points
+            const revealed = trainingData.filter(d => d.x <= state.revealX);
+            if (revealed.length < 2) { row.style.display = 'none'; return; }
+            const rxs = revealed.map(d => d.x), rys = revealed.map(d => d.y);
+            pred = rxs.map(x => { const f = originalFits[x]; return f ? f.slope * x + f.intercept : NaN; });
+            const vp = rys.map((y, i) => [y, pred[i]]).filter(p => !isNaN(p[1]));
+            const vY = vp.map(p => p[0]), vP = vp.map(p => p[1]);
+            document.getElementById('metric-mse').textContent = computeMSE(vY, vP).toFixed(4);
+            document.getElementById('metric-r2').textContent = computeR2(vY, vP).toFixed(4);
+            document.getElementById('metric-n').textContent = trainingData.length;
+            return;
+        } else {
+            pred = xs.map(x => evalPoly(polyCoeffs, x));
+        }
+        const vp = ys.map((y, i) => [y, pred[i]]).filter(p => !isNaN(p[1]));
+        const vY = vp.map(p => p[0]), vP = vp.map(p => p[1]);
+
+        document.getElementById('metric-mse').textContent = computeMSE(vY, vP).toFixed(4);
+        document.getElementById('metric-r2').textContent = computeR2(vY, vP).toFixed(4);
+        document.getElementById('metric-n').textContent = trainingData.length;
+    }
+
+    // =========================================================================
+    // FULL UPDATE
+    // =========================================================================
+    function fullUpdate() {
+        const n = trainingData.length;
+        trainingData.sort((a, b) => a.x - b.x);
+        trainingData.forEach((d, i) => {
+            // Support more than 26 points: A-Z, then A2, B2, ...
+            d.id = i < 26 ? String.fromCharCode(65 + i) : String.fromCharCode(65 + (i % 26)) + Math.floor(i / 26);
+        });
+
+        document.getElementById('points-count-display').textContent = n;
+
+        const maxDeg = Math.max(1, n - 1);
+        const ds = document.getElementById('degree-slider');
+        ds.max = Math.min(9, maxDeg);
+        if (state.degree > maxDeg) state.degree = maxDeg;
+        ds.value = state.degree;
+        document.getElementById('degree-value').textContent = state.degree;
+        document.getElementById('max-degree-hint').textContent = Math.min(9, maxDeg);
+
+        recalculate();
+        render();
+    }
+
+    function setMode(m) {
+        state.mode = m;
+        document.body.className = `antialiased mode-${m}`;
+        document.getElementById('mode-label-lowess').className = m === 'lowess' ? 'active-lowess' : '';
+        document.getElementById('mode-label-poly').className = m === 'poly' ? 'active-poly' : '';
+        recalculate();
+        render();
+    }
+
+    // =========================================================================
+    // EVENT HANDLERS
+    // =========================================================================
+    document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', e => setMode(e.target.value)));
+
+    // Reveal slider — only triggers render (no recalc needed, just filters existing curve)
+    document.getElementById('reveal-slider').addEventListener('input', e => {
+        state.revealX = +e.target.value;
+        render();
+    });
+
+    document.getElementById('frac-slider').addEventListener('input', e => {
+        state.frac = +e.target.value;
+        document.getElementById('frac-value').textContent = state.frac.toFixed(2);
+        recalculate(); render();
+    });
+    document.getElementById('lowess-boot-slider').addEventListener('input', e => {
+        state.lowessBootstrap = +e.target.value;
+        document.getElementById('lowess-boot-value').textContent = state.lowessBootstrap;
+        recalculate(); render();
+    });
+    document.getElementById('degree-slider').addEventListener('input', e => {
+        state.degree = +e.target.value;
+        document.getElementById('degree-value').textContent = state.degree;
+        recalculate(); render();
+    });
+    document.getElementById('poly-boot-slider').addEventListener('input', e => {
+        state.polyBootstrap = +e.target.value;
+        document.getElementById('poly-boot-value').textContent = state.polyBootstrap;
+        recalculate(); render();
+    });
+    document.getElementById('residual-toggle').addEventListener('click', () => {
+        state.showResiduals = !state.showResiduals;
+        document.getElementById('residual-toggle').classList.toggle('on', state.showResiduals);
+        render();
+    });
+
+    svg.on('click', event => {
+        if (event.target.tagName === 'circle') return;
+        const [x, y] = d3.pointer(event, chartG.node());
+        const pt = { id: '', x: xScale.invert(x), y: yScale.invert(y) };
+        if (pt.x < 0 || pt.x > 1 || pt.y < 0 || pt.y > 1) return;
+        trainingData.push(pt);
+        fullUpdate();
+    });
+
+    // --- Reset and Generate ---
+    document.getElementById('btn-reset').addEventListener('click', () => {
+        trainingData = [];
+        state.revealX = 0;
+        document.getElementById('reveal-slider').value = 0;
+        fullUpdate();
+    });
+
+    /**
+     * Generate 20 points along a random noisy trend.
+     * Picks a random underlying function (linear, quadratic, sinusoidal, or logistic)
+     * and adds Gaussian noise so students see realistic scatter.
+     */
+    function generateNoisyData() {
+        const n = 20;
+        const patterns = ['linear', 'quadratic', 'sine', 'logistic'];
+        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+
+        // Random parameters for variety
+        const a = 0.3 + Math.random() * 0.4;   // scale
+        const b = 0.1 + Math.random() * 0.3;   // offset
+        const flip = Math.random() > 0.5 ? -1 : 1;
+
+        const points = [];
+        for (let i = 0; i < n; i++) {
+            const x = 0.03 + 0.94 * Math.random(); // spread across [0.03, 0.97]
+            let yTrue;
+            switch (pattern) {
+                case 'linear':
+                    yTrue = b + flip * a * x;
+                    break;
+                case 'quadratic':
+                    yTrue = b + flip * a * 4 * (x - 0.5) * (x - 0.5);
+                    break;
+                case 'sine':
+                    yTrue = 0.5 + flip * a * Math.sin(2 * Math.PI * x);
+                    break;
+                case 'logistic':
+                    yTrue = b + a / (1 + Math.exp(-10 * (x - 0.5)));
+                    break;
+            }
+            // Add Gaussian noise (Box-Muller transform)
+            const u1 = Math.random(), u2 = Math.random();
+            const noise = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * 0.08;
+            const y = Math.max(0.01, Math.min(0.99, yTrue + noise));
+            points.push({ id: '', x, y });
+        }
+        return points;
+    }
+
+    document.getElementById('btn-generate').addEventListener('click', () => {
+        trainingData = generateNoisyData();
+        state.revealX = 0;
+        document.getElementById('reveal-slider').value = 0;
+        fullUpdate();
+    });
+
+    const ro = new ResizeObserver(() => { clearTimeout(ro._t); ro._t = setTimeout(render, 80); });
+    ro.observe(container.node());
+
+    // =========================================================================
+    // INIT — start with a fresh 20-point dataset
+    // =========================================================================
+    trainingData = generateNoisyData();
+    fullUpdate();
+});
+</script>
+</body>
+</html>
