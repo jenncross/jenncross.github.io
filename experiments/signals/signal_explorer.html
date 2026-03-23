@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Processing Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1d21; --sub: #4a5060; --muted: #6e7685; --faint: #9ea5b0;
+            --border: #d5dae2; --surface: #f3f5f8; --bg: #ebeef3; --card: #fff;
+            --sig: #94a3b8; --sig-line: #64748b;
+            --filt: #0891b2; --filt-soft: #cffafe; --filt-mid: #67e8f9;
+            --peak-ok: #059669; --peak-cand: #d97706; --peak-rej: #dc2626;
+            --deriv: #7c3aed; --deriv-soft: #ede5ff;
+            --R: 14px;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); margin: 0; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+        code, .mono { font-family: 'DM Mono', monospace; font-size: 0.9em; }
+
+        .axis-label { font-size: 13px; font-weight: 500; fill: var(--muted); }
+        .domain { stroke: var(--border); stroke-width: 1.5; }
+        .tick line { stroke: #e5e7eb; }
+        .tick text { fill: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; }
+
+        .panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--R); }
+        .ctrl-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 5px; }
+        .ctrl-row .val { text-transform: none; letter-spacing: 0; }
+
+        .tab-nav { display: flex; gap: 2px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; padding: 2px; }
+        .tab-btn { flex: 1; text-align: center; padding: 8px 6px; font-weight: 700; font-size: 12px; cursor: pointer; transition: all 0.15s; user-select: none; color: var(--muted); border-radius: 10px; border: none; background: transparent; display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; font-family: 'DM Sans', sans-serif; }
+        .tab-btn:hover { color: var(--ink); background: rgba(255,255,255,0.5); }
+        .tab-btn.active { background: var(--filt); color: #fff; }
+        .tab-btn[data-tab="peak"].active { background: var(--peak-ok); color: #fff; }
+        .tab-btn[data-tab="drift"].active { background: var(--deriv); color: #fff; }
+        .tab-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        input[type="range"] { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; outline: none; background: var(--border); width: 100%; touch-action: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--filt); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.2); }
+        input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--filt); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.2); }
+
+        .transport { display: flex; gap: 4px; align-items: center; }
+        .transport button { min-width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; color: var(--sub); font-family: 'DM Sans', sans-serif; }
+        .transport button:hover { background: var(--surface); color: var(--ink); }
+        .transport button svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        .seg-toggle { display: flex; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); background: var(--surface); }
+        .seg-toggle label { flex: 1; text-align: center; padding: 7px 4px; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.15s; user-select: none; color: var(--muted); }
+        .seg-toggle label:not(:last-child) { border-right: 1px solid var(--border); }
+        .seg-toggle input { display: none; }
+        .seg-toggle label.active { background: var(--filt); color: #fff; }
+        .seg-toggle.drift-color label.active { background: var(--deriv); color: #fff; }
+
+        .chart-bar { position: absolute; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 6px; z-index: 10; pointer-events: none; }
+        .chart-bar > * { pointer-events: auto; }
+        .chart-bar.top { top: 6px; }
+        .chart-bar.bottom { bottom: 6px; }
+        .pill-btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 9px; border: 1px solid rgba(0,0,0,0.06); background: rgba(255,255,255,0.88); color: var(--sub); cursor: pointer; transition: all 0.15s; backdrop-filter: blur(6px); font-family: 'DM Sans', sans-serif; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .pill-btn:hover { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .pill-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .pill-btn.accent { background: var(--filt); color: #fff; border-color: var(--filt); }
+        .pill-btn.accent:hover { filter: brightness(0.9); }
+        .legend-line { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; }
+
+        .metric-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 6px 12px; font-size: 12px; }
+        .metric-bar .m { color: var(--muted); font-weight: 500; }
+        .metric-bar .v { font-weight: 700; font-family: 'DM Mono', monospace; margin-right: 4px; }
+
+        details { border-radius: var(--R); }
+        details summary { cursor: pointer; user-select: none; font-size: 13px; font-weight: 600; color: var(--sub); padding: 10px 14px; list-style: none; display: flex; align-items: center; gap: 6px; }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::before { content: ''; display: inline-block; width: 0; height: 0; border-left: 5px solid var(--muted); border-top: 4px solid transparent; border-bottom: 4px solid transparent; transition: transform 0.15s; flex-shrink: 0; }
+        details[open] summary::before { transform: rotate(90deg); }
+        details .inner { padding: 0 14px 12px; font-size: 13px; line-height: 1.55; color: var(--sub); }
+
+        .window-detail { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--sub); padding: 8px 12px; min-height: 36px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; line-height: 1.6; }
+        .wd-val { display: inline-block; padding: 1px 5px; border-radius: 4px; background: var(--surface); font-weight: 500; }
+        .wd-center { background: var(--filt-soft) !important; color: var(--filt); font-weight: 700 !important; }
+        .wd-result { color: var(--filt); font-weight: 700; }
+    </style>
+</head>
+<body class="antialiased">
+<div class="max-w-[1440px] mx-auto px-3 py-3 sm:px-5 sm:py-4">
+
+    <div class="flex items-center justify-between gap-3 mb-3">
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight truncate">Signal Processing Explorer</h1>
+    </div>
+
+    <!-- TAB NAV -->
+    <div class="tab-nav mb-3" id="tab-nav">
+        <button class="tab-btn active" data-tab="filter"><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg><span>Filtering</span></button>
+        <button class="tab-btn" data-tab="peak"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Peak Finding</span></button>
+        <button class="tab-btn" data-tab="drift"><svg viewBox="0 0 24 24"><path d="M2 12h4l3 9 4-18 3 9h6"/></svg><span>Baseline Drift</span></button>
+    </div>
+
+    <!-- ==================== TAB 1: FILTERING ==================== -->
+    <div class="tab-content active" id="tab-filter">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3">
+            <div class="flex flex-col gap-2">
+                <div class="panel relative" style="padding:8px">
+                    <div class="chart-bar top" style="justify-content:space-between;padding:0 6px">
+                        <button id="filt-regen" class="pill-btn accent"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>New Signal</button>
+                    </div>
+                    <div id="filt-chart" class="w-full" style="height:clamp(280px,42vh,420px)"></div>
+                    <div class="chart-bar bottom">
+                        <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px);display:flex;gap:12px;align-items:center">
+                            <span><span class="legend-line" style="background:var(--sig-line)"></span> Original</span>
+                            <span><span class="legend-line" style="background:var(--filt)"></span> Filtered</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" style="padding:10px 14px">
+                    <div class="flex items-center justify-between gap-3 flex-wrap">
+                        <div class="transport">
+                            <button id="filt-reset" title="Reset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                            <button id="filt-step" title="Step"><svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></button>
+                            <button id="filt-play" title="Play" style="background:var(--filt);color:#fff;border-color:var(--filt)"><svg viewBox="0 0 24 24" id="filt-play-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+                        </div>
+                        <div class="flex items-center gap-2"><span class="text-xs font-semibold" style="color:var(--muted)">Speed</span><input id="filt-speed" type="range" min="1" max="10" value="5" step="1" style="width:80px"></div>
+                        <div class="mono text-xs font-semibold" style="color:var(--faint)">Step <span id="filt-step-n">0</span>/<span id="filt-step-total">0</span></div>
+                    </div>
+                </div>
+                <div class="panel window-detail" id="filt-anno">Press <strong style="color:var(--filt)">Play</strong> or <strong style="color:var(--filt)">Step</strong> to watch the filter slide across the signal.</div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div class="panel" style="padding:12px 14px">
+                    <div class="ctrl-row" style="margin-bottom:8px"><span>Filter Type</span></div>
+                    <div class="seg-toggle" id="filt-type-tog">
+                        <label class="active"><input type="radio" name="ft" value="median" checked>Median</label>
+                        <label><input type="radio" name="ft" value="mean">Mean</label>
+                        <label><input type="radio" name="ft" value="gaussian">Gaussian</label>
+                    </div>
+                </div>
+                <div class="panel" style="padding:12px 14px">
+                    <div class="space-y-4">
+                        <div>
+                            <div class="ctrl-row"><span>Window Size</span><span class="val mono font-bold" style="color:var(--filt)" id="filt-win-v">11</span></div>
+                            <input id="filt-win" type="range" min="3" max="21" value="11" step="2">
+                            <p class="text-xs mt-1" style="color:var(--faint)">Odd numbers only (so there is a center element). Larger = more smoothing.</p>
+                        </div>
+                        <div>
+                            <div class="ctrl-row"><span>Noise Level</span><span class="val mono font-bold" style="color:var(--filt)" id="filt-noise-v">0.30</span></div>
+                            <input id="filt-noise" type="range" min="0.0" max="1.0" value="0.30" step="0.05">
+                        </div>
+                    </div>
+                </div>
+                <details class="panel"><summary>How does median filtering work?</summary><div class="inner">
+                    <p>The median filter slides a <strong>window</strong> across the signal one sample at a time. At each position it sorts the values inside the window and picks the <strong>middle value</strong> (the median) as the output.</p>
+                    <p class="mt-2">Outlying spikes get replaced by the median of their neighbors, which smooths out high-frequency noise while preserving the shape of the underlying signal. In Python, <code>scipy.signal.medfilt</code> does this.</p>
+                    <p class="mt-2"><strong>Try:</strong> Set window to 3 (minimal), then increase to 21 and watch peaks change.</p>
+                </div></details>
+                <details class="panel"><summary>How does Gaussian-weighted smoothing work?</summary><div class="inner">
+                    <p>Instead of treating all window values equally, Gaussian smoothing applies <strong>weights</strong> shaped like a bell curve. The center value gets the highest weight and values farther from center contribute less.</p>
+                    <p class="mt-2">In Python, generate weights with <code>scipy.signal.gaussian</code> and apply them with <code>numpy.convolve</code>.</p>
+                    <p class="mt-2"><strong>Try:</strong> Watch the weight values inside the window as the filter steps through.</p>
+                </div></details>
+                <details class="panel"><summary>What are high-frequency vs. low-frequency signals?</summary><div class="inner">
+                    <p>A signal is a composite of components that change at different rates. <strong>Low-frequency</strong> components change slowly (like the overall heartbeat shape). <strong>High-frequency</strong> components change rapidly (like noise spikes).</p>
+                    <p class="mt-2">Smoothing filters are <strong>low-pass filters</strong>: they let low frequencies pass and remove high frequencies. The window size controls the cutoff.</p>
+                    <p class="mt-2">The <strong>signal-to-noise ratio</strong> (SNR) describes how much "good" signal you have relative to noise. High SNR = clean. Low SNR = buried in noise.</p>
+                </div></details>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 2: PEAK FINDING ==================== -->
+    <div class="tab-content" id="tab-peak">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3">
+            <div class="flex flex-col gap-2">
+                <div class="panel relative" style="padding:8px">
+                    <div class="chart-bar top" style="justify-content:space-between;padding:0 6px">
+                        <button id="peak-regen" class="pill-btn accent" style="background:var(--peak-ok);border-color:var(--peak-ok)"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>New Signal</button>
+                    </div>
+                    <div id="peak-chart" class="w-full" style="height:clamp(280px,42vh,420px)"></div>
+                    <div class="chart-bar bottom">
+                        <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px)">Drag the <span style="color:var(--peak-ok);font-weight:700">green threshold line</span> up or down</div>
+                    </div>
+                </div>
+                <div class="panel" style="padding:10px 14px">
+                    <div class="flex items-center justify-between gap-3 flex-wrap">
+                        <div class="transport">
+                            <button id="peak-reset" title="Reset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                            <button id="peak-step" title="Step"><svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></button>
+                            <button id="peak-play" title="Play" style="background:var(--peak-ok);color:#fff;border-color:var(--peak-ok)"><svg viewBox="0 0 24 24" id="peak-play-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+                        </div>
+                        <div class="flex items-center gap-2"><span class="text-xs font-semibold" style="color:var(--muted)">Speed</span><input id="peak-speed" type="range" min="1" max="10" value="5" step="1" style="width:80px"></div>
+                    </div>
+                </div>
+                <div class="panel metric-bar" id="peak-metrics">
+                    <span class="m">Peaks</span><span class="v" id="pk-count">&mdash;</span>
+                    <span class="m">Avg Period</span><span class="v" id="pk-avg">&mdash;</span>
+                    <span class="m">Std Dev</span><span class="v" id="pk-std">&mdash;</span>
+                </div>
+                <div class="panel window-detail" id="peak-anno">Press <strong style="color:var(--peak-ok)">Play</strong> or <strong style="color:var(--peak-ok)">Step</strong> to scan for peaks left to right.</div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div class="panel" style="padding:12px 14px"><div class="space-y-4">
+                    <div>
+                        <div class="ctrl-row"><span>Threshold</span><span class="val mono font-bold" style="color:var(--peak-ok)" id="pk-th-v">0.50</span></div>
+                        <input id="pk-th" type="range" min="0.05" max="1.8" value="0.50" step="0.01">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Peaks must exceed this. Also draggable on chart.</p>
+                    </div>
+                    <div>
+                        <div class="ctrl-row"><span>Min Peak Distance</span><span class="val mono font-bold" style="color:var(--peak-ok)" id="pk-dist-v">20</span></div>
+                        <input id="pk-dist" type="range" min="1" max="80" value="20" step="1">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Minimum samples between accepted peaks.</p>
+                    </div>
+                    <div>
+                        <div class="ctrl-row"><span>Pre-filter Window</span><span class="val mono font-bold" style="color:var(--peak-ok)" id="pk-fw-v">5</span></div>
+                        <input id="pk-fw" type="range" min="1" max="21" value="5" step="2">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Median filter before detection. 1 = no filtering.</p>
+                    </div>
+                </div></div>
+                <details class="panel"><summary>How does peak detection work?</summary><div class="inner">
+                    <p>The algorithm scans left to right. At each point it checks: (1) Is this a <strong>local maximum</strong> (higher than both neighbors)? (2) Is it above the <strong>threshold</strong>?</p>
+                    <p class="mt-2">If both are true the point is a <strong>candidate</strong>. Then: is it at least <code>min_distance</code> samples from the last accepted peak? If yes, <strong>accepted</strong> (green). If too close, <strong>rejected</strong> (red).</p>
+                    <p class="mt-2">The <strong>period</strong> is the spacing between consecutive peaks. A stable average period means a consistent rhythm like a heartbeat.</p>
+                </div></details>
+                <details class="panel"><summary>Why filter before finding peaks?</summary><div class="inner">
+                    <p>Noise creates false local maxima. A small random spike can trick the algorithm.</p>
+                    <p class="mt-2">Smoothing first removes small spikes so the real peaks stand out.</p>
+                    <p class="mt-2"><strong>Try:</strong> Set pre-filter to 1 (none) and watch false peaks appear.</p>
+                </div></details>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 3: BASELINE DRIFT ==================== -->
+    <div class="tab-content" id="tab-drift">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3">
+            <div class="flex flex-col gap-2">
+                <div class="panel relative" style="padding:8px">
+                    <div id="drift-top" class="w-full" style="height:clamp(200px,28vh,300px)"></div>
+                    <div class="chart-bar bottom">
+                        <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px);display:flex;gap:12px;align-items:center">
+                            <span><span class="legend-line" style="background:var(--sig-line)"></span> Signal + Drift</span>
+                            <span><span class="legend-line" style="background:var(--peak-ok)"></span> Detected Peaks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel relative" style="padding:8px" id="drift-bot-panel">
+                    <div id="drift-bot" class="w-full" style="height:clamp(180px,24vh,260px)"></div>
+                    <div class="chart-bar bottom">
+                        <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px);display:flex;gap:12px;align-items:center">
+                            <span><span class="legend-line" style="background:var(--deriv)"></span> Derivative: dy[i] = y[i+1] &minus; y[i]</span>
+                            <span id="drift-zc-leg" style="display:none"><span class="legend-line" style="background:var(--peak-ok)"></span> Zero Crossings</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel metric-bar">
+                    <span class="m">Peaks</span><span class="v" id="dr-count">&mdash;</span>
+                    <span class="m">Avg Period</span><span class="v" id="dr-avg">&mdash;</span>
+                    <span class="m">Std Dev</span><span class="v" id="dr-std">&mdash;</span>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div class="panel" style="padding:12px 14px">
+                    <div class="ctrl-row" style="margin-bottom:8px"><span>Stage</span></div>
+                    <div class="seg-toggle drift-color" id="drift-stage-tog">
+                        <label class="active"><input type="radio" name="ds" value="1" checked>1. The Problem</label>
+                        <label><input type="radio" name="ds" value="2">2. Derivative</label>
+                        <label><input type="radio" name="ds" value="3">3. Zero Cross</label>
+                    </div>
+                </div>
+                <div class="panel" style="padding:12px 14px"><div class="space-y-4">
+                    <div>
+                        <div class="ctrl-row"><span>Drift Amount</span><span class="val mono font-bold" style="color:var(--deriv)" id="dr-drift-v">0.00</span></div>
+                        <input id="dr-drift" type="range" min="0.0" max="1.5" value="0.0" step="0.05">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Adds slow baseline wander. Watch peak detection break.</p>
+                    </div>
+                    <div>
+                        <div class="ctrl-row"><span>Threshold (Stage 1)</span><span class="val mono font-bold" style="color:var(--deriv)" id="dr-th-v">0.50</span></div>
+                        <input id="dr-th" type="range" min="0.05" max="1.8" value="0.50" step="0.01">
+                    </div>
+                </div></div>
+                <details class="panel"><summary>Why does baseline drift break peak detection?</summary><div class="inner">
+                    <p>Peak detection uses a fixed <strong>threshold</strong>. When the baseline drifts upward, noise bumps cross the threshold (false positives). When it drifts downward, real peaks drop below (missed detections).</p>
+                    <p class="mt-2">Real EKG data almost always has baseline wander from breathing, electrode movement, or electrical interference.</p>
+                </div></details>
+                <details class="panel"><summary>How does the derivative act as a high-pass filter?</summary><div class="inner">
+                    <p>The derivative <code>dy[i] = y[i+1] - y[i]</code> measures how fast the signal <strong>changes</strong>. Slow drift changes very little between samples so its derivative is near zero. Sharp QRS spikes change rapidly so they produce large derivative values.</p>
+                    <p class="mt-2">This removes slow drift (low-frequency) and preserves fast spikes (high-frequency). That is exactly what a <strong>high-pass filter</strong> does.</p>
+                    <p class="mt-2">The smoothing filters in the Filtering tab are <strong>low-pass</strong> (remove high frequencies). The derivative is the opposite: a <strong>high-pass filter</strong> that removes low frequencies like baseline drift.</p>
+                </div></details>
+                <details class="panel"><summary>How do zero crossings find periods?</summary><div class="inner">
+                    <p>After taking the derivative, each original peak becomes a point where the derivative crosses from <strong>positive to negative</strong>. This is because the signal goes from rising to falling at a peak.</p>
+                    <p class="mt-2">By finding these zero crossings we locate peaks <strong>without needing a threshold</strong>. The spacing between consecutive crossings gives the heartbeat period.</p>
+                </div></details>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    /* ===================================================================
+       UTILITIES
+       =================================================================== */
+
+    /** Box-Muller gaussian random. */
+    function randn() {
+        const u1 = Math.random(), u2 = Math.random();
+        return Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);
+    }
+
+    /**
+     * Generate a clean sine wave with additive gaussian noise.
+     * @param {number} n - Sample count
+     * @param {number} freq - Frequency in Hz
+     * @param {number} dur - Duration in seconds
+     * @param {number} noise - Noise std dev
+     * @returns {{x:number,y:number}[]}
+     */
+    function genSine(n, freq, dur, noise) {
+        const out = [];
+        for (let i = 0; i < n; i++) {
+            const t = (i/(n-1))*dur;
+            out.push({ x: t, y: Math.sin(2*Math.PI*freq*t) + noise*randn() });
+        }
+        return out;
+    }
+
+    /**
+     * Generate a synthetic EKG-like waveform.
+     * @param {number} n - Sample count
+     * @param {number} bpm - Heart rate
+     * @param {number} noise - Noise level
+     * @param {number} drift - Baseline drift amplitude
+     * @returns {{x:number,y:number}[]}
+     */
+    function genEKG(n, bpm, noise, drift) {
+        const dur = 4, dt = dur/(n-1), per = 60/bpm;
+        const out = [];
+        for (let i = 0; i < n; i++) {
+            const t = i*dt, ph = (t%per)/per;
+            let y = 0;
+            y += 0.15*Math.exp(-(((ph - 0.15) / 0.03) ** 2));       // P wave
+            y -= 0.12*Math.exp(-(((ph - 0.28) / 0.008) ** 2));       // Q
+            y += 1.0 *Math.exp(-(((ph - 0.32) / 0.012) ** 2));       // R
+            y -= 0.15*Math.exp(-(((ph - 0.36) / 0.01) ** 2));        // S
+            y += 0.25*Math.exp(-(((ph - 0.55) / 0.05) ** 2));        // T wave
+            y += drift*Math.sin(2*Math.PI*0.3*t);
+            y += noise*randn();
+            out.push({ x: t, y });
+        }
+        return out;
+    }
+
+    /* --- Filter functions --- */
+
+    function medFilt(v, w) {
+        const n = v.length, h = (w-1)/2, out = new Array(n);
+        for (let i = 0; i < n; i++) {
+            const lo = Math.max(0,i-h), hi = Math.min(n-1,i+h);
+            const win = [];
+            for (let j = lo; j <= hi; j++) win.push(v[j]);
+            win.sort((a,b)=>a-b);
+            out[i] = win[Math.floor(win.length/2)];
+        }
+        return out;
+    }
+
+    function meanFilt(v, w) {
+        const n = v.length, h = (w-1)/2, out = new Array(n);
+        for (let i = 0; i < n; i++) {
+            const lo = Math.max(0,i-h), hi = Math.min(n-1,i+h);
+            let s = 0, c = 0;
+            for (let j = lo; j <= hi; j++) { s += v[j]; c++; }
+            out[i] = s/c;
+        }
+        return out;
+    }
+
+    function gaussWeights(w) {
+        const h = (w-1)/2, sig = w/6, wt = [];
+        let s = 0;
+        for (let i = 0; i < w; i++) { const g = Math.exp(-0.5*((i-h)/sig)**2); wt.push(g); s += g; }
+        return wt.map(x=>x/s);
+    }
+
+    function gaussFilt(v, w) {
+        const n = v.length, h = (w-1)/2, wt = gaussWeights(w), out = new Array(n);
+        for (let i = 0; i < n; i++) {
+            let s = 0, ws = 0;
+            for (let j = 0; j < w; j++) {
+                const idx = i-h+j;
+                if (idx >= 0 && idx < n) { s += v[idx]*wt[j]; ws += wt[j]; }
+            }
+            out[i] = s/ws;
+        }
+        return out;
+    }
+
+    function applyFilt(v, type, w) {
+        if (type==='median') return medFilt(v,w);
+        if (type==='mean')   return meanFilt(v,w);
+        return gaussFilt(v,w);
+    }
+
+    /** Element-wise derivative: dy[i] = y[i+1] - y[i]. */
+    function deriv(v) { const o=[]; for(let i=0;i<v.length-1;i++) o.push(v[i+1]-v[i]); return o; }
+
+    /** Find peaks (local max above threshold, respecting min distance). */
+    function findPeaks(v, th, minD) {
+        const cands = [];
+        for (let i=1;i<v.length-1;i++) if(v[i]>v[i-1]&&v[i]>v[i+1]&&v[i]>th) cands.push({index:i,value:v[i]});
+        const res = []; let last = -Infinity;
+        for (const c of cands) {
+            if (c.index-last >= minD) { res.push({index:c.index,status:'accepted'}); last=c.index; }
+            else res.push({index:c.index,status:'rejected'});
+        }
+        return res;
+    }
+
+    /** Find negative-going zero crossings. */
+    function findZC(dv) {
+        const zc = [];
+        for (let i=0;i<dv.length-1;i++) if(dv[i]>=0&&dv[i+1]<0) zc.push(i);
+        return zc;
+    }
+
+    /* ===================================================================
+       D3 CHART FACTORY
+       =================================================================== */
+
+    function makeChart(id) {
+        const ct = d3.select('#'+id);
+        const m = {top:16,right:12,bottom:40,left:48};
+        const svg = ct.append('svg').attr('width','100%').attr('height','100%');
+        const g = svg.append('g').attr('transform',`translate(${m.left},${m.top})`);
+        const xS = d3.scaleLinear(), yS = d3.scaleLinear();
+        const xAx = g.append('g').attr('class','x-axis');
+        const yAx = g.append('g').attr('class','y-axis');
+        const xL = g.append('text').attr('class','axis-label').attr('text-anchor','middle');
+        const yL = g.append('text').attr('class','axis-label').attr('text-anchor','middle').attr('transform','rotate(-90)');
+
+        function resize() {
+            const r = ct.node().getBoundingClientRect();
+            const W = r.width-m.left-m.right, H = r.height-m.top-m.bottom;
+            svg.attr('viewBox',`0 0 ${r.width} ${r.height}`);
+            xS.range([0,W]); yS.range([H,0]);
+            xAx.attr('transform',`translate(0,${H})`).call(d3.axisBottom(xS).ticks(Math.min(10,Math.floor(W/60))));
+            yAx.call(d3.axisLeft(yS).ticks(Math.min(8,Math.floor(H/50))));
+            xL.attr('transform',`translate(${W/2},${H+m.bottom-6})`);
+            yL.attr('transform',`translate(${-m.left+14},${H/2}) rotate(-90)`);
+            return {W,H};
+        }
+        return {ct,svg,g,xS,yS,xAx,yAx,xL,yL,m,resize};
+    }
+
+    /* ===================================================================
+       TAB SWITCHING
+       =================================================================== */
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+            document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+            requestAnimationFrame(()=>{
+                if(btn.dataset.tab==='filter') fRender();
+                if(btn.dataset.tab==='peak')   pRender();
+                if(btn.dataset.tab==='drift')  dRenderAll();
+            });
+        });
+    });
+
+    /** Wire up a segmented toggle. */
+    function segToggle(id, cb) {
+        const el=document.getElementById(id), ls=el.querySelectorAll('label'), rs=el.querySelectorAll('input[type="radio"]');
+        rs.forEach((r,i)=>r.addEventListener('change',()=>{ ls.forEach(l=>l.classList.remove('active')); ls[i].classList.add('active'); cb(r.value); }));
+    }
+
+    /* ===================================================================
+       TAB 1 — FILTERING
+       =================================================================== */
+
+    const fc = makeChart('filt-chart');
+    fc.xL.text('Time (s)'); fc.yL.text('Amplitude');
+
+    const fOrigP = fc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',1.5).attr('opacity',0.5);
+    const fFiltP = fc.g.append('path').attr('fill','none').attr('stroke','var(--filt)').attr('stroke-width',2.5).attr('stroke-linejoin','round');
+    const fWinR  = fc.g.append('rect').attr('fill','rgba(8,145,178,0.08)').attr('stroke','var(--filt)').attr('stroke-width',1.5).attr('stroke-dasharray','4 3').attr('rx',4).style('display','none');
+    const fDotG  = fc.g.append('g');
+    const fCDot  = fc.g.append('circle').attr('r',5).attr('fill','var(--filt)').attr('stroke','#fff').attr('stroke-width',2).style('display','none');
+
+    let fSig=[], fFilt=[], fS={type:'median',win:11,noise:0.30,step:0,playing:false,tid:null};
+
+    function fGen() {
+        fSig = genSine(200,1,3,fS.noise);
+        fS.step=0; fStop();
+        fCalc(); fFullUpd();
+    }
+    function fCalc() { fFilt = applyFilt(fSig.map(d=>d.y),fS.type,fS.win).map((y,i)=>({x:fSig[i].x,y})); }
+    function fFullUpd() {
+        const ys=fSig.map(d=>d.y);
+        fc.xS.domain([0,fSig[fSig.length-1].x]);
+        fc.yS.domain([d3.min(ys)-0.3, d3.max(ys)+0.3]);
+        fc.resize(); fRender();
+        document.getElementById('filt-step-total').textContent=fSig.length;
+    }
+
+    function fRender() {
+        fc.resize();
+        const ln = d3.line().x(d=>fc.xS(d.x)).y(d=>fc.yS(d.y));
+        fOrigP.datum(fSig).attr('d',ln);
+        fFiltP.datum(fS.step>=fSig.length ? fFilt : fFilt.slice(0,fS.step)).attr('d', fS.step>0?ln:null);
+
+        const h = Math.floor(fS.win/2);
+        if (fS.step>0 && fS.step<=fSig.length) {
+            const ci=fS.step-1, lo=Math.max(0,ci-h), hi=Math.min(fSig.length-1,ci+h);
+            const x1=fc.xS(fSig[lo].x), x2=fc.xS(fSig[hi].x);
+            const dims=fc.resize();
+            fWinR.attr('x',x1-2).attr('y',0).attr('width',Math.max(4,x2-x1+4)).attr('height',dims.H).style('display',null);
+            const wd=[]; for(let j=lo;j<=hi;j++) wd.push({i:j,x:fSig[j].x,y:fSig[j].y,c:j===ci});
+            const dots=fDotG.selectAll('circle').data(wd,d=>d.i);
+            dots.exit().remove();
+            dots.enter().append('circle').attr('r',4).merge(dots)
+                .attr('cx',d=>fc.xS(d.x)).attr('cy',d=>fc.yS(d.y))
+                .attr('fill',d=>d.c?'var(--filt)':'var(--filt-mid)').attr('stroke','#fff').attr('stroke-width',1.5);
+            fCDot.attr('cx',fc.xS(fSig[ci].x)).attr('cy',fc.yS(fFilt[ci].y)).style('display',null);
+            fAnno(ci,lo,hi);
+        } else {
+            fWinR.style('display','none'); fDotG.selectAll('circle').remove(); fCDot.style('display','none');
+        }
+        document.getElementById('filt-step-n').textContent=fS.step;
+    }
+
+    function fAnno(ci,lo,hi) {
+        const vals=[]; for(let j=lo;j<=hi;j++) vals.push(fSig[j].y);
+        const el=document.getElementById('filt-anno');
+        if (fS.type==='median') {
+            const sorted=[...vals].sort((a,b)=>a-b), mi=Math.floor(sorted.length/2);
+            el.innerHTML='Sorted: '+sorted.map((v,i)=>`<span class="wd-val${i===mi?' wd-center':''}">${v.toFixed(2)}</span>`).join(' ')+` &rarr; <span class="wd-result">median = ${sorted[mi].toFixed(2)}</span>`;
+        } else if (fS.type==='mean') {
+            const s=vals.reduce((a,b)=>a+b,0), m=s/vals.length;
+            el.innerHTML=`Sum: <span class="wd-val">${s.toFixed(2)}</span> &divide; <span class="wd-val">${vals.length}</span> &rarr; <span class="wd-result">mean = ${m.toFixed(2)}</span>`;
+        } else {
+            const wt=gaussWeights(fS.win), offset=lo-(ci-Math.floor(fS.win/2));
+            const pairs=vals.map((v,i)=>{const wi=offset+i;const w=(wi>=0&&wi<wt.length)?wt[wi]:0;return `<span class="wd-val">${v.toFixed(1)}&times;${w.toFixed(2)}</span>`;});
+            el.innerHTML=`Weighted: ${pairs.join(' + ')} &rarr; <span class="wd-result">${fFilt[ci].y.toFixed(2)}</span>`;
+        }
+    }
+
+    function fStop() { fS.playing=false; clearInterval(fS.tid); fS.tid=null; document.getElementById('filt-play-icon').innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>'; }
+    function fStepFn() { if(fS.step<fSig.length){fS.step++;fRender();}else fStop(); }
+    function fPlay() {
+        if(fS.playing){fStop();return;} if(fS.step>=fSig.length)fS.step=0;
+        fS.playing=true; document.getElementById('filt-play-icon').innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        const spd=parseInt(document.getElementById('filt-speed').value), delay=Math.max(10,500-spd*48);
+        fS.tid=setInterval(()=>{if(fS.step>=fSig.length){fStop();return;}fS.step++;fRender();},delay);
+    }
+    function fReset() { fStop(); fS.step=0; fRender(); document.getElementById('filt-anno').innerHTML='Press <strong style="color:var(--filt)">Play</strong> or <strong style="color:var(--filt)">Step</strong> to watch the filter slide across the signal.'; }
+
+    segToggle('filt-type-tog',v=>{fS.type=v;fReset();fCalc();fFullUpd();});
+    document.getElementById('filt-win').addEventListener('input',e=>{fS.win=+e.target.value;document.getElementById('filt-win-v').textContent=fS.win;fReset();fCalc();fFullUpd();});
+    document.getElementById('filt-noise').addEventListener('input',e=>{fS.noise=+e.target.value;document.getElementById('filt-noise-v').textContent=fS.noise.toFixed(2);fGen();});
+    document.getElementById('filt-regen').addEventListener('click',fGen);
+    document.getElementById('filt-reset').addEventListener('click',fReset);
+    document.getElementById('filt-step').addEventListener('click',fStepFn);
+    document.getElementById('filt-play').addEventListener('click',fPlay);
+    document.getElementById('filt-speed').addEventListener('input',()=>{if(fS.playing){fStop();fPlay();}});
+
+    /* ===================================================================
+       TAB 2 — PEAK FINDING
+       =================================================================== */
+
+    const pc = makeChart('peak-chart');
+    pc.xL.text('Time (s)'); pc.yL.text('Amplitude');
+
+    const pRawP  = pc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',1.5).attr('opacity',0.4);
+    const pFiltP = pc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',2);
+    const pThL   = pc.g.append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',2).attr('stroke-dasharray','8 4').attr('opacity',0.8);
+    const pScan  = pc.g.append('line').attr('stroke','var(--faint)').attr('stroke-width',1.5).attr('stroke-dasharray','4 4').style('display','none');
+    const pMkG   = pc.g.append('g');
+    const pPerG  = pc.g.append('g');
+
+    let pRaw=[], pFlt=[], pS={th:0.50,minD:20,fw:5,scan:0,playing:false,tid:null};
+
+    function pGen() { pRaw=genEKG(400,72,0.12,0); pStop(); pS.scan=0; pCalc(); pFullUpd(); }
+    function pCalc() {
+        const v=pRaw.map(d=>d.y);
+        pFlt = pS.fw<=1 ? pRaw.map(d=>({...d})) : medFilt(v,pS.fw).map((y,i)=>({x:pRaw[i].x,y}));
+    }
+    function pFullUpd() {
+        const ay=pRaw.map(d=>d.y);
+        pc.xS.domain([0,pRaw[pRaw.length-1].x]);
+        pc.yS.domain([d3.min(ay)-0.2, d3.max(ay)+0.3]);
+        pc.resize(); pRender();
+    }
+    function pAllPeaks() { return findPeaks(pFlt.map(d=>d.y),pS.th,pS.minD); }
+
+    function pRender() {
+        const dims=pc.resize();
+        const ln=d3.line().x(d=>pc.xS(d.x)).y(d=>pc.yS(d.y));
+        pRawP.datum(pRaw).attr('d',ln);
+        pFiltP.datum(pFlt).attr('d',ln);
+        pThL.attr('x1',0).attr('y1',pc.yS(pS.th)).attr('x2',dims.W).attr('y2',pc.yS(pS.th));
+
+        const all=pAllPeaks(), vis=pS.scan===0?[]:pS.scan>=pFlt.length?all:all.filter(r=>r.index<=pS.scan);
+
+        if(pS.scan>0&&pS.scan<pFlt.length){const sx=pc.xS(pFlt[pS.scan].x);pScan.style('display',null).attr('x1',sx).attr('y1',0).attr('x2',sx).attr('y2',dims.H);}else pScan.style('display','none');
+
+        const mk=pMkG.selectAll('circle').data(vis,d=>d.index);
+        mk.exit().remove();
+        mk.enter().append('circle').attr('r',6).attr('stroke','#fff').attr('stroke-width',2).merge(mk)
+            .attr('cx',d=>pc.xS(pFlt[d.index].x)).attr('cy',d=>pc.yS(pFlt[d.index].y))
+            .attr('fill',d=>d.status==='accepted'?'var(--peak-ok)':'var(--peak-rej)');
+
+        const acc=vis.filter(r=>r.status==='accepted');
+        const pd=[]; for(let i=1;i<acc.length;i++) pd.push({a:acc[i-1].index,b:acc[i].index});
+        const pl=pPerG.selectAll('line').data(pd);
+        pl.exit().remove();
+        pl.enter().append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',1).attr('stroke-dasharray','3 3').attr('opacity',0.5).merge(pl)
+            .attr('x1',d=>pc.xS(pFlt[d.a].x)).attr('y1',d=>pc.yS(pFlt[d.a].y)-10)
+            .attr('x2',d=>pc.xS(pFlt[d.b].x)).attr('y2',d=>pc.yS(pFlt[d.b].y)-10);
+
+        pMetrics(acc); pAnno(vis);
+    }
+
+    function pMetrics(acc) {
+        document.getElementById('pk-count').textContent=acc.length||'\u2014';
+        if(acc.length>=2){
+            const ps=[]; for(let i=1;i<acc.length;i++) ps.push(pFlt[acc[i].index].x-pFlt[acc[i-1].index].x);
+            const av=ps.reduce((a,b)=>a+b,0)/ps.length, sd=Math.sqrt(ps.reduce((a,b)=>a+(b-av)**2,0)/ps.length);
+            document.getElementById('pk-avg').textContent=av.toFixed(3)+'s';
+            document.getElementById('pk-std').textContent=sd.toFixed(3)+'s';
+        } else { document.getElementById('pk-avg').textContent='\u2014'; document.getElementById('pk-std').textContent='\u2014'; }
+    }
+
+    function pAnno(vis) {
+        const el=document.getElementById('peak-anno');
+        if(!pS.scan){el.innerHTML='Press <strong style="color:var(--peak-ok)">Play</strong> or <strong style="color:var(--peak-ok)">Step</strong> to scan for peaks left to right.';return;}
+        if(pS.scan>=pFlt.length){const ac=vis.filter(r=>r.status==='accepted');el.innerHTML=`Scan complete. <strong style="color:var(--peak-ok)">${ac.length}</strong> peaks from ${vis.length} candidates.`;return;}
+        const rec=[...vis].reverse().find(r=>r.index<=pS.scan);
+        if(rec){const v=pFlt[rec.index].y.toFixed(2);el.innerHTML=rec.status==='accepted'?`Index ${rec.index}: <span class="wd-val">${v}</span> above threshold &rarr; <strong style="color:var(--peak-ok)">Accepted</strong>`:`Index ${rec.index}: <span class="wd-val">${v}</span> too close to previous &rarr; <strong style="color:var(--peak-rej)">Rejected</strong>`;}
+        else el.innerHTML=`Scanning... index ${pS.scan}`;
+    }
+
+    function pStop(){pS.playing=false;clearInterval(pS.tid);pS.tid=null;document.getElementById('peak-play-icon').innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';}
+    function pStepFn(){
+        if(pS.scan>=pFlt.length){pStop();return;}
+        const all=pAllPeaks(), nx=all.find(r=>r.index>pS.scan);
+        pS.scan=nx?nx.index:pFlt.length; pRender();
+    }
+    function pPlay(){
+        if(pS.playing){pStop();return;} if(pS.scan>=pFlt.length)pS.scan=0;
+        pS.playing=true; document.getElementById('peak-play-icon').innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        const spd=+document.getElementById('peak-speed').value, delay=Math.max(30,600-spd*56);
+        pS.tid=setInterval(()=>{pStepFn();if(pS.scan>=pFlt.length)pStop();},delay);
+    }
+    function pResetFn(){pStop();pS.scan=0;pRender();}
+
+    // Draggable threshold
+    let pDrag=false;
+    pc.svg.on('mousedown touchstart',function(e){
+        const r=pc.ct.node().getBoundingClientRect(), y=(e.touches?e.touches[0].clientY:e.clientY)-r.top-pc.m.top;
+        if(Math.abs(y-pc.yS(pS.th))<20){pDrag=true;e.preventDefault();}
+    });
+    d3.select(document).on('mousemove.pk touchmove.pk',function(e){
+        if(!pDrag)return; const r=pc.ct.node().getBoundingClientRect(), y=(e.touches?e.touches[0].clientY:e.clientY)-r.top-pc.m.top;
+        pS.th=Math.max(0.05,Math.min(1.8,pc.yS.invert(y)));
+        document.getElementById('pk-th').value=pS.th; document.getElementById('pk-th-v').textContent=pS.th.toFixed(2); pRender();
+    });
+    d3.select(document).on('mouseup.pk touchend.pk',()=>{pDrag=false;});
+
+    document.getElementById('pk-th').addEventListener('input',e=>{pS.th=+e.target.value;document.getElementById('pk-th-v').textContent=pS.th.toFixed(2);pResetFn();});
+    document.getElementById('pk-dist').addEventListener('input',e=>{pS.minD=+e.target.value;document.getElementById('pk-dist-v').textContent=pS.minD;pResetFn();});
+    document.getElementById('pk-fw').addEventListener('input',e=>{pS.fw=+e.target.value;document.getElementById('pk-fw-v').textContent=pS.fw;pStop();pS.scan=0;pCalc();pFullUpd();});
+    document.getElementById('peak-regen').addEventListener('click',pGen);
+    document.getElementById('peak-reset').addEventListener('click',pResetFn);
+    document.getElementById('peak-step').addEventListener('click',pStepFn);
+    document.getElementById('peak-play').addEventListener('click',pPlay);
+    document.getElementById('peak-speed').addEventListener('input',()=>{if(pS.playing){pStop();pPlay();}});
+
+    /* ===================================================================
+       TAB 3 — BASELINE DRIFT & DERIVATIVES
+       =================================================================== */
+
+    const dtc = makeChart('drift-top');
+    dtc.xL.text('Time (s)'); dtc.yL.text('Amplitude');
+    const dbc = makeChart('drift-bot');
+    dbc.xL.text('Time (s)'); dbc.yL.text('dy/dt');
+
+    const dOrigP = dtc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',2);
+    const dThL   = dtc.g.append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',2).attr('stroke-dasharray','8 4').attr('opacity',0.7);
+    const dPkG   = dtc.g.append('g');
+
+    const dDrvP  = dbc.g.append('path').attr('fill','none').attr('stroke','var(--deriv)').attr('stroke-width',2);
+    const dZeroL = dbc.g.append('line').attr('stroke','var(--faint)').attr('stroke-width',1).attr('stroke-dasharray','4 4');
+    const dZCG   = dbc.g.append('g');
+
+    let dBase=[], dSig=[], dDrv=[], dSt={stage:1,drift:0,th:0.50};
+
+    function dGen() { dBase=genEKG(400,72,0.05,0); dUpdate(); }
+
+    function dUpdate() {
+        dSig=dBase.map(d=>({x:d.x, y:d.y+dSt.drift*Math.sin(2*Math.PI*0.3*d.x)}));
+        const dv=deriv(dSig.map(d=>d.y));
+        dDrv=dv.map((y,i)=>({x:dSig[i].x,y}));
+        dRenderAll();
+    }
+
+    function dRenderAll() {
+        // Top chart
+        const ay=dSig.map(d=>d.y);
+        dtc.xS.domain([0,dSig[dSig.length-1].x]);
+        dtc.yS.domain([Math.min(d3.min(ay)-0.3,-0.5), Math.max(d3.max(ay)+0.3,1.5)]);
+        const topD=dtc.resize();
+        dOrigP.datum(dSig).attr('d',d3.line().x(d=>dtc.xS(d.x)).y(d=>dtc.yS(d.y)));
+
+        // Stage 1: threshold + peaks
+        if(dSt.stage===1){
+            dThL.style('display',null).attr('x1',0).attr('y1',dtc.yS(dSt.th)).attr('x2',topD.W).attr('y2',dtc.yS(dSt.th));
+            const res=findPeaks(dSig.map(d=>d.y),dSt.th,20), acc=res.filter(r=>r.status==='accepted');
+            const mk=dPkG.selectAll('circle').data(acc,d=>d.index);
+            mk.exit().remove();
+            mk.enter().append('circle').attr('r',5).attr('stroke','#fff').attr('stroke-width',2).attr('fill','var(--peak-ok)').merge(mk)
+                .attr('cx',d=>dtc.xS(dSig[d.index].x)).attr('cy',d=>dtc.yS(dSig[d.index].y));
+            dMetrics(acc,dSig);
+        } else {
+            dThL.style('display','none');
+            dPkG.selectAll('circle').remove();
+        }
+
+        // Bottom chart: derivative
+        const showBot=dSt.stage>=2;
+        document.getElementById('drift-bot-panel').style.display=showBot?'':'none';
+        document.getElementById('drift-zc-leg').style.display=dSt.stage===3?'':'none';
+
+        if(showBot){
+            const dy=dDrv.map(d=>d.y);
+            dbc.xS.domain([0,dDrv[dDrv.length-1].x]);
+            dbc.yS.domain([d3.min(dy)-0.05, d3.max(dy)+0.05]);
+            const botD=dbc.resize();
+            dDrvP.datum(dDrv).attr('d',d3.line().x(d=>dbc.xS(d.x)).y(d=>dbc.yS(d.y)));
+            const zy=dbc.yS(0);
+            dZeroL.attr('x1',0).attr('y1',zy).attr('x2',botD.W).attr('y2',zy);
+
+            if(dSt.stage===3){
+                const zci=findZC(dDrv.map(d=>d.y));
+                // Mark on top chart too
+                const topMk=dPkG.selectAll('circle').data(zci,d=>d);
+                topMk.exit().remove();
+                topMk.enter().append('circle').attr('r',5).attr('stroke','#fff').attr('stroke-width',2).attr('fill','var(--peak-ok)').merge(topMk)
+                    .attr('cx',d=>dtc.xS(dSig[d].x)).attr('cy',d=>dtc.yS(dSig[d].y));
+                const botMk=dZCG.selectAll('circle').data(zci,d=>d);
+                botMk.exit().remove();
+                botMk.enter().append('circle').attr('r',4).attr('stroke','#fff').attr('stroke-width',1.5).attr('fill','var(--peak-ok)').merge(botMk)
+                    .attr('cx',d=>dbc.xS(dDrv[d].x)).attr('cy',d=>dbc.yS(dDrv[d].y));
+                dMetrics(zci.map(i=>({index:i,status:'accepted'})),dSig);
+            } else {
+                dZCG.selectAll('circle').remove();
+                document.getElementById('dr-count').textContent='\u2014';
+                document.getElementById('dr-avg').textContent='\u2014';
+                document.getElementById('dr-std').textContent='\u2014';
+            }
+        } else { dZCG.selectAll('circle').remove(); }
+    }
+
+    function dMetrics(acc,sig) {
+        document.getElementById('dr-count').textContent=acc.length||'\u2014';
+        if(acc.length>=2){
+            const ps=[]; for(let i=1;i<acc.length;i++) ps.push(sig[acc[i].index].x-sig[acc[i-1].index].x);
+            const av=ps.reduce((a,b)=>a+b,0)/ps.length, sd=Math.sqrt(ps.reduce((a,b)=>a+(b-av)**2,0)/ps.length);
+            document.getElementById('dr-avg').textContent=av.toFixed(3)+'s';
+            document.getElementById('dr-std').textContent=sd.toFixed(3)+'s';
+        } else { document.getElementById('dr-avg').textContent='\u2014'; document.getElementById('dr-std').textContent='\u2014'; }
+    }
+
+    segToggle('drift-stage-tog',v=>{dSt.stage=+v;dUpdate();});
+    document.getElementById('dr-drift').addEventListener('input',e=>{dSt.drift=+e.target.value;document.getElementById('dr-drift-v').textContent=dSt.drift.toFixed(2);dUpdate();});
+    document.getElementById('dr-th').addEventListener('input',e=>{dSt.th=+e.target.value;document.getElementById('dr-th-v').textContent=dSt.th.toFixed(2);dUpdate();});
+
+    /* ===================================================================
+       GLOBAL RESIZE
+       =================================================================== */
+
+    const ro = new ResizeObserver(()=>{
+        clearTimeout(ro._t);
+        ro._t=setTimeout(()=>{
+            const ac=document.querySelector('.tab-content.active');
+            if(ac.id==='tab-filter')fRender();
+            else if(ac.id==='tab-peak')pRender();
+            else dRenderAll();
+        },80);
+    });
+    ro.observe(document.querySelector('.max-w-\\[1440px\\]'));
+
+    /* ===================================================================
+       INIT
+       =================================================================== */
+
+    fGen();
+    pGen();
+    dGen();
+});
+</script>
+</body>
+</html>
