@@ -93,9 +93,10 @@
 
     <!-- TAB NAV -->
     <div class="tab-nav mb-3" id="tab-nav">
-        <button class="tab-btn active" data-tab="filter"><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg><span>Filtering</span></button>
+        <button class="tab-btn active" data-tab="filter"><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg><span>Low Pass Filter</span></button>
+        <button class="tab-btn" data-tab="zero"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg><span>Zero Crossings</span></button>
         <button class="tab-btn" data-tab="peak"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Peak Finding</span></button>
-        <button class="tab-btn" data-tab="drift"><svg viewBox="0 0 24 24"><path d="M2 12h4l3 9 4-18 3 9h6"/></svg><span>Baseline Drift</span></button>
+        <button class="tab-btn" data-tab="drift"><svg viewBox="0 0 24 24"><path d="M2 12h4l3 9 4-18 3 9h6"/></svg><span>Drift</span></button>
     </div>
 
     <!-- ==================== TAB 1: FILTERING ==================== -->
@@ -152,7 +153,7 @@
                 <details class="panel"><summary>How does median filtering work?</summary><div class="inner">
                     <p>The median filter slides a <strong>window</strong> across the signal one sample at a time. At each position it sorts the values inside the window and picks the <strong>middle value</strong> (the median) as the output.</p>
                     <p class="mt-2">Outlying spikes get replaced by the median of their neighbors, which smooths out high-frequency noise while preserving the shape of the underlying signal. In Python, <code>scipy.signal.medfilt</code> does this.</p>
-                    <p class="mt-2"><strong>Try:</strong> Set window to 3 (minimal), then increase to 21 and watch peaks change.</p>
+                    <p class="mt-2"><strong>Try:</strong> Set window to 3 (minimal), then increase to 21 and watch the noisy sine wave become smoother. Example applications for this kind of signal include pendulum motion, a pedometer, or a breath-rate tracker.</p>
                 </div></details>
                 <details class="panel"><summary>How does Gaussian-weighted smoothing work?</summary><div class="inner">
                     <p>Instead of treating all window values equally, Gaussian smoothing applies <strong>weights</strong> shaped like a bell curve. The center value gets the highest weight and values farther from center contribute less.</p>
@@ -160,9 +161,56 @@
                     <p class="mt-2"><strong>Try:</strong> Watch the weight values inside the window as the filter steps through.</p>
                 </div></details>
                 <details class="panel"><summary>What are high-frequency vs. low-frequency signals?</summary><div class="inner">
-                    <p>A signal is a composite of components that change at different rates. <strong>Low-frequency</strong> components change slowly (like the overall heartbeat shape). <strong>High-frequency</strong> components change rapidly (like noise spikes).</p>
+                    <p>A signal is a composite of components that change at different rates. <strong>Low-frequency</strong> components change slowly (like the main sine-wave trend). <strong>High-frequency</strong> components change rapidly (like noise spikes).</p>
                     <p class="mt-2">Smoothing filters are <strong>low-pass filters</strong>: they let low frequencies pass and remove high frequencies. The window size controls the cutoff.</p>
                     <p class="mt-2">The <strong>signal-to-noise ratio</strong> (SNR) describes how much "good" signal you have relative to noise. High SNR = clean. Low SNR = buried in noise.</p>
+                </div></details>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 2: ZERO CROSSINGS ==================== -->
+    <div class="tab-content" id="tab-zero">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3">
+            <div class="flex flex-col gap-2">
+                <div class="panel relative" style="padding:8px">
+                    <div class="chart-bar top" style="justify-content:space-between;padding:0 6px">
+                        <button id="zero-regen" class="pill-btn accent"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>New Signal</button>
+                    </div>
+                    <div id="zero-chart" class="w-full" style="height:clamp(280px,42vh,420px)"></div>
+                    <div class="chart-bar bottom">
+                        <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px);display:flex;gap:12px;align-items:center">
+                            <span><span class="legend-line" style="background:var(--sig-line)"></span> Raw sine wave</span>
+                            <span><span class="legend-line" style="background:var(--filt)"></span> Smoothed signal</span>
+                            <span><span class="legend-line" style="background:var(--peak-ok)"></span> Rising zero crossings</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel metric-bar">
+                    <span class="m">Crossings</span><span class="v" id="zc-count">&mdash;</span>
+                    <span class="m">Avg Period</span><span class="v" id="zc-avg">&mdash;</span>
+                    <span class="m">Std Dev</span><span class="v" id="zc-std">&mdash;</span>
+                </div>
+                <div class="panel window-detail" id="zero-anno">We smooth the sine wave first, then measure the time between rising zero crossings.</div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div class="panel" style="padding:12px 14px"><div class="space-y-4">
+                    <div>
+                        <div class="ctrl-row"><span>Noise Level</span><span class="val mono font-bold" style="color:var(--filt)" id="zc-noise-v">0.30</span></div>
+                        <input id="zc-noise" type="range" min="0.05" max="0.80" value="0.30" step="0.05">
+                    </div>
+                    <div>
+                        <div class="ctrl-row"><span>Smoothing Window</span><span class="val mono font-bold" style="color:var(--filt)" id="zc-fw-v">11</span></div>
+                        <input id="zc-fw" type="range" min="1" max="31" value="11" step="2">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Median filter before detecting zero crossings on the sine wave.</p>
+                    </div>
+                </div></div>
+                <details class="panel"><summary>How do zero crossings find periods?</summary><div class="inner">
+                    <p>For a sine-wave-like oscillation, one cycle later the signal rises through zero again. The time between consecutive <strong>rising zero crossings</strong> is the period.</p>
+                    <p class="mt-2">We smooth first so random noise does not create extra crossings.</p><p class="mt-2">Example applications include a pendulum motion sensor, a pedometer-style repeating motion signal, or a breath-rate tracker.</p>
+                </div></details>
+                <details class="panel"><summary>Where might this be useful?</summary><div class="inner">
+                    <p>This works well for signals that are roughly sinusoidal. Example applications include a pendulum motion signal, a pedometer-like repeating motion signal, or a breath-rate tracker. By contrast, the EKG examples in the next two tabs have sharp spikes and are better handled with <strong>peak finding</strong>.</p>
                 </div></details>
             </div>
         </div>
@@ -181,22 +229,12 @@
                         <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px)">Drag the <span style="color:var(--peak-ok);font-weight:700">green threshold line</span> up or down</div>
                     </div>
                 </div>
-                <div class="panel" style="padding:10px 14px">
-                    <div class="flex items-center justify-between gap-3 flex-wrap">
-                        <div class="transport">
-                            <button id="peak-reset" title="Reset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
-                            <button id="peak-step" title="Step"><svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></button>
-                            <button id="peak-play" title="Play" style="background:var(--peak-ok);color:#fff;border-color:var(--peak-ok)"><svg viewBox="0 0 24 24" id="peak-play-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-                        </div>
-                        <div class="flex items-center gap-2"><span class="text-xs font-semibold" style="color:var(--muted)">Speed</span><input id="peak-speed" type="range" min="1" max="10" value="5" step="1" style="width:80px"></div>
-                    </div>
-                </div>
                 <div class="panel metric-bar" id="peak-metrics">
                     <span class="m">Peaks</span><span class="v" id="pk-count">&mdash;</span>
                     <span class="m">Avg Period</span><span class="v" id="pk-avg">&mdash;</span>
                     <span class="m">Std Dev</span><span class="v" id="pk-std">&mdash;</span>
                 </div>
-                <div class="panel window-detail" id="peak-anno">Press <strong style="color:var(--peak-ok)">Play</strong> or <strong style="color:var(--peak-ok)">Step</strong> to scan for peaks left to right.</div>
+                <div class="panel window-detail" id="peak-anno">Adjust the threshold, minimum distance, and noise level to see which EKG peaks are detected.</div>
             </div>
             <div class="flex flex-col gap-2">
                 <div class="panel" style="padding:12px 14px"><div class="space-y-4">
@@ -211,9 +249,9 @@
                         <p class="text-xs mt-1" style="color:var(--faint)">Minimum samples between accepted peaks.</p>
                     </div>
                     <div>
-                        <div class="ctrl-row"><span>Pre-filter Window</span><span class="val mono font-bold" style="color:var(--peak-ok)" id="pk-fw-v">5</span></div>
-                        <input id="pk-fw" type="range" min="1" max="21" value="5" step="2">
-                        <p class="text-xs mt-1" style="color:var(--faint)">Median filter before detection. 1 = no filtering.</p>
+                        <div class="ctrl-row"><span>Noise Level</span><span class="val mono font-bold" style="color:var(--peak-ok)" id="pk-noise-v">0.08</span></div>
+                        <input id="pk-noise" type="range" min="0.00" max="0.30" value="0.08" step="0.01">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Higher noise adds more jitter and makes threshold selection harder.</p>
                     </div>
                 </div></div>
                 <details class="panel"><summary>How does peak detection work?</summary><div class="inner">
@@ -221,34 +259,37 @@
                     <p class="mt-2">If both are true the point is a <strong>candidate</strong>. Then: is it at least <code>min_distance</code> samples from the last accepted peak? If yes, <strong>accepted</strong> (green). If too close, <strong>rejected</strong> (red).</p>
                     <p class="mt-2">The <strong>period</strong> is the spacing between consecutive peaks. A stable average period means a consistent rhythm like a heartbeat.</p>
                 </div></details>
-                <details class="panel"><summary>Why filter before finding peaks?</summary><div class="inner">
-                    <p>Noise creates false local maxima. A small random spike can trick the algorithm.</p>
-                    <p class="mt-2">Smoothing first removes small spikes so the real peaks stand out.</p>
-                    <p class="mt-2"><strong>Try:</strong> Set pre-filter to 1 (none) and watch false peaks appear.</p>
+                <details class="panel"><summary>Why can noise cause trouble?</summary><div class="inner">
+                    <p>Noise creates false local maxima. A small random spike can trick the algorithm into looking like a heartbeat peak.</p>
+                    <p class="mt-2">That is why the threshold and minimum peak distance matter. They help reject many noisy spikes without changing the underlying signal first.</p>
+                    <p class="mt-2"><strong>Try:</strong> Increase the noise level and then adjust the threshold to recover the main R peaks.</p>
                 </div></details>
             </div>
         </div>
     </div>
 
-    <!-- ==================== TAB 3: BASELINE DRIFT ==================== -->
+    <!-- ==================== TAB 4: EKG BASELINE DRIFT REMOVAL ==================== -->
     <div class="tab-content" id="tab-drift">
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3">
             <div class="flex flex-col gap-2">
                 <div class="panel relative" style="padding:8px">
-                    <div id="drift-top" class="w-full" style="height:clamp(200px,28vh,300px)"></div>
+                    <div class="chart-bar top" style="justify-content:space-between;padding:0 6px">
+                        <button id="drift-regen" class="pill-btn accent" style="background:var(--deriv);border-color:var(--deriv)"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>New Signal</button>
+                    </div>
+                    <div id="drift-top" class="w-full" style="height:clamp(220px,30vh,320px)"></div>
                     <div class="chart-bar bottom">
                         <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px);display:flex;gap:12px;align-items:center">
-                            <span><span class="legend-line" style="background:var(--sig-line)"></span> Signal + Drift</span>
-                            <span><span class="legend-line" style="background:var(--peak-ok)"></span> Detected Peaks</span>
+                            <span><span class="legend-line" style="background:var(--sig-line)"></span> Raw EKG + drift</span>
+                            <span><span class="legend-line" style="background:var(--deriv)"></span> Median baseline estimate</span>
                         </div>
                     </div>
                 </div>
-                <div class="panel relative" style="padding:8px" id="drift-bot-panel">
-                    <div id="drift-bot" class="w-full" style="height:clamp(180px,24vh,260px)"></div>
+                <div class="panel relative" style="padding:8px">
+                    <div id="drift-bot" class="w-full" style="height:clamp(220px,30vh,320px)"></div>
                     <div class="chart-bar bottom">
                         <div style="font-size:12px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.9);padding:5px 14px;border-radius:9px;border:1px solid var(--border);backdrop-filter:blur(4px);display:flex;gap:12px;align-items:center">
-                            <span><span class="legend-line" style="background:var(--deriv)"></span> Derivative: dy[i] = y[i+1] &minus; y[i]</span>
-                            <span id="drift-zc-leg" style="display:none"><span class="legend-line" style="background:var(--peak-ok)"></span> Zero Crossings</span>
+                            <span><span class="legend-line" style="background:var(--filt)"></span> Signal used for peak finding</span>
+                            <span><span class="legend-line" style="background:var(--peak-ok)"></span> Detected R peaks</span>
                         </div>
                     </div>
                 </div>
@@ -257,39 +298,37 @@
                     <span class="m">Avg Period</span><span class="v" id="dr-avg">&mdash;</span>
                     <span class="m">Std Dev</span><span class="v" id="dr-std">&mdash;</span>
                 </div>
+                <div class="panel window-detail" id="drift-anno">A long median filter estimates the slow baseline drift. Subtract it from the raw signal, then run the same threshold peak finder. This tab uses an EKG example.</div>
             </div>
             <div class="flex flex-col gap-2">
-                <div class="panel" style="padding:12px 14px">
-                    <div class="ctrl-row" style="margin-bottom:8px"><span>Stage</span></div>
-                    <div class="seg-toggle drift-color" id="drift-stage-tog">
-                        <label class="active"><input type="radio" name="ds" value="1" checked>1. The Problem</label>
-                        <label><input type="radio" name="ds" value="2">2. Derivative</label>
-                        <label><input type="radio" name="ds" value="3">3. Zero Cross</label>
-                    </div>
-                </div>
                 <div class="panel" style="padding:12px 14px"><div class="space-y-4">
                     <div>
-                        <div class="ctrl-row"><span>Drift Amount</span><span class="val mono font-bold" style="color:var(--deriv)" id="dr-drift-v">0.00</span></div>
-                        <input id="dr-drift" type="range" min="0.0" max="1.5" value="0.0" step="0.05">
-                        <p class="text-xs mt-1" style="color:var(--faint)">Adds slow baseline wander. Watch peak detection break.</p>
+                        <div class="ctrl-row"><span>Drift Amount</span><span class="val mono font-bold" style="color:var(--deriv)" id="dr-drift-v">0.40</span></div>
+                        <input id="dr-drift" type="range" min="0.0" max="1.5" value="0.40" step="0.05">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Adds slow baseline wander to the EKG.</p>
                     </div>
                     <div>
-                        <div class="ctrl-row"><span>Threshold (Stage 1)</span><span class="val mono font-bold" style="color:var(--deriv)" id="dr-th-v">0.50</span></div>
+                        <div class="ctrl-row"><span>Baseline Median Window</span><span class="val mono font-bold" style="color:var(--deriv)" id="dr-fw-v">81</span></div>
+                        <input id="dr-fw" type="range" min="11" max="151" value="81" step="2">
+                        <p class="text-xs mt-1" style="color:var(--faint)">Long window to estimate only the slow baseline.</p>
+                    </div>
+                    <div>
+                        <div class="ctrl-row"><span>Peak Threshold</span><span class="val mono font-bold" style="color:var(--peak-ok)" id="dr-th-v">0.50</span></div>
                         <input id="dr-th" type="range" min="0.05" max="1.8" value="0.50" step="0.01">
                     </div>
+                    <div>
+                        <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--sub);cursor:pointer">
+                            <input id="dr-use-baseline" type="checkbox" checked style="width:16px;height:16px">
+                            Subtract median baseline estimate
+                        </label>
+                        <p class="text-xs mt-1" style="color:var(--faint)">Turn this off to compare peak finding on the original drifted EKG.</p>
+                    </div>
                 </div></div>
-                <details class="panel"><summary>Why does baseline drift break peak detection?</summary><div class="inner">
-                    <p>Peak detection uses a fixed <strong>threshold</strong>. When the baseline drifts upward, noise bumps cross the threshold (false positives). When it drifts downward, real peaks drop below (missed detections).</p>
-                    <p class="mt-2">Real EKG data almost always has baseline wander from breathing, electrode movement, or electrical interference.</p>
+                <details class="panel"><summary>Why use a median filter here?</summary><div class="inner">
+                    <p>A long-window median filter follows the <strong>slow baseline drift</strong> but ignores the narrow R peaks better than a moving average does. That makes it a good simple baseline estimate.</p>
                 </div></details>
-                <details class="panel"><summary>How does the derivative act as a high-pass filter?</summary><div class="inner">
-                    <p>The derivative <code>dy[i] = y[i+1] - y[i]</code> measures how fast the signal <strong>changes</strong>. Slow drift changes very little between samples so its derivative is near zero. Sharp QRS spikes change rapidly so they produce large derivative values.</p>
-                    <p class="mt-2">This removes slow drift (low-frequency) and preserves fast spikes (high-frequency). That is exactly what a <strong>high-pass filter</strong> does.</p>
-                    <p class="mt-2">The smoothing filters in the Filtering tab are <strong>low-pass</strong> (remove high frequencies). The derivative is the opposite: a <strong>high-pass filter</strong> that removes low frequencies like baseline drift.</p>
-                </div></details>
-                <details class="panel"><summary>How do zero crossings find periods?</summary><div class="inner">
-                    <p>After taking the derivative, each original peak becomes a point where the derivative crosses from <strong>positive to negative</strong>. This is because the signal goes from rising to falling at a peak.</p>
-                    <p class="mt-2">By finding these zero crossings we locate peaks <strong>without needing a threshold</strong>. The spacing between consecutive crossings gives the heartbeat period.</p>
+                <details class="panel"><summary>What is the correction step?</summary><div class="inner">
+                    <p>First estimate the baseline with a long median filter. Then compute <code>corrected = raw - baseline</code>. After that, the same threshold peak detector works much better.</p>
                 </div></details>
             </div>
         </div>
@@ -466,6 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
             requestAnimationFrame(()=>{
                 if(btn.dataset.tab==='filter') fRender();
+                if(btn.dataset.tab==='zero')   zRender();
                 if(btn.dataset.tab==='peak')   pRender();
                 if(btn.dataset.tab==='drift')  dRenderAll();
             });
@@ -569,94 +609,135 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('filt-speed').addEventListener('input',()=>{if(fS.playing){fStop();fPlay();}});
 
     /* ===================================================================
+       TAB 2 — ZERO CROSSINGS
+       =================================================================== */
+
+    const zc = makeChart('zero-chart');
+    zc.xL.text('Time (s)'); zc.yL.text('Amplitude');
+    const zRawP = zc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',1.5).attr('opacity',0.45);
+    const zFiltP = zc.g.append('path').attr('fill','none').attr('stroke','var(--filt)').attr('stroke-width',2.5);
+    const zZeroL = zc.g.append('line').attr('stroke','var(--faint)').attr('stroke-width',1).attr('stroke-dasharray','4 4');
+    const zMkG = zc.g.append('g');
+
+    let zSig=[], zFilt=[], zS={noise:0.30, fw:11};
+
+    function risingZeroCrossings(v) {
+        const idx=[];
+        for(let i=0;i<v.length-1;i++) if(v[i] < 0 && v[i+1] >= 0) idx.push(i+1);
+        return idx;
+    }
+
+    function zGen() {
+        zSig = genSine(240,0.8,8,zS.noise);
+        zCalc();
+        zRender();
+    }
+    function zCalc() {
+        const y = medFilt(zSig.map(d=>d.y), zS.fw);
+        zFilt = y.map((yy,i)=>({x:zSig[i].x,y:yy}));
+    }
+    function zRender() {
+        if(!zSig.length) return;
+        const ys = zSig.map(d=>d.y).concat(zFilt.map(d=>d.y));
+        zc.xS.domain([0,zSig[zSig.length-1].x]);
+        zc.yS.domain([d3.min(ys)-0.25, d3.max(ys)+0.25]);
+        const dims = zc.resize();
+        const ln = d3.line().x(d=>zc.xS(d.x)).y(d=>zc.yS(d.y));
+        zRawP.datum(zSig).attr('d',ln);
+        zFiltP.datum(zFilt).attr('d',ln);
+        zZeroL.attr('x1',0).attr('y1',zc.yS(0)).attr('x2',dims.W).attr('y2',zc.yS(0));
+
+        const idx = risingZeroCrossings(zFilt.map(d=>d.y));
+        const mk = zMkG.selectAll('circle').data(idx,d=>d);
+        mk.exit().remove();
+        mk.enter().append('circle').attr('r',5).attr('stroke','#fff').attr('stroke-width',2).attr('fill','var(--peak-ok)').merge(mk)
+            .attr('cx',i=>zc.xS(zFilt[i].x)).attr('cy',i=>zc.yS(zFilt[i].y));
+
+        document.getElementById('zc-count').textContent = idx.length || '—';
+        if(idx.length >= 2) {
+            const ps=[];
+            for(let i=1;i<idx.length;i++) ps.push(zFilt[idx[i]].x - zFilt[idx[i-1]].x);
+            const av=ps.reduce((a,b)=>a+b,0)/ps.length;
+            const sd=Math.sqrt(ps.reduce((a,b)=>a+(b-av)**2,0)/ps.length);
+            document.getElementById('zc-avg').textContent = av.toFixed(3)+'s';
+            document.getElementById('zc-std').textContent = sd.toFixed(3)+'s';
+            document.getElementById('zero-anno').innerHTML = `Found <strong style="color:var(--peak-ok)">${idx.length}</strong> rising zero crossings on the smoothed sine wave.`;
+        } else {
+            document.getElementById('zc-avg').textContent='—';
+            document.getElementById('zc-std').textContent='—';
+        }
+    }
+
+    document.getElementById('zc-noise').addEventListener('input',e=>{zS.noise=+e.target.value;document.getElementById('zc-noise-v').textContent=zS.noise.toFixed(2);zGen();});
+    document.getElementById('zc-fw').addEventListener('input',e=>{zS.fw=+e.target.value;document.getElementById('zc-fw-v').textContent=zS.fw;zCalc();zRender();});
+    document.getElementById('zero-regen').addEventListener('click',zGen);
+
+    /* ===================================================================
        TAB 2 — PEAK FINDING
        =================================================================== */
 
     const pc = makeChart('peak-chart');
     pc.xL.text('Time (s)'); pc.yL.text('Amplitude');
 
-    const pRawP  = pc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',1.5).attr('opacity',0.4);
-    const pFiltP = pc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',2);
+    const pRawP  = pc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',2);
     const pThL   = pc.g.append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',2).attr('stroke-dasharray','8 4').attr('opacity',0.8);
-    const pScan  = pc.g.append('line').attr('stroke','var(--faint)').attr('stroke-width',1.5).attr('stroke-dasharray','4 4').style('display','none');
     const pMkG   = pc.g.append('g');
-    const pPerG  = pc.g.append('g');
 
-    let pRaw=[], pFlt=[], pS={th:0.50,minD:20,fw:5,scan:0,playing:false,tid:null};
+    let pRaw=[], pS={th:0.50,minD:20,noise:0.08};
 
-    function pGen() { pRaw=genEKG(400,72,0.12,0); pStop(); pS.scan=0; pCalc(); pFullUpd(); }
-    function pCalc() {
-        const v=pRaw.map(d=>d.y);
-        pFlt = pS.fw<=1 ? pRaw.map(d=>({...d})) : medFilt(v,pS.fw).map((y,i)=>({x:pRaw[i].x,y}));
+    function pGen() {
+        pRaw = genEKG(400,72,pS.noise,0);
+        pFullUpd();
     }
     function pFullUpd() {
         const ay=pRaw.map(d=>d.y);
         pc.xS.domain([0,pRaw[pRaw.length-1].x]);
         pc.yS.domain([d3.min(ay)-0.2, d3.max(ay)+0.3]);
-        pc.resize(); pRender();
+        pc.resize();
+        pRender();
     }
-    function pAllPeaks() { return findPeaks(pFlt.map(d=>d.y),pS.th,pS.minD); }
+    function pAllPeaks() { return findPeaks(pRaw.map(d=>d.y),pS.th,pS.minD); }
 
     function pRender() {
         const dims=pc.resize();
         const ln=d3.line().x(d=>pc.xS(d.x)).y(d=>pc.yS(d.y));
         pRawP.datum(pRaw).attr('d',ln);
-        pFiltP.datum(pFlt).attr('d',ln);
         pThL.attr('x1',0).attr('y1',pc.yS(pS.th)).attr('x2',dims.W).attr('y2',pc.yS(pS.th));
 
-        const all=pAllPeaks(), vis=pS.scan===0?[]:pS.scan>=pFlt.length?all:all.filter(r=>r.index<=pS.scan);
-
-        if(pS.scan>0&&pS.scan<pFlt.length){const sx=pc.xS(pFlt[pS.scan].x);pScan.style('display',null).attr('x1',sx).attr('y1',0).attr('x2',sx).attr('y2',dims.H);}else pScan.style('display','none');
-
-        const mk=pMkG.selectAll('circle').data(vis,d=>d.index);
+        const all=pAllPeaks();
+        const mk=pMkG.selectAll('circle').data(all,d=>d.index);
         mk.exit().remove();
         mk.enter().append('circle').attr('r',6).attr('stroke','#fff').attr('stroke-width',2).merge(mk)
-            .attr('cx',d=>pc.xS(pFlt[d.index].x)).attr('cy',d=>pc.yS(pFlt[d.index].y))
+            .attr('cx',d=>pc.xS(pRaw[d.index].x)).attr('cy',d=>pc.yS(pRaw[d.index].y))
             .attr('fill',d=>d.status==='accepted'?'var(--peak-ok)':'var(--peak-rej)');
 
-        const acc=vis.filter(r=>r.status==='accepted');
-        const pd=[]; for(let i=1;i<acc.length;i++) pd.push({a:acc[i-1].index,b:acc[i].index});
-        const pl=pPerG.selectAll('line').data(pd);
-        pl.exit().remove();
-        pl.enter().append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',1).attr('stroke-dasharray','3 3').attr('opacity',0.5).merge(pl)
-            .attr('x1',d=>pc.xS(pFlt[d.a].x)).attr('y1',d=>pc.yS(pFlt[d.a].y)-10)
-            .attr('x2',d=>pc.xS(pFlt[d.b].x)).attr('y2',d=>pc.yS(pFlt[d.b].y)-10);
-
-        pMetrics(acc); pAnno(vis);
+        const acc=all.filter(r=>r.status==='accepted');
+        pMetrics(acc); pAnno(all, acc);
     }
 
     function pMetrics(acc) {
-        document.getElementById('pk-count').textContent=acc.length||'\u2014';
+        document.getElementById('pk-count').textContent=acc.length||'—';
         if(acc.length>=2){
-            const ps=[]; for(let i=1;i<acc.length;i++) ps.push(pFlt[acc[i].index].x-pFlt[acc[i-1].index].x);
+            const ps=[]; for(let i=1;i<acc.length;i++) ps.push(pRaw[acc[i].index].x-pRaw[acc[i-1].index].x);
             const av=ps.reduce((a,b)=>a+b,0)/ps.length, sd=Math.sqrt(ps.reduce((a,b)=>a+(b-av)**2,0)/ps.length);
             document.getElementById('pk-avg').textContent=av.toFixed(3)+'s';
             document.getElementById('pk-std').textContent=sd.toFixed(3)+'s';
-        } else { document.getElementById('pk-avg').textContent='\u2014'; document.getElementById('pk-std').textContent='\u2014'; }
+        } else {
+            document.getElementById('pk-avg').textContent='—';
+            document.getElementById('pk-std').textContent='—';
+        }
     }
 
-    function pAnno(vis) {
+    function pAnno(all, acc) {
         const el=document.getElementById('peak-anno');
-        if(!pS.scan){el.innerHTML='Press <strong style="color:var(--peak-ok)">Play</strong> or <strong style="color:var(--peak-ok)">Step</strong> to scan for peaks left to right.';return;}
-        if(pS.scan>=pFlt.length){const ac=vis.filter(r=>r.status==='accepted');el.innerHTML=`Scan complete. <strong style="color:var(--peak-ok)">${ac.length}</strong> peaks from ${vis.length} candidates.`;return;}
-        const rec=[...vis].reverse().find(r=>r.index<=pS.scan);
-        if(rec){const v=pFlt[rec.index].y.toFixed(2);el.innerHTML=rec.status==='accepted'?`Index ${rec.index}: <span class="wd-val">${v}</span> above threshold &rarr; <strong style="color:var(--peak-ok)">Accepted</strong>`:`Index ${rec.index}: <span class="wd-val">${v}</span> too close to previous &rarr; <strong style="color:var(--peak-rej)">Rejected</strong>`;}
-        else el.innerHTML=`Scanning... index ${pS.scan}`;
+        if(!all.length){
+            el.innerHTML='Detected <strong style="color:var(--peak-ok)">0</strong> accepted peaks and <strong style="color:var(--peak-rej)">0</strong> rejected candidates.';
+            return;
+        }
+        const rej=all.filter(r=>r.status==='rejected').length;
+        el.innerHTML=`Detected <strong style="color:var(--peak-ok)">${acc.length}</strong> accepted peaks and <strong style="color:var(--peak-rej)">${rej}</strong> rejected candidates.`;
     }
 
-    function pStop(){pS.playing=false;clearInterval(pS.tid);pS.tid=null;document.getElementById('peak-play-icon').innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';}
-    function pStepFn(){
-        if(pS.scan>=pFlt.length){pStop();return;}
-        const all=pAllPeaks(), nx=all.find(r=>r.index>pS.scan);
-        pS.scan=nx?nx.index:pFlt.length; pRender();
-    }
-    function pPlay(){
-        if(pS.playing){pStop();return;} if(pS.scan>=pFlt.length)pS.scan=0;
-        pS.playing=true; document.getElementById('peak-play-icon').innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-        const spd=+document.getElementById('peak-speed').value, delay=Math.max(30,600-spd*56);
-        pS.tid=setInterval(()=>{pStepFn();if(pS.scan>=pFlt.length)pStop();},delay);
-    }
-    function pResetFn(){pStop();pS.scan=0;pRender();}
 
     // Draggable threshold
     let pDrag=false;
@@ -667,117 +748,92 @@ document.addEventListener('DOMContentLoaded', function() {
     d3.select(document).on('mousemove.pk touchmove.pk',function(e){
         if(!pDrag)return; const r=pc.ct.node().getBoundingClientRect(), y=(e.touches?e.touches[0].clientY:e.clientY)-r.top-pc.m.top;
         pS.th=Math.max(0.05,Math.min(1.8,pc.yS.invert(y)));
-        document.getElementById('pk-th').value=pS.th; document.getElementById('pk-th-v').textContent=pS.th.toFixed(2); pRender();
+        document.getElementById('pk-th').value=pS.th;
+        document.getElementById('pk-th-v').textContent=pS.th.toFixed(2);
+        pRender();
     });
     d3.select(document).on('mouseup.pk touchend.pk',()=>{pDrag=false;});
 
-    document.getElementById('pk-th').addEventListener('input',e=>{pS.th=+e.target.value;document.getElementById('pk-th-v').textContent=pS.th.toFixed(2);pResetFn();});
-    document.getElementById('pk-dist').addEventListener('input',e=>{pS.minD=+e.target.value;document.getElementById('pk-dist-v').textContent=pS.minD;pResetFn();});
-    document.getElementById('pk-fw').addEventListener('input',e=>{pS.fw=+e.target.value;document.getElementById('pk-fw-v').textContent=pS.fw;pStop();pS.scan=0;pCalc();pFullUpd();});
+    document.getElementById('pk-th').addEventListener('input',e=>{pS.th=+e.target.value;document.getElementById('pk-th-v').textContent=pS.th.toFixed(2);pRender();});
+    document.getElementById('pk-dist').addEventListener('input',e=>{pS.minD=+e.target.value;document.getElementById('pk-dist-v').textContent=pS.minD;pRender();});
+    document.getElementById('pk-noise').addEventListener('input',e=>{pS.noise=+e.target.value;document.getElementById('pk-noise-v').textContent=pS.noise.toFixed(2);pGen();});
     document.getElementById('peak-regen').addEventListener('click',pGen);
-    document.getElementById('peak-reset').addEventListener('click',pResetFn);
-    document.getElementById('peak-step').addEventListener('click',pStepFn);
-    document.getElementById('peak-play').addEventListener('click',pPlay);
-    document.getElementById('peak-speed').addEventListener('input',()=>{if(pS.playing){pStop();pPlay();}});
 
     /* ===================================================================
-       TAB 3 — BASELINE DRIFT & DERIVATIVES
+       TAB 4 — EKG BASELINE DRIFT REMOVAL
        =================================================================== */
 
     const dtc = makeChart('drift-top');
     dtc.xL.text('Time (s)'); dtc.yL.text('Amplitude');
     const dbc = makeChart('drift-bot');
-    dbc.xL.text('Time (s)'); dbc.yL.text('dy/dt');
+    dbc.xL.text('Time (s)'); dbc.yL.text('Amplitude');
 
     const dOrigP = dtc.g.append('path').attr('fill','none').attr('stroke','var(--sig-line)').attr('stroke-width',2);
-    const dThL   = dtc.g.append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',2).attr('stroke-dasharray','8 4').attr('opacity',0.7);
-    const dPkG   = dtc.g.append('g');
+    const dBaseP = dtc.g.append('path').attr('fill','none').attr('stroke','var(--deriv)').attr('stroke-width',2.5);
+    const dCorrP = dbc.g.append('path').attr('fill','none').attr('stroke','var(--filt)').attr('stroke-width',2);
+    const dThL   = dbc.g.append('line').attr('stroke','var(--peak-ok)').attr('stroke-width',2).attr('stroke-dasharray','8 4').attr('opacity',0.8);
+    const dPkG   = dbc.g.append('g');
 
-    const dDrvP  = dbc.g.append('path').attr('fill','none').attr('stroke','var(--deriv)').attr('stroke-width',2);
-    const dZeroL = dbc.g.append('line').attr('stroke','var(--faint)').attr('stroke-width',1).attr('stroke-dasharray','4 4');
-    const dZCG   = dbc.g.append('g');
+    let dRaw=[], dBase=[], dCorr=[], dSt={drift:0.40, th:0.50, fw:81, useBaseline:true};
 
-    let dBase=[], dSig=[], dDrv=[], dSt={stage:1,drift:0,th:0.50};
-
-    function dGen() { dBase=genEKG(400,72,0.05,0); dUpdate(); }
+    function dGen() {
+        dRaw = genEKG(400,72,0.05,dSt.drift);
+        dUpdate();
+    }
 
     function dUpdate() {
-        dSig=dBase.map(d=>({x:d.x, y:d.y+dSt.drift*Math.sin(2*Math.PI*0.3*d.x)}));
-        const dv=deriv(dSig.map(d=>d.y));
-        dDrv=dv.map((y,i)=>({x:dSig[i].x,y}));
+        const rawY = dRaw.map(d=>d.y);
+        const baseY = medFilt(rawY, dSt.fw);
+        dBase = baseY.map((y,i)=>({x:dRaw[i].x,y}));
+        dCorr = dRaw.map((d,i)=>({x:d.x, y:d.y - baseY[i]}));
         dRenderAll();
     }
 
     function dRenderAll() {
-        // Top chart
-        const ay=dSig.map(d=>d.y);
-        dtc.xS.domain([0,dSig[dSig.length-1].x]);
-        dtc.yS.domain([Math.min(d3.min(ay)-0.3,-0.5), Math.max(d3.max(ay)+0.3,1.5)]);
-        const topD=dtc.resize();
-        dOrigP.datum(dSig).attr('d',d3.line().x(d=>dtc.xS(d.x)).y(d=>dtc.yS(d.y)));
+        if(!dRaw.length) return;
+        const topY = dRaw.map(d=>d.y).concat(dBase.map(d=>d.y));
+        dtc.xS.domain([0,dRaw[dRaw.length-1].x]);
+        dtc.yS.domain([d3.min(topY)-0.25, d3.max(topY)+0.25]);
+        dtc.resize();
+        const topLn=d3.line().x(d=>dtc.xS(d.x)).y(d=>dtc.yS(d.y));
+        dOrigP.datum(dRaw).attr('d',topLn);
+        dBaseP.datum(dBase).attr('d',topLn);
 
-        // Stage 1: threshold + peaks
-        if(dSt.stage===1){
-            dThL.style('display',null).attr('x1',0).attr('y1',dtc.yS(dSt.th)).attr('x2',topD.W).attr('y2',dtc.yS(dSt.th));
-            const res=findPeaks(dSig.map(d=>d.y),dSt.th,20), acc=res.filter(r=>r.status==='accepted');
-            const mk=dPkG.selectAll('circle').data(acc,d=>d.index);
-            mk.exit().remove();
-            mk.enter().append('circle').attr('r',5).attr('stroke','#fff').attr('stroke-width',2).attr('fill','var(--peak-ok)').merge(mk)
-                .attr('cx',d=>dtc.xS(dSig[d.index].x)).attr('cy',d=>dtc.yS(dSig[d.index].y));
-            dMetrics(acc,dSig);
-        } else {
-            dThL.style('display','none');
-            dPkG.selectAll('circle').remove();
-        }
+        const botSig = dSt.useBaseline ? dCorr : dRaw;
+        const botY = botSig.map(d=>d.y);
+        dbc.xS.domain([0,botSig[botSig.length-1].x]);
+        dbc.yS.domain([d3.min(botY)-0.25, d3.max(botY)+0.25]);
+        const botDims=dbc.resize();
+        const botLn=d3.line().x(d=>dbc.xS(d.x)).y(d=>dbc.yS(d.y));
+        dCorrP.datum(botSig).attr('d',botLn);
+        dThL.attr('x1',0).attr('y1',dbc.yS(dSt.th)).attr('x2',botDims.W).attr('y2',dbc.yS(dSt.th));
 
-        // Bottom chart: derivative
-        const showBot=dSt.stage>=2;
-        document.getElementById('drift-bot-panel').style.display=showBot?'':'none';
-        document.getElementById('drift-zc-leg').style.display=dSt.stage===3?'':'none';
-
-        if(showBot){
-            const dy=dDrv.map(d=>d.y);
-            dbc.xS.domain([0,dDrv[dDrv.length-1].x]);
-            dbc.yS.domain([d3.min(dy)-0.05, d3.max(dy)+0.05]);
-            const botD=dbc.resize();
-            dDrvP.datum(dDrv).attr('d',d3.line().x(d=>dbc.xS(d.x)).y(d=>dbc.yS(d.y)));
-            const zy=dbc.yS(0);
-            dZeroL.attr('x1',0).attr('y1',zy).attr('x2',botD.W).attr('y2',zy);
-
-            if(dSt.stage===3){
-                const zci=findZC(dDrv.map(d=>d.y));
-                // Mark on top chart too
-                const topMk=dPkG.selectAll('circle').data(zci,d=>d);
-                topMk.exit().remove();
-                topMk.enter().append('circle').attr('r',5).attr('stroke','#fff').attr('stroke-width',2).attr('fill','var(--peak-ok)').merge(topMk)
-                    .attr('cx',d=>dtc.xS(dSig[d].x)).attr('cy',d=>dtc.yS(dSig[d].y));
-                const botMk=dZCG.selectAll('circle').data(zci,d=>d);
-                botMk.exit().remove();
-                botMk.enter().append('circle').attr('r',4).attr('stroke','#fff').attr('stroke-width',1.5).attr('fill','var(--peak-ok)').merge(botMk)
-                    .attr('cx',d=>dbc.xS(dDrv[d].x)).attr('cy',d=>dbc.yS(dDrv[d].y));
-                dMetrics(zci.map(i=>({index:i,status:'accepted'})),dSig);
-            } else {
-                dZCG.selectAll('circle').remove();
-                document.getElementById('dr-count').textContent='\u2014';
-                document.getElementById('dr-avg').textContent='\u2014';
-                document.getElementById('dr-std').textContent='\u2014';
-            }
-        } else { dZCG.selectAll('circle').remove(); }
+        const res=findPeaks(botSig.map(d=>d.y),dSt.th,20), acc=res.filter(r=>r.status==='accepted');
+        const mk=dPkG.selectAll('circle').data(acc,d=>d.index);
+        mk.exit().remove();
+        mk.enter().append('circle').attr('r',5).attr('stroke','#fff').attr('stroke-width',2).attr('fill','var(--peak-ok)').merge(mk)
+            .attr('cx',d=>dbc.xS(botSig[d.index].x)).attr('cy',d=>dbc.yS(botSig[d.index].y));
+        dMetrics(acc,botSig);
+        document.getElementById('drift-anno').innerHTML = dSt.useBaseline
+            ? `Median baseline window <span class="wd-val">${dSt.fw}</span>. Compute <span class="wd-result">corrected = raw - baseline</span>, then detect peaks on the baseline-corrected EKG.`
+            : `Median baseline window <span class="wd-val">${dSt.fw}</span>. Peak finding is currently running on the original drifted EKG so you can compare it to the corrected version.`;
     }
 
     function dMetrics(acc,sig) {
-        document.getElementById('dr-count').textContent=acc.length||'\u2014';
+        document.getElementById('dr-count').textContent=acc.length||'—';
         if(acc.length>=2){
             const ps=[]; for(let i=1;i<acc.length;i++) ps.push(sig[acc[i].index].x-sig[acc[i-1].index].x);
             const av=ps.reduce((a,b)=>a+b,0)/ps.length, sd=Math.sqrt(ps.reduce((a,b)=>a+(b-av)**2,0)/ps.length);
             document.getElementById('dr-avg').textContent=av.toFixed(3)+'s';
             document.getElementById('dr-std').textContent=sd.toFixed(3)+'s';
-        } else { document.getElementById('dr-avg').textContent='\u2014'; document.getElementById('dr-std').textContent='\u2014'; }
+        } else { document.getElementById('dr-avg').textContent='—'; document.getElementById('dr-std').textContent='—'; }
     }
 
-    segToggle('drift-stage-tog',v=>{dSt.stage=+v;dUpdate();});
-    document.getElementById('dr-drift').addEventListener('input',e=>{dSt.drift=+e.target.value;document.getElementById('dr-drift-v').textContent=dSt.drift.toFixed(2);dUpdate();});
-    document.getElementById('dr-th').addEventListener('input',e=>{dSt.th=+e.target.value;document.getElementById('dr-th-v').textContent=dSt.th.toFixed(2);dUpdate();});
+    document.getElementById('dr-drift').addEventListener('input',e=>{dSt.drift=+e.target.value;document.getElementById('dr-drift-v').textContent=dSt.drift.toFixed(2);dGen();});
+    document.getElementById('dr-fw').addEventListener('input',e=>{dSt.fw=+e.target.value;document.getElementById('dr-fw-v').textContent=dSt.fw;dUpdate();});
+    document.getElementById('dr-th').addEventListener('input',e=>{dSt.th=+e.target.value;document.getElementById('dr-th-v').textContent=dSt.th.toFixed(2);dRenderAll();});
+    document.getElementById('dr-use-baseline').addEventListener('change',e=>{dSt.useBaseline=e.target.checked;dRenderAll();});
+    document.getElementById('drift-regen').addEventListener('click',dGen);
 
     /* ===================================================================
        GLOBAL RESIZE
@@ -788,6 +844,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ro._t=setTimeout(()=>{
             const ac=document.querySelector('.tab-content.active');
             if(ac.id==='tab-filter')fRender();
+            else if(ac.id==='tab-zero')zRender();
             else if(ac.id==='tab-peak')pRender();
             else dRenderAll();
         },80);
@@ -799,6 +856,7 @@ document.addEventListener('DOMContentLoaded', function() {
        =================================================================== */
 
     fGen();
+    zGen();
     pGen();
     dGen();
 });
