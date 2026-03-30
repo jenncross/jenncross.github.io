@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1d21; --sub: #4a5060; --muted: #6e7685; --faint: #9ea5b0;
+            --border: #d5dae2; --surface: #f3f5f8; --bg: #ebeef3; --card: #fff;
+            --lo: #0064e0; --lo-soft: #e0f0ff; --lo-mid: #b0d4ff;
+            --po: #7c3aed; --po-soft: #ede5ff; --po-mid: #c7b2ff;
+            --danger: #dc2626; --success: #16a34a;
+            --class-a: #0064e0; --class-a-soft: #e0f0ff;
+            --class-b: #e05d00; --class-b-soft: #fff0e0;
+            --R: 14px;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); margin: 0; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+        code, .mono { font-family: 'DM Mono', monospace; font-size: 0.9em; }
+        .axis-label { font-size: 13px; font-weight: 500; fill: var(--muted); }
+        .domain { stroke: var(--border); stroke-width: 1.5; }
+        .tick line { stroke: #e5e7eb; }
+        .tick text { fill: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; }
+        .panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--R); }
+        .ctrl-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 5px; }
+        .ctrl-row .val { text-transform: none; letter-spacing: 0; }
+        input[type="range"] { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; outline: none; background: var(--border); width: 100%; touch-action: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--lo); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.2); }
+        input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--lo); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.2); }
+        .tab-bar { display: flex; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); background: var(--surface); }
+        .tab-bar label { flex: 1; text-align: center; padding: 10px 4px; font-weight: 700; font-size: 12px; cursor: pointer; transition: all 0.15s; user-select: none; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; gap: 5px; border-right: 1px solid var(--border); white-space: nowrap; }
+        .tab-bar label:last-child { border-right: none; }
+        .tab-bar input { display: none; }
+        .tab-bar label.active { background: var(--lo); color: #fff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .pill-btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 9px; border: 1px solid rgba(0,0,0,0.06); background: rgba(255,255,255,0.88); color: var(--sub); cursor: pointer; transition: all 0.15s; backdrop-filter: blur(6px); font-family: 'DM Sans', sans-serif; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .pill-btn:hover { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .pill-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .pill-btn.accent { background: var(--lo); color: #fff; border-color: var(--lo); box-shadow: 0 2px 8px rgba(0,100,224,0.3); }
+        .pill-btn.accent:hover { background: #0055c0; }
+        .stage-panel { position: relative; }
+        .stage-panel .stage-num { position: absolute; top: 12px; left: 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--lo); }
+        .stage-panel .stage-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+        .stage-panel .stage-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+        .stage-header { padding: 28px 14px 6px 14px; }
+        .stage-connector { width: 2px; height: 20px; background: var(--border); margin: 0 auto; }
+        .metric-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 6px 12px; font-size: 12px; }
+        .metric-bar .m { color: var(--muted); font-weight: 500; }
+        .metric-bar .v { font-weight: 700; font-family: 'DM Mono', monospace; margin-right: 4px; }
+        .cm-table { border-collapse: collapse; font-size: 12px; }
+        .cm-table th, .cm-table td { padding: 6px 10px; text-align: center; border: 1px solid var(--border); }
+        .cm-table th { background: var(--surface); font-weight: 600; color: var(--muted); font-size: 11px; }
+        .cm-table td { font-family: 'DM Mono', monospace; font-weight: 700; font-size: 14px; }
+        .cm-tp { background: #dcfce7; color: #166534; }
+        .cm-tn { background: #dbeafe; color: #1e40af; }
+        .cm-fp { background: #fee2e2; color: #991b1b; }
+        .cm-fn { background: #fef3c7; color: #92400e; }
+        details { border-radius: var(--R); }
+        details summary { cursor: pointer; user-select: none; font-size: 13px; font-weight: 600; color: var(--sub); padding: 10px 14px; list-style: none; display: flex; align-items: center; gap: 6px; }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::before { content: ''; display: inline-block; width: 0; height: 0; border-left: 5px solid var(--muted); border-top: 4px solid transparent; border-bottom: 4px solid transparent; transition: transform 0.15s; flex-shrink: 0; }
+        details[open] summary::before { transform: rotate(90deg); }
+        details .inner { padding: 0 14px 12px; font-size: 13px; line-height: 1.55; color: var(--sub); }
+        .toggle-sw { position: relative; width: 38px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+        .toggle-sw.on { background: var(--lo); }
+        .toggle-sw .dot { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+        .toggle-sw.on .dot { transform: translateX(16px); }
+        .cta-box { background: var(--lo-soft); border: 2px solid var(--lo); border-radius: var(--R); padding: 16px 20px; text-align: center; }
+        .cta-box h2 { font-size: 16px; font-weight: 700; color: var(--lo); margin: 0 0 6px; }
+        .cta-box p { font-size: 13px; color: var(--sub); margin: 0 0 12px; line-height: 1.5; }
+        .dist-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+        .dist-table th { padding: 4px 6px; text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+        .dist-table td { padding: 3px 6px; border-bottom: 1px solid var(--surface); font-family: 'DM Mono', monospace; font-size: 11px; }
+        .dist-table tr.neighbor { background: var(--lo-soft); }
+        .dist-table .class-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; vertical-align: middle; }
+        .test-point-clickable { cursor: pointer; transition: stroke-width 0.1s; }
+        .test-point-clickable:hover { stroke-width: 4px !important; }
+        .inspect-panel { background: var(--lo-soft); border: 2px solid var(--lo); border-radius: var(--R); padding: 12px 14px; }
+        .inspect-panel .inspect-title { font-size: 13px; font-weight: 700; color: var(--lo); margin-bottom: 6px; }
+        @media (min-width: 1024px) { .tab-bar label { font-size: 13px; padding: 10px 8px; } }
+    </style>
+</head>
+<body class="antialiased">
+<div class="max-w-[1440px] mx-auto px-3 py-3 sm:px-5 sm:py-4">
+
+    <!-- HEADER -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Classification Explorer</h1>
+        <div class="tab-bar" style="width: 100%; max-width: 520px; flex-shrink: 0;">
+            <label id="tab-label-pipeline" class="active" onclick="switchTab('pipeline')"><input type="radio" name="tab" value="pipeline" checked><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>Classification Pipeline</span></label>
+            <label id="tab-label-knn" onclick="switchTab('knn')"><input type="radio" name="tab" value="knn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg><span>kNN &amp; Effect of k</span></label>
+            <label id="tab-label-normalize" onclick="switchTab('normalize')"><input type="radio" name="tab" value="normalize"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 6H3"/><path d="M21 12H3"/><path d="M21 18H3"/></svg><span>Why Normalize?</span></label>
+        </div>
+    </div>
+
+    <!-- ====================== TAB 1: CLASSIFICATION PIPELINE ====================== -->
+    <div id="tab-pipeline" class="tab-content active">
+        <div class="cta-box mb-3" id="pipeline-cta">
+            <h2>Build a classifier step by step</h2>
+            <p>Generate a dataset with two classes, then scroll down to walk through the full classification pipeline: normalize, split into train and test sets, classify each test point by finding its nearest training neighbor, and evaluate the results.</p>
+            <button id="pipeline-generate" class="pill-btn accent" style="font-size: 14px; padding: 10px 20px;"><svg viewBox="0 0 24 24" style="width:16px; height:16px;"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>Generate Dataset</button>
+        </div>
+
+        <div id="pipeline-stages" style="display: none;">
+            <!-- STEP 1: Raw Data -->
+            <div class="panel stage-panel mb-1">
+                <div class="stage-header"><div class="stage-num">Step 1</div><div class="stage-title">Raw Data</div><div class="stage-desc">Two features, two classes. Each point belongs to Class A or Class B.</div></div>
+                <div style="padding: 0 8px 8px;"><div id="pipeline-raw-chart" style="width:100%; height: clamp(240px, 35vh, 360px);"></div></div>
+                <div class="metric-bar" style="border-top: 1px solid var(--border);">
+                    <span style="color: var(--class-a);">&#9679;</span> <span class="m">Class A:</span> <span class="v" id="pipe-class-a">0</span>
+                    <span style="color: var(--class-b);">&#9679;</span> <span class="m">Class B:</span> <span class="v" id="pipe-class-b">0</span>
+                    <span class="m" style="margin-left:8px;">Total:</span> <span class="v" id="pipe-total-pts">0</span>
+                    <span style="flex:1"></span>
+                    <button id="pipeline-regen" class="pill-btn" style="font-size:11px; padding: 4px 10px;"><svg viewBox="0 0 24 24" style="width:12px; height:12px;"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/></svg>New Data</button>
+                </div>
+            </div>
+            <div class="stage-connector"></div>
+
+            <!-- STEP 2: Normalize -->
+            <div class="panel stage-panel mb-1">
+                <div class="stage-header"><div class="stage-num">Step 2</div><div class="stage-title">Normalize (Min-Max to [0, 1])</div><div class="stage-desc">Scale both features to the range [0, 1] so that neither dominates the distance calculation.</div></div>
+                <div style="padding: 0 8px 8px;"><div id="pipeline-norm-chart" style="width:100%; height: clamp(240px, 35vh, 360px);"></div></div>
+                <details class="panel" style="border:none; border-top: 1px solid var(--border); border-radius: 0;">
+                    <summary>How does min-max normalization work?</summary>
+                    <div class="inner">For each feature, find the minimum and maximum values across all data points. Then transform each value: <code>x_norm = (x - min) / (max - min)</code>. This maps the smallest value to 0 and the largest to 1. Both features now live on the same scale, so Euclidean distance treats them equally.</div>
+                </details>
+            </div>
+            <div class="stage-connector"></div>
+
+            <!-- STEP 3: Train/Test Split -->
+            <div class="panel stage-panel mb-1">
+                <div class="stage-header"><div class="stage-num">Step 3</div><div class="stage-title">Split into Training and Test Sets</div><div class="stage-desc">Reserve some data for testing. The model never sees test points during training.</div></div>
+                <div style="padding: 4px 14px 8px;">
+                    <div class="ctrl-row"><span>Test set fraction</span><span class="val mono" id="pipe-split-val">25%</span></div>
+                    <input type="range" id="pipe-split-slider" min="10" max="40" value="25" step="5">
+                    <div style="display: flex; gap: 8px; margin-top: 8px; align-items: center;">
+                        <button id="pipe-reshuffle" class="pill-btn" style="font-size: 11px; padding: 4px 10px;"><svg viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/></svg>Reshuffle</button>
+                        <span style="font-size: 11px; color: var(--muted);"><span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--class-a); vertical-align:-1px;"></span> Filled = training &nbsp; <span style="display:inline-block; width:10px; height:10px; border-radius:50%; border:2px solid var(--class-a); vertical-align:-1px;"></span> Hollow = test</span>
+                    </div>
+                </div>
+                <div style="padding: 0 8px 8px;"><div id="pipeline-split-chart" style="width:100%; height: clamp(240px, 35vh, 360px);"></div></div>
+                <div class="metric-bar" style="border-top: 1px solid var(--border);"><span class="m">Training:</span> <span class="v" id="pipe-train-n">0</span><span class="m">Test:</span> <span class="v" id="pipe-test-n">0</span></div>
+            </div>
+            <div class="stage-connector"></div>
+
+            <!-- STEP 4: Classify Each Test Point -->
+            <div class="panel stage-panel mb-1">
+                <div class="stage-header"><div class="stage-num">Step 4</div><div class="stage-title">Classify Each Test Point</div><div class="stage-desc">For each test point: measure the distance to every training point, sort to find the nearest, and assign that neighbor's label. Click any test point to inspect its distance calculation.</div></div>
+                <div style="padding: 4px 14px 0;">
+                    <div class="ctrl-row"><span>k (neighbors)</span><span class="val mono" id="pipe-k-val">1</span></div>
+                    <input type="range" id="pipe-k-slider" min="1" max="15" value="1" step="2">
+                </div>
+                <div style="padding: 0 8px 8px;">
+                    <div id="pipeline-classify-chart" style="width:100%; height: clamp(300px, 42vh, 420px);"></div>
+                    <div style="text-align:center; margin-top:4px;"><span style="font-size:11px; font-weight:600; color:var(--sub); background:var(--surface); padding:3px 10px; border-radius:6px; border:1px solid var(--border);">click a test point to inspect its distances</span></div>
+                </div>
+                <!-- Inspect panel -->
+                <div id="pipe-inspect" style="display:none; padding: 0 10px 10px;">
+                    <div class="inspect-panel">
+                        <div class="inspect-title" id="pipe-inspect-title">Test Point #1</div>
+                        <div style="font-size:12px; color:var(--sub); margin-bottom:8px;">
+                            <strong>Actual class:</strong> <span id="pipe-inspect-actual">—</span> &nbsp;
+                            <strong>Predicted:</strong> <span id="pipe-inspect-predicted">—</span> &nbsp;
+                            <span id="pipe-inspect-verdict" style="font-weight:700;"></span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start;">
+                            <div><div id="pipe-inspect-chart" style="width:100%; height: 260px;"></div></div>
+                            <div>
+                                <div style="font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); margin-bottom:4px;">Sorted Distances (argsort)</div>
+                                <div style="max-height: 260px; overflow-y: auto;"><table class="dist-table" id="pipe-inspect-table"><thead><tr><th>Rank</th><th>Class</th><th>Distance</th></tr></thead><tbody></tbody></table></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-bar" style="border-top: 1px solid var(--border);">
+                    <span style="font-size:11px; color:var(--sub);">
+                        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; border:3px solid var(--success); vertical-align:-2px;"></span> correct &nbsp;
+                        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; border:3px solid var(--danger); vertical-align:-2px;"></span> misclassified
+                    </span>
+                </div>
+            </div>
+            <div class="stage-connector"></div>
+
+            <!-- STEP 5: Evaluate -->
+            <div class="panel stage-panel mb-1">
+                <div class="stage-header"><div class="stage-num">Step 5</div><div class="stage-title">Evaluate: Compare Predictions to Actual Labels</div><div class="stage-desc">Build a confusion matrix from the predicted vs. actual labels and calculate accuracy.</div></div>
+                <div style="padding: 10px 14px;">
+                    <div class="metric-bar" style="padding:0; margin-bottom: 12px; font-size: 13px;">
+                        <span class="m">Test accuracy:</span> <span class="v" style="font-size:16px;" id="pipe-test-acc">—</span>
+                        <span class="m" style="margin-left:12px;">Correct:</span> <span class="v" id="pipe-test-correct">—</span>
+                        <span class="m">Wrong:</span> <span class="v" style="color:var(--danger);" id="pipe-test-wrong">—</span>
+                    </div>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <div style="font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px;">Per-Point Results</div>
+                            <div style="max-height: 180px; overflow-y: auto;"><table class="dist-table" id="pipe-results-table"><thead><tr><th>Test Pt</th><th>Actual</th><th>Predicted</th><th>Result</th></tr></thead><tbody></tbody></table></div>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px;">Confusion Matrix</div>
+                            <table class="cm-table">
+                                <tr><th></th><th>Actual A</th><th>Actual B</th></tr>
+                                <tr><th>Predicted A</th><td class="cm-tp" id="pipe-cm-tp">0</td><td class="cm-fp" id="pipe-cm-fp">0</td></tr>
+                                <tr><th>Predicted B</th><td class="cm-fn" id="pipe-cm-fn">0</td><td class="cm-tn" id="pipe-cm-tn">0</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <details style="margin-top: 10px;">
+                        <summary>What do the confusion matrix cells mean?</summary>
+                        <div class="inner"><strong>True Positive (TP):</strong> Predicted A, actually A — correct.<br><strong>True Negative (TN):</strong> Predicted B, actually B — correct.<br><strong>False Positive (FP):</strong> Predicted A, actually B — error (Type I).<br><strong>False Negative (FN):</strong> Predicted B, actually A — error (Type II).<br><br><strong>Accuracy</strong> = (TP + TN) / total test points.</div>
+                    </details>
+                </div>
+            </div>
+            <div class="stage-connector"></div>
+
+            <!-- STEP 6: Denormalize -->
+            <div class="panel stage-panel mb-3">
+                <div class="stage-header"><div class="stage-num">Step 6</div><div class="stage-title">Denormalize: View in Original Units</div><div class="stage-desc">Map the classified results back to the original feature scales for plotting. The classifications are the same; only the axis units change.</div></div>
+                <div style="padding: 0 8px 8px;"><div id="pipeline-denorm-chart" style="width:100%; height: clamp(280px, 40vh, 400px);"></div></div>
+                <div class="metric-bar" style="border-top: 1px solid var(--border);">
+                    <span style="font-size:11px; color:var(--sub);">Filled = training &nbsp; | &nbsp; <span style="display:inline-block; width:10px; height:10px; border-radius:50%; border:3px solid var(--success); vertical-align:-2px;"></span> test correct &nbsp; <span style="display:inline-block; width:10px; height:10px; border-radius:50%; border:3px solid var(--danger); vertical-align:-2px;"></span> test misclassified</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================== TAB 2: kNN & EFFECT OF K ====================== -->
+    <div id="tab-knn" class="tab-content">
+        <div class="cta-box mb-3" id="knn-cta">
+            <h2>Explore how k changes classification</h2>
+            <p>Drag the query point around the scatterplot to classify it using the kNN algorithm. Adjust k to see how using more neighbors changes the vote and the result. Watch the distance lines and sorted distance table update in real time.</p>
+            <button id="knn-generate" class="pill-btn accent" style="font-size: 14px; padding: 10px 20px;"><svg viewBox="0 0 24 24" style="width:16px; height:16px;"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>Generate Dataset</button>
+        </div>
+        <div id="knn-content" style="display: none;">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3">
+                <div class="flex flex-col gap-2">
+                    <div class="panel relative" style="padding: 8px;">
+                        <div style="position:absolute; top:6px; left:10px; z-index:10; display:flex; gap:5px;">
+                            <button id="knn-regen" class="pill-btn accent" style="font-size:11px; padding:4px 10px;"><svg viewBox="0 0 24 24" style="width:12px; height:12px;"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/></svg>New Data</button>
+                        </div>
+                        <div id="knn-chart" style="width:100%; height: clamp(360px, 55vh, 520px);"></div>
+                        <div style="position:absolute; bottom:6px; left:0; right:0; display:flex; justify-content:center; z-index:10; pointer-events:none;">
+                            <div style="font-size:12px; font-weight:600; color:var(--sub); background:rgba(255,255,255,0.9); padding:5px 14px; border-radius:9px; border:1px solid var(--border); backdrop-filter:blur(4px); pointer-events:auto;">drag the diamond to classify</div>
+                        </div>
+                    </div>
+                    <div class="panel" style="padding: 10px 14px;">
+                        <div class="ctrl-row"><span>k (neighbors)</span><span class="val mono" id="knn-k-val">1</span></div>
+                        <input type="range" id="knn-k-slider" min="1" max="15" value="1" step="2">
+                        <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--faint); margin-top:2px;"><span>1 (sensitive)</span><span>15 (smooth)</span></div>
+                    </div>
+                    <div class="panel" style="padding: 10px 14px;">
+                        <div style="font-size:13px; font-weight:700; margin-bottom:4px;">Classification Result</div>
+                        <div id="knn-result" style="font-size: 14px; font-weight: 600; color: var(--muted);">Generate data to begin</div>
+                        <div id="knn-vote-tally" style="font-size: 12px; color: var(--sub); margin-top: 4px;"></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="panel" style="padding: 10px 14px;">
+                        <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 6px;">Distances (sorted)</div>
+                        <div id="knn-dist-table-container" style="max-height: 400px; overflow-y: auto;"><table class="dist-table" id="knn-dist-table"><thead><tr><th>#</th><th>Class</th><th>Distance</th></tr></thead><tbody></tbody></table></div>
+                    </div>
+                    <details class="panel">
+                        <summary>How does kNN work?</summary>
+                        <div class="inner"><strong>1. Calculate distances</strong> from the query point to every training point using Euclidean distance: <code>d = sqrt((x1-x2)^2 + (y1-y2)^2)</code>.<br><br><strong>2. Sort distances</strong> to find the k smallest (this is what <code>argsort</code> does in Python).<br><br><strong>3. Count classes</strong> among those k nearest neighbors.<br><br><strong>4. Vote:</strong> the majority class wins. The query point is assigned that class label.</div>
+                    </details>
+                    <details class="panel">
+                        <summary>What does k control?</summary>
+                        <div class="inner"><strong>k = 1 (nearest neighbor):</strong> The query point copies its single nearest neighbor. Classification is very sensitive to individual points — moving the query slightly can flip the result.<br><br><strong>k = large:</strong> More neighbors vote, so the classification is smoother and less affected by any single outlier. But it becomes less responsive to local patterns in the data.<br><br>Using an odd k avoids ties when you have two classes.</div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================== TAB 3: WHY NORMALIZE? ====================== -->
+    <div id="tab-normalize" class="tab-content">
+        <div class="cta-box mb-3" id="norm-cta">
+            <h2>See why normalization matters</h2>
+            <p>This dataset has two features on very different scales. Toggle normalization on and off to see how it changes which feature dominates the distance calculation and the resulting classification.</p>
+            <button id="norm-generate" class="pill-btn accent" style="font-size: 14px; padding: 10px 20px;"><svg viewBox="0 0 24 24" style="width:16px; height:16px;"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>Generate Dataset</button>
+        </div>
+        <div id="norm-content" style="display:none;">
+            <div class="panel mb-3" style="padding: 12px 14px;">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:13px; font-weight:700;">Normalization</span>
+                        <div class="toggle-sw" id="norm-toggle"><div class="dot"></div></div>
+                        <span id="norm-toggle-label" style="font-size:12px; font-weight:600; color:var(--muted);">OFF — raw features</span>
+                    </div>
+                    <span style="flex:1;"></span>
+                    <button id="norm-regen" class="pill-btn" style="font-size:11px; padding:4px 10px;"><svg viewBox="0 0 24 24" style="width:12px; height:12px;"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/></svg>New Data</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-3 mb-3">
+                <div class="panel" style="padding: 8px;">
+                    <div style="padding: 6px 8px; font-size:13px; font-weight:700;">Distances from Query Point (k = 3)</div>
+                    <div id="norm-distance-chart" style="width:100%; height: clamp(340px, 50vh, 480px);"></div>
+                    <div style="text-align:center; margin-top:4px;"><span style="font-size:11px; font-weight:600; color:var(--sub); background:var(--surface); padding:3px 10px; border-radius:6px; border:1px solid var(--border);">drag the diamond to explore distances</span></div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="panel" style="padding: 10px 14px;">
+                        <div style="font-size:13px; font-weight:700; margin-bottom:4px;">Classification Result</div>
+                        <div id="norm-result" style="font-size: 14px; font-weight: 600; color: var(--muted);">—</div>
+                        <div id="norm-vote-tally" style="font-size: 12px; color: var(--sub); margin-top: 4px;"></div>
+                    </div>
+                    <div class="panel" style="padding: 10px 14px;">
+                        <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 6px;">Distances (sorted)</div>
+                        <div style="max-height: 360px; overflow-y: auto;"><table class="dist-table" id="norm-dist-table"><thead><tr><th>#</th><th>Class</th><th>Distance</th></tr></thead><tbody></tbody></table></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel mb-3" style="padding: 0;">
+                <div class="metric-bar" style="border-bottom: 1px solid var(--border);">
+                    <span class="m">Feature 1 range:</span> <span class="v" id="norm-f1-range">—</span>
+                    <span class="m" style="margin-left: 12px;">Feature 2 range:</span> <span class="v" id="norm-f2-range">—</span>
+                    <span class="m" style="margin-left: 12px;">Scale ratio:</span> <span class="v" id="norm-scale-ratio">—</span>
+                </div>
+                <details>
+                    <summary>Why does this happen?</summary>
+                    <div class="inner">Euclidean distance is calculated as <code>sqrt((x1-x2)^2 + (y1-y2)^2)</code>. When Feature 1 ranges from 0 to 100 and Feature 2 ranges from 0 to 2, a difference of 10 in Feature 1 contributes 100 to the squared distance, while a difference of 1 in Feature 2 contributes only 1. Feature 1 effectively controls the distance calculation all by itself.<br><br>After min-max normalization, both features range from 0 to 1, so equal-sized differences in either feature contribute equally to the distance. The classifier can now use information from both features to make its decision.</div>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   SHARED UTILITIES
+   ============================================================ */
+
+/**
+ * Generate a 2-class dataset with two clusters in 2D.
+ * @param {number} n - Total number of points.
+ * @param {Object} opts - Feature ranges and overlap control.
+ * @returns {Array} Array of {f1, f2, label} objects.
+ */
+function generateData(n, opts = {}) {
+    const { f1Range = [0, 1], f2Range = [0, 1], overlap = 0.3 } = opts;
+    const data = [];
+    const nA = Math.floor(n / 2);
+    const nB = n - nA;
+    const cA = [0.35, 0.65], cB = [0.65, 0.35];
+    const spread = 0.12 + overlap * 0.15;
+
+    /** Box-Muller transform for normal-distributed random values. */
+    function randn() {
+        let u = 0, v = 0;
+        while (u === 0) u = Math.random();
+        while (v === 0) v = Math.random();
+        return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    }
+    function scaleF1(val) { return f1Range[0] + val * (f1Range[1] - f1Range[0]); }
+    function scaleF2(val) { return f2Range[0] + val * (f2Range[1] - f2Range[0]); }
+
+    for (let i = 0; i < nA; i++) {
+        const x = Math.max(0, Math.min(1, cA[0] + randn() * spread));
+        const y = Math.max(0, Math.min(1, cA[1] + randn() * spread));
+        data.push({ f1: scaleF1(x), f2: scaleF2(y), label: 'A' });
+    }
+    for (let i = 0; i < nB; i++) {
+        const x = Math.max(0, Math.min(1, cB[0] + randn() * spread));
+        const y = Math.max(0, Math.min(1, cB[1] + randn() * spread));
+        data.push({ f1: scaleF1(x), f2: scaleF2(y), label: 'B' });
+    }
+    return data;
+}
+
+/**
+ * Min-max normalize an array of data points.
+ * Adds f1n and f2n (normalized) properties to each point.
+ */
+function minMaxNormalize(data) {
+    const f1Vals = data.map(d => d.f1), f2Vals = data.map(d => d.f2);
+    const f1Min = Math.min(...f1Vals), f1Max = Math.max(...f1Vals);
+    const f2Min = Math.min(...f2Vals), f2Max = Math.max(...f2Vals);
+    const f1Span = f1Max - f1Min || 1, f2Span = f2Max - f2Min || 1;
+    const normed = data.map(d => ({ ...d, f1n: (d.f1 - f1Min) / f1Span, f2n: (d.f2 - f2Min) / f2Span }));
+    return { data: normed, f1Min, f1Max, f2Min, f2Max, f1Span, f2Span };
+}
+
+/** Euclidean distance between two 2D points. */
+function dist2d(x1, y1, x2, y2) { return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2); }
+
+/**
+ * kNN classification for a single query point.
+ * Mirrors student algorithm: compute all distances, sort (argsort), take k nearest, vote.
+ */
+function knnClassify(qx, qy, training, k) {
+    const distances = training.map((p, i) => ({ idx: i, label: p.label, dist: dist2d(qx, qy, p.x, p.y) }));
+    distances.sort((a, b) => a.dist - b.dist);
+    const neighbors = distances.slice(0, k);
+    const votes = { A: 0, B: 0 };
+    neighbors.forEach(n => votes[n.label]++);
+    const label = votes.A >= votes.B ? 'A' : 'B';
+    return { label, votes, neighbors, distances };
+}
+
+/** Standard D3 chart setup with axes and gridlines. */
+function setupChart(container, xLabel, yLabel, xDomain, yDomain) {
+    const el = document.getElementById(container);
+    el.innerHTML = '';
+    const rect = el.getBoundingClientRect();
+    const width = rect.width, height = rect.height;
+    const margin = { top: 12, right: 16, bottom: 40, left: 50 };
+    const innerW = width - margin.left - margin.right;
+    const innerH = height - margin.top - margin.bottom;
+    const svg = d3.select(el).append('svg').attr('width', width).attr('height', height).style('display', 'block');
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const xScale = d3.scaleLinear().domain(xDomain).range([0, innerW]);
+    const yScale = d3.scaleLinear().domain(yDomain).range([innerH, 0]);
+
+    /* Grid */
+    g.append('g').attr('class', 'grid').attr('transform', `translate(0,${innerH})`)
+        .call(d3.axisBottom(xScale).ticks(Math.min(8, Math.floor(innerW / 60))).tickSize(-innerH).tickFormat(''))
+        .call(gg => { gg.select('.domain').remove(); gg.selectAll('.tick line').attr('stroke', '#e5e7eb'); });
+    g.append('g').attr('class', 'grid')
+        .call(d3.axisLeft(yScale).ticks(Math.min(6, Math.floor(innerH / 50))).tickSize(-innerW).tickFormat(''))
+        .call(gg => { gg.select('.domain').remove(); gg.selectAll('.tick line').attr('stroke', '#e5e7eb'); });
+
+    /* Axes */
+    g.append('g').attr('transform', `translate(0,${innerH})`).call(d3.axisBottom(xScale).ticks(Math.min(8, Math.floor(innerW / 60)))).call(gg => gg.select('.domain').attr('stroke', 'var(--border)'));
+    g.append('g').call(d3.axisLeft(yScale).ticks(Math.min(6, Math.floor(innerH / 50)))).call(gg => gg.select('.domain').attr('stroke', 'var(--border)'));
+
+    /* Labels */
+    g.append('text').attr('class', 'axis-label').attr('x', innerW / 2).attr('y', innerH + 34).attr('text-anchor', 'middle').text(xLabel);
+    g.append('text').attr('class', 'axis-label').attr('transform', 'rotate(-90)').attr('x', -innerH / 2).attr('y', -38).attr('text-anchor', 'middle').text(yLabel);
+    return { svg, g, xScale, yScale, width, height, innerW, innerH, margin };
+}
+
+/** Draw a diamond (query point) at given chart coordinates. Returns the group for attaching drag. */
+function drawDiamond(g, xScale, yScale, x, y, color, size = 10) {
+    const qg = g.append('g').attr('class', 'query-point').attr('transform', `translate(${xScale(x)}, ${yScale(y)})`).style('cursor', 'grab');
+    qg.append('polygon').attr('points', `0,${-size} ${size},0 0,${size} ${-size},0`).attr('fill', color).attr('stroke', 'var(--ink)').attr('stroke-width', 2.5);
+    return qg;
+}
+
+/* ============================================================
+   TAB SWITCHING
+   ============================================================ */
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-bar label').forEach(el => el.classList.remove('active'));
+    document.getElementById(`tab-${name}`).classList.add('active');
+    document.getElementById(`tab-label-${name}`).classList.add('active');
+    if (name === 'knn' && knnState.data) drawKnn();
+    if (name === 'normalize' && normState.data) drawNormalize();
+}
+
+/* ============================================================
+   TAB 1: CLASSIFICATION PIPELINE
+   ============================================================ */
+const pipeState = { rawData: null, normResult: null, splitFrac: 0.25, k: 1, testResults: [], inspectedIdx: null };
+
+function pipelineGenerate() {
+    pipeState.rawData = generateData(30, { f1Range: [10, 90], f2Range: [0.5, 5.5], overlap: 0.35 });
+    pipeState.normResult = minMaxNormalize(pipeState.rawData);
+    pipeState.inspectedIdx = null;
+    pipelineShuffle();
+    document.getElementById('pipeline-stages').style.display = 'block';
+    document.getElementById('pipeline-cta').querySelector('h2').textContent = 'Pipeline loaded — scroll down';
+    document.getElementById('pipeline-cta').querySelector('p').textContent = 'Each panel below is one step. Change controls and watch downstream steps update.';
+    drawPipelineAll();
+}
+
+function pipelineShuffle() {
+    const n = pipeState.rawData.length;
+    const nTest = Math.max(2, Math.round(n * pipeState.splitFrac));
+    const indices = d3.shuffle(d3.range(n));
+    const testSet = new Set(indices.slice(0, nTest));
+    pipeState.normResult.data.forEach((d, i) => { d.isTest = testSet.has(i); });
+    pipeState.inspectedIdx = null;
+}
+
+function classifyTestPoints() {
+    const data = pipeState.normResult.data;
+    const training = data.filter(d => !d.isTest).map(d => ({ x: d.f1n, y: d.f2n, label: d.label }));
+    const testData = data.filter(d => d.isTest);
+    const k = pipeState.k;
+    pipeState.testResults = testData.map((d, i) => {
+        const result = knnClassify(d.f1n, d.f2n, training, k);
+        return { testIdx: i, point: d, predicted: result.label, correct: result.label === d.label, distances: result.distances, neighbors: result.neighbors, votes: result.votes };
+    });
+}
+
+function drawPipelineAll() { classifyTestPoints(); drawPipeRaw(); drawPipeNorm(); drawPipeSplit(); drawPipeClassify(); drawPipeEvaluate(); drawPipeDenorm(); }
+
+function drawPipeRaw() {
+    const data = pipeState.rawData;
+    const chart = setupChart('pipeline-raw-chart', 'Feature 1', 'Feature 2',
+        [d3.min(data, d => d.f1) - 5, d3.max(data, d => d.f1) + 5],
+        [d3.min(data, d => d.f2) - 0.3, d3.max(data, d => d.f2) + 0.3]);
+    chart.g.selectAll('.dp').data(data).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.f1)).attr('cy', d => chart.yScale(d.f2)).attr('r', 5)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)').attr('stroke', '#fff').attr('stroke-width', 2);
+    document.getElementById('pipe-total-pts').textContent = data.length;
+    document.getElementById('pipe-class-a').textContent = data.filter(d => d.label === 'A').length;
+    document.getElementById('pipe-class-b').textContent = data.filter(d => d.label === 'B').length;
+}
+
+function drawPipeNorm() {
+    const data = pipeState.normResult.data;
+    const chart = setupChart('pipeline-norm-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05]);
+    chart.g.selectAll('.dp').data(data).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.f1n)).attr('cy', d => chart.yScale(d.f2n)).attr('r', 5)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)').attr('stroke', '#fff').attr('stroke-width', 2);
+}
+
+function drawPipeSplit() {
+    const data = pipeState.normResult.data;
+    const chart = setupChart('pipeline-split-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05]);
+    chart.g.selectAll('.dp').data(data).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.f1n)).attr('cy', d => chart.yScale(d.f2n)).attr('r', 5)
+        .attr('fill', d => d.isTest ? 'var(--card)' : (d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'))
+        .attr('stroke', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)')
+        .attr('stroke-width', d => d.isTest ? 2.5 : 2);
+    document.getElementById('pipe-train-n').textContent = data.filter(d => !d.isTest).length;
+    document.getElementById('pipe-test-n').textContent = data.filter(d => d.isTest).length;
+}
+
+function drawPipeClassify() {
+    const data = pipeState.normResult.data;
+    const results = pipeState.testResults;
+    const training = data.filter(d => !d.isTest).map(d => ({ x: d.f1n, y: d.f2n, label: d.label }));
+    const k = pipeState.k;
+    const chart = setupChart('pipeline-classify-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05]);
+
+    /* Training points (filled, dimmed) */
+    chart.g.selectAll('.trp').data(data.filter(d => !d.isTest)).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.f1n)).attr('cy', d => chart.yScale(d.f2n)).attr('r', 4)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)')
+        .attr('stroke', '#fff').attr('stroke-width', 1.5).attr('opacity', 0.45);
+
+    /* If a test point is selected, show its distance lines */
+    if (pipeState.inspectedIdx !== null && results[pipeState.inspectedIdx]) {
+        const ir = results[pipeState.inspectedIdx];
+        ir.distances.forEach((dd, i) => {
+            const isN = i < k;
+            const tp = training[dd.idx];
+            chart.g.append('line')
+                .attr('x1', chart.xScale(ir.point.f1n)).attr('y1', chart.yScale(ir.point.f2n))
+                .attr('x2', chart.xScale(tp.x)).attr('y2', chart.yScale(tp.y))
+                .attr('stroke', isN ? 'var(--lo)' : '#ddd').attr('stroke-width', isN ? 2 : 0.8)
+                .attr('stroke-dasharray', isN ? 'none' : '3 3').attr('opacity', isN ? 0.7 : 0.2);
+        });
+        ir.neighbors.forEach(n => {
+            const tp = training[n.idx];
+            const mx = (ir.point.f1n + tp.x) / 2, my = (ir.point.f2n + tp.y) / 2;
+            chart.g.append('text').attr('x', chart.xScale(mx)).attr('y', chart.yScale(my) - 6)
+                .attr('text-anchor', 'middle').attr('font-size', '9px').attr('font-weight', '600')
+                .attr('font-family', "'DM Mono', monospace").attr('fill', 'var(--lo)').text(n.dist.toFixed(3));
+            chart.g.append('circle').attr('cx', chart.xScale(tp.x)).attr('cy', chart.yScale(tp.y))
+                .attr('r', 9).attr('fill', 'none').attr('stroke', 'var(--lo)').attr('stroke-width', 2).attr('stroke-dasharray', '3 2');
+        });
+    }
+
+    /* Test points (clickable) */
+    chart.g.selectAll('.tsp').data(results).enter().append('circle')
+        .attr('class', 'test-point-clickable')
+        .attr('cx', d => chart.xScale(d.point.f1n)).attr('cy', d => chart.yScale(d.point.f2n)).attr('r', 7)
+        .attr('fill', d => d.predicted === 'A' ? 'var(--class-a-soft)' : 'var(--class-b-soft)')
+        .attr('stroke', d => d.correct ? 'var(--success)' : 'var(--danger)')
+        .attr('stroke-width', d => pipeState.inspectedIdx === d.testIdx ? 4 : 3)
+        .on('click', function(event, d) { pipeState.inspectedIdx = d.testIdx; drawPipeClassify(); drawPipeInspect(); });
+
+    drawPipeInspect();
+}
+
+function drawPipeInspect() {
+    const panel = document.getElementById('pipe-inspect');
+    if (pipeState.inspectedIdx === null || !pipeState.testResults.length) { panel.style.display = 'none'; return; }
+    panel.style.display = 'block';
+    const ir = pipeState.testResults[pipeState.inspectedIdx];
+    const data = pipeState.normResult.data;
+    const training = data.filter(d => !d.isTest).map(d => ({ x: d.f1n, y: d.f2n, label: d.label }));
+    const k = pipeState.k;
+
+    document.getElementById('pipe-inspect-title').textContent = `Test Point #${ir.testIdx + 1}`;
+    document.getElementById('pipe-inspect-actual').innerHTML = `<span style="color:${ir.point.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}; font-weight:700;">Class ${ir.point.label}</span>`;
+    document.getElementById('pipe-inspect-predicted').innerHTML = `<span style="color:${ir.predicted === 'A' ? 'var(--class-a)' : 'var(--class-b)'}; font-weight:700;">Class ${ir.predicted}</span>`;
+    const v = document.getElementById('pipe-inspect-verdict');
+    v.textContent = ir.correct ? 'Correct' : 'Wrong'; v.style.color = ir.correct ? 'var(--success)' : 'var(--danger)';
+
+    /* Mini chart */
+    const chart = setupChart('pipe-inspect-chart', 'Feature 1 (norm)', 'Feature 2 (norm)', [-0.05, 1.05], [-0.05, 1.05]);
+    ir.distances.forEach((dd, i) => {
+        const isN = i < k; const tp = training[dd.idx];
+        chart.g.append('line').attr('x1', chart.xScale(ir.point.f1n)).attr('y1', chart.yScale(ir.point.f2n))
+            .attr('x2', chart.xScale(tp.x)).attr('y2', chart.yScale(tp.y))
+            .attr('stroke', isN ? 'var(--lo)' : '#e0e0e0').attr('stroke-width', isN ? 2 : 0.7)
+            .attr('stroke-dasharray', isN ? 'none' : '2 2').attr('opacity', isN ? 0.8 : 0.2);
+    });
+    chart.g.selectAll('.tp').data(training).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.x)).attr('cy', d => chart.yScale(d.y)).attr('r', 4)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)').attr('stroke', '#fff').attr('stroke-width', 1.5).attr('opacity', 0.5);
+    ir.neighbors.forEach(n => {
+        const tp = training[n.idx];
+        chart.g.append('circle').attr('cx', chart.xScale(tp.x)).attr('cy', chart.yScale(tp.y))
+            .attr('r', 8).attr('fill', 'none').attr('stroke', 'var(--lo)').attr('stroke-width', 2).attr('stroke-dasharray', '3 2');
+    });
+    drawDiamond(chart.g, chart.xScale, chart.yScale, ir.point.f1n, ir.point.f2n, ir.predicted === 'A' ? 'var(--class-a)' : 'var(--class-b)', 8);
+
+    /* Sorted distance table */
+    const tbody = document.querySelector('#pipe-inspect-table tbody'); tbody.innerHTML = '';
+    ir.distances.forEach((dd, i) => {
+        const row = tbody.insertRow(); if (i < k) row.classList.add('neighbor');
+        row.innerHTML = `<td>${i + 1}</td><td><span class="class-dot" style="background:${dd.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}"></span> ${dd.label}</td><td>${dd.dist.toFixed(4)}</td>`;
+    });
+}
+
+function drawPipeEvaluate() {
+    const results = pipeState.testResults;
+    let tp = 0, fp = 0, tn = 0, fn = 0;
+    results.forEach(r => { if (r.point.label === 'A' && r.predicted === 'A') tp++; else if (r.point.label === 'B' && r.predicted === 'B') tn++; else if (r.point.label === 'B' && r.predicted === 'A') fp++; else fn++; });
+    const nC = tp + tn, nW = fp + fn, total = results.length;
+    document.getElementById('pipe-test-acc').textContent = total > 0 ? (nC / total * 100).toFixed(1) + '%' : '—';
+    document.getElementById('pipe-test-correct').textContent = nC;
+    document.getElementById('pipe-test-wrong').textContent = nW;
+    document.getElementById('pipe-cm-tp').textContent = tp; document.getElementById('pipe-cm-fp').textContent = fp;
+    document.getElementById('pipe-cm-fn').textContent = fn; document.getElementById('pipe-cm-tn').textContent = tn;
+
+    const tbody = document.querySelector('#pipe-results-table tbody'); tbody.innerHTML = '';
+    results.forEach((r, i) => {
+        const row = tbody.insertRow();
+        row.innerHTML = `<td>#${i + 1}</td><td><span class="class-dot" style="background:${r.point.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}"></span> ${r.point.label}</td><td><span class="class-dot" style="background:${r.predicted === 'A' ? 'var(--class-a)' : 'var(--class-b)'}"></span> ${r.predicted}</td><td style="color:${r.correct ? 'var(--success)' : 'var(--danger)'}; font-weight:700;">${r.correct ? 'Correct' : 'Wrong'}</td>`;
+    });
+}
+
+function drawPipeDenorm() {
+    const data = pipeState.normResult.data;
+    const { f1Min, f1Max, f2Min, f2Max, f1Span, f2Span } = pipeState.normResult;
+    const results = pipeState.testResults;
+    const xPad = f1Span * 0.06, yPad = f2Span * 0.06;
+    const chart = setupChart('pipeline-denorm-chart', 'Feature 1 (original)', 'Feature 2 (original)',
+        [f1Min - xPad, f1Max + xPad], [f2Min - yPad, f2Max + yPad]);
+
+    /* Training points */
+    chart.g.selectAll('.trp').data(data.filter(d => !d.isTest)).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.f1)).attr('cy', d => chart.yScale(d.f2)).attr('r', 5)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)')
+        .attr('stroke', '#fff').attr('stroke-width', 2).attr('opacity', 0.5);
+
+    /* Test points with results */
+    chart.g.selectAll('.tsp').data(results).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.point.f1)).attr('cy', d => chart.yScale(d.point.f2)).attr('r', 7)
+        .attr('fill', d => d.predicted === 'A' ? 'var(--class-a-soft)' : 'var(--class-b-soft)')
+        .attr('stroke', d => d.correct ? 'var(--success)' : 'var(--danger)').attr('stroke-width', 3);
+}
+
+/* Pipeline listeners */
+document.getElementById('pipeline-generate').addEventListener('click', pipelineGenerate);
+document.getElementById('pipeline-regen').addEventListener('click', pipelineGenerate);
+document.getElementById('pipe-split-slider').addEventListener('input', function() {
+    pipeState.splitFrac = this.value / 100; document.getElementById('pipe-split-val').textContent = this.value + '%';
+    pipelineShuffle(); classifyTestPoints(); drawPipeSplit(); drawPipeClassify(); drawPipeEvaluate(); drawPipeDenorm();
+});
+document.getElementById('pipe-reshuffle').addEventListener('click', function() {
+    pipelineShuffle(); classifyTestPoints(); drawPipeSplit(); drawPipeClassify(); drawPipeEvaluate(); drawPipeDenorm();
+});
+document.getElementById('pipe-k-slider').addEventListener('input', function() {
+    pipeState.k = parseInt(this.value); document.getElementById('pipe-k-val').textContent = this.value;
+    pipeState.inspectedIdx = null; classifyTestPoints(); drawPipeClassify(); drawPipeEvaluate(); drawPipeDenorm();
+});
+
+/* ============================================================
+   TAB 2: kNN & EFFECT OF k
+   ============================================================ */
+const knnState = { data: null, queryX: 0.5, queryY: 0.5, k: 1 };
+
+function knnGenerate() {
+    knnState.data = generateData(24, { f1Range: [0, 1], f2Range: [0, 1], overlap: 0.35 });
+    knnState.queryX = 0.5; knnState.queryY = 0.5;
+    document.getElementById('knn-content').style.display = 'block';
+    document.getElementById('knn-cta').style.display = 'none';
+    drawKnn();
+}
+
+function drawKnn() {
+    if (!knnState.data) return;
+    const data = knnState.data;
+    const training = data.map(d => ({ x: d.f1, y: d.f2, label: d.label }));
+    const k = knnState.k, qx = knnState.queryX, qy = knnState.queryY;
+    const chart = setupChart('knn-chart', 'Feature 1', 'Feature 2', [-0.08, 1.08], [-0.08, 1.08]);
+    const result = knnClassify(qx, qy, training, k);
+
+    /* Distance lines */
+    result.distances.forEach((d, i) => {
+        const isN = i < k;
+        chart.g.append('line').attr('x1', chart.xScale(qx)).attr('y1', chart.yScale(qy))
+            .attr('x2', chart.xScale(training[d.idx].x)).attr('y2', chart.yScale(training[d.idx].y))
+            .attr('stroke', isN ? 'var(--lo)' : '#ddd').attr('stroke-width', isN ? 2 : 1)
+            .attr('stroke-dasharray', isN ? 'none' : '3 3').attr('opacity', isN ? 0.7 : 0.3);
+    });
+    result.neighbors.forEach(n => {
+        const tp = training[n.idx], mx = (qx + tp.x) / 2, my = (qy + tp.y) / 2;
+        chart.g.append('text').attr('x', chart.xScale(mx)).attr('y', chart.yScale(my) - 6)
+            .attr('text-anchor', 'middle').attr('font-size', '10px').attr('font-weight', '600')
+            .attr('font-family', "'DM Mono', monospace").attr('fill', 'var(--lo)').text(n.dist.toFixed(3));
+    });
+
+    /* Data points */
+    chart.g.selectAll('.dp').data(data).enter().append('circle')
+        .attr('cx', d => chart.xScale(d.f1)).attr('cy', d => chart.yScale(d.f2)).attr('r', 5)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)').attr('stroke', '#fff').attr('stroke-width', 2);
+
+    /* Neighbor rings */
+    result.neighbors.forEach(n => {
+        const tp = training[n.idx];
+        chart.g.append('circle').attr('cx', chart.xScale(tp.x)).attr('cy', chart.yScale(tp.y))
+            .attr('r', 10).attr('fill', 'none').attr('stroke', 'var(--lo)').attr('stroke-width', 2).attr('stroke-dasharray', '3 2');
+    });
+
+    /* Query diamond */
+    const queryG = drawDiamond(chart.g, chart.xScale, chart.yScale, qx, qy, result.label === 'A' ? 'var(--class-a)' : 'var(--class-b)');
+    queryG.append('text').attr('y', -14).attr('text-anchor', 'middle').attr('font-size', '11px').attr('font-weight', '700').attr('fill', 'var(--ink)').text('?');
+    queryG.call(d3.drag().on('drag', function(event) {
+        const [mx, my] = d3.pointer(event, chart.g.node());
+        knnState.queryX = Math.max(-0.05, Math.min(1.05, chart.xScale.invert(mx)));
+        knnState.queryY = Math.max(-0.05, Math.min(1.05, chart.yScale.invert(my)));
+        drawKnn();
+    }));
+
+    document.getElementById('knn-result').innerHTML = `Classified as <strong style="color:${result.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}">Class ${result.label}</strong>`;
+    document.getElementById('knn-vote-tally').textContent = `Votes: ${result.votes.A} Class A, ${result.votes.B} Class B (k = ${k})`;
+
+    const tbody = document.querySelector('#knn-dist-table tbody'); tbody.innerHTML = '';
+    result.distances.forEach((d, i) => {
+        const row = tbody.insertRow(); if (i < k) row.classList.add('neighbor');
+        row.innerHTML = `<td>${i + 1}</td><td><span class="class-dot" style="background:${d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}"></span> ${d.label}</td><td>${d.dist.toFixed(4)}</td>`;
+    });
+}
+
+document.getElementById('knn-generate').addEventListener('click', knnGenerate);
+document.getElementById('knn-regen').addEventListener('click', knnGenerate);
+document.getElementById('knn-k-slider').addEventListener('input', function() { knnState.k = parseInt(this.value); document.getElementById('knn-k-val').textContent = this.value; drawKnn(); });
+
+/* ============================================================
+   TAB 3: WHY NORMALIZE?
+   ============================================================ */
+const normState = { data: null, normResult: null, normalized: false, queryX: null, queryY: null };
+
+function normGenerate() {
+    normState.data = generateData(24, { f1Range: [5, 95], f2Range: [0.2, 1.8], overlap: 0.35 });
+    normState.normResult = minMaxNormalize(normState.data);
+    normState.normalized = false;
+    document.getElementById('norm-toggle').classList.remove('on');
+    document.getElementById('norm-toggle-label').textContent = 'OFF — raw features';
+    normState.queryX = 50; normState.queryY = 1.0;
+    document.getElementById('norm-content').style.display = 'block';
+    document.getElementById('norm-cta').style.display = 'none';
+    const { f1Min, f1Max, f2Min, f2Max } = normState.normResult;
+    document.getElementById('norm-f1-range').textContent = `${f1Min.toFixed(1)} \u2013 ${f1Max.toFixed(1)}`;
+    document.getElementById('norm-f2-range').textContent = `${f2Min.toFixed(2)} \u2013 ${f2Max.toFixed(2)}`;
+    document.getElementById('norm-scale-ratio').textContent = `~${Math.round((f1Max - f1Min) / (f2Max - f2Min))}:1`;
+    drawNormalize();
+}
+
+function drawNormalize() {
+    if (!normState.data) return;
+    const isNorm = normState.normalized;
+    const data = normState.normResult.data;
+    const { f1Min, f1Max, f2Min, f2Max, f1Span, f2Span } = normState.normResult;
+    let xKey, yKey, xLabel, yLabel, xDomain, yDomain, trainingData;
+
+    if (isNorm) {
+        xKey = 'f1n'; yKey = 'f2n'; xLabel = 'Feature 1 (normalized)'; yLabel = 'Feature 2 (normalized)';
+        xDomain = [-0.05, 1.05]; yDomain = [-0.05, 1.05];
+        trainingData = data.map(d => ({ x: d.f1n, y: d.f2n, label: d.label }));
+    } else {
+        xKey = 'f1'; yKey = 'f2'; xLabel = 'Feature 1'; yLabel = 'Feature 2';
+        const xPad = f1Span * 0.06, yPad = f2Span * 0.06;
+        xDomain = [f1Min - xPad, f1Max + xPad]; yDomain = [f2Min - yPad, f2Max + yPad];
+        trainingData = data.map(d => ({ x: d.f1, y: d.f2, label: d.label }));
+    }
+
+    let qx, qy;
+    if (isNorm) { qx = Math.max(-0.02, Math.min(1.02, (normState.queryX - f1Min) / f1Span)); qy = Math.max(-0.02, Math.min(1.02, (normState.queryY - f2Min) / f2Span)); }
+    else { qx = normState.queryX; qy = normState.queryY; }
+
+    const dChart = setupChart('norm-distance-chart', xLabel, yLabel, xDomain, yDomain);
+    const result = knnClassify(qx, qy, trainingData, 3);
+
+    result.distances.forEach((d, i) => {
+        const isN = i < 3; const tp = trainingData[d.idx];
+        dChart.g.append('line').attr('x1', dChart.xScale(qx)).attr('y1', dChart.yScale(qy))
+            .attr('x2', dChart.xScale(tp.x)).attr('y2', dChart.yScale(tp.y))
+            .attr('stroke', isN ? 'var(--lo)' : '#ddd').attr('stroke-width', isN ? 2 : 0.8)
+            .attr('stroke-dasharray', isN ? 'none' : '3 3').attr('opacity', isN ? 0.7 : 0.2);
+    });
+    result.neighbors.forEach(n => {
+        const tp = trainingData[n.idx], mx = (qx + tp.x) / 2, my = (qy + tp.y) / 2;
+        dChart.g.append('text').attr('x', dChart.xScale(mx)).attr('y', dChart.yScale(my) - 6)
+            .attr('text-anchor', 'middle').attr('font-size', '10px').attr('font-weight', '600')
+            .attr('font-family', "'DM Mono', monospace").attr('fill', 'var(--lo)').text(n.dist.toFixed(isNorm ? 3 : 1));
+    });
+    dChart.g.selectAll('.dp').data(data).enter().append('circle')
+        .attr('cx', d => dChart.xScale(d[xKey])).attr('cy', d => dChart.yScale(d[yKey])).attr('r', 5)
+        .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)').attr('stroke', '#fff').attr('stroke-width', 2);
+    result.neighbors.forEach(n => {
+        const tp = trainingData[n.idx];
+        dChart.g.append('circle').attr('cx', dChart.xScale(tp.x)).attr('cy', dChart.yScale(tp.y))
+            .attr('r', 10).attr('fill', 'none').attr('stroke', 'var(--lo)').attr('stroke-width', 2).attr('stroke-dasharray', '3 2');
+    });
+
+    const queryG = drawDiamond(dChart.g, dChart.xScale, dChart.yScale, qx, qy, result.label === 'A' ? 'var(--class-a)' : 'var(--class-b)');
+    queryG.call(d3.drag().on('drag', function(event) {
+        const [mx, my] = d3.pointer(event, dChart.g.node());
+        const newX = dChart.xScale.invert(mx), newY = dChart.yScale.invert(my);
+        if (isNorm) { normState.queryX = f1Min + Math.max(0, Math.min(1, newX)) * f1Span; normState.queryY = f2Min + Math.max(0, Math.min(1, newY)) * f2Span; }
+        else { normState.queryX = Math.max(xDomain[0], Math.min(xDomain[1], newX)); normState.queryY = Math.max(yDomain[0], Math.min(yDomain[1], newY)); }
+        drawNormalize();
+    }));
+
+    document.getElementById('norm-result').innerHTML = `Classified as <strong style="color:${result.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}">Class ${result.label}</strong>`;
+    document.getElementById('norm-vote-tally').textContent = `Votes: ${result.votes.A} Class A, ${result.votes.B} Class B`;
+
+    const tbody = document.querySelector('#norm-dist-table tbody'); tbody.innerHTML = '';
+    result.distances.forEach((d, i) => {
+        const row = tbody.insertRow(); if (i < 3) row.classList.add('neighbor');
+        row.innerHTML = `<td>${i + 1}</td><td><span class="class-dot" style="background:${d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'}"></span> ${d.label}</td><td>${d.dist.toFixed(isNorm ? 4 : 2)}</td>`;
+    });
+}
+
+document.getElementById('norm-toggle').addEventListener('click', function() {
+    normState.normalized = !normState.normalized; this.classList.toggle('on');
+    document.getElementById('norm-toggle-label').textContent = normState.normalized ? 'ON — features scaled to [0, 1]' : 'OFF — raw features';
+    drawNormalize();
+});
+document.getElementById('norm-generate').addEventListener('click', normGenerate);
+document.getElementById('norm-regen').addEventListener('click', normGenerate);
+
+/* ============================================================
+   RESIZE
+   ============================================================ */
+let resizeTimer;
+window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => {
+    if (pipeState.rawData && document.getElementById('tab-pipeline').classList.contains('active')) drawPipelineAll();
+    if (knnState.data && document.getElementById('tab-knn').classList.contains('active')) drawKnn();
+    if (normState.data && document.getElementById('tab-normalize').classList.contains('active')) drawNormalize();
+}, 200); });
+</script>
+</body>
+</html>
