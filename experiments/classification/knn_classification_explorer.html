@@ -400,8 +400,13 @@ function knnClassify(qx, qy, training, k) {
     return { label, votes, neighbors, distances };
 }
 
-/** Standard D3 chart setup with axes and gridlines. */
-function setupChart(container, xLabel, yLabel, xDomain, yDomain) {
+/**
+ * Standard D3 chart setup with axes and gridlines.
+ * @param {boolean} equalAspect - If true, pad the shorter domain so
+ *   1 data-unit = the same number of pixels on both axes. Use this for
+ *   normalized charts where visual distance must match Euclidean distance.
+ */
+function setupChart(container, xLabel, yLabel, xDomain, yDomain, equalAspect = false) {
     const el = document.getElementById(container);
     el.innerHTML = '';
     const rect = el.getBoundingClientRect();
@@ -409,22 +414,65 @@ function setupChart(container, xLabel, yLabel, xDomain, yDomain) {
     const margin = { top: 12, right: 16, bottom: 40, left: 50 };
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
+
+    /* Equal aspect ratio: expand the domain of the longer pixel-axis so
+       both axes have identical pixels-per-unit. Anchor the expansion at
+       the domain start (bottom-left origin) rather than centering it. */
+    let equalTickStep = null;
+    if (equalAspect) {
+        const xSpan = xDomain[1] - xDomain[0];
+        const ySpan = yDomain[1] - yDomain[0];
+        const pxPerUnitX = innerW / xSpan;
+        const pxPerUnitY = innerH / ySpan;
+
+        if (pxPerUnitX > pxPerUnitY) {
+            /* X axis has more px/unit — expand x domain rightward */
+            const newXSpan = innerW / pxPerUnitY;
+            xDomain = [xDomain[0], xDomain[0] + newXSpan];
+        } else {
+            /* Y axis has more px/unit — expand y domain upward */
+            const newYSpan = innerH / pxPerUnitX;
+            yDomain = [yDomain[0], yDomain[0] + newYSpan];
+        }
+
+        /* Use a common tick step so gridlines form squares.
+           Pick a clean interval based on the shorter domain span. */
+        const shortSpan = Math.min(xDomain[1] - xDomain[0], yDomain[1] - yDomain[0]);
+        const candidates = [0.1, 0.2, 0.25, 0.5, 1.0];
+        equalTickStep = candidates.find(s => shortSpan / s >= 3 && shortSpan / s <= 10) || 0.2;
+    }
+
     const svg = d3.select(el).append('svg').attr('width', width).attr('height', height).style('display', 'block');
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
     const xScale = d3.scaleLinear().domain(xDomain).range([0, innerW]);
     const yScale = d3.scaleLinear().domain(yDomain).range([innerH, 0]);
 
+    /* Tick values: use matched step for equal-aspect, otherwise auto */
+    const xTickArgs = equalTickStep
+        ? [d3.axisBottom(xScale).tickValues(d3.range(Math.ceil(xDomain[0] / equalTickStep) * equalTickStep, xDomain[1] + equalTickStep * 0.01, equalTickStep))]
+        : [d3.axisBottom(xScale).ticks(Math.min(8, Math.floor(innerW / 60)))];
+    const yTickArgs = equalTickStep
+        ? [d3.axisLeft(yScale).tickValues(d3.range(Math.ceil(yDomain[0] / equalTickStep) * equalTickStep, yDomain[1] + equalTickStep * 0.01, equalTickStep))]
+        : [d3.axisLeft(yScale).ticks(Math.min(6, Math.floor(innerH / 50)))];
+
     /* Grid */
     g.append('g').attr('class', 'grid').attr('transform', `translate(0,${innerH})`)
-        .call(d3.axisBottom(xScale).ticks(Math.min(8, Math.floor(innerW / 60))).tickSize(-innerH).tickFormat(''))
+        .call(xTickArgs[0].tickSize(-innerH).tickFormat(''))
         .call(gg => { gg.select('.domain').remove(); gg.selectAll('.tick line').attr('stroke', '#e5e7eb'); });
     g.append('g').attr('class', 'grid')
-        .call(d3.axisLeft(yScale).ticks(Math.min(6, Math.floor(innerH / 50))).tickSize(-innerW).tickFormat(''))
+        .call(yTickArgs[0].tickSize(-innerW).tickFormat(''))
         .call(gg => { gg.select('.domain').remove(); gg.selectAll('.tick line').attr('stroke', '#e5e7eb'); });
 
-    /* Axes */
-    g.append('g').attr('transform', `translate(0,${innerH})`).call(d3.axisBottom(xScale).ticks(Math.min(8, Math.floor(innerW / 60)))).call(gg => gg.select('.domain').attr('stroke', 'var(--border)'));
-    g.append('g').call(d3.axisLeft(yScale).ticks(Math.min(6, Math.floor(innerH / 50)))).call(gg => gg.select('.domain').attr('stroke', 'var(--border)'));
+    /* Axes (recreate tick generators since the grid calls consumed them) */
+    const xAxisTickArgs = equalTickStep
+        ? d3.axisBottom(xScale).tickValues(d3.range(Math.ceil(xDomain[0] / equalTickStep) * equalTickStep, xDomain[1] + equalTickStep * 0.01, equalTickStep))
+        : d3.axisBottom(xScale).ticks(Math.min(8, Math.floor(innerW / 60)));
+    const yAxisTickArgs = equalTickStep
+        ? d3.axisLeft(yScale).tickValues(d3.range(Math.ceil(yDomain[0] / equalTickStep) * equalTickStep, yDomain[1] + equalTickStep * 0.01, equalTickStep))
+        : d3.axisLeft(yScale).ticks(Math.min(6, Math.floor(innerH / 50)));
+
+    g.append('g').attr('transform', `translate(0,${innerH})`).call(xAxisTickArgs).call(gg => gg.select('.domain').attr('stroke', 'var(--border)'));
+    g.append('g').call(yAxisTickArgs).call(gg => gg.select('.domain').attr('stroke', 'var(--border)'));
 
     /* Labels */
     g.append('text').attr('class', 'axis-label').attr('x', innerW / 2).attr('y', innerH + 34).attr('text-anchor', 'middle').text(xLabel);
@@ -504,7 +552,7 @@ function drawPipeRaw() {
 
 function drawPipeNorm() {
     const data = pipeState.normResult.data;
-    const chart = setupChart('pipeline-norm-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05]);
+    const chart = setupChart('pipeline-norm-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05], true);
     chart.g.selectAll('.dp').data(data).enter().append('circle')
         .attr('cx', d => chart.xScale(d.f1n)).attr('cy', d => chart.yScale(d.f2n)).attr('r', 5)
         .attr('fill', d => d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)').attr('stroke', '#fff').attr('stroke-width', 2);
@@ -512,7 +560,7 @@ function drawPipeNorm() {
 
 function drawPipeSplit() {
     const data = pipeState.normResult.data;
-    const chart = setupChart('pipeline-split-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05]);
+    const chart = setupChart('pipeline-split-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05], true);
     chart.g.selectAll('.dp').data(data).enter().append('circle')
         .attr('cx', d => chart.xScale(d.f1n)).attr('cy', d => chart.yScale(d.f2n)).attr('r', 5)
         .attr('fill', d => d.isTest ? 'var(--card)' : (d.label === 'A' ? 'var(--class-a)' : 'var(--class-b)'))
@@ -527,7 +575,7 @@ function drawPipeClassify() {
     const results = pipeState.testResults;
     const training = data.filter(d => !d.isTest).map(d => ({ x: d.f1n, y: d.f2n, label: d.label }));
     const k = pipeState.k;
-    const chart = setupChart('pipeline-classify-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05]);
+    const chart = setupChart('pipeline-classify-chart', 'Feature 1 (normalized)', 'Feature 2 (normalized)', [-0.05, 1.05], [-0.05, 1.05], true);
 
     /* Training points (filled, dimmed) */
     chart.g.selectAll('.trp').data(data.filter(d => !d.isTest)).enter().append('circle')
@@ -586,7 +634,7 @@ function drawPipeInspect() {
     v.textContent = ir.correct ? 'Correct' : 'Wrong'; v.style.color = ir.correct ? 'var(--success)' : 'var(--danger)';
 
     /* Mini chart */
-    const chart = setupChart('pipe-inspect-chart', 'Feature 1 (norm)', 'Feature 2 (norm)', [-0.05, 1.05], [-0.05, 1.05]);
+    const chart = setupChart('pipe-inspect-chart', 'Feature 1 (norm)', 'Feature 2 (norm)', [-0.05, 1.05], [-0.05, 1.05], true);
     ir.distances.forEach((dd, i) => {
         const isN = i < k; const tp = training[dd.idx];
         chart.g.append('line').attr('x1', chart.xScale(ir.point.f1n)).attr('y1', chart.yScale(ir.point.f2n))
@@ -684,7 +732,7 @@ function drawKnn() {
     const data = knnState.data;
     const training = data.map(d => ({ x: d.f1, y: d.f2, label: d.label }));
     const k = knnState.k, qx = knnState.queryX, qy = knnState.queryY;
-    const chart = setupChart('knn-chart', 'Feature 1', 'Feature 2', [-0.08, 1.08], [-0.08, 1.08]);
+    const chart = setupChart('knn-chart', 'Feature 1', 'Feature 2', [-0.08, 1.08], [-0.08, 1.08], true);
     const result = knnClassify(qx, qy, training, k);
 
     /* Distance lines */
@@ -781,7 +829,7 @@ function drawNormalize() {
     if (isNorm) { qx = Math.max(-0.02, Math.min(1.02, (normState.queryX - f1Min) / f1Span)); qy = Math.max(-0.02, Math.min(1.02, (normState.queryY - f2Min) / f2Span)); }
     else { qx = normState.queryX; qy = normState.queryY; }
 
-    const dChart = setupChart('norm-distance-chart', xLabel, yLabel, xDomain, yDomain);
+    const dChart = setupChart('norm-distance-chart', xLabel, yLabel, xDomain, yDomain, isNorm);
     const result = knnClassify(qx, qy, trainingData, 3);
 
     result.distances.forEach((d, i) => {
