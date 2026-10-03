@@ -54,11 +54,11 @@ gallery:
 
 ## Project Overview
 
-On Smart Playground project, our team is reimagining the playground as a programmable robotic system that kindergarten children can control through play-based interactions. Unlike traditional approaches to teaching computational thinking that rely on screen-based activities, this project translates programming concepts into tangible, physical experiences on school playgrounds where children engage in exploratory learning.
+On the Smart Playground project, our team is reimagining the playground as a programmable robotic system that kindergarten children can control through play-based interactions. Unlike traditional approaches to teaching computational thinking that rely on screen-based activities, this project translates programming concepts into tangible, physical experiences on school playgrounds where children engage in exploratory learning.
 
 ## Design Approach
 
-The development team, at Tufts University, is rapidly prototyping, iteratively testing, and responding to feedback from participatory design sessions with kindergarten students, teachers, and families in Santa Ana. I coordinate and advise our team's efforts on the following aspects of the design process:
+The development team at Tufts University is rapidly prototyping, iteratively testing, and responding to feedback from participatory design sessions with kindergarten students, teachers, and families in Santa Ana. I coordinate and advise our team's efforts on the following aspects of the design process:
 
 1. Designing and implementing interface prototypes based on co-design feedback from our UCI partners
 2. Refining usability testing methodologies for kindergarten-aged users
